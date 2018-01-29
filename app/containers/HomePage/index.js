@@ -10,13 +10,17 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <h1>
-        Home Page Component
-      </h1>
+      <ul>
+        <li><Link to="/">Home Page</Link></li>
+        <li><Link to="/supplychain">Supply Chain</Link></li>
+        <li><Link to="/warehouse">Warehouse</Link></li>
+        <li><Link to="/intellegentagent">Intelligent Agent</Link></li>
+      </ul>
     );
   }
 }
