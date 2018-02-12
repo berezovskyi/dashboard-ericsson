@@ -1,32 +1,40 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default class Sidebar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+import { SidebarPanel } from './styles';
+
+export default class Sidebar extends React.Component { // eslint-disable-line react/prefer-stateless-function
   // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div>
+      <SidebarPanel>
         <ul>
           <li>
-            <NavLink exact activeClassName="active" to="/">Home Page</NavLink>
+            <NavLink exact activeClassName="active" to="/">
+              <img src="http://via.placeholder.com/50x50" alt="" />
+              <span>Home Page</span>
+            </NavLink>
           </li>
           <li>
             <NavLink activeClassName="active" to="/supplychain">
-              Supply Chain
+              <img src="http://via.placeholder.com/50x50" alt="" />
+              <span>Supply Chain</span>
             </NavLink>
           </li>
           <li>
             <NavLink activeClassName="active" to="/warehouse">
-              Warehouse
+              <img src="http://via.placeholder.com/50x50" alt="" />
+              <span>Warehouse</span>
             </NavLink>
           </li>
           <li>
             <NavLink activeClassName="active" to="/intellegentagent">
-              Intelligent Agent
+              <img src="http://via.placeholder.com/50x50" alt="" />
+              <span>Intelligent Agent</span>
             </NavLink>
           </li>
         </ul>
-      </div>
+      </SidebarPanel>
     );
   }
 }
