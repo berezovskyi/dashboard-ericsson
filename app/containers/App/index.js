@@ -16,6 +16,9 @@ import { Switch, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 
+/* Import Layout */
+import MainLayout from 'layouts/Main/Loadable';
+
 /* Import all the Pages */
 
 import HomePage from 'containers/HomePage/Loadable';
@@ -39,7 +42,6 @@ export default function App() {
       >
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
-      <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/supplychain" component={SupplyChainPage} />
@@ -47,7 +49,7 @@ export default function App() {
         <Route path="/intellegentagent" component={IntelligentAgentPage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
-      <Footer />
+      <MainLayout />
     </div>
   );
 }
