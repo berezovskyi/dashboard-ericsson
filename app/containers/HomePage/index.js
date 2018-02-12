@@ -10,17 +10,12 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { H1 } from '../../ui/typography';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <ul>
-        <li><Link to="/">Home Page</Link></li>
-        <li><Link to="/supplychain">Supply Chain</Link></li>
-        <li><Link to="/warehouse">Warehouse</Link></li>
-        <li><Link to="/intellegentagent">Intelligent Agent</Link></li>
-      </ul>
+      <H1>This is the homepage</H1>
     );
   }
 }

@@ -1,11 +1,12 @@
 import React from 'react';
+import { H1 } from '../../ui/typography';
 
 export default class IntelligentAgentPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <h1>
+      <H1>
         Intelligent Agent
-      </h1>
+      </H1>
     );
   }
 }

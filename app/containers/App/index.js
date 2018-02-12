@@ -15,6 +15,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
+/* Import Layout */
+import Sidebar from 'components/Sidebar';
 
 /* Import all the Pages */
 
@@ -24,11 +26,9 @@ import IntelligentAgentPage from 'containers/IntelligentAgentPage/Loadable';
 import SupplyChainPage from 'containers/SupplyChainPage/Loadable';
 import WareHousePage from 'containers/WareHousePage/Loadable';
 
+import { Content, InnerContent } from './styles';
 
-/* Import all the Components */
-
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+/* TODO: Move the sidebar to Main layout */
 
 export default function App() {
   return (
@@ -39,15 +39,18 @@ export default function App() {
       >
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
-      <Header />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/supplychain" component={SupplyChainPage} />
-        <Route path="/warehouse" component={WareHousePage} />\
-        <Route path="/intellegentagent" component={IntelligentAgentPage} />
-        <Route path="" component={NotFoundPage} />
-      </Switch>
-      <Footer />
+      <Sidebar />
+      <Content>
+        <InnerContent>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/supplychain" component={SupplyChainPage} />
+            <Route path="/warehouse" component={WareHousePage} />
+            <Route path="/intellegentagent" component={IntelligentAgentPage} />
+            <Route path="" component={NotFoundPage} />
+          </Switch>
+        </InnerContent>
+      </Content>
     </div>
   );
 }
