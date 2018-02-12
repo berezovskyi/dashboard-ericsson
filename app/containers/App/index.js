@@ -11,13 +11,14 @@
  * the linting exception.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
 
 /* Import Layout */
-import MainLayout from 'layouts/Main/Loadable';
+import Sidebar from 'components/Sidebar';
 
 /* Import all the Pages */
 
@@ -28,28 +29,32 @@ import SupplyChainPage from 'containers/SupplyChainPage/Loadable';
 import WareHousePage from 'containers/WareHousePage/Loadable';
 
 
-/* Import all the Components */
+/* TODO: Move the sidebar to Main layout */
 
-import Header from 'components/Header';
-import Footer from 'components/Footer';
-
-export default function App() {
-  return (
-    <div>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta name="description" content="A React.js Boilerplate application" />
-      </Helmet>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/supplychain" component={SupplyChainPage} />
-        <Route path="/warehouse" component={WareHousePage} />\
-        <Route path="/intellegentagent" component={IntelligentAgentPage} />
-        <Route path="" component={NotFoundPage} />
-      </Switch>
-      <MainLayout />
-    </div>
-  );
+export default class App extends Component { // eslint-disable-line react/prefer-stateless-function
+  render() {
+    return (
+      <div>
+        <Helmet
+          titleTemplate="%s - React.js Boilerplate"
+          defaultTitle="React.js Boilerplate"
+        >
+          <meta name="description" content="A React.js Boilerplate application" />
+        </Helmet>
+        <Sidebar />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/supplychain" component={SupplyChainPage} />
+          <Route path="/warehouse" component={WareHousePage} />
+          <Route path="/intellegentagent" component={IntelligentAgentPage} />
+          <Route path="" component={NotFoundPage} />
+        </Switch>
+      </div>
+    );
+  }
 }
+
+App.propTypes = {
+  children: PropTypes.node,
+};
+
