@@ -16,9 +16,6 @@ import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 import 'sanitize.css/sanitize.css';
 
-// Import Semantic UI for CSS
-import 'semantic-ui-css/semantic.min.css';
-
 // Import root app
 import App from 'containers/App';
 
