@@ -1,6 +1,4 @@
-import styled from 'styled-components';
-
-const Content = styled.div`
+.content {
   background: #292A3A;
   overflow-y: auto;
   height: 100vh;
@@ -8,13 +6,8 @@ const Content = styled.div`
   color: #6A7088;
   margin-left: 100px;
   font-family: 'Lato';
-  
-`;
+}
 
-
-const InnerContent = styled.div`
+.innercontent {
   padding: 20px;
-`;
-
-
-export { Content, InnerContent };
+}
