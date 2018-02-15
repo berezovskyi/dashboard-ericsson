@@ -19,6 +19,9 @@ import 'file-loader?name=[name].[ext]!./.htaccess';
 
 import configureStore from './configureStore';
 
+// Import CSS reset and Global Styles
+import './ui/reset.css';
+
 // Create redux store with history
 const initialState = {};
 const history = createHistory();
