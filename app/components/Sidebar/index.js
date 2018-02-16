@@ -17,19 +17,19 @@ class Sidebar extends React.Component { // eslint-disable-line react/prefer-stat
           <li>
             <NavLink activeClassName={styles.active} to="/supplychain">
               <img src="http://via.placeholder.com/50x50" alt="" />
-              <span>Supply Chain</span>
+              <span>Supply Chain Level</span>
             </NavLink>
           </li>
           <li>
             <NavLink activeClassName={styles.active} to="/warehouse">
               <img src="http://via.placeholder.com/50x50" alt="" />
-              <span>Warehouse</span>
+              <span>Warehouse Level</span>
             </NavLink>
           </li>
           <li>
             <NavLink activeClassName={styles.active} to="/intellegentagent">
               <img src="http://via.placeholder.com/50x50" alt="" />
-              <span>Intelligent Agent</span>
+              <span>Intelligent Agent Level</span>
             </NavLink>
           </li>
         </ul>
