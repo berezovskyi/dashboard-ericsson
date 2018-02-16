@@ -1,40 +1,41 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { SidebarPanel } from './styles';
+import styles from './styles.css';
 
-export default class Sidebar extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  // eslint-disable-line react/prefer-stateless-function
+class Sidebar extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <SidebarPanel>
+      <div className={styles.sidebarpanel}>
         <ul>
           <li>
-            <NavLink exact activeClassName="active" to="/">
+            <NavLink exact activeClassName={styles.active} to="/">
               <img src="http://via.placeholder.com/50x50" alt="" />
               <span>Home Page</span>
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName="active" to="/supplychain">
+            <NavLink activeClassName={styles.active} to="/supplychain">
               <img src="http://via.placeholder.com/50x50" alt="" />
-              <span>Supply Chain</span>
+              <span>Supply Chain Level</span>
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName="active" to="/warehouse">
+            <NavLink activeClassName={styles.active} to="/warehouse">
               <img src="http://via.placeholder.com/50x50" alt="" />
-              <span>Warehouse</span>
+              <span>Warehouse Level</span>
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName="active" to="/intellegentagent">
+            <NavLink activeClassName={styles.active} to="/intellegentagent">
               <img src="http://via.placeholder.com/50x50" alt="" />
-              <span>Intelligent Agent</span>
+              <span>Intelligent Agent Level</span>
             </NavLink>
           </li>
         </ul>
-      </SidebarPanel>
+      </div>
     );
   }
 }
+
+export default Sidebar;

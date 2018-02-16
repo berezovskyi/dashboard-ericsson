@@ -1,12 +1,15 @@
 import React from 'react';
-import { H1 } from '../../ui/typography';
+import styles from '../../ui/styles.css';
 
-export default class IntelligentAgentPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class IntelligentAgentPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <H1>
+      <h1 className={styles.h1}>
         Intelligent Agent
-      </H1>
+      </h1>
     );
   }
 }
+
+
+export default IntelligentAgentPage;

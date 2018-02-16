@@ -26,13 +26,13 @@ import IntelligentAgentPage from 'containers/IntelligentAgentPage/Loadable';
 import SupplyChainPage from 'containers/SupplyChainPage/Loadable';
 import WareHousePage from 'containers/WareHousePage/Loadable';
 
-import { Content, InnerContent } from './styles';
+import styles from './styles.css';
 
 /* TODO: Move the sidebar to Main layout */
 
 export default function App() {
   return (
-    <div>
+    <main>
       <Helmet
         titleTemplate="%s - React.js Boilerplate"
         defaultTitle="React.js Boilerplate"
@@ -40,8 +40,8 @@ export default function App() {
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
       <Sidebar />
-      <Content>
-        <InnerContent>
+      <div className={styles.content}>
+        <div className={styles.innercontent}>
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/supplychain" component={SupplyChainPage} />
@@ -49,8 +49,8 @@ export default function App() {
             <Route path="/intellegentagent" component={IntelligentAgentPage} />
             <Route path="" component={NotFoundPage} />
           </Switch>
-        </InnerContent>
-      </Content>
-    </div>
+        </div>
+      </div>
+    </main>
   );
 }

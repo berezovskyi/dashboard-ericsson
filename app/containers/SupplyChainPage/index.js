@@ -1,12 +1,12 @@
 import React from 'react';
-import { H1 } from '../../ui/typography';
+import styles from './styles.css';
 
-export default class SupplyChainPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class SupplyChainPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <H1>
-        SupplyChainComponent Agent
-      </H1>
+      <h1 className={styles.h1}>This is the supply chain page.</h1>
     );
   }
 }
+
+export default SupplyChainPage;

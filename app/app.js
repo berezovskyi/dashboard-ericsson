@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
-import 'sanitize.css/sanitize.css';
 
 // Import root app
 import App from 'containers/App';
@@ -21,7 +20,7 @@ import 'file-loader?name=[name].[ext]!./.htaccess';
 import configureStore from './configureStore';
 
 // Import CSS reset and Global Styles
-import './global-styles';
+import './ui/reset.css';
 
 // Create redux store with history
 const initialState = {};

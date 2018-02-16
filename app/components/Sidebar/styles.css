@@ -1,0 +1,34 @@
+.sidebarpanel {
+  position: fixed;
+  width: 100px;
+  height: 100%;
+  left: 0;
+  background: #14141c;
+  font-family: Lato;
+}
+
+.sidebarpanel ul {
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.sidebarpanel ul li a {
+  color: #6A7088;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 30px 5px;
+  display: block;
+}
+
+.sidebarpanel .active {
+  color: white;
+}
+
+.sidebarpanel ul li a span {
+  display: block;
+}
+
+.sidebarpanel ul li a img {
+  margin-bottom: 10px;
+}

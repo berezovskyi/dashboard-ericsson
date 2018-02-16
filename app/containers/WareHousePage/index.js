@@ -1,12 +1,14 @@
 import React from 'react';
-import { H1 } from '../../ui/typography';
+import styles from '../../ui/styles.css';
 
-export default class WareHousePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class WareHousePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <H1>
+      <h1 className={styles.h1}>
         WareHouseComponent Agent
-      </H1>
+      </h1>
     );
   }
 }
+
+export default WareHousePage;

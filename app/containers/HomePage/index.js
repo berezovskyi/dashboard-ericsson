@@ -10,12 +10,14 @@
  */
 
 import React from 'react';
-import { H1 } from '../../ui/typography';
+import styles from '../../ui/styles.css';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <H1>This is the homepage</H1>
+      <h1 className={styles.h1}>This is the homepage</h1>
     );
   }
 }
+
+export default HomePage;
