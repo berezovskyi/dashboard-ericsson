@@ -16,6 +16,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 /* Import Layout */
+import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 
 /* Import all the Pages */
@@ -39,6 +40,7 @@ export default function App() {
       >
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
+      <Header />
       <Sidebar />
       <div className={styles.content}>
         <div className={styles.innercontent}>
