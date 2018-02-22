@@ -4,17 +4,35 @@ import classNames from 'classnames';
 
 import styles from './styles.css';
 
-class Button extends Component {
+class Button extends Component {  // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(e) {
+    if (this.props.disabled) {
+      e.preventDefault();
+      return;
+    }
+
+    if (this.props.onClick) {
+      this.props.onClick(e);
+    }
+  }
 
   render() {
-    const { color, size, disabled, onClick, block, children } = this.props;
+    const { color, size, disabled, block, children } = this.props;
 
     const buttonClass = classNames(
       styles.button,
       styles[`button-${color}`],
       styles[`button-${size}`],
+      disabled ? styles[`button-${disabled}`] : null,
+      block ? styles[`button-${block}`] : null,
     );
-    return <button className={buttonClass}>{children}</button>;
+    return <button className={buttonClass} onClick={this.onClick}>{children}</button>;
   }
 }
 

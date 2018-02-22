@@ -5,7 +5,7 @@ import toNumber from 'lodash';
 
 import styles from './styles.css';
 
-class Progress extends Component {
+class Progress extends Component {  // eslint-disable-line react/prefer-stateless-function
   render() {
     const {
       value,
