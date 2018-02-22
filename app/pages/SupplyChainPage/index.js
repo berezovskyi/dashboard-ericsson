@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../../ui/Card/Card';
+import Card from '../../components/Card/Card';
 import styles from './styles.css';
 
 class SupplyChainPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
