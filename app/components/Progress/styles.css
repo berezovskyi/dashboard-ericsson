@@ -1,0 +1,12 @@
+.progress {
+  background: #efefef;
+}
+.progress-bar {
+  height: 20px;
+  width: 100%;
+}
+
+.progress-bar.bg-primary {
+  background-image: linear-gradient(90deg, #FC76FF 0%, #33A9F4 100%);
+  border-radius: 2px;
+}

@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 
 // Import root app
-import App from 'containers/App';
+import App from 'pages/App';
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
@@ -18,9 +18,6 @@ import 'file-loader?name=[name].[ext]!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './configureStore';
-
-// Import CSS reset and Global Styles
-import './ui/reset.css';
 
 // Create redux store with history
 const initialState = {};

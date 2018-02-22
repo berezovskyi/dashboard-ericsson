@@ -16,16 +16,16 @@ import { Switch, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 /* Import Layout */
-import Header from 'components/Header';
-import Sidebar from 'components/Sidebar';
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
 
 /* Import all the Pages */
 
-import HomePage from 'containers/HomePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import IntelligentAgentPage from 'containers/IntelligentAgentPage/Loadable';
-import SupplyChainPage from 'containers/SupplyChainPage/Loadable';
-import WareHousePage from 'containers/WareHousePage/Loadable';
+import HomePage from '../../pages/HomePage/Loadable';
+import NotFoundPage from '../../pages/NotFoundPage/Loadable';
+import IntelligentAgentPage from '../../pages/IntelligentAgentPage/Loadable';
+import SupplyChainPage from '../../pages/SupplyChainPage/Loadable';
+import WareHousePage from '../../pages/WareHousePage/Loadable';
 
 import styles from './styles.css';
 

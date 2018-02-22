@@ -1,10 +1,9 @@
 /**
- * Asynchronously loads the component for MainLayout
+ * Asynchronously loads the component for Buttons
  */
-
 import Loadable from 'react-loadable';
 
 export default Loadable({
-  loader: () => import('./index'),
+  loader: () => import('./Button'),
   loading: () => null,
 });
