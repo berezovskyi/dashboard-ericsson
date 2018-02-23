@@ -10,7 +10,7 @@ const DEFAULT_DELAYS = {
   hide: 250,
 };
 
-class Tooltip extends Component {
+class Popover extends Component {
   constructor(props) {
     super(props);
 
@@ -152,7 +152,7 @@ class Tooltip extends Component {
   }
 }
 
-Tooltip.propTypes = {
+Popover.propTypes = {
   target: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
   container: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   isOpen: PropTypes.bool,
@@ -168,11 +168,11 @@ Tooltip.propTypes = {
   innerClassName: PropTypes.string,
 };
 
-Tooltip.defaultProps = {
+Popover.defaultProps = {
   isOpen: false,
   disabled: false,
   toggle: () => {},
   delay: DEFAULT_DELAYS,
 };
 
-export default Tooltip;
+export default Popover;
