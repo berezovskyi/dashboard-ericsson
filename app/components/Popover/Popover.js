@@ -1,95 +1,128 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { getTarget } from '../../utils/utils';
+import PopperContent from './PopperContent';
+import { getTarget, DOMElement, omit, PopperPlacements } from '../../utils/utils';
 
 import styles from './styles.css';
 
-const DEFAULT_DELAYS = {
-  show: 0,
-  hide: 250,
+const propTypes = {
+  placement: PropTypes.oneOf(PopperPlacements),
+  target: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    DOMElement,
+  ]).isRequired,
+  container: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    DOMElement,
+  ]),
+  isOpen: PropTypes.bool,
+  disabled: PropTypes.bool,
+  hideArrow: PropTypes.bool,
+  innerClassName: PropTypes.string,
+  placementPrefix: PropTypes.string,
+  toggle: PropTypes.func,
+  delay: PropTypes.oneOfType([
+    PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
+    PropTypes.number,
+  ]),
+  modifiers: PropTypes.object,
 };
 
-class Popover extends Component {
+const DEFAULT_DELAYS = {
+  show: 0,
+  hide: 0,
+};
+
+const defaultProps = {
+  isOpen: false,
+  hideArrow: false,
+  placement: 'left',
+  delay: DEFAULT_DELAYS,
+  toggle: () => {},
+};
+
+class Popover extends React.Component {
   constructor(props) {
     super(props);
 
+    this.addTargetEvents = this.addTargetEvents.bind(this);
+    this.handleDocumentClick = this.handleDocumentClick.bind(this);
+    this.removeTargetEvents = this.removeTargetEvents.bind(this);
+    this.getRef = this.getRef.bind(this);
     this.toggle = this.toggle.bind(this);
     this.show = this.show.bind(this);
     this.hide = this.hide.bind(this);
-    this.handleDocumentClick = this.handleDocumentClick.bind(this);
-    this.removeTargetEvents = this.removeTargetEvents.bind(this);
-    this.onMouseLeaveTooltip = this.onMouseLeaveTooltip.bind(this);
-    this.onMouseOverTooltip = this.onMouseOverTooltip.bind(this);
-    this.onMouseLeaveTooltipContent = this.onMouseLeaveTooltipContent.bind(this);
-    this.onMouseOverTooltip = this.onMouseOverTooltip.bind(this);
   }
 
   componentDidMount() {
-    this.target = getTarget(this.props.target);
-    this.addTargetEvents();
+    this._target = getTarget(this.props.target);
+    this.handleProps();
+  }
+
+  componentDidUpdate() {
+    this.handleProps();
   }
 
   componentWillUnmount() {
+    this.clearShowTimeout();
+    this.clearHideTimeout();
     this.removeTargetEvents();
   }
 
-  onMouseOverTooltip() {
-    if (this.hideTimeOut) {
-      this.clearHideTimeout();
-    }
-    this.showTimeout = setTimeout(this.show, this.getDelay('show'));
-  }
-
-  onMouseLeaveTooltip() {
-    if (this.hideTimeOut) {
-      this.clearHideTimeout();
-    }
-    this.showTimeout = setTimeout(this.show, this.getDelay('hide'));
-  }
-
-  onMouseLeaveTooltipContent() {
-    if (this.showTimeout) {
-      this.clearShowTimeout();
-    }
-    this.hideTimeOut = setTimeout(this.hide, this.getDelay('hide'));
+  getRef(ref) {
+    this._popover = ref;
   }
 
   getDelay(key) {
     const { delay } = this.props;
     if (typeof delay === 'object') {
-      return delay[key] ? DEFAULT_DELAYS[key] : delay[key];
+      return isNaN(delay[key]) ? DEFAULT_DELAYS[key] : delay[key];
     }
     return delay;
   }
 
+  handleProps() {
+    if (this.props.isOpen) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }
+
   show() {
+    this.clearHideTimeout();
+    this.addTargetEvents();
     if (!this.props.isOpen) {
       this.clearShowTimeout();
-      this.toggle();
+      this._showTimeout = setTimeout(this.toggle, this.getDelay('show'));
     }
   }
 
   hide() {
+    this.clearShowTimeout();
+    this.removeTargetEvents();
     if (this.props.isOpen) {
       this.clearHideTimeout();
-      this.toggle();
+      this._hideTimeout = setTimeout(this.toggle, this.getDelay('hide'));
     }
   }
 
   clearShowTimeout() {
-    clearTimeout(this.showTimeout);
-    this.showTimeout = undefined;
+    clearTimeout(this._showTimeout);
+    this._showTimeout = undefined;
   }
 
   clearHideTimeout() {
-    clearTimeout(this.hideTimeOut);
-    this.hideTimeOut = undefined;
+    clearTimeout(this._hideTimeout);
+    this._hideTimeout = undefined;
   }
 
   handleDocumentClick(e) {
-    if (e.target === this.target || this.target.contains(e.target)) {
-      if (this.hideTimeout) {
+    if (e.target !== this._target && !this._target.contains(e.target) && e.target !== this._popover && !(this._popover && this._popover.contains(e.target))) {
+      if (this._hideTimeout) {
         this.clearHideTimeout();
       }
 
@@ -100,79 +133,54 @@ class Popover extends Component {
   }
 
   addTargetEvents() {
-    this.target.removeEventListener('mouseover', this.onMouseOverTooltip, true);
-    this.target.removeEventListener('mouseout', this.onMouseLeaveTooltip, true);
     ['click', 'touchstart'].forEach((event) =>
-      document.removeEventListener(event, this.handleDocumentClick, true),
+      document.addEventListener(event, this.handleDocumentClick, true)
     );
   }
 
   removeTargetEvents() {
-    this.target.removeEventListener('mouseover', this.onMouseOverTooltip, true);
-    this.target.removeEventListener('mouseout', this.onMouseLeaveTooltip, true);
     ['click', 'touchstart'].forEach((event) =>
-      document.removeEventListener(event, this.handleDocumentClick, true),
+      document.removeEventListener(event, this.handleDocumentClick, true)
     );
   }
+
   toggle(e) {
     if (this.props.disabled) {
       return e && e.preventDefault();
     }
+
     return this.props.toggle();
   }
 
   render() {
-    // If it is open by default, return nothing new
     if (!this.props.isOpen) {
       return null;
     }
 
-    const tooltipInnerClass = classNames(
-      'tooltip-inner',
-      this.props.innerClassName,
+    const attributes = omit(this.props, Object.keys(propTypes));
+    const classes = classNames(
+      styles['popover-inner'],
+      styles[this.props.innerClassName]
     );
 
-    const tooltipClass = classNames(styles.tooltip, styles.show);
-
     return (
-      <div
-        className={tooltipClass}
+      <PopperContent
+        className="popover"
         target={this.props.target}
         isOpen={this.props.isOpen}
+        hideArrow={this.props.hideArrow}
+        placement={this.props.placement}
+        placementPrefix={this.props.placementPrefix}
         container={this.props.container}
+        modifiers={this.props.modifiers}
       >
-        <div
-          className={tooltipInnerClass}
-          onMouseOver={this.onMouseOverTooltipContent}
-          onMouseLeave={this.onMouseLeaveTooltipContent}
-          onFocus=""
-        />
-      </div>
+        <div {...attributes} className={classes} ref={this.getRef} />
+      </PopperContent>
     );
   }
 }
 
-Popover.propTypes = {
-  target: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
-  container: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  isOpen: PropTypes.bool,
-  disabled: PropTypes.bool,
-  toggle: PropTypes.func,
-  delay: PropTypes.oneOfType([
-    PropTypes.shape({
-      show: PropTypes.number,
-      hide: PropTypes.number,
-    }),
-    PropTypes.number,
-  ]),
-  innerClassName: PropTypes.string,
-};
-
-Popover.defaultProps = {
-  isOpen: false,
-  disabled: false,
-  toggle: () => {},
-  delay: DEFAULT_DELAYS,
-};
+Popover.propTypes = propTypes;
+Popover.defaultProps = defaultProps;
 
 export default Popover;
