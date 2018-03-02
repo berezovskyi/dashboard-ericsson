@@ -1,50 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
 import PopperContent from './PopperContent';
-import { getTarget, DOMElement, omit, PopperPlacements } from '../../utils/utils';
+
+import { getTarget, DOMElement, PopperPlacements } from '../../utils/utils';
 
 import styles from './styles.css';
 
-const propTypes = {
-  placement: PropTypes.oneOf(PopperPlacements),
-  target: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func,
-    DOMElement,
-  ]).isRequired,
-  container: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func,
-    DOMElement,
-  ]),
-  isOpen: PropTypes.bool,
-  disabled: PropTypes.bool,
-  hideArrow: PropTypes.bool,
-  innerClassName: PropTypes.string,
-  placementPrefix: PropTypes.string,
-  toggle: PropTypes.func,
-  delay: PropTypes.oneOfType([
-    PropTypes.shape({ show: PropTypes.number, hide: PropTypes.number }),
-    PropTypes.number,
-  ]),
-  modifiers: PropTypes.object,
-};
 
-const DEFAULT_DELAYS = {
-  show: 0,
-  hide: 0,
-};
-
-const defaultProps = {
-  isOpen: false,
-  hideArrow: false,
-  placement: 'left',
-  delay: DEFAULT_DELAYS,
-  toggle: () => {},
-};
-
-class Popover extends React.Component {
+class Popover extends React.Component {  // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
 
@@ -76,14 +41,6 @@ class Popover extends React.Component {
     this._popover = ref;
   }
 
-  getDelay(key) {
-    const { delay } = this.props;
-    if (typeof delay === 'object') {
-      return isNaN(delay[key]) ? DEFAULT_DELAYS[key] : delay[key];
-    }
-    return delay;
-  }
-
   handleProps() {
     if (this.props.isOpen) {
       this.show();
@@ -97,7 +54,6 @@ class Popover extends React.Component {
     this.addTargetEvents();
     if (!this.props.isOpen) {
       this.clearShowTimeout();
-      this._showTimeout = setTimeout(this.toggle, this.getDelay('show'));
     }
   }
 
@@ -106,7 +62,6 @@ class Popover extends React.Component {
     this.removeTargetEvents();
     if (this.props.isOpen) {
       this.clearHideTimeout();
-      this._hideTimeout = setTimeout(this.toggle, this.getDelay('hide'));
     }
   }
 
@@ -121,7 +76,7 @@ class Popover extends React.Component {
   }
 
   handleDocumentClick(e) {
-    if (e.target !== this._target && !this._target.contains(e.target) && e.target !== this._popover && !(this._popover && this._popover.contains(e.target))) {
+    if (e.target !== this._target && !this._target.contains(e.target)) {
       if (this._hideTimeout) {
         this.clearHideTimeout();
       }
@@ -153,11 +108,12 @@ class Popover extends React.Component {
   }
 
   render() {
+    const { isOpen, target, hideArrow, placement, placementPrefix, container, modifiers, children } = this.props;
+
     if (!this.props.isOpen) {
       return null;
     }
 
-    const attributes = omit(this.props, Object.keys(propTypes));
     const classes = classNames(
       styles['popover-inner'],
       styles[this.props.innerClassName]
@@ -166,21 +122,49 @@ class Popover extends React.Component {
     return (
       <PopperContent
         className="popover"
-        target={this.props.target}
-        isOpen={this.props.isOpen}
-        hideArrow={this.props.hideArrow}
-        placement={this.props.placement}
-        placementPrefix={this.props.placementPrefix}
-        container={this.props.container}
-        modifiers={this.props.modifiers}
+        target={target}
+        isOpen={isOpen}
+        hideArrow={hideArrow}
+        placement={placement}
+        placementPrefix={placementPrefix}
+        container={container}
+        modifiers={modifiers}
       >
-        <div {...attributes} className={classes} ref={this.getRef} />
+        <div className={classes} ref={this.getRef}>
+          {children}
+        </div>
       </PopperContent>
     );
   }
 }
 
-Popover.propTypes = propTypes;
-Popover.defaultProps = defaultProps;
+Popover.propTypes = {
+  placement: PropTypes.oneOf(PopperPlacements),
+  target: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    DOMElement,
+  ]).isRequired,
+  container: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    DOMElement,
+  ]),
+  isOpen: PropTypes.bool,
+  disabled: PropTypes.bool,
+  hideArrow: PropTypes.bool,
+  innerClassName: PropTypes.string,
+  placementPrefix: PropTypes.string,
+  toggle: PropTypes.func,
+  modifiers: PropTypes.object,
+  children: PropTypes.node,
+};
+
+Popover.defaultProps = {
+  isOpen: false,
+  hideArrow: false,
+  placement: 'bottom',
+  toggle: () => {},
+};
 
 export default Popover;

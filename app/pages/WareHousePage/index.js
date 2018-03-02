@@ -27,7 +27,7 @@ class WareHousePage extends React.Component { // eslint-disable-line react/prefe
           Launch Popover
         </Button>
         <Popover
-          placement="bottom"
+          placement="left"
           isOpen={this.state.popoverOpen}
           target="Popover1"
           toggle={this.toggle}

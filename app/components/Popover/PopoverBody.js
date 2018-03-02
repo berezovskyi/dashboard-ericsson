@@ -4,34 +4,24 @@ import classNames from 'classnames';
 
 import styles from './styles.css';
 
-const propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  className: PropTypes.string,
-  cssModule: PropTypes.object,
+class PopoverBody extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  render() {
+    const { children } = this.props;
+
+    const classes = classNames(
+      styles['popover-body']
+    );
+
+    return (
+      <div className={classes}>
+        {children}
+      </div>
+    );
+  }
+}
+
+PopoverBody.propTypes = {
+  children: PropTypes.node,
 };
-
-const defaultProps = {
-  tag: 'div',
-};
-
-const PopoverBody = (props) => {
-  const {
-    className,
-    tag: Tag,
-    ...attributes
-  } = props;
-
-  const classes = classNames(
-    styles[className],
-    styles['popover-body']
-  );
-
-  return (
-    <Tag {...attributes} className={classes} />
-  );
-};
-
-PopoverBody.propTypes = propTypes;
-PopoverBody.defaultProps = defaultProps;
 
 export default PopoverBody;

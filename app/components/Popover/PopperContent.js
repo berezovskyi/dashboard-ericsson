@@ -7,37 +7,6 @@ import { getTarget, DOMElement } from '../../utils/utils';
 
 import styles from './styles.css';
 
-const propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  placement: PropTypes.string,
-  placementPrefix: PropTypes.string,
-  hideArrow: PropTypes.bool,
-  tag: PropTypes.string,
-  isOpen: PropTypes.bool.isRequired,
-  cssModule: PropTypes.object,
-  offset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  fallbackPlacement: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  flip: PropTypes.bool,
-  container: PropTypes.oneOfType([PropTypes.string, PropTypes.func, DOMElement]),
-  target: PropTypes.oneOfType([PropTypes.string, PropTypes.func, DOMElement]).isRequired,
-  modifiers: PropTypes.object,
-};
-
-const defaultProps = {
-  placement: 'auto',
-  hideArrow: false,
-  isOpen: false,
-  offset: 0,
-  fallbackPlacement: 'flip',
-  flip: true,
-  container: 'body',
-  modifiers: {},
-};
-
-const childContextTypes = {
-  popperManager: PropTypes.object.isRequired,
-};
 
 class PopperContent extends React.Component {
   constructor(props) {
@@ -131,23 +100,21 @@ class PopperContent extends React.Component {
 
   renderChildren() {
     const {
-      cssModule,
       children,
-      isOpen,
       flip,
-      target,
       offset,
       fallbackPlacement,
       placementPrefix,
       hideArrow,
       className,
       tag,
-      container,
       modifiers,
-      ...attrs
+      isOpen,
+      container,
+      ...attributes
     } = this.props;
-    const arrowClassName = styles.arrow;
-    const placement = (this.state.placement || attrs.placement).split('-')[0];
+
+    const placement = (this.state.placement || attributes.placement).split('-')[0];
 
     const popperClassName = classNames(
       styles[className],
@@ -166,9 +133,9 @@ class PopperContent extends React.Component {
     };
 
     return (
-      <ReactPopper modifiers={extendedModifiers} {...attrs} component={tag} className={popperClassName}>
+      <ReactPopper modifiers={extendedModifiers} {...attributes} component={tag} className={popperClassName}>
         {children}
-        {!hideArrow && <Arrow className={arrowClassName} />}
+        {!hideArrow && <Arrow className={styles.arrow} />}
       </ReactPopper>
     );
   }
@@ -184,8 +151,35 @@ class PopperContent extends React.Component {
   }
 }
 
-PopperContent.propTypes = propTypes;
-PopperContent.defaultProps = defaultProps;
-PopperContent.childContextTypes = childContextTypes;
+PopperContent.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  placement: PropTypes.string,
+  placementPrefix: PropTypes.string,
+  hideArrow: PropTypes.bool,
+  tag: PropTypes.string,
+  isOpen: PropTypes.bool.isRequired,
+  cssModule: PropTypes.object,
+  offset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  fallbackPlacement: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  flip: PropTypes.bool,
+  container: PropTypes.oneOfType([PropTypes.string, PropTypes.func, DOMElement]),
+  target: PropTypes.oneOfType([PropTypes.string, PropTypes.func, DOMElement]).isRequired,
+  modifiers: PropTypes.object,
+};
+PopperContent.defaultProps = {
+  placement: 'auto',
+  hideArrow: false,
+  isOpen: false,
+  offset: 0,
+  fallbackPlacement: 'flip',
+  flip: true,
+  container: 'body',
+  modifiers: {},
+};
+
+PopperContent.childContextTypes = {
+  popperManager: PropTypes.object.isRequired,
+};
 
 export default PopperContent;
