@@ -21,15 +21,11 @@ const propTypes = {
   centered: PropTypes.bool,
   size: PropTypes.string,
   toggle: PropTypes.func,
-  keyboard: PropTypes.bool,
   labelledBy: PropTypes.string,
   backdrop: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.oneOf(['static']),
   ]),
-  onEnter: PropTypes.func,
-  onExit: PropTypes.func,
-  onOpened: PropTypes.func,
   onClosed: PropTypes.func,
   children: PropTypes.node,
   external: PropTypes.node,
@@ -44,8 +40,6 @@ const defaultProps = {
   role: 'dialog',
   labelledBy: 'dialog',
   backdrop: true,
-  keyboard: true,
-  onOpened: noop,
   onClosed: noop,
 };
 
@@ -56,8 +50,6 @@ class Modal extends React.Component {
     this._element = null;
     this._originalBodyPadding = null;
     this.handleBackdropClick = this.handleBackdropClick.bind(this);
-    this.handleEscape = this.handleEscape.bind(this);
-    this.onOpened = this.onOpened.bind(this);
     this.onClosed = this.onClosed.bind(this);
 
     this.state = {
@@ -70,10 +62,6 @@ class Modal extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.onEnter) {
-      this.props.onEnter();
-    }
-
     if (this.state.isOpen && this.props.autoFocus) {
       this.setFocus();
     }
@@ -82,7 +70,6 @@ class Modal extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (nextProps.isOpen && !this.props.isOpen) {
       this.setState({ isOpen: nextProps.isOpen });
     }
@@ -101,19 +88,11 @@ class Modal extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.props.onExit) {
-      this.props.onExit();
-    }
-
     if (this.state.isOpen) {
       this.destroy();
     }
 
     this._isMounted = false;
-  }
-
-  onOpened() {
-    this.props.onOpened();
   }
 
   onClosed() {
@@ -141,12 +120,9 @@ class Modal extends React.Component {
     if (e.target && !container.contains(e.target) && this.props.toggle) {
       this.props.toggle();
     }
-  }
-
-  handleEscape(e) {
-    if (this.props.isOpen && this.props.keyboard && e.keyCode === 27 && this.props.toggle) {
-      this.props.toggle();
-    }
+    this.setState({
+      isOpen: false,
+    });
   }
 
   init() {
@@ -213,7 +189,6 @@ class Modal extends React.Component {
         external,
       } = this.props;
 
-
       return (
         <Portal node={this._element}>
           <div>
@@ -221,7 +196,6 @@ class Modal extends React.Component {
               in={isOpen}
               style={{ display: 'block' }}
               onClick={this.handleBackdropClick}
-              onKeyUp={this.handleEscape}
               className={styles.modal}
               aria-labelledby={labelledBy}
               tabIndex="-1"
