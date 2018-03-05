@@ -20,7 +20,6 @@ const ModalHeader = (props) => {
 };
 
 ModalHeader.propTypes = {
-  toggle: PropTypes.func,
   children: PropTypes.node,
 };
 

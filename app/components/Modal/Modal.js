@@ -117,11 +117,11 @@ class Modal extends React.Component {
     this._isMounted = false;
   }
 
-  onOpened(node, isAppearing) {
+  onOpened() {
     this.props.onOpened();
   }
 
-  onClosed(node) {
+  onClosed() {
     // so all methods get called before it is unmounted
     this.props.onClosed();
     this.destroy();
@@ -231,7 +231,7 @@ class Modal extends React.Component {
       return (
         <Portal node={this._element}>
           <div>
-            <Fade
+            <div
               {...modalAttributes}
               in={isOpen}
               onEntered={this.onOpened}
@@ -240,8 +240,8 @@ class Modal extends React.Component {
             >
               {external}
               {this.renderModalDialog()}
-            </Fade>
-            <Fade
+            </div>
+            <div
               in={isOpen && !!backdrop}
               className={styles['modal-backdrop']}
             />

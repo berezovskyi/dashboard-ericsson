@@ -25,7 +25,6 @@ function Fade(props) {
     children,
   } = props;
 
-  console.log('yolo');
   return (
     <div>
       {children}

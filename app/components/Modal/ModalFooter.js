@@ -17,6 +17,6 @@ const ModalFooter = (props) => {
 
 ModalFooter.propTypes = {
   children: PropTypes.node,
-}
+};
 
 export default ModalFooter;
