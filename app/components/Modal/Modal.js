@@ -12,21 +12,16 @@ import {
   omit,
 } from '../../utils/utils';
 
-function noop() { }
-
 
 const propTypes = {
   isOpen: PropTypes.bool,
   autoFocus: PropTypes.bool,
-  centered: PropTypes.bool,
-  size: PropTypes.string,
   toggle: PropTypes.func,
   labelledBy: PropTypes.string,
   backdrop: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.oneOf(['static']),
   ]),
-  onClosed: PropTypes.func,
   children: PropTypes.node,
   external: PropTypes.node,
 };
@@ -36,11 +31,9 @@ const propsToOmit = Object.keys(propTypes);
 const defaultProps = {
   isOpen: false,
   autoFocus: true,
-  centered: true,
   role: 'dialog',
   labelledBy: 'dialog',
   backdrop: true,
-  onClosed: noop,
 };
 
 class Modal extends React.Component {
@@ -50,7 +43,6 @@ class Modal extends React.Component {
     this._element = null;
     this._originalBodyPadding = null;
     this.handleBackdropClick = this.handleBackdropClick.bind(this);
-    this.onClosed = this.onClosed.bind(this);
 
     this.state = {
       isOpen: props.isOpen,
@@ -65,7 +57,6 @@ class Modal extends React.Component {
     if (this.state.isOpen && this.props.autoFocus) {
       this.setFocus();
     }
-
     this._isMounted = true;
   }
 
@@ -91,18 +82,7 @@ class Modal extends React.Component {
     if (this.state.isOpen) {
       this.destroy();
     }
-
     this._isMounted = false;
-  }
-
-  onClosed() {
-    // so all methods get called before it is unmounted
-    this.props.onClosed();
-    this.destroy();
-
-    if (this._isMounted) {
-      this.setState({ isOpen: false });
-    }
   }
 
   setFocus() {
@@ -120,6 +100,8 @@ class Modal extends React.Component {
     if (e.target && !container.contains(e.target) && this.props.toggle) {
       this.props.toggle();
     }
+
+    // Fix this, this should be dependent on props.
     this.setState({
       isOpen: false,
     });
@@ -147,25 +129,18 @@ class Modal extends React.Component {
     this._element = null;
 
     const modalOpenClassName = styles['modal-open'];
-    // Use regex to prevent matching `modal-open` as part of a different class, e.g. `my-modal-opened`
-    const modalOpenClassNameRegex = new RegExp(`(^| )${modalOpenClassName}( |$)`);
-    document.body.className = document.body.className.replace(modalOpenClassNameRegex, ' ').trim();
+    document.body.className = document.body.className.replace(modalOpenClassName, ' ').trim();
 
     setScrollbarWidth(this._originalBodyPadding);
   }
 
   renderModalDialog() {
     const attributes = omit(this.props, propsToOmit);
-    const dialogBaseClass = classNames(
-      styles['modal-dialog'],
-      this.props.size ? styles[`modal-${this.props.size}`] : null,
-      this.props.centered ? styles[`modal-${this.props.size}`] : null,
-    );
 
     return (
       <div
         {...attributes}
-        className={dialogBaseClass}
+        className={styles['modal-dialog']}
         role="document"
         ref={(c) => {
           this._dialog = c;
@@ -183,10 +158,9 @@ class Modal extends React.Component {
   render() {
     if (this.props.isOpen) {
       const {
-        isOpen,
-        backdrop,
         labelledBy,
         external,
+        isOpen,
       } = this.props;
 
       return (
@@ -205,7 +179,7 @@ class Modal extends React.Component {
               {this.renderModalDialog()}
             </div>
             <div
-              in={isOpen && !!backdrop}
+              in={isOpen}
               className={styles['modal-backdrop']}
             />
           </div>
