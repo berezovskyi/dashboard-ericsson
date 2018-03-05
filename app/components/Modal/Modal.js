@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Portal } from 'react-portal';
 import classNames from 'classnames';
-import Fade from './Fade';
 
 import styles from './styles.css';
 
@@ -23,7 +22,6 @@ const propTypes = {
   size: PropTypes.string,
   toggle: PropTypes.func,
   keyboard: PropTypes.bool,
-  role: PropTypes.string,
   labelledBy: PropTypes.string,
   backdrop: PropTypes.oneOfType([
     PropTypes.bool,
@@ -48,6 +46,7 @@ const defaultProps = {
   autoFocus: true,
   centered: true,
   role: 'dialog',
+  labelledBy: 'dialog',
   backdrop: true,
   keyboard: true,
   zIndex: 1050,
@@ -214,29 +213,22 @@ class Modal extends React.Component {
       const {
         isOpen,
         backdrop,
-        role,
         labelledBy,
         external,
       } = this.props;
-
-      const modalAttributes = {
-        onClick: this.handleBackdropClick,
-        onKeyUp: this.handleEscape,
-        style: { display: 'block' },
-        'aria-labelledby': labelledBy,
-        role,
-        tabIndex: '-1',
-      };
 
       return (
         <Portal node={this._element}>
           <div>
             <div
-              {...modalAttributes}
               in={isOpen}
-              onEntered={this.onOpened}
-              onExited={this.onClosed}
+              style={{ display: 'block' }}
+              onClick={this.handleBackdropClick}
+              onKeyUp={this.handleEscape}
               className={styles.modal}
+              aria-labelledby={labelledBy}
+              tabIndex="-1"
+              role="dialog"
             >
               {external}
               {this.renderModalDialog()}
