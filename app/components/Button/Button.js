@@ -23,7 +23,7 @@ class Button extends Component {  // eslint-disable-line react/prefer-stateless-
   }
 
   render() {
-    const { color, size, disabled, block, children } = this.props;
+    const { color, size, disabled, block, children, id } = this.props;
 
     const buttonClass = classNames(
       styles.button,
@@ -32,7 +32,7 @@ class Button extends Component {  // eslint-disable-line react/prefer-stateless-
       disabled ? styles[`button-${disabled}`] : null,
       block ? styles[`button-${block}`] : null,
     );
-    return <button className={buttonClass} onClick={this.onClick}>{children}</button>;
+    return <button className={buttonClass} onClick={this.onClick} id={id}>{children}</button>;
   }
 }
 
@@ -49,6 +49,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   block: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 export default Button;
