@@ -33,10 +33,6 @@ const propTypes = {
   onClosed: PropTypes.func,
   children: PropTypes.node,
   external: PropTypes.node,
-  zIndex: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
 };
 
 const propsToOmit = Object.keys(propTypes);
@@ -49,7 +45,6 @@ const defaultProps = {
   labelledBy: 'dialog',
   backdrop: true,
   keyboard: true,
-  zIndex: 1050,
   onOpened: noop,
   onClosed: noop,
 };
@@ -87,6 +82,7 @@ class Modal extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     if (nextProps.isOpen && !this.props.isOpen) {
       this.setState({ isOpen: nextProps.isOpen });
     }
@@ -157,7 +153,7 @@ class Modal extends React.Component {
     this._element = document.createElement('div');
     this._element.setAttribute('tabindex', '-1');
     this._element.style.position = 'relative';
-    this._element.style.zIndex = this.props.zIndex;
+    this._element.style.zIndex = 1050;
     this._originalBodyPadding = getOriginalBodyPadding();
 
     conditionallyUpdateScrollbar();
@@ -209,13 +205,14 @@ class Modal extends React.Component {
   }
 
   render() {
-    if (this.state.isOpen) {
+    if (this.props.isOpen) {
       const {
         isOpen,
         backdrop,
         labelledBy,
         external,
       } = this.props;
+
 
       return (
         <Portal node={this._element}>
