@@ -1,5 +1,37 @@
 import { isFunction } from 'lodash';
 
+export function getOriginalBodyPadding() {
+  const style = window.getComputedStyle(document.body, null);
+
+  return parseInt(
+    (style && style.getPropertyValue('padding-right')) || 0,
+    10
+  );
+}
+
+export function setScrollbarWidth(padding) {
+  document.body.style.paddingRight = padding > 0 ? `${padding}px` : null;
+}
+
+export function isBodyOverflowing() {
+  return document.body.clientWidth < window.innerWidth;
+}
+
+
+export function conditionallyUpdateScrollbar() {
+  const scrollbarWidth = getScrollbarWidth();
+  // https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.6/js/src/modal.js#L433
+  const fixedContent = document.querySelectorAll('.fixed-top, .fixed-bottom, .is-fixed, .sticky-top')[0];
+  const bodyPadding = fixedContent ? parseInt(
+    fixedContent.style.paddingRight || 0,
+    10
+  ) : 0;
+
+  if (isBodyOverflowing()) {
+    setScrollbarWidth(bodyPadding + scrollbarWidth);
+  }
+}
+
 // https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.4/js/src/modal.js#L436-L443
 export function getScrollbarWidth() {
   const scrollDiv = document.createElement('div');
