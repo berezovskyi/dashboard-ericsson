@@ -57,7 +57,6 @@ class Modal extends React.Component {
     if (this.state.isOpen && this.props.autoFocus) {
       this.setFocus();
     }
-    this._isMounted = true;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -82,7 +81,6 @@ class Modal extends React.Component {
     if (this.state.isOpen) {
       this.destroy();
     }
-    this._isMounted = false;
   }
 
   setFocus() {
@@ -105,6 +103,8 @@ class Modal extends React.Component {
     this.setState({
       isOpen: false,
     });
+
+    this.destroy();
   }
 
   init() {
