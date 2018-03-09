@@ -1,28 +1,33 @@
 import React from 'react';
-import Card from '../../components/Card';
-import Button from '../../components/Button';
-import Progress from '../../components/Progress';
-import styles from './styles.css';
 
-class SupplyChainPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+import Capacity from './Capacity/Capacity';
+import Truck from './Truck/Truck';
+import Stakeholders from '../../shared/Stakeholders/Stakeholders';
+import Notes from '../../shared/Notes/Notes';
+
+import styles from './SupplyChainPage.css';
+
+class SupplyChainPage extends React.Component {
+  // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div className={styles.fullpage}>
-        <Card title="Capacity" helpText="This explains the meaning of this section.">
-          <div>
-            <h4>Warehouse</h4>
-            <Progress value="50" />
+      <div className={styles.fullPage}>
+        <div className={styles.row}>
+          <div className={styles.oneHalf}>
+            <Capacity />
           </div>
-          <div>
-            <h4>Retailer 1</h4>
-            <Progress value="50" />
+          <div className={styles.oneHalf}>
+            <Truck />
           </div>
-          <div>
-            <h4>Retailer 2</h4>
-            <Progress value="60" />
+        </div>
+        <div className={styles.row}>
+          <div className={styles.oneHalf}>
+            <Stakeholders />
           </div>
-          <Button size="medium" color="primary">View all</Button>
-        </Card>
+          <div className={styles.oneHalf}>
+            <Notes />
+          </div>
+        </div>
       </div>
     );
   }

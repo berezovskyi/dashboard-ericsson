@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Arrow, Popper as ReactPopper } from 'react-popper';
 import { getTarget, DOMElement } from '../../utils/utils';
 
-import styles from './styles.css';
+import styles from './Popover.css';
 
 
 class PopperContent extends React.Component {

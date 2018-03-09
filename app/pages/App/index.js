@@ -13,33 +13,25 @@
 
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 
 /* Import Layout */
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 /* Import all the Pages */
 
-import HomePage from '../../pages/HomePage/Loadable';
-import NotFoundPage from '../../pages/NotFoundPage/Loadable';
-import IntelligentAgentPage from '../../pages/IntelligentAgentPage/Loadable';
-import SupplyChainPage from '../../pages/SupplyChainPage/Loadable';
-import WareHousePage from '../../pages/WareHousePage/Loadable';
+import HomePage from '../../pages/HomePage';
+import NotFoundPage from '../../pages/NotFoundPage';
+import IntelligentAgentPage from '../../pages/IntelligentAgentPage';
+import SupplyChainPage from '../../pages/SupplyChainPage';
+import WareHousePage from '../../pages/WareHousePage';
 
-import styles from './styles.css';
+import styles from './App.css';
+import Header from '../../components/Header/Header';
 
-/* TODO: Move the sidebar to Main layout */
 
 export default function App() {
   return (
     <main>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta name="description" content="A React.js Boilerplate application" />
-      </Helmet>
       <Header />
       <Sidebar />
       <div className={styles.content}>

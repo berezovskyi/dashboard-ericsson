@@ -13,13 +13,13 @@ body {
   position: fixed;
   color: #6A7088;
   margin-left: 100px;
-  font-family: 'Lato';
-  top: 60px;
+  font-family: 'Lato', sans-serif;
+  top: 80px;
   right: 0;
   left: 0;
   height: 100%;
 }
 
 .innercontent {
-  padding: 20px;
+  padding: 10px 30px 10px 10px;
 }

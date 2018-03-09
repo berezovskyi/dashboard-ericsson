@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles.css';
+import styles from './IntellegentAgentPage.css';
 
 class IntelligentAgentPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {

@@ -1,0 +1,16 @@
+.row {
+  lost-center: 100%;
+  margin-bottom: 20px;
+}
+
+.oneHalf {
+  lost-column: 1/2;
+}
+
+.oneThird {
+  lost-column: 1/3;
+}
+
+.profile {
+  text-align: center;
+}
