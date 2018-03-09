@@ -7,14 +7,27 @@ import Notes from './Notes/Notes';
 
 import styles from './styles.css';
 
-class SupplyChainPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class SupplyChainPage extends React.Component {
+  // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div className={styles.fullpage}>
-        <Capacity />
-        <Truck />
-        <Stakeholders />
-        <Notes />
+      <div className={styles.fullPage}>
+        <div className={styles.row}>
+          <div className={styles.oneHalf}>
+            <Capacity />
+          </div>
+          <div className={styles.oneHalf}>
+            <Truck />
+          </div>
+        </div>
+        <div className={styles.row}>
+          <div className={styles.oneHalf}>
+            <Stakeholders />
+          </div>
+          <div className={styles.oneHalf}>
+            <Notes />
+          </div>
+        </div>
       </div>
     );
   }
