@@ -55,8 +55,7 @@ module.exports = (options) => ({
     modulesDirectories: [
       'pages',
       'components',
-      'selectors',
-      'sagas',
+      'shared',
       'assets',
       'node_modules',
     ],
