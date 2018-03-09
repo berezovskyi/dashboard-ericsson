@@ -13,7 +13,7 @@
 .button-medium {
   font-size: 14px;
   padding: 8px 20px;
-  margin-bottom: 5px;
+  margin: 10px 0;
 }
 
 .button-small {
@@ -26,7 +26,8 @@
 }
 
 .button-secondary {
-
+  background: #E9EFF4;
+  color: #474F58;
 }
 
 .button-link {
