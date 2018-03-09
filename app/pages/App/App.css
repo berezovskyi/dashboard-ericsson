@@ -1,3 +1,11 @@
+body {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  background-color: #fff;
+}
+
 .content {
   background: #F4F8F9;
   overflow-y: auto;
