@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import styles from './styles.css';
+import styles from './Button.css';
 
 class Button extends Component {  // eslint-disable-line react/prefer-stateless-function
   constructor(props) {

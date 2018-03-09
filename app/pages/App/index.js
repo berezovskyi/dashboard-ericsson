@@ -15,7 +15,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 /* Import Layout */
-import Sidebar from '../../components/Sidebar';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 /* Import all the Pages */
 
@@ -25,8 +25,8 @@ import IntelligentAgentPage from '../../pages/IntelligentAgentPage';
 import SupplyChainPage from '../../pages/SupplyChainPage';
 import WareHousePage from '../../pages/WareHousePage';
 
-import styles from './styles.css';
-import Header from '../../components/Header';
+import styles from './App.css';
+import Header from '../../components/Header/Header';
 
 
 export default function App() {

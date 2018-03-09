@@ -6,7 +6,7 @@ import PopperContent from './PopperContent';
 
 import { getTarget, DOMElement, PopperPlacements } from '../../utils/utils';
 
-import styles from './styles.css';
+import styles from './Popover.css';
 
 
 class Popover extends React.Component {  // eslint-disable-line react/prefer-stateless-function

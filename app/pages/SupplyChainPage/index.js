@@ -5,7 +5,7 @@ import Truck from './Truck/Truck';
 import Stakeholders from './Stakeholders/Stakeholders';
 import Notes from './Notes/Notes';
 
-import styles from './styles.css';
+import styles from './SupplyChainPage.css';
 
 class SupplyChainPage extends React.Component {
   // eslint-disable-line react/prefer-stateless-function

@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import styles from './styles.css';
+import styles from './Sidebar.css';
 
 class Sidebar extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {

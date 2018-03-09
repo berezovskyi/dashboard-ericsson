@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './Card.css';
 
-class Card extends React.Component { // eslint-disable-line react/prefer-stateless-function
+const helperImage = require('../../images/icons/help.svg');
+
+console.log(helperImage);
+
+class Card extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     const { children, title } = this.props;
 
@@ -13,7 +17,7 @@ class Card extends React.Component { // eslint-disable-line react/prefer-statele
           <h3 className={styles.cardtitle}>{title}</h3>
         </div>
         <div className={styles.helperImage}>
-          <img src="" height="24" width="24" alt="Help me" />
+          <img src={helperImage} height="24" width="24" alt="Help me" />
         </div>
         <div>
           {children}

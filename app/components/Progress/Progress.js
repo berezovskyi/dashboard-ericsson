@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import toNumber from 'lodash';
 
-import styles from './styles.css';
+import styles from './Progress.css';
 
 class Progress extends Component {  // eslint-disable-line react/prefer-stateless-function
   render() {

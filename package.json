@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "The website for react-boilerplate",
   "dependencies": {
+    "@types/react": "^16.0.40",
     "babel-polyfill": "^6.3.14",
     "chalk": "^1.1.1",
     "classnames": "^2.2.5",
