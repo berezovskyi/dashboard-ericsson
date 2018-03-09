@@ -7,7 +7,6 @@ import { Router } from 'react-router';
 import createHistory from 'history/createBrowserHistory';
 import reducer from './reducers';
 
-import styles from './global-styles.css';
 // Import root app
 import App from './pages/App';
 

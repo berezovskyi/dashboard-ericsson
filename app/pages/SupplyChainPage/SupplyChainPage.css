@@ -3,8 +3,20 @@
   margin-bottom: 20px;
 }
 
+.oneFull {
+  lost-column: 1/1;
+}
+
 .oneHalf {
   lost-column: 1/2;
+}
+
+.fourFifth {
+  lost-column: 4/5;
+}
+
+.oneFifth {
+  lost-column: 1/5;
 }
 
 .oneThird {
@@ -12,5 +24,9 @@
 }
 
 .profile {
+  text-align: center;
+}
+
+.imageThumbnail {
   text-align: center;
 }
