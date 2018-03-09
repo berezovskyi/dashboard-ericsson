@@ -2,11 +2,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import { createStore } from 'redux';
+import { Router } from 'react-router';
 import createHistory from 'history/createBrowserHistory';
+import reducer from './reducers';
 
 // Import root app
-import App from 'pages/App';
+import App from './pages/App';
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
@@ -17,26 +19,15 @@ import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
-import configureStore from './configureStore';
 
-// Create redux store with history
-const initialState = {};
 const history = createHistory();
-const store = configureStore(initialState, history);
-const MOUNT_NODE = document.getElementById('app');
+const store = createStore(reducer);
 
-const render = () => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <App />
-      </ConnectedRouter>
-    </Provider>,
-    MOUNT_NODE,
-  );
-};
-
-if (module.hot) {
-  ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-  render();
-}
+ReactDOM.render(
+  <Provider store={store}>
+    <Router history={history}>
+      <App />
+    </Router>
+  </Provider>,
+  document.getElementById('app'),
+);

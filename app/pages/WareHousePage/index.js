@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from '../../components/Button';
+import Button from '../../components/Button/Button';
 import Popover from '../../components/Popover/Popover';
 import PopoverBody from '../../components/Popover/PopoverBody';
 
