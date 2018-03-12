@@ -34,19 +34,33 @@ class Truck extends React.Component { // eslint-disable-line react/prefer-statel
           <Progress value="50" />
           <Button size="medium" color="secondary" onClick={this._handletruckinfoModal}>View more on Truck 1</Button>
         </div>
-        <div>
-          <h4 className={styles.trucktitle}>Time to reach warehouse for truck 2</h4>
-          <Progress value="50" />
-          <Button color="secondary">View more on Truck 1</Button>
-        </div>
         <Button size="medium" color="primary">View all</Button>
         <Modal isOpen={this.state.truckModal} toggle={this._handletruckinfoModal}>
-          <ModalHeader toggle={this._handletruckinfoModal}>Modal title</ModalHeader>
+          <ModalHeader toggle={this._handletruckinfoModal}>Warehouse - Truck 1</ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <div>
+              <h4 className={styles.trucktitle}>Time to reach warehouse for truck 1</h4>
+              <Progress value="50" />
+            </div>
+            <div>
+              <h4 className={styles.truckdata}>72%</h4>
+              <h6 className={styles.truckdatadescription}>Completed</h6>
+            </div>
+            <div>
+              <h4 className={styles.truckdata}>72%</h4>
+              <h6 className={styles.truckdatadescription}>Total Hours</h6>
+              <h4 className={styles.truckdata}>2%</h4>
+              <h6 className={styles.truckdatadescription}>Under Average</h6>
+            </div>
+            <div>
+              <h4 className={styles.truckdata}>72%</h4>
+              <h6 className={styles.truckdatadescription}>Sustainability</h6>
+              <h4 className={styles.truckdata}>2%</h4>
+              <h6 className={styles.truckdatadescription}>Above Average</h6>
+            </div>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this._handletruckinfoModal}>Do Something</Button>{' '}
+            <Button color="primary" onClick={this._handletruckinfoModal}>Close</Button>{' '}
           </ModalFooter>
         </Modal>
       </Card>

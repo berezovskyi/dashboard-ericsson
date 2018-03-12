@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import className from 'classnames';
 
+import RiskCurveIcon from '../../../images/icons/riskcurve.svg';
+import ProfitCurveIcon from '../../../images/icons/profitabilitycurve.svg';
+
 import {
   XYPlot,
   XAxis,
@@ -65,12 +68,16 @@ class RPChart extends Component {
           </div>
           <div className={styles.oneFifth}>
             <div className={styles.imageThumbnail}>
-              <img src="http://placehold.it/100x100" />
-              <p>Risk</p>
+              <div className={styles.imageThumbnailInner}>
+                <ProfitCurveIcon />
+                <p>Risk</p>
+              </div>
             </div>
             <div className={styles.imageThumbnail}>
-              <img src="http://placehold.it/100x100" />
+              <div className={styles.imageThumbnailInner}>
+              <RiskCurveIcon />
               <p>Profitability</p>
+            </div>
             </div>
           </div>
         </div>

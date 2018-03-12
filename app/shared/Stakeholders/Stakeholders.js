@@ -32,6 +32,10 @@ class Stakeholders extends React.Component { // eslint-disable-line react/prefer
       styles.profile, styles.oneThird
     );
 
+    const modalprofileList = className(
+      styles.row, styles.profilelist
+    );
+
     const { id } = this.props;
 
     return (
@@ -50,14 +54,43 @@ class Stakeholders extends React.Component { // eslint-disable-line react/prefer
             <h4>Raghu Nayyar</h4>
           </div>
         </div>
-        <Button size="medium" color="primary" onClick={this._handleallstakeholderModal}>View all</Button>
+        <Button size="medium" color="primary" onClick={this._handleallstakeholderModal}>Know More</Button>
         <Modal isOpen={this.state.stakeholderModal} toggle={this._handleallstakeholderModal}>
-          <ModalHeader toggle={this._handleallstakeholderModal}>Modal title</ModalHeader>
+          <ModalHeader toggle={this._handleallstakeholderModal}>Stakeholders for Intellegent Agent Level</ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <div className={modalprofileList}>
+              <div className={styles.oneFifth}>
+                <img className={styles.stakeholderphoto} src="http://placehold.it/100x100" />
+              </div>
+              <div className={styles.fourFifth}>
+                <h5 className={styles.stakeholdername}>Raghu Nayyar</h5>
+                <p className={styles.stakeholderemail}>hey@raghunayyar.com</p>
+                <p className={styles.stakeholderphone}>+46 72 002 0360</p>
+              </div>
+            </div>
+            <div className={modalprofileList}>
+              <div className={styles.oneFifth}>
+                <img className={styles.stakeholderphoto} src="http://placehold.it/100x100" />
+              </div>
+              <div className={styles.fourFifth}>
+                <h5 className={styles.stakeholdername}>Raghu Nayyar</h5>
+                <p className={styles.stakeholderemail}>hey@raghunayyar.com</p>
+                <p className={styles.stakeholderphone}>+46 72 002 0360</p>
+              </div>
+            </div>
+            <div className={modalprofileList}>
+              <div className={styles.oneFifth}>
+                <img className={styles.stakeholderphoto} src="http://placehold.it/100x100" />
+              </div>
+              <div className={styles.fourFifth}>
+                <h5 className={styles.stakeholdername}>Raghu Nayyar</h5>
+                <p className={styles.stakeholderemail}>hey@raghunayyar.com</p>
+                <p className={styles.stakeholderphone}>+46 72 002 0360</p>
+              </div>
+            </div>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this._handleallstakeholderModal}>Do Something</Button>{' '}
+            <Button color="primary" onClick={this._handleallstakeholderModal}>Close</Button>{' '}
           </ModalFooter>
         </Modal>
       </Card>
