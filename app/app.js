@@ -7,7 +7,6 @@ import { Router } from 'react-router';
 import createHistory from 'history/createBrowserHistory';
 import reducer from './reducers';
 
-import styles from './global-styles.css';
 // Import root app
 import App from './pages/App';
 
@@ -20,6 +19,8 @@ import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
+/* TODO: Try if we can pull this out */
+import 'react-vis/dist/style.css';
 
 const history = createHistory();
 const store = createStore(reducer);

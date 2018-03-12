@@ -9,12 +9,10 @@ body {
 .content {
   background: #F4F8F9;
   overflow-y: auto;
-  /* height: 100vh; */
-  position: fixed;
   color: #6A7088;
   margin-left: 100px;
   font-family: 'Lato', sans-serif;
-  top: 80px;
+  margin-top: 80px;
   right: 0;
   left: 0;
   height: 100%;

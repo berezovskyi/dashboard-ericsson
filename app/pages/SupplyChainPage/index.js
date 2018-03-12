@@ -6,6 +6,7 @@ import Stakeholders from '../../shared/Stakeholders/Stakeholders';
 import Notes from '../../shared/Notes/Notes';
 
 import styles from './SupplyChainPage.css';
+import RPChart from "./RPChart/RPChart";
 
 class SupplyChainPage extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -18,6 +19,11 @@ class SupplyChainPage extends React.Component {
           </div>
           <div className={styles.oneHalf}>
             <Truck />
+          </div>
+        </div>
+        <div className={styles.row}>
+          <div className={styles.oneFull}>
+            <RPChart />
           </div>
         </div>
         <div className={styles.row}>

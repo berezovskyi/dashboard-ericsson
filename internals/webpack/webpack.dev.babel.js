@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const cssnext = require('postcss-cssnext');
 const postcssFocus = require('postcss-focus');
 const postcssReporter = require('postcss-reporter');
+const combineLoaders = require('webpack-combine-loaders');
 const lost = require('lost');
 const postcssVariables = require('postcss-advanced-variables');
 const cssConfig = require('../../app/css-config.js');
@@ -29,8 +30,25 @@ module.exports = require('./webpack.base.babel')({
   },
 
   // Load the CSS in a style tag in development
-  cssLoaders: 'style-loader!css-loader?localIdentName=[name]__[local]--[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader',
+  cssLoaders: combineLoaders([
+    {
+      loader: 'style-loader',
+    }, {
+      loader: 'css-loader',
+      query: {
+        modules: true,
+        localIdentName: '[name]__[local]___[hash:base64:5]',
+      },
 
+    }, {
+      loader: 'postcss-loader',
+      query: {
+        modules: true,
+        importLoaders: true,
+        sourceMaps: true,
+      },
+    },
+  ]),
   // Process the CSS with PostCSS
   postcssPlugins: [
     postcssFocus(), // Add a :focus to every :hover
