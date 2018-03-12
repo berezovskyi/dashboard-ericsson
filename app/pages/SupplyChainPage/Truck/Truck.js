@@ -8,6 +8,8 @@ import ModalHeader from '../../../components/Modal/ModalHeader';
 import ModalFooter from '../../../components/Modal/ModalFooter';
 import ModalBody from '../../../components/Modal/ModalBody';
 
+import styles from './Truck.css';
+
 class Truck extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
@@ -28,12 +30,12 @@ class Truck extends React.Component { // eslint-disable-line react/prefer-statel
     return (
       <Card title="Trucks" helpText="The data relevant to the trucks">
         <div>
-          <h4>Time to reach warehouse for truck 1</h4>
+          <h4 className={styles.trucktitle}>Time to reach warehouse for truck 1</h4>
           <Progress value="50" />
           <Button size="medium" color="secondary" onClick={this._handletruckinfoModal}>View more on Truck 1</Button>
         </div>
         <div>
-          <h4>Time to reach warehouse for truck 2</h4>
+          <h4 className={styles.trucktitle}>Time to reach warehouse for truck 2</h4>
           <Progress value="50" />
           <Button color="secondary">View more on Truck 1</Button>
         </div>

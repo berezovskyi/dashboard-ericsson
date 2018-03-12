@@ -40,8 +40,9 @@ class RPChart extends Component {
   }
 
   render() {
+    const { id } = this.props;
     return (
-      <Card title="Profitability vs Risk Curve">
+      <Card title="Profitability vs Risk Curve" id={id}>
         <div className={styles.row}>
           <div className={styles.threeFifth}>
             <XYPlot xType="linear" width={960} height={300}>
@@ -78,6 +79,8 @@ class RPChart extends Component {
   }
 }
 
-RPChart.propTypes = {};
+RPChart.propTypes = {
+  id: PropTypes.string,
+};
 
 export default RPChart;

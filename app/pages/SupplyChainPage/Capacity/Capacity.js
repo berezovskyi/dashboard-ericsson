@@ -9,6 +9,8 @@ import ModalHeader from '../../../components/Modal/ModalHeader';
 import ModalFooter from '../../../components/Modal/ModalFooter';
 import ModalBody from '../../../components/Modal/ModalBody';
 
+import styles from './Capacity.css';
+
 class Capacity extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
@@ -25,21 +27,23 @@ class Capacity extends React.Component { // eslint-disable-line react/prefer-sta
   }
 
   render() {
+    const { id } = this.props;
     return (
       <Card
         title="Capacity"
         helpText="This explains the meaning of this section."
+        id={id}
       >
         <div>
-          <h4>Warehouse</h4>
+          <h4 className={styles.capacitytitle}>Warehouse</h4>
           <Progress value="50" />
         </div>
         <div>
-          <h4>Retailer 1</h4>
+          <h4 className={styles.capacitytitle}>Retailer 1</h4>
           <Progress value="50" />
         </div>
         <div>
-          <h4>Retailer 2</h4>
+          <h4 className={styles.capacitytitle}>Retailer 2</h4>
           <Progress value="60" />
         </div>
         <Button size="medium" color="primary" onClick={this._handlealltrucksModal}>View all</Button>

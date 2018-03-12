@@ -15,23 +15,23 @@ class SupplyChainPage extends React.Component {
       <div className={styles.fullPage}>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
-            <Capacity />
+            <Capacity id="capactiy" />
           </div>
           <div className={styles.oneHalf}>
-            <Truck />
+            <Truck id="truck" />
           </div>
         </div>
         <div className={styles.row}>
           <div className={styles.oneFull}>
-            <RPChart />
+            <RPChart id="rpchrt" />
           </div>
         </div>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
-            <Stakeholders />
+            <Stakeholders id="stakholder" />
           </div>
           <div className={styles.oneHalf}>
-            <Notes />
+            <Notes id="notes" />
           </div>
         </div>
       </div>

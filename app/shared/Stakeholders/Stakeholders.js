@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import className from 'classnames';
 
 import Card from '../../components/Card/Card';
@@ -11,7 +12,7 @@ import ModalBody from '../../components/Modal/ModalBody';
 
 import styles from '../../pages/SupplyChainPage/SupplyChainPage.css';
 
-class Notes extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class Stakeholders extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this._handleallstakeholderModal = this._handleallstakeholderModal.bind(this);
@@ -30,8 +31,11 @@ class Notes extends React.Component { // eslint-disable-line react/prefer-statel
     const profile = className(
       styles.profile, styles.oneThird
     );
+
+    const { id } = this.props;
+
     return (
-      <Card title="Stakeholders" helpText="All the people involved in the Supply Chain area.">
+      <Card title="Stakeholders" helpText="All the people involved in the Supply Chain area." id={id}>
         <div className={styles.row}>
           <div className={profile}>
             <img src="http://placehold.it/150x150" alt="John Doe" />
@@ -61,8 +65,8 @@ class Notes extends React.Component { // eslint-disable-line react/prefer-statel
   }
 }
 
-Notes.propTypes = {
-
+Stakeholders.propTypes = {
+  id: PropTypes.string,
 };
 
-export default Notes;
+export default Stakeholders;
