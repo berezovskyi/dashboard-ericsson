@@ -1,0 +1,32 @@
+.row {
+  lost-center: 100%;
+  margin-bottom: 20px;
+}
+
+.oneFull {
+  lost-column: 1/1;
+}
+
+.oneHalf {
+  lost-column: 1/2;
+}
+
+.threeFifth {
+  lost-column: 4/5;
+}
+
+.oneFifth {
+  lost-column: 1/5;
+}
+
+.oneThird {
+  lost-column: 1/3;
+}
+
+.profile {
+  text-align: center;
+}
+
+.imageThumbnail {
+  text-align: center;
+}

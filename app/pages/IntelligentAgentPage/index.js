@@ -1,12 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import Notes from '../../shared/Notes/Notes';
+import Stakeholders from '../../shared/Stakeholders/Stakeholders';
+
 import styles from './IntellegentAgentPage.css';
 
 class IntelligentAgentPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <h1 className={styles.h1}>
-        Intelligent Agent
-      </h1>
+      <div className={styles.row}>
+        <div className={styles.oneHalf}>
+          <Stakeholders />
+        </div>
+        <div className={styles.oneHalf}>
+          <Notes />
+        </div>
+      </div>
     );
   }
 }

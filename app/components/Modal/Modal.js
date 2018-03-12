@@ -24,6 +24,7 @@ const propTypes = {
   ]),
   children: PropTypes.node,
   external: PropTypes.node,
+  in: PropTypes.bool,
 };
 
 const propsToOmit = Object.keys(propTypes);
@@ -167,7 +168,7 @@ class Modal extends React.Component {
         <Portal node={this._element}>
           <div>
             <div
-              in={isOpen}
+              in={isOpen.toString()}
               style={{ display: 'block' }}
               onClick={this.handleBackdropClick}
               className={styles.modal}
@@ -179,7 +180,7 @@ class Modal extends React.Component {
               {this.renderModalDialog()}
             </div>
             <div
-              in={isOpen}
+              in={isOpen.toString()}
               className={styles['modal-backdrop']}
             />
           </div>
