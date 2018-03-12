@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import className from 'classnames';
+import 'whatwg-fetch';
 
 import Card from '../../components/Card/Card';
 import Button from '../../components/Button/Button';
@@ -18,8 +19,18 @@ class Stakeholders extends React.Component { // eslint-disable-line react/prefer
     this._handleallstakeholderModal = this._handleallstakeholderModal.bind(this);
     this.state = {
       stakeholderModal: false,
+      stakeholders: [],
     };
   }
+
+  componentDidMount() {
+    fetch('http://localhost:3004/stakeholders')
+      .then((response) => {
+        return response.json();
+      }).then((json) => {
+        console.log('parsed json', json);
+      });
+    }
 
   _handleallstakeholderModal() {
     this.setState({
