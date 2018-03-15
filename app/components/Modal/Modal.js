@@ -24,6 +24,7 @@ const propTypes = {
   ]),
   children: PropTypes.node,
   external: PropTypes.node,
+  in: PropTypes.bool,
 };
 
 const propsToOmit = Object.keys(propTypes);
@@ -136,11 +137,17 @@ class Modal extends React.Component {
 
   renderModalDialog() {
     const attributes = omit(this.props, propsToOmit);
+    const centeredModalClasses = classNames(
+      styles['modal-dialog'],
+      styles['modal-dialog-centered'],
+    );
+
+    const { children } = this.props;
 
     return (
       <div
         {...attributes}
-        className={styles['modal-dialog']}
+        className={centeredModalClasses}
         role="document"
         ref={(c) => {
           this._dialog = c;
@@ -149,7 +156,7 @@ class Modal extends React.Component {
         <div
           className={styles['modal-content']}
         >
-          {this.props.children}
+          {children}
         </div>
       </div>
     );
@@ -167,7 +174,7 @@ class Modal extends React.Component {
         <Portal node={this._element}>
           <div>
             <div
-              in={isOpen}
+              in={isOpen.toString()}
               style={{ display: 'block' }}
               onClick={this.handleBackdropClick}
               className={styles.modal}
@@ -179,7 +186,7 @@ class Modal extends React.Component {
               {this.renderModalDialog()}
             </div>
             <div
-              in={isOpen}
+              in={isOpen.toString()}
               className={styles['modal-backdrop']}
             />
           </div>
