@@ -7,6 +7,8 @@ import ModalHeader from '../../components/Modal/ModalHeader';
 import ModalFooter from '../../components/Modal/ModalFooter';
 import ModalBody from '../../components/Modal/ModalBody';
 
+import styles from './Notes.css';
+
 class Notes extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
@@ -26,7 +28,7 @@ class Notes extends React.Component { // eslint-disable-line react/prefer-statel
     const { id } = this.props;
     return (
       <Card title="Notes" helpText="Add Notes relevant to Supply Chain over here" id={id}>
-        <div>
+        <div className={styles.noNotesContainer}>
           <h4>No Notes so far</h4>
         </div>
         <Button size="medium" color="primary" onClick={this._handlenotesModal}>Add Note</Button>

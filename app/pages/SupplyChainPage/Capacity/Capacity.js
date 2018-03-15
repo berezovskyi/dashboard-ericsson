@@ -11,8 +11,7 @@ import ModalBody from '../../../components/Modal/ModalBody';
 
 import styles from './Capacity.css';
 
-class Capacity extends React.Component {
-  // eslint-disable-line react/prefer-stateless-function
+class Capacity extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this._handlealltrucksModal = this._handlealltrucksModal.bind(this);

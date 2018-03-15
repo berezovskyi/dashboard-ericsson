@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import className from 'classnames';
 import 'whatwg-fetch';
 
@@ -11,26 +12,21 @@ import ModalHeader from '../../components/Modal/ModalHeader';
 import ModalFooter from '../../components/Modal/ModalFooter';
 import ModalBody from '../../components/Modal/ModalBody';
 
+import StakeholderProfile from './StakeholderProfile';
 import styles from '../../pages/SupplyChainPage/SupplyChainPage.css';
 
-class Stakeholders extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class Stakeholders extends React.Component {
+  // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-    this._handleallstakeholderModal = this._handleallstakeholderModal.bind(this);
+    this._handleallstakeholderModal = this._handleallstakeholderModal.bind(
+      this,
+    );
     this.state = {
       stakeholderModal: false,
       stakeholders: [],
     };
   }
-
-  componentDidMount() {
-    fetch('http://localhost:3004/stakeholders')
-      .then((response) => {
-        return response.json();
-      }).then((json) => {
-        console.log('parsed json', json);
-      });
-    }
 
   _handleallstakeholderModal() {
     this.setState({
@@ -39,39 +35,43 @@ class Stakeholders extends React.Component { // eslint-disable-line react/prefer
   }
 
   render() {
-    const profile = className(
-      styles.profile, styles.oneThird
-    );
+    const modalprofileList = className(styles.row, styles.profilelist);
 
-    const modalprofileList = className(
-      styles.row, styles.profilelist
-    );
+    const { stakeholders } = this.props;
 
-    const { id } = this.props;
+    const { id, type } = this.props;
 
     return (
-      <Card title="Stakeholders" helpText="All the people involved in the Supply Chain area." id={id}>
+      <Card
+        title="Stakeholders"
+        helpText="All the people involved in the Supply Chain area."
+        id={id}
+        type={type}
+      >
         <div className={styles.row}>
-          <div className={profile}>
-            <img src="http://placehold.it/150x150" alt="John Doe" />
-            <h4>Raghu Nayyar</h4>
-          </div>
-          <div className={profile}>
-            <img src="http://placehold.it/150x150" alt="John Doe" />
-            <h4>Raghu Nayyar</h4>
-          </div>
-          <div className={profile}>
-            <img src="http://placehold.it/150x150" alt="John Doe" />
-            <h4>Raghu Nayyar</h4>
-          </div>
+          <StakeholderProfile stakeholders={stakeholders} />
         </div>
-        <Button size="medium" color="primary" onClick={this._handleallstakeholderModal}>Know More</Button>
-        <Modal isOpen={this.state.stakeholderModal} toggle={this._handleallstakeholderModal}>
-          <ModalHeader toggle={this._handleallstakeholderModal}>Stakeholders for Intellegent Agent Level</ModalHeader>
+        <Button
+          size="medium"
+          color="primary"
+          onClick={this._handleallstakeholderModal}
+        >
+          Know More
+        </Button>
+        <Modal
+          isOpen={this.state.stakeholderModal}
+          toggle={this._handleallstakeholderModal}
+        >
+          <ModalHeader toggle={this._handleallstakeholderModal}>
+            Stakeholders for Intellegent Agent Level
+          </ModalHeader>
           <ModalBody>
             <div className={modalprofileList}>
               <div className={styles.oneFifth}>
-                <img className={styles.stakeholderphoto} src="http://placehold.it/100x100" />
+                <img
+                  className={styles.stakeholderphoto}
+                  src="http://placehold.it/100x100"
+                />
               </div>
               <div className={styles.fourFifth}>
                 <h5 className={styles.stakeholdername}>Raghu Nayyar</h5>
@@ -81,7 +81,10 @@ class Stakeholders extends React.Component { // eslint-disable-line react/prefer
             </div>
             <div className={modalprofileList}>
               <div className={styles.oneFifth}>
-                <img className={styles.stakeholderphoto} src="http://placehold.it/100x100" />
+                <img
+                  className={styles.stakeholderphoto}
+                  src="http://placehold.it/100x100"
+                />
               </div>
               <div className={styles.fourFifth}>
                 <h5 className={styles.stakeholdername}>Raghu Nayyar</h5>
@@ -91,7 +94,10 @@ class Stakeholders extends React.Component { // eslint-disable-line react/prefer
             </div>
             <div className={modalprofileList}>
               <div className={styles.oneFifth}>
-                <img className={styles.stakeholderphoto} src="http://placehold.it/100x100" />
+                <img
+                  className={styles.stakeholderphoto}
+                  src="http://placehold.it/100x100"
+                />
               </div>
               <div className={styles.fourFifth}>
                 <h5 className={styles.stakeholdername}>Raghu Nayyar</h5>
@@ -101,7 +107,10 @@ class Stakeholders extends React.Component { // eslint-disable-line react/prefer
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this._handleallstakeholderModal}>Close</Button>{' '}
+            <Button color="primary" onClick={this._handleallstakeholderModal}>
+              Close
+            </Button>
+            {' '}
           </ModalFooter>
         </Modal>
       </Card>
@@ -109,8 +118,15 @@ class Stakeholders extends React.Component { // eslint-disable-line react/prefer
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    stakeholders: state.get('stakeholders'),
+  };
+}
+
 Stakeholders.propTypes = {
   id: PropTypes.string,
+  type: PropTypes.string.isRequired,
 };
 
-export default Stakeholders;
+export default connect(mapStateToProps)(Stakeholders);

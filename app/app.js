@@ -23,7 +23,7 @@ import 'file-loader?name=[name].[ext]!./.htaccess';
 import 'react-vis/dist/style.css';
 
 const history = createHistory();
-const store = createStore(reducer);
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <Provider store={store}>

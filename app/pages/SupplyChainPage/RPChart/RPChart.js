@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import className from 'classnames';
 
-import RiskCurveIcon from '../../../images/icons/riskcurve.svg';
-import ProfitCurveIcon from '../../../images/icons/profitabilitycurve.svg';
+import RiskCurveIcon from '../../../images/icons/risk.png';
+import ProfitCurveIcon from '../../../images/icons/profits.png';
 
 import {
   XYPlot,
@@ -48,7 +48,7 @@ class RPChart extends Component {
       <Card title="Profitability vs Risk Curve" id={id}>
         <div className={styles.row}>
           <div className={styles.threeFifth}>
-            <XYPlot xType="linear" width={960} height={300}>
+            <XYPlot xType="linear" width={1060} height={300}>
               <HorizontalGridLines />
               <XAxis />
               <YAxis />
@@ -69,13 +69,13 @@ class RPChart extends Component {
           <div className={styles.oneFifth}>
             <div className={styles.imageThumbnail}>
               <div className={styles.imageThumbnailInner}>
-                <ProfitCurveIcon />
+                <img src={RiskCurveIcon} width={80} />
                 <p>Risk</p>
               </div>
             </div>
             <div className={styles.imageThumbnail}>
               <div className={styles.imageThumbnailInner}>
-              <RiskCurveIcon />
+                <img src={ProfitCurveIcon} width={80} />
               <p>Profitability</p>
             </div>
             </div>
