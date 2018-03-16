@@ -31,7 +31,7 @@ class Truck extends React.Component { // eslint-disable-line react/prefer-statel
       <Card title="Trucks" helpText="The data relevant to the trucks">
         <div>
           <h4 className={styles.trucktitle}>Time to reach warehouse for truck 1</h4>
-          <Progress value="50" />
+          <Progress value={50} />
           <Button size="medium" color="secondary" onClick={this._handletruckinfoModal}>View more on Truck 1</Button>
         </div>
         <Button size="medium" color="primary">View all</Button>
@@ -40,7 +40,7 @@ class Truck extends React.Component { // eslint-disable-line react/prefer-statel
           <ModalBody>
             <div>
               <h4 className={styles.trucktitle}>Time to reach warehouse for truck 1</h4>
-              <Progress value="50" />
+              <Progress value={50} />
             </div>
             <div>
               <h4 className={styles.truckdata}>72%</h4>
