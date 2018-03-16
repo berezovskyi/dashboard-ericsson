@@ -179,6 +179,7 @@
         }
       ],
       "no-console": 0,
+      "new-cap": 0,
       "react/prop-types": 0,
       "max-len": 0,
       "prefer-template": 0,

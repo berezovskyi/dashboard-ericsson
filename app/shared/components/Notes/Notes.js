@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '../../components/Card/Card';
-import Button from '../../components/Button/Button';
-import Modal from '../../components/Modal/Modal';
-import ModalHeader from '../../components/Modal/ModalHeader';
-import ModalFooter from '../../components/Modal/ModalFooter';
-import ModalBody from '../../components/Modal/ModalBody';
+import Card from '../../../components/Card/Card';
+import Button from '../../../components/Button/Button';
+import Modal from '../../../components/Modal/Modal';
+import ModalHeader from '../../../components/Modal/ModalHeader';
+import ModalFooter from '../../../components/Modal/ModalFooter';
+import ModalBody from '../../../components/Modal/ModalBody';
 
 import styles from './Notes.css';
 

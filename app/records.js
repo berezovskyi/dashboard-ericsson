@@ -17,4 +17,11 @@ const Stakeholder = new Record({
   type: '',
 });
 
-export { Note, Stakeholder }
+const Capacity = new Record({
+  id: '00000-00000',
+  name: '',
+  value: 0,
+  type: '',
+});
+
+export { Note, Stakeholder, Capacity }

@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 import className from 'classnames';
 import 'whatwg-fetch';
 
-import Card from '../../components/Card/Card';
-import Button from '../../components/Button/Button';
+import Card from '../../../components/Card/Card';
+import Button from '../../../components/Button/Button';
 
-import Modal from '../../components/Modal/Modal';
-import ModalHeader from '../../components/Modal/ModalHeader';
-import ModalFooter from '../../components/Modal/ModalFooter';
-import ModalBody from '../../components/Modal/ModalBody';
+import Modal from '../../../components/Modal/Modal';
+import ModalHeader from '../../../components/Modal/ModalHeader';
+import ModalFooter from '../../../components/Modal/ModalFooter';
+import ModalBody from '../../../components/Modal/ModalBody';
 
 import StakeholderProfile from './StakeholderProfile';
-import styles from '../../pages/SupplyChainPage/SupplyChainPage.css';
+import styles from '../../../pages/SupplyChainPage/SupplyChainPage.css';
 
 class Stakeholders extends React.Component {
   // eslint-disable-line react/prefer-stateless-function

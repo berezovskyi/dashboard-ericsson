@@ -2,8 +2,8 @@ import React from 'react';
 
 import Capacity from './Capacity/Capacity';
 import Truck from './Truck/Truck';
-import Stakeholders from '../../shared/Stakeholders/Stakeholders';
-import Notes from '../../shared/Notes/Notes';
+import Stakeholders from '../../shared/components/Stakeholders/Stakeholders';
+import Notes from '../../shared/components/Notes/Notes';
 
 import styles from './SupplyChainPage.css';
 import RPChart from "./RPChart/RPChart";
