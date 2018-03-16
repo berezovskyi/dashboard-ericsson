@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Notes from '../../shared/Notes/Notes';
-import Stakeholders from '../../shared/Stakeholders/Stakeholders';
+import Notes from '../../shared/components/Notes/Notes';
+import Stakeholders from '../../shared/components/Stakeholders/Stakeholders';
 
 import styles from './IntellegentAgentPage.css';
 

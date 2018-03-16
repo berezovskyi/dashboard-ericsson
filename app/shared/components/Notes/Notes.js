@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '../../components/Card/Card';
-import Button from '../../components/Button/Button';
-import Modal from '../../components/Modal/Modal';
-import ModalHeader from '../../components/Modal/ModalHeader';
-import ModalFooter from '../../components/Modal/ModalFooter';
-import ModalBody from '../../components/Modal/ModalBody';
+import Card from '../../../components/Card/Card';
+import Button from '../../../components/Button/Button';
+import Modal from '../../../components/Modal/Modal';
+import ModalHeader from '../../../components/Modal/ModalHeader';
+import ModalFooter from '../../../components/Modal/ModalFooter';
+import ModalBody from '../../../components/Modal/ModalBody';
+
+import styles from './Notes.css';
 
 class Notes extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -26,7 +28,7 @@ class Notes extends React.Component { // eslint-disable-line react/prefer-statel
     const { id } = this.props;
     return (
       <Card title="Notes" helpText="Add Notes relevant to Supply Chain over here" id={id}>
-        <div>
+        <div className={styles.noNotesContainer}>
           <h4>No Notes so far</h4>
         </div>
         <Button size="medium" color="primary" onClick={this._handlenotesModal}>Add Note</Button>
