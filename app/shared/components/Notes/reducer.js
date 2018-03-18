@@ -28,7 +28,7 @@ const notesReducer = Map({
     text: 'Note 3',
     timestamp: '2015-10-11',
     author: 'Raghu Nayyar',
-    type: 'warehouselevel',
+    type: 'wh',
   }),
   ['12341-45677']: Note({
     id: '12341-45677',
