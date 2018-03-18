@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Card.css';
 
-import HelperImage from '../../images/icons/help.svg';
+import HelperImage from '../../shared/media/images/icons/help.svg';
 import Popover from '../../components/Popover/Popover';
 import PopoverBody from '../../components/Popover/PopoverBody';
 

@@ -12,7 +12,7 @@ import App from './pages/App';
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
-import '!file-loader?name=[name].[ext]!./images/favicons/favicon.ico';
+import '!file-loader?name=[name].[ext]!./shared/media/images/favicons/favicon.ico';
 
 
 import '!file-loader?name=[name].[ext]!./manifest.json';

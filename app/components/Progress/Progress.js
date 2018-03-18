@@ -13,7 +13,7 @@ class Progress extends Component {  // eslint-disable-line react/prefer-stateles
       color,
     } = this.props;
 
-    const percent = ((toNumber(value) / toNumber(max)) * 100);
+    const percent = (value / max) * 100;
 
     const progressClass = classNames(
       styles['progress-bar'],
@@ -25,7 +25,7 @@ class Progress extends Component {  // eslint-disable-line react/prefer-stateles
           className={progressClass}
           style={{ width: `${percent}%` }}
           data-value={value}
-          data-min="0"
+          data-min={0}
           data-max={max}
         />
       </div>
@@ -34,14 +34,8 @@ class Progress extends Component {  // eslint-disable-line react/prefer-stateles
 }
 
 Progress.propTypes = {
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
-  max: PropTypes.oneOf([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  value: PropTypes.number,
+  max: PropTypes.number,
   color: PropTypes.string,
 };
 

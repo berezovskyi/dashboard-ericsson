@@ -133,7 +133,7 @@
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 500px;
+    max-width: 640px;
     margin: 1.75rem auto;
   }
 
@@ -157,4 +157,8 @@
   .modal-dialog-centered {
     min-height: calc(100% - (1.75rem * 2));
   }
+}
+
+.modal-footer button {
+  margin-left: 10px;
 }
