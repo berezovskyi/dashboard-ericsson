@@ -5,7 +5,7 @@ import styles from './Stakeholders.css';
 export default function StakeholderModalProfile({ stakeholders }) {
   const modalprofileList = className(styles.row, styles.profilelist);
   return stakeholders.valueSeq().map(stakeholder => (
-    <div className={modalprofileList}>
+    <div className={modalprofileList} key={stakeholder.id}>
       <div className={styles.oneFifth}>
         <img
           className={styles.stakeholderphoto}

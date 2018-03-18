@@ -10,7 +10,7 @@ class WareHousePage extends React.Component { // eslint-disable-line react/prefe
     return (
       <div className={styles.row}>
         <div className={styles.oneHalf}>
-          <Stakeholders />
+          <Stakeholders id="stakeholder" type="wh" />
         </div>
         <div className={styles.oneHalf}>
           <Notes />

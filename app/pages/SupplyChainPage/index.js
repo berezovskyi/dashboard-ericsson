@@ -28,7 +28,7 @@ class SupplyChainPage extends React.Component {
         </div>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
-            <Stakeholders id="stakholder" type='sc' />
+            <Stakeholders id="stakeholder" type="sc" />
           </div>
           <div className={styles.oneHalf}>
             <Notes id="notes" />

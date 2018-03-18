@@ -29,6 +29,14 @@ class Stakeholders extends React.Component {
     };
   }
 
+  componentWillMount() {
+    const { type, stakeholders } = this.props;
+    const filteredstakeholders = stakeholders.filter(stakeholder => type === stakeholder.type);
+    this.setState({
+      stakeholders: filteredstakeholders,
+    });
+  }
+
   _handleallstakeholderModal() {
     this.setState({
       stakeholderModal: !this.state.stakeholderModal,
@@ -36,11 +44,8 @@ class Stakeholders extends React.Component {
   }
 
   render() {
-    const modalprofileList = className(styles.row, styles.profilelist);
-
-    const { stakeholders } = this.props;
-
     const { id, type } = this.props;
+    const { stakeholders } = this.state;
 
     return (
       <Card
