@@ -35,7 +35,7 @@ const stakeholdersReducer = Map({
     name: 'Tushar Gayal',
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
-    type: 'warehouselevel',
+    type: 'wh',
   }),
   ['12345-45674']: Stakeholder({
     id: '12345-45674',
