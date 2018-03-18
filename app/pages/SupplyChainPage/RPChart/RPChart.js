@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import className from 'classnames';
 
-import RiskCurveIcon from '../../../images/icons/risk.png';
-import ProfitCurveIcon from '../../../images/icons/profits.png';
+import RiskCurveIcon from '../../../shared/media/images/icons/risk.png';
+import ProfitCurveIcon from '../../../shared/media/images/icons/profits.png';
 
 import {
   XYPlot,

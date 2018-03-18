@@ -24,4 +24,17 @@ const Capacity = new Record({
   type: '',
 });
 
-export { Note, Stakeholder, Capacity }
+const Truck = new Record({
+  to: '',
+  from: '',
+  id: '0000-0000',
+  activity: {
+    time: 0,
+    diff: 0,
+  },
+  sustainability: {
+    value: 0,
+    diff: 0,
+  },
+});
+export { Note, Stakeholder, Capacity, Truck }
