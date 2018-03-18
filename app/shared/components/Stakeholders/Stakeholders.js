@@ -14,6 +14,7 @@ import ModalBody from '../../../components/Modal/ModalBody';
 
 import StakeholderProfile from './StakeholderProfile';
 import styles from '../../../pages/SupplyChainPage/SupplyChainPage.css';
+import StakeholderModalProfile from './StakeholderModalProfile';
 
 class Stakeholders extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -66,45 +67,7 @@ class Stakeholders extends React.Component {
             Stakeholders for Intellegent Agent Level
           </ModalHeader>
           <ModalBody>
-            <div className={modalprofileList}>
-              <div className={styles.oneFifth}>
-                <img
-                  className={styles.stakeholderphoto}
-                  src="http://placehold.it/100x100"
-                />
-              </div>
-              <div className={styles.fourFifth}>
-                <h5 className={styles.stakeholdername}>Raghu Nayyar</h5>
-                <p className={styles.stakeholderemail}>hey@raghunayyar.com</p>
-                <p className={styles.stakeholderphone}>+46 72 002 0360</p>
-              </div>
-            </div>
-            <div className={modalprofileList}>
-              <div className={styles.oneFifth}>
-                <img
-                  className={styles.stakeholderphoto}
-                  src="http://placehold.it/100x100"
-                />
-              </div>
-              <div className={styles.fourFifth}>
-                <h5 className={styles.stakeholdername}>Raghu Nayyar</h5>
-                <p className={styles.stakeholderemail}>hey@raghunayyar.com</p>
-                <p className={styles.stakeholderphone}>+46 72 002 0360</p>
-              </div>
-            </div>
-            <div className={modalprofileList}>
-              <div className={styles.oneFifth}>
-                <img
-                  className={styles.stakeholderphoto}
-                  src="http://placehold.it/100x100"
-                />
-              </div>
-              <div className={styles.fourFifth}>
-                <h5 className={styles.stakeholdername}>Raghu Nayyar</h5>
-                <p className={styles.stakeholderemail}>hey@raghunayyar.com</p>
-                <p className={styles.stakeholderphone}>+46 72 002 0360</p>
-              </div>
-            </div>
+            <StakeholderModalProfile stakeholders={stakeholders} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handleallstakeholderModal}>
