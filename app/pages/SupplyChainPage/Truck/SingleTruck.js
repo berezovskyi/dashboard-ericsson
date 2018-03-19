@@ -31,6 +31,7 @@ class SingleTruck extends React.Component {
     if (!this.state.truckModal) {
       this.setState({
         data: {
+          value: data.get('value'),
           id: data.get('id'),
           name: data.get('name'),
           to: data.get('to'),
