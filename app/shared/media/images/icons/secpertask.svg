@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128px" height="59px" viewBox="0 0 128 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#F5515F" offset="0%"></stop>
+            <stop stop-color="#9F041B" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Notes" transform="translate(-601.000000, -398.000000)" fill="url(#linearGradient-1)" fill-rule="nonzero">
+            <g id="noun_45371_cc" transform="translate(601.000000, 398.000000)">
+                <g id="Group-2">
+                    <path d="M58.781,0.281 L27.718,31.25 L14.749,18.094 L9.061,23.719 L24.842,39.719 L27.686,42.563 L30.53,39.719 L64.436,5.938 L58.78,0.282 L58.781,0.281 Z M3.5,3 C1.533,3 0,4.533 0,6.5 L0,55.5 C0,57.467 1.533,59 3.5,59 L52.5,59 C54.467,59 56,57.467 56,55.5 L56,19.094 L52,23.094 L52,55 L4,55 L4,7 L47.188,7 L51.188,3 L3.5,3 Z M68,15 L68,19 L128,19 L128,15 L68,15 Z M68,27 L68,31 L118,31 L118,27 L68,27 Z M68,39 L68,43 L122,43 L122,39 L68,39 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
