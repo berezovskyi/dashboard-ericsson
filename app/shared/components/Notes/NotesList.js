@@ -8,7 +8,7 @@ export default function NotesList({ notes }) {
         <li key={note.id}>
           <div className={styles.text}>{note.text}</div>
           <div className={styles.meta}>
-            <span className={styles.author}>{note.author}</span> { ' | '}
+            <span className={styles.author}>{note.author}</span> {' | '}
             <span className={styles.timestamp}>{note.timestamp}</span>
           </div>
         </li>

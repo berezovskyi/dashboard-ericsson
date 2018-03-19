@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './Capacity.css';
+import styles from './Energy.css';
 import Progress from '../../../ui/Progress/Progress';
 
-export default function SingleCapacity({ capacity }) {
-  return capacity.valueSeq().map(row => (
+export default function SingleEnergy({ energy }) {
+  return energy.valueSeq().map(row => (
     <div key={row.id}>
       <h4 className={styles.title}>{row.name}</h4>
       <Progress value={row.value} />
