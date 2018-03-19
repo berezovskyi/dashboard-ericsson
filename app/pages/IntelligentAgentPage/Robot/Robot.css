@@ -61,22 +61,3 @@
 .modalincrease {
   color: #60C303;
 }
-
-.title {
-  margin-bottom: 10px;
-}
-
-.fiveSixth {
-  lost-column: 5/6;
-}
-
-.oneSixth {
-  lost-column: 1/6;
-}
-
-.text {
-  font-size: 12px;
-  display: block;
-  text-align: right;
-  color: #aaa;
-}

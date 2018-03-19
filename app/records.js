@@ -28,13 +28,15 @@ const Truck = new Record({
   to: '',
   from: '',
   id: '0000-0000',
+  name: '',
+  value: 0,
   activity: {
-    time: 0,
-    diff: 0,
+    time: '',
+    diff: '',
   },
   sustainability: {
-    value: 0,
-    diff: 0,
+    value: '',
+    diff: '',
   },
 });
 export { Note, Stakeholder, Capacity, Truck }

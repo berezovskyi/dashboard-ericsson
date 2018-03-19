@@ -15,12 +15,6 @@ class Sidebar extends React.Component { // eslint-disable-line react/prefer-stat
       <div className={styles.sidebarpanel}>
         <ul>
           <li>
-            <NavLink exact activeClassName={styles.active} to="/">
-              <HomeIcon width={50} />
-              <span>Home Page</span>
-            </NavLink>
-          </li>
-          <li>
             <NavLink activeClassName={styles.active} to="/supplychain">
               <SupplyChainIcon width={50} />
               <span>Supply Chain Level</span>
