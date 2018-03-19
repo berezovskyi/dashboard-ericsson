@@ -1,21 +1,38 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Card from '../../../components/Card/Card';
-import Button from '../../../components/Button/Button';
-import Modal from '../../../components/Modal/Modal';
-import ModalHeader from '../../../components/Modal/ModalHeader';
-import ModalFooter from '../../../components/Modal/ModalFooter';
-import ModalBody from '../../../components/Modal/ModalBody';
+import Card from '../../../ui/Card/Card';
+import Button from '../../../ui/Button/Button';
+import Form from '../../../ui/Form/Form';
+import Label from '../../../ui/Form/Label';
+import Textarea from '../../../ui/Form/Textarea';
+import FormGroup from '../../../ui/Form/FormGroup';
 
-import styles from './Notes.css';
+import Modal from '../../../ui/Modal/Modal';
+import ModalHeader from '../../../ui/Modal/ModalHeader';
+import ModalFooter from '../../../ui/Modal/ModalFooter';
+import ModalBody from '../../../ui/Modal/ModalBody';
 
-class Notes extends React.Component { // eslint-disable-line react/prefer-stateless-function
+import NoNotes from './NoNotes';
+import NotesList from './NotesList';
+
+class Notes extends React.Component {
+  // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this._handlenotesModal = this._handlenotesModal.bind(this);
     this.state = {
       notesModal: false,
+      notes: [],
     };
+  }
+
+  componentWillMount() {
+    const { type, notes } = this.props;
+    const filterednotes = notes.filter(note => type === note.type);
+    this.setState({
+      notes: filterednotes,
+    });
   }
 
   _handlenotesModal() {
@@ -25,25 +42,37 @@ class Notes extends React.Component { // eslint-disable-line react/prefer-statel
   }
 
   render() {
-    const { id } = this.props;
+    const { id, type } = this.props;
+    const { notes } = this.state;
+
+    console.log(notes);
     return (
-      <Card title="Notes" helpText="Add Notes relevant to Supply Chain over here" id={id}>
-        <div className={styles.noNotesContainer}>
-          <h4>No Notes so far</h4>
-        </div>
-        <Button size="medium" color="primary" onClick={this._handlenotesModal}>Add Note</Button>
+      <Card
+        title="Notes"
+        helpText="Add Notes relevant to Supply Chain over here"
+        id={id}
+      >
+        {notes.size > 0 ? <NotesList notes={notes} /> : <NoNotes />}
+        <Button size="medium" color="primary" onClick={this._handlenotesModal}>
+          Add Note
+        </Button>
         <Modal isOpen={this.state.notesModal} toggle={this._handlenotesModal}>
-          <ModalHeader toggle={this._handlenotesModal}>Modal title</ModalHeader>
+          <ModalHeader toggle={this._handlenotesModal}>All Notes</ModalHeader>
           <ModalBody>
-            <form>
-              <label>
-                Note
-              </label>
-              <textarea />
-            </form>
+            <Form>
+              <FormGroup>
+                <Label>
+                  Add Note
+                </Label>
+                <Textarea />
+              </FormGroup>
+            </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this._handlenotesModal}>Add</Button>{' '}
+            <Button color="primary" onClick={this._handlenotesModal}>
+              Add
+            </Button>
+            {' '}
           </ModalFooter>
         </Modal>
       </Card>
@@ -51,8 +80,14 @@ class Notes extends React.Component { // eslint-disable-line react/prefer-statel
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    notes: state.get('notes'),
+  };
+}
+
 Notes.propTypes = {
   id: PropTypes.string,
 };
 
-export default Notes;
+export default connect(mapStateToProps)(Notes);

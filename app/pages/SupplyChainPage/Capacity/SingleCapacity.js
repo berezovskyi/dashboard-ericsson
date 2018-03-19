@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Capacity.css';
-import Progress from '../../../components/Progress/Progress';
+import Progress from '../../../ui/Progress/Progress';
 
 export default function SingleCapacity({ capacity }) {
   return capacity.valueSeq().map(row => (
