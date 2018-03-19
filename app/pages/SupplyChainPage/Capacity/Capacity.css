@@ -1,3 +1,22 @@
 .capacitytitle {
   margin-bottom: 10px;
 }
+
+.row {
+  lost-center: 100%;
+}
+
+.fiveSixth {
+  lost-column: 5/6;
+}
+
+.oneSixth {
+  lost-column: 1/6;
+}
+
+.text {
+  font-size: 12px;
+  display: block;
+  text-align: right;
+  color: #aaa;
+}

@@ -28,6 +28,8 @@ const Truck = new Record({
   to: '',
   from: '',
   id: '0000-0000',
+  name: '',
+  value: 0,
   activity: {
     time: 0,
     diff: 0,
