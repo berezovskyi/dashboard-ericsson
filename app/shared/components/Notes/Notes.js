@@ -14,6 +14,7 @@ import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
 
 import NoNotes from './NoNotes';
+import NotesList from './NotesList';
 
 class Notes extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -51,7 +52,7 @@ class Notes extends React.Component {
         helpText="Add Notes relevant to Supply Chain over here"
         id={id}
       >
-        <NoNotes />
+        {notes.size > 0 ? <NotesList notes={notes} /> : <NoNotes />}
         <Button size="medium" color="primary" onClick={this._handlenotesModal}>
           Add Note
         </Button>
