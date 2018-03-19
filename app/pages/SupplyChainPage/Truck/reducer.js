@@ -16,12 +16,12 @@ const truckReducer = Map({
     name: 'Truck 1',
     value: 25,
     activity: {
-      time: 0,
-      diff: 0,
+      time: '5h 30m',
+      diff: '3',
     },
     sustainability: {
-      value: 0,
-      diff: 0,
+      value: '65',
+      diff: '2',
     },
   }),
   ['12341-41234']: Truck({
@@ -31,12 +31,12 @@ const truckReducer = Map({
     name: 'Truck 2',
     value: 60,
     activity: {
-      time: 0,
-      diff: 0,
+      time: '5h 30m',
+      diff: '2',
     },
     sustainability: {
-      value: 0,
-      diff: 0,
+      value: '51',
+      diff: '3',
     },
   }),
   ['12341-41235']: Truck({
@@ -46,12 +46,12 @@ const truckReducer = Map({
     name: 'Truck 3',
     value: 15,
     activity: {
-      time: 0,
-      diff: 0,
+      time: '5h 30m',
+      diff: '1',
     },
     sustainability: {
-      value: 0,
-      diff: 0,
+      value: '45',
+      diff: '1',
     },
   }),
   ['12341-41236']: Truck({
@@ -61,12 +61,12 @@ const truckReducer = Map({
     name: 'Truck 4',
     value: 52,
     activity: {
-      time: 0,
-      diff: 0,
+      time: '5h 30m',
+      diff: '4',
     },
     sustainability: {
-      value: 0,
-      diff: 0,
+      value: '25',
+      diff: '5',
     },
   }),
 });

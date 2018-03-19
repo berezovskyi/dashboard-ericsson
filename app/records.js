@@ -31,12 +31,12 @@ const Truck = new Record({
   name: '',
   value: 0,
   activity: {
-    time: 0,
-    diff: 0,
+    time: '',
+    diff: '',
   },
   sustainability: {
-    value: 0,
-    diff: 0,
+    value: '',
+    diff: '',
   },
 });
 export { Note, Stakeholder, Capacity, Truck }
