@@ -30,6 +30,16 @@
   display: block;
 }
 
-.sidebarpanel ul li a img {
+.sidebarpanel ul li a svg {
   margin-bottom: 10px;
+}
+
+.sidebarpanel svg g,
+.sidebarpanel svg path {
+  fill: #6A7088;
+}
+
+.sidebarpanel .active svg g,
+.sidebarpanel .active svg path {
+  fill: #FFFFFF;
 }
