@@ -1,12 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Card from '../../../components/Card/Card';
-import Button from '../../../components/Button/Button';
-import Modal from '../../../components/Modal/Modal';
-import ModalHeader from '../../../components/Modal/ModalHeader';
-import ModalFooter from '../../../components/Modal/ModalFooter';
-import ModalBody from '../../../components/Modal/ModalBody';
+import Card from '../../../ui/Card/Card';
+import Button from '../../../ui/Button/Button';
+import Form from '../../../ui/Form/Form';
+import Label from '../../../ui/Form/Label';
+import Textarea from '../../../ui/Form/Textarea';
+import FormGroup from '../../../ui/Form/FormGroup';
+
+import Modal from '../../../ui/Modal/Modal';
+import ModalHeader from '../../../ui/Modal/ModalHeader';
+import ModalFooter from '../../../ui/Modal/ModalFooter';
+import ModalBody from '../../../ui/Modal/ModalBody';
 
 import NoNotes from './NoNotes';
 
@@ -51,14 +56,16 @@ class Notes extends React.Component {
           Add Note
         </Button>
         <Modal isOpen={this.state.notesModal} toggle={this._handlenotesModal}>
-          <ModalHeader toggle={this._handlenotesModal}>Modal title</ModalHeader>
+          <ModalHeader toggle={this._handlenotesModal}>All Notes</ModalHeader>
           <ModalBody>
-            <form>
-              <label>
-                Note
-              </label>
-              <textarea />
-            </form>
+            <Form>
+              <FormGroup>
+                <Label>
+                  Add Note
+                </Label>
+                <Textarea />
+              </FormGroup>
+            </Form>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handlenotesModal}>

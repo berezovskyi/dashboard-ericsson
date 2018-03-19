@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Card from '../../../components/Card/Card';
-import Button from '../../../components/Button/Button';
+import Card from '../../../ui/Card/Card';
+import Button from '../../../ui/Button/Button';
 
-import Modal from '../../../components/Modal/Modal';
-import ModalHeader from '../../../components/Modal/ModalHeader';
-import ModalFooter from '../../../components/Modal/ModalFooter';
-import ModalBody from '../../../components/Modal/ModalBody';
+import Modal from '../../../ui/Modal/Modal';
+import ModalHeader from '../../../ui/Modal/ModalHeader';
+import ModalFooter from '../../../ui/Modal/ModalFooter';
+import ModalBody from '../../../ui/Modal/ModalBody';
 
 import SingleCapacity from './SingleCapacity';
 

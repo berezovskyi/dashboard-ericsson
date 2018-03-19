@@ -14,7 +14,7 @@ import {
   LineSeries,
 } from 'react-vis';
 
-import Card from '../../../components/Card/Card';
+import Card from '../../../ui/Card/Card';
 import styles from '../SupplyChainPage.css';
 
 const DATA = [

@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import className from 'classnames';
-import Card from '../../../components/Card/Card';
-import Progress from '../../../components/Progress/Progress';
-import Button from '../../../components/Button/Button';
-import Modal from '../../../components/Modal/Modal';
-import ModalHeader from '../../../components/Modal/ModalHeader';
-import ModalFooter from '../../../components/Modal/ModalFooter';
-import ModalBody from '../../../components/Modal/ModalBody';
+import Card from '../../../ui/Card/Card';
+import Progress from '../../../ui/Progress/Progress';
+import Button from '../../../ui/Button/Button';
+import Modal from '../../../ui/Modal/Modal';
+import ModalHeader from '../../../ui/Modal/ModalHeader';
+import ModalFooter from '../../../ui/Modal/ModalFooter';
+import ModalBody from '../../../ui/Modal/ModalBody';
 
 import sustainabilityIcon from '../../../shared/media/images/icons/sustainability.png';
 import activityIcon from '../../../shared/media/images/icons/activity.png';
