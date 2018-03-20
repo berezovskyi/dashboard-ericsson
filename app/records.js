@@ -1,6 +1,5 @@
 import { Record } from 'immutable';
 
-
 const Note = new Record({
   id: '00000-00000',
   text: '',
@@ -27,7 +26,7 @@ const Capacity = new Record({
 const Truck = new Record({
   to: '',
   from: '',
-  id: '0000-0000',
+  id: '00000-00000',
   name: '',
   value: 0,
   activity: {
@@ -39,4 +38,19 @@ const Truck = new Record({
     diff: '',
   },
 });
-export { Note, Stakeholder, Capacity, Truck }
+
+const Robot = new Record({
+  id: '00000-00000',
+  name: '',
+  value: 0,
+  performance: {
+    value: '',
+    diff: '',
+  },
+  secpertask: {
+    time: '',
+    diff: '',
+  },
+});
+
+export { Note, Stakeholder, Capacity, Truck, Robot };
