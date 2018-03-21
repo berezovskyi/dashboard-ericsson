@@ -23,10 +23,10 @@ class IntelligentAgentPage extends React.Component { // eslint-disable-line reac
         </div>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
-            <Stakeholders id="stakeholder" type="ia" />
+            <Stakeholders id="intelligentagent" type="ia" name="Intelligent Agent Level" />
           </div>
           <div className={styles.oneHalf}>
-            <Notes type="ia" />
+            <Notes type="ia" name="Intelligent Agent Level" />
           </div>
         </div>
       </div>

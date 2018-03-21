@@ -44,18 +44,20 @@ class Stakeholders extends React.Component {
   }
 
   render() {
-    const { id, type } = this.props;
+    const { id, type, name } = this.props;
     const { stakeholders } = this.state;
+
+    const title = 'Highlighted Stakeholders for ' + name;
 
     return (
       <Card
-        title="Stakeholders"
+        title={title}
         helpText="All the people involved in the Supply Chain area."
         id={id}
         type={type}
       >
         <div className={styles.row}>
-          <StakeholderProfile stakeholders={stakeholders} />
+          <StakeholderProfile stakeholders={stakeholders} total={3} />
         </div>
         <Button
           size="medium"
@@ -69,10 +71,10 @@ class Stakeholders extends React.Component {
           toggle={this._handleallstakeholderModal}
         >
           <ModalHeader toggle={this._handleallstakeholderModal}>
-            Stakeholders for Intellegent Agent Level
+            Stakeholders for {name}
           </ModalHeader>
           <ModalBody>
-            <StakeholderModalProfile stakeholders={stakeholders} />
+            <StakeholderModalProfile stakeholders={stakeholders} name={name} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handleallstakeholderModal}>
@@ -95,6 +97,7 @@ function mapStateToProps(state) {
 Stakeholders.propTypes = {
   id: PropTypes.string,
   type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(Stakeholders);

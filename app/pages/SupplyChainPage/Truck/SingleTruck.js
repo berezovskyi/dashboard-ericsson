@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import className from 'classnames';
 import Progress from '../../../ui/Progress/Progress';
 import Button from '../../../ui/Button/Button';
@@ -53,7 +54,7 @@ class SingleTruck extends React.Component {
   }
 
   render() {
-    const { trucks } = this.props;
+    const { trucks, total } = this.props;
     const {
       name,
       to,
@@ -68,7 +69,7 @@ class SingleTruck extends React.Component {
 
     return (
       <div className={styles.singlecontainer}>
-        {trucks.valueSeq().map(row => (
+        {trucks.valueSeq().filter((i, index) => index < total).map(row => (
           <div key={row.id}>
             <div className={styles.row}>
               <h4 className={styles.title}>
@@ -166,4 +167,8 @@ class SingleTruck extends React.Component {
   }
 }
 
+SingleTruck.proptypes = {
+  total: PropTypes.number,
+  trucks: PropTypes.any,
+}
 export default SingleTruck;

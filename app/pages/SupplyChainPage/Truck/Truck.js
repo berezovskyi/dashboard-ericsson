@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import className from 'classnames';
 import Card from '../../../ui/Card/Card';
@@ -39,7 +40,7 @@ class Truck extends React.Component {
 
     return (
       <Card title="Trucks" helpText="The data relevant to the trucks">
-        <SingleTruck trucks={truck} />
+        <SingleTruck trucks={truck} total={3} />
         <Button size="medium" color="primary">View all</Button>
       </Card>
     );
@@ -52,6 +53,8 @@ function mapStateToProps(state) {
   };
 }
 
-Truck.propTypes = {};
+Truck.propTypes = {
+  truck: PropTypes.node,
+};
 
 export default connect(mapStateToProps)(Truck);

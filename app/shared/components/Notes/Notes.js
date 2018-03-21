@@ -13,6 +13,7 @@ import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
 
+import styles from './Notes.css';
 import NoNotes from './NoNotes';
 import NotesList from './NotesList';
 
@@ -20,9 +21,11 @@ class Notes extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-    this._handlenotesModal = this._handlenotesModal.bind(this);
+    this._handleaddNoteModal = this._handleaddNoteModal.bind(this);
+    this._handleallNotesModal = this._handleallNotesModal.bind(this);
     this.state = {
-      notesModal: false,
+      addnotesModal: false,
+      allnotesModal: false,
       notes: [],
     };
   }
@@ -35,29 +38,53 @@ class Notes extends React.Component {
     });
   }
 
-  _handlenotesModal() {
+  _handleaddNoteModal() {
     this.setState({
-      notesModal: !this.state.notesModal,
+      addnotesModal: !this.state.addnotesModal,
+      allnotesModal: false,
+    });
+  }
+
+  _handleallNotesModal() {
+    this.setState({
+      addnotesModal: false,
+      allnotesModal: !this.state.allnotesModal,
     });
   }
 
   render() {
-    const { id, type } = this.props;
+    const { id, type, name } = this.props;
     const { notes } = this.state;
 
-    console.log(notes);
+    const title = 'Highlighted Notes for ' + name;
+
     return (
       <Card
-        title="Notes"
+        title={title}
         helpText="Add Notes relevant to Supply Chain over here"
         id={id}
       >
-        {notes.size > 0 ? <NotesList notes={notes} /> : <NoNotes />}
-        <Button size="medium" color="primary" onClick={this._handlenotesModal}>
-          Add Note
-        </Button>
-        <Modal isOpen={this.state.notesModal} toggle={this._handlenotesModal}>
-          <ModalHeader toggle={this._handlenotesModal}>All Notes</ModalHeader>
+        {notes.size > 0 ? <NotesList notes={notes} total={3} /> : <NoNotes />}
+        <div className={styles.footer}>
+          {notes.size > 0
+            ? <Button size="medium" color="primary" onClick={this._handleallNotesModal}>
+                View all Notes
+              </Button>
+            : null}
+
+          <Button
+            size="medium"
+            color="secondary"
+            onClick={this._handleaddNoteModal}
+          >
+            Add Note
+          </Button>
+        </div>
+        <Modal
+          isOpen={this.state.addnotesModal}
+          toggle={this._handleaddNoteModal}
+        >
+          <ModalHeader toggle={this._handleaddNoteModal}>Add Notes to {name}</ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
@@ -69,7 +96,24 @@ class Notes extends React.Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this._handlenotesModal}>
+            <Button color="primary" onClick={this._handleaddNoteModal}>
+              Add
+            </Button>
+            {' '}
+          </ModalFooter>
+        </Modal>
+        <Modal
+          isOpen={this.state.allnotesModal}
+          toggle={this._handleallNotesModal}
+        >
+          <ModalHeader toggle={this._handleallNotesModal}>
+            All Notes for {name}
+          </ModalHeader>
+          <ModalBody>
+            <NotesList notes={notes} />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this._handleallNotesModal}>
               Add
             </Button>
             {' '}
@@ -88,6 +132,7 @@ function mapStateToProps(state) {
 
 Notes.propTypes = {
   id: PropTypes.string,
+  name: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(Notes);

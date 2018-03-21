@@ -28,10 +28,10 @@ class SupplyChainPage extends React.Component {
         </div>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
-            <Stakeholders id="stakeholder" type="sc" />
+            <Stakeholders id="stakeholder" type="sc" name="Supply Chain Level" />
           </div>
           <div className={styles.oneHalf}>
-            <Notes id="notes" type="sc" />
+            <Notes id="notes" type="sc" name="Supply Chain Level" />
           </div>
         </div>
       </div>
