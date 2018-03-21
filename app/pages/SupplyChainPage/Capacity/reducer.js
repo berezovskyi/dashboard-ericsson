@@ -33,6 +33,36 @@ const capacityReducer = Map({
     value: 23,
     type: 'wh',
   }),
+  ['12341-45127']: Capacity({
+    id: '12341-45127',
+    name: 'Warehouse 2',
+    value: 23,
+    type: 'wh',
+  }),
+  ['12341-45128']: Capacity({
+    id: '12341-45128',
+    name: 'Warehouse 3',
+    value: 23,
+    type: 'wh',
+  }),
+  ['12341-45129']: Capacity({
+    id: '12341-45129',
+    name: 'Warehouse 4',
+    value: 23,
+    type: 'wh',
+  }),  ['12341-45110']: Capacity({
+    id: '12341-45110',
+    name: 'Warehouse 5',
+    value: 23,
+    type: 'wh',
+  }),  ['12341-45111']: Capacity({
+    id: '12341-45111',
+    name: 'Warehouse 6',
+    value: 23,
+    type: 'wh',
+  }),
+
+
 });
 
 export default capacityReducer;

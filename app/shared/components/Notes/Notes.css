@@ -37,3 +37,7 @@
 .timestamp {
   padding-left: 10px;
 }
+
+.footer button {
+  margin-right: 5px;
+}

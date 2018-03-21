@@ -37,6 +37,41 @@ const notesReducer = Map({
     author: 'Raghu Nayyar',
     type: 'ia',
   }),
+  ['12341-45678']: Note({
+    id: '12341-45678',
+    text: 'Your bones don\'t break, mine do. That\'s clear. Your cells react to bacteria and viruses differently than mine. You don\'t get sick, I do.',
+    timestamp: '2015-10-11',
+    author: 'Raghu Nayyar',
+    type: 'ia',
+  }),
+  ['12341-45679']: Note({
+    id: '12341-45679',
+    text: 'Some pilots get picked and become television programs. Some don\'t, become nothing. She starred in one of the ones that became nothing.',
+    timestamp: '2015-10-11',
+    author: 'Raghu Nayyar',
+    type: 'sc',
+  }),
+  ['12341-45680']: Note({
+    id: '12341-45680',
+    text: 'The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother\'s keeper and the finder of lost children.',
+    timestamp: '2015-10-11',
+    author: 'Didem Gurdur',
+    type: 'ia',
+  }),
+  ['12341-45681']: Note({
+    id: '12341-45681',
+    text: 'We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We\'re on the same curve, just on opposite ends',
+    timestamp: '2015-10-11',
+    author: 'Daniel Craig',
+    type: 'ia',
+  }),
+  ['12341-45682']: Note({
+    id: '12341-45682',
+    text: 'And most times they\'re friends, like you and me! I should\'ve known way back when... You know why, David? Because of the kids. They called me Mr Glass.',
+    timestamp: '2015-10-11',
+    author: 'Denise Richards',
+    type: 'wh',
+  }),
 });
 
 

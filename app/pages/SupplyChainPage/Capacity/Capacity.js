@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -12,7 +12,7 @@ import ModalBody from '../../../ui/Modal/ModalBody';
 
 import SingleCapacity from './SingleCapacity';
 
-class Capacity extends React.Component {
+class Capacity extends Component {
   // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
@@ -36,7 +36,7 @@ class Capacity extends React.Component {
         helpText="This explains the meaning of this section."
         id={id}
       >
-        <SingleCapacity capacity={capacity} />
+        <SingleCapacity capacity={capacity} total={3} />
         <Button
           size="medium"
           color="primary"
