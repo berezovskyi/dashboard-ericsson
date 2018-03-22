@@ -36,7 +36,7 @@ class Capacity extends Component {
         helpText="This explains the meaning of this section."
         id={id}
       >
-        <SingleCapacity capacity={capacity} total={3} />
+        <SingleCapacity capacity={capacity} total={5} />
         <Button
           size="medium"
           color="primary"
