@@ -66,6 +66,14 @@
   margin-bottom: 10px;
 }
 
+.fourFifth {
+  lost-column: 4/5;
+}
+
+.oneFifth {
+  lost-column: 1/5;
+}
+
 .fiveSixth {
   lost-column: 5/6;
 }
