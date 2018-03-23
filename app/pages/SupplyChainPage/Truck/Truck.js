@@ -23,7 +23,6 @@ class Truck extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-    this._handletruckinfoModal = this._handletruckinfoModal.bind(this);
     this.state = {
       truckModal: false,
     };
