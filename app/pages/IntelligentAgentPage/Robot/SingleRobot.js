@@ -139,7 +139,7 @@ class SingleRobot extends React.Component {
                     alt="Seconds spent per task"
                     width={90}
                   />
-                  <h1 className={styles.modalboxtitle}>{secpertask.time}</h1>
+                  <h1 className={styles.modalboxtitle}>{secpertask.time}{'h'}</h1>
                   <p>
                     <span className={differenceClass}>
                       <DecreaseIcon />{secpertask.diff}{'%'}

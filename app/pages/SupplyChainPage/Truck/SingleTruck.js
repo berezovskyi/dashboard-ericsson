@@ -49,7 +49,6 @@ class SingleTruck extends React.Component {
     this.setState({
       truckModal: !this.state.truckModal,
     });
-    console.log(this.state.truckModal);
     this.setModal(data);
   }
 
@@ -105,7 +104,14 @@ class SingleTruck extends React.Component {
               <h4 className={styles.progresstitle}>
                 {name}{' - '}{id}{' - '}{to}{' from '}{from}
               </h4>
-              <Progress value={value} />
+              <div className={styles.row}>
+                <div className={styles.fourFifth}>
+                  <Progress value={value} />
+                </div>
+                <div className={styles.oneFifth}>
+                  <span className={styles.text}>{value}{'% completed'}</span>
+                </div>
+              </div>
             </div>
             <div className={styles.row}>
               <div className={styles.oneHalf}>
