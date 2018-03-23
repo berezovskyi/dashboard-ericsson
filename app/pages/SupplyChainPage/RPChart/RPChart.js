@@ -15,7 +15,7 @@ import {
 } from 'react-vis';
 
 import Card from '../../../ui/Card/Card';
-import styles from '../SupplyChainPage.css';
+import styles from './RPChart.css';
 
 const DATA = [
   [{ x: 1, y: 3 }, { x: 2, y: 5 }, { x: 3, y: 15 }, { x: 4, y: 12 }],
@@ -76,8 +76,8 @@ class RPChart extends Component {
             <div className={styles.imageThumbnail}>
               <div className={styles.imageThumbnailInner}>
                 <img src={ProfitCurveIcon} width={80} />
-              <p>Profitability</p>
-            </div>
+                <p>Profitability</p>
+              </div>
             </div>
           </div>
         </div>
