@@ -53,4 +53,30 @@ const Robot = new Record({
   },
 });
 
-export { Note, Stakeholder, Capacity, Truck, Robot };
+const Battery = new Record({
+  id: '00000-00000',
+  name: '',
+  from: {
+    name: '',
+    id: '00000-00000',
+  },
+  to: {
+    name: '',
+    id: '00000-00000',
+  },
+  batterystatus: {
+    value: '',
+    status: '',
+  },
+  performance: {
+    value: '',
+    diff: '',
+  },
+  total: {
+    hours: '',
+    diff: '',
+  },
+  timetoreturn: 0,
+});
+
+export { Note, Stakeholder, Capacity, Truck, Robot, Battery };
