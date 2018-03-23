@@ -64,7 +64,7 @@ class Notes extends React.Component {
         helpText="Add Notes relevant to Supply Chain over here"
         id={id}
       >
-        {notes.size > 0 ? <NotesList notes={notes} total={3} /> : <NoNotes />}
+        {notes.size > 0 ? <NotesList notes={notes} total={2} /> : <NoNotes />}
         <div className={styles.footer}>
           {notes.size > 0
             ? <Button size="medium" color="primary" onClick={this._handleallNotesModal}>
