@@ -49,7 +49,6 @@ class SingleTruck extends React.Component {
     this.setState({
       truckModal: !this.state.truckModal,
     });
-    console.log(this.state.truckModal);
     this.setModal(data);
   }
 
