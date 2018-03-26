@@ -53,7 +53,7 @@ function mapStateToProps(state) {
 }
 
 Truck.propTypes = {
-  truck: PropTypes.node,
+  truck: PropTypes.any,
 };
 
 export default connect(mapStateToProps)(Truck);
