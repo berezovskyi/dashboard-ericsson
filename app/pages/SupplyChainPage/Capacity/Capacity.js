@@ -11,6 +11,7 @@ import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
 
 import SingleCapacity from './SingleCapacity';
+import SingleCapacityModal from './SingleCapacityModal';
 
 class Capacity extends Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -36,7 +37,8 @@ class Capacity extends Component {
         helpText="This explains the meaning of this section."
         id={id}
       >
-        <SingleCapacity capacity={capacity} total={5} />
+        <SingleCapacity capacity={capacity} total={5} type="wh" />
+        <SingleCapacity capacity={capacity} total={5} type="rt" />
         <Button
           size="medium"
           color="primary"
@@ -52,7 +54,7 @@ class Capacity extends Component {
             Capacity of all Trucks and Warehouses
           </ModalHeader>
           <ModalBody>
-            <SingleCapacity capacity={capacity} />
+            <SingleCapacityModal capacity={capacity} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handlealltrucksModal}>
