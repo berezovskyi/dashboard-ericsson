@@ -40,15 +40,15 @@ const DATA = [
   },
   {
     time: '2000',
-    arm1: 60,
-    arm2: 7,
-    robot1: 13,
+    arm1: 0,
+    arm2: 0,
+    robot1: 0,
   },
   {
     time: '2359',
-    arm1: 45,
-    arm2: 21,
-    robot1: 11,
+    arm1: 0,
+    arm2: 0,
+    robot1: 0,
   },
 ];
 
@@ -100,10 +100,11 @@ class RobotPerformanceChart extends Component {
               legends={[
                 {
                   dataFrom: 'keys',
-                  anchor: 'bottom-right',
-                  direction: 'column',
+                  anchor: 'top-right',
+                  direction: 'row',
                   symbolShape: 'circle',
-                  translateX: 100,
+                  translateX: 10,
+                  translateY: -40,
                   itemWidth: 64,
                   itemHeight: 16,
                   itemsSpacing: 5,
@@ -112,7 +113,7 @@ class RobotPerformanceChart extends Component {
               ]}
               maxValue={100}
               height={420}
-              width={740}
+              width={840}
             />
           </div>
         </div>
