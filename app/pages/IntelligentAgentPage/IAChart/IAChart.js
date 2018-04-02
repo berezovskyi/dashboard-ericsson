@@ -23,11 +23,11 @@ class IAChart extends Component {
           <div className={styles.oneFull}>
             <Chord
               matrix={DATA}
-              keys={['John', 'Raoul', 'Jane', 'Marcel', 'Ibrahim']}
+              keys={['AR1', 'AR2', 'ARM1', 'ARM2', 'ARM3']}
               margin={{
                 top: 60,
                 right: 60,
-                bottom: 90,
+                bottom: 0,
                 left: 60,
               }}
               padAngle={0.02}
@@ -48,22 +48,24 @@ class IAChart extends Component {
               arcHoverOthersOpacity={0.25}
               ribbonHoverOpacity={0.75}
               ribbonHoverOthersOpacity={0.25}
-              animate={true}
               motionStiffness={90}
               motionDamping={7}
               legends={[
                 {
-                  anchor: 'bottom',
+                  dataFrom: 'keys',
+                  anchor: 'top-right',
                   direction: 'row',
-                  translateY: 70,
-                  itemWidth: 80,
-                  itemHeight: 14,
-                  symbolSize: 14,
                   symbolShape: 'circle',
+                  translateX: 10,
+                  translateY: -40,
+                  itemWidth: 64,
+                  itemHeight: 16,
+                  itemsSpacing: 5,
+                  symbolSize: 16,
                 },
               ]}
-              width={600}
-              height={600}
+              width={700}
+              height={700}
             />
           </div>
         </div>

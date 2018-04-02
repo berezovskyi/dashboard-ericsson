@@ -52,8 +52,6 @@ const DATA = [
   },
 ];
 
-const COLORS = ['#E46A53', '#30A987', '#F4A026'];
-
 class RobotPerformanceChart extends Component {
   render() {
     const { id } = this.props;
@@ -72,7 +70,7 @@ class RobotPerformanceChart extends Component {
                 left: 60,
               }}
               padding={0.4}
-              colors={COLORS}
+              colors="nivo"
               colorBy="id"
               axisBottom={{
                 orient: 'bottom',
