@@ -24,7 +24,7 @@ export default function SingleCapacity({ capacity, total, type }) {
               </div>
             );
           }
-        })};
+        })}
       </div>
     );
   }
