@@ -4,6 +4,7 @@ import Stakeholders from '../../shared/components/Stakeholders/Stakeholders';
 
 import Battery from './Battery/Battery';
 import styles from './WareHousePage.css';
+import RobotPerformanceChart from './RobotPerformanceChart/RobotPerformanceChart';
 
 class WareHousePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -12,6 +13,7 @@ class WareHousePage extends React.Component { // eslint-disable-line react/prefe
       <div className={styles.fullPage}>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
+            <RobotPerformanceChart />
           </div>
           <div className={styles.oneHalf}>
             <Battery id="battery" />
