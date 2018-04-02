@@ -46,7 +46,7 @@ class Knob extends React.Component {
     bgColor: '#EEE',
     fgColor: '#EA2',
     inputColor: '',
-    font: 'Arial',
+    font: 'Lato',
     fontWeight: '300',
     clockwise: true,
     cursor: false,

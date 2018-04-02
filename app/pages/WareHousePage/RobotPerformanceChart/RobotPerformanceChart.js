@@ -9,111 +9,50 @@ import styles from './RobotPerformanceChart.css';
 
 const DATA = [
   {
-    country: 'AD',
-    'hot dog': 58,
-    'hot dogColor': 'hsl(80, 70%, 50%)',
-    burger: 196,
-    burgerColor: 'hsl(137, 70%, 50%)',
-    sandwich: 84,
-    sandwichColor: 'hsl(215, 70%, 50%)',
-    kebab: 59,
-    kebabColor: 'hsl(59, 70%, 50%)',
-    fries: 161,
-    friesColor: 'hsl(72, 70%, 50%)',
-    donut: 101,
-    donutColor: 'hsl(148, 70%, 50%)',
+    time: '0000',
+    arm1: 20,
+    arm2: 34,
+    robot1: 19,
   },
   {
-    country: 'AE',
-    'hot dog': 96,
-    'hot dogColor': 'hsl(36, 70%, 50%)',
-    burger: 58,
-    burgerColor: 'hsl(267, 70%, 50%)',
-    sandwich: 177,
-    sandwichColor: 'hsl(284, 70%, 50%)',
-    kebab: 184,
-    kebabColor: 'hsl(135, 70%, 50%)',
-    fries: 100,
-    friesColor: 'hsl(240, 70%, 50%)',
-    donut: 43,
-    donutColor: 'hsl(315, 70%, 50%)',
+    time: '0400',
+    arm1: 24,
+    arm2: 44,
+    robot1: 17,
   },
   {
-    country: 'AF',
-    'hot dog': 69,
-    'hot dogColor': 'hsl(259, 70%, 50%)',
-    burger: 119,
-    burgerColor: 'hsl(168, 70%, 50%)',
-    sandwich: 196,
-    sandwichColor: 'hsl(283, 70%, 50%)',
-    kebab: 145,
-    kebabColor: 'hsl(335, 70%, 50%)',
-    fries: 90,
-    friesColor: 'hsl(303, 70%, 50%)',
-    donut: 86,
-    donutColor: 'hsl(117, 70%, 50%)',
+    time: '0800',
+    arm1: 18,
+    arm2: 51,
+    robot1: 16,
   },
   {
-    country: 'AG',
-    'hot dog': 115,
-    'hot dogColor': 'hsl(4, 70%, 50%)',
-    burger: 40,
-    burgerColor: 'hsl(117, 70%, 50%)',
-    sandwich: 5,
-    sandwichColor: 'hsl(186, 70%, 50%)',
-    kebab: 63,
-    kebabColor: 'hsl(46, 70%, 50%)',
-    fries: 31,
-    friesColor: 'hsl(222, 70%, 50%)',
-    donut: 172,
-    donutColor: 'hsl(259, 70%, 50%)',
+    time: '1200',
+    arm1: 45,
+    arm2: 37,
+    robot1: 4,
   },
   {
-    country: 'AI',
-    'hot dog': 71,
-    'hot dogColor': 'hsl(215, 70%, 50%)',
-    burger: 183,
-    burgerColor: 'hsl(112, 70%, 50%)',
-    sandwich: 30,
-    sandwichColor: 'hsl(311, 70%, 50%)',
-    kebab: 13,
-    kebabColor: 'hsl(130, 70%, 50%)',
-    fries: 73,
-    friesColor: 'hsl(26, 70%, 50%)',
-    donut: 27,
-    donutColor: 'hsl(127, 70%, 50%)',
+    time: '1600',
+    arm1: 11,
+    arm2: 38,
+    robot1: 21,
   },
   {
-    country: 'AL',
-    'hot dog': 43,
-    'hot dogColor': 'hsl(144, 70%, 50%)',
-    burger: 33,
-    burgerColor: 'hsl(66, 70%, 50%)',
-    sandwich: 177,
-    sandwichColor: 'hsl(266, 70%, 50%)',
-    kebab: 12,
-    kebabColor: 'hsl(38, 70%, 50%)',
-    fries: 65,
-    friesColor: 'hsl(333, 70%, 50%)',
-    donut: 71,
-    donutColor: 'hsl(225, 70%, 50%)',
+    time: '2000',
+    arm1: 60,
+    arm2: 7,
+    robot1: 13,
   },
   {
-    country: 'AM',
-    'hot dog': 31,
-    'hot dogColor': 'hsl(254, 70%, 50%)',
-    burger: 192,
-    burgerColor: 'hsl(86, 70%, 50%)',
-    sandwich: 190,
-    sandwichColor: 'hsl(268, 70%, 50%)',
-    kebab: 83,
-    kebabColor: 'hsl(249, 70%, 50%)',
-    fries: 59,
-    friesColor: 'hsl(351, 70%, 50%)',
-    donut: 92,
-    donutColor: 'hsl(71, 70%, 50%)',
+    time: '2359',
+    arm1: 45,
+    arm2: 21,
+    robot1: 11,
   },
 ];
+
+const COLORS = ['#E46A53', '#30A987', '#F4A026'];
 
 class RobotPerformanceChart extends Component {
   render() {
@@ -124,75 +63,38 @@ class RobotPerformanceChart extends Component {
           <div className={styles.oneFull}>
             <Bar
               data={DATA}
-              keys={[
-                'hot dog',
-                'burger',
-                'sandwich',
-              ]}
-              indexBy="country"
+              keys={['arm1', 'arm2', 'robot1']}
+              indexBy="time"
               margin={{
                 top: 50,
                 right: 130,
                 bottom: 50,
                 left: 60,
               }}
-              padding={0.3}
-              colors="nivo"
+              padding={0.4}
+              colors={COLORS}
               colorBy="id"
-              defs={[
-                {
-                  id: 'dots',
-                  background: 'inherit',
-                  color: '#38bcb2',
-                  size: 4,
-                  padding: 1,
-                  stagger: true,
-                },
-                {
-                  id: 'lines',
-                  background: 'inherit',
-                  color: '#eed312',
-                  rotation: -45,
-                  lineWidth: 6,
-                  spacing: 10,
-                },
-              ]}
-              fill={[
-                {
-                  match: {
-                    id: 'fries',
-                  },
-                  id: 'dots',
-                },
-                {
-                  match: {
-                    id: 'sandwich',
-                  },
-                  id: 'lines',
-                },
-              ]}
-              borderColor="inherit:darker(1.6)"
               axisBottom={{
                 orient: 'bottom',
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'country',
+                legend: 'Time (24h)',
                 legendPosition: 'center',
-                legendOffset: 36,
+                legendOffset: 50,
               }}
               axisLeft={{
                 orient: 'left',
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'food',
+                legend: 'Performance (%)',
                 legendPosition: 'center',
-                legendOffset: -40,
+                legendOffset: -50,
               }}
               labelSkipWidth={12}
               labelSkipHeight={12}
-              labelTextColor="inherit:darker(1.6)"
+              labelTextColor="#333333"
               motionStiffness={90}
               motionDamping={15}
               legends={[
@@ -208,6 +110,7 @@ class RobotPerformanceChart extends Component {
                   symbolSize: 16,
                 },
               ]}
+              maxValue={100}
               height={420}
               width={740}
             />
