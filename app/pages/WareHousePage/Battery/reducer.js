@@ -29,7 +29,7 @@ const batteryReducer = Map({
     },
     total: {
       hours: '',
-      diff: '',
+      diff: 1,
     },
     timetoreturn: 34,
   }),
@@ -54,7 +54,7 @@ const batteryReducer = Map({
     },
     total: {
       hours: '',
-      diff: '',
+      diff: -4,
     },
     timetoreturn: 25,
   }),
@@ -79,7 +79,7 @@ const batteryReducer = Map({
     },
     total: {
       hours: '',
-      diff: '',
+      diff: -5,
     },
     timetoreturn: 45,
   }),
@@ -104,7 +104,7 @@ const batteryReducer = Map({
     },
     total: {
       hours: '',
-      diff: '',
+      diff: -7,
     },
     timetoreturn: 76,
   }),

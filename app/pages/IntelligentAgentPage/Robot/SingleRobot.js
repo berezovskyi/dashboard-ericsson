@@ -51,6 +51,25 @@ class SingleRobot extends React.Component {
     this.setModal(data);
   }
 
+  diffContainer(diff) {
+    let differenceClass;
+    if (diff > 0) {
+      differenceClass = className(styles.modaldiff, styles.modalincrease);
+      return (
+        <span className={differenceClass}>
+          <IncreaseIcon />
+          {`${diff} %`}
+        </span>
+      );
+    }
+    differenceClass = className(styles.modaldiff, styles.modaldecrease);
+    return (
+      <span className={differenceClass}>
+        <DecreaseIcon />{`${Math.abs(diff)} %`}
+      </span>
+    );
+  }
+
   render() {
     const { robots } = this.props;
     const {
@@ -141,9 +160,7 @@ class SingleRobot extends React.Component {
                   />
                   <h1 className={styles.modalboxtitle}>{secpertask.time}{'h'}</h1>
                   <p>
-                    <span className={differenceClass}>
-                      <DecreaseIcon />{secpertask.diff}{'%'}
-                    </span>
+                    {this.diffContainer(secpertask.diff)}
                     <span className={styles.modaltime}>14:45</span>
                   </p>
                 </div>
