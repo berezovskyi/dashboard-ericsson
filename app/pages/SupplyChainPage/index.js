@@ -6,11 +6,12 @@ import Stakeholders from '../../shared/components/Stakeholders/Stakeholders';
 import Notes from '../../shared/components/Notes/Notes';
 
 import styles from './SupplyChainPage.css';
-import RPChart from "./RPChart/RPChart";
+import RPChart from './RPChart/RPChart';
 
 class SupplyChainPage extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
   render() {
+    const { match } = this.props;
     return (
       <div className={styles.fullPage}>
         <div className={styles.row}>
@@ -23,12 +24,16 @@ class SupplyChainPage extends React.Component {
         </div>
         <div className={styles.row}>
           <div className={styles.oneFull}>
-            <RPChart id="rpchrt" />
+            <RPChart id="rpchrt" type={match.params.id} />
           </div>
         </div>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
-            <Stakeholders id="stakeholder" type="sc" name="Supply Chain Level" />
+            <Stakeholders
+              id="stakeholder"
+              type="sc"
+              name="Supply Chain Level"
+            />
           </div>
           <div className={styles.oneHalf}>
             <Notes id="notes" type="sc" name="Supply Chain Level" />

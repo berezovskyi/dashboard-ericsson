@@ -8,8 +8,9 @@ import styles from './RPChart.css';
 
 class RPChart extends Component {
   render() {
-    const { id, graphdata } = this.props;
-    const data = graphdata.get('day');
+    const { id, graphdata, type } = this.props;
+    console.log(type);
+    const data = graphdata.get(type);
     return (
       <Card title="Profitability - Risk vs Time Curve" id={id}>
         <div className={styles.row}>
@@ -74,6 +75,7 @@ class RPChart extends Component {
 
 RPChart.propTypes = {
   id: PropTypes.string,
+  type: PropTypes.string,
 };
 
 function mapStateToProps(state) {

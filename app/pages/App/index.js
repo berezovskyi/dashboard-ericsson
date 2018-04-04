@@ -38,7 +38,7 @@ export default function App() {
         <div className={styles.innercontent}>
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route path="/supplychain" component={SupplyChainPage} />
+            <Route path="/supplychain/:id" component={SupplyChainPage} />
             <Route path="/warehouse" component={WareHousePage} />
             <Route path="/intellegentagent" component={IntelligentAgentPage} />
             <Route path="" component={NotFoundPage} />
