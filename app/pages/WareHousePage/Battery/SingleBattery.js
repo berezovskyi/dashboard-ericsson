@@ -17,6 +17,7 @@ import highBatteryIcon
 import midBatteryIcon
   from '../../../shared/media/images/icons/averagebattery.png';
 import DecreaseIcon from '../../../shared/media/images/icons/decrease.svg';
+import IncreaseIcon from '../../../shared/media/images/icons/increase.svg';
 
 import { Battery } from '../../../records';
 
@@ -68,6 +69,25 @@ class SingleBattery extends React.Component {
     }
   }
 
+  diffContainer(diff) {
+    let differenceClass;
+    if (diff > 0) {
+      differenceClass = className(styles.modaldiff, styles.modalincrease);
+      return (
+        <span className={differenceClass}>
+          <IncreaseIcon />
+          {`${diff} %`}
+        </span>
+      );
+    }
+    differenceClass = className(styles.modaldiff, styles.modaldecrease);
+    return (
+      <span className={differenceClass}>
+        <DecreaseIcon />{`${Math.abs(diff)} %`}
+      </span>
+    );
+  }
+
   render() {
     const { battery } = this.props;
 
@@ -85,8 +105,6 @@ class SingleBattery extends React.Component {
     } = this.state.data;
 
     console.log(this.state.data);
-
-    const differenceClass = className(styles.modaldiff, styles.modalincrease);
 
     return (
       <div className={styles.singlecontainer}>
@@ -184,9 +202,7 @@ class SingleBattery extends React.Component {
                     {performance.value}{'%'}
                   </h1>
                   <p>
-                    <span className={differenceClass}>
-                      <DecreaseIcon />{total.diff}{'%'}
-                    </span>
+                    {this.diffContainer(total.diff)}
                     <span className={styles.modaltime}>14:45</span>
                   </p>
                 </div>

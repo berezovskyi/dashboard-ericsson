@@ -52,6 +52,25 @@ class SingleTruck extends React.Component {
     this.setModal(data);
   }
 
+  diffContainer(diff) {
+    let differenceClass;
+    if (diff > 0) {
+      differenceClass = className(styles.modaldiff, styles.modalincrease);
+      return (
+        <span className={differenceClass}>
+          <IncreaseIcon />
+          {`${diff} %`}
+        </span>
+      );
+    }
+    differenceClass = className(styles.modaldiff, styles.modaldecrease);
+    return (
+      <span className={differenceClass}>
+        <DecreaseIcon />{`${Math.abs(diff)} %`}
+      </span>
+    );
+  }
+
   render() {
     const { trucks, total } = this.props;
     const {
@@ -149,9 +168,7 @@ class SingleTruck extends React.Component {
                   />
                   <h1 className={styles.modalboxtitle}>{activity.time}</h1>
                   <p>
-                    <span className={differenceClass}>
-                      <DecreaseIcon />{activity.diff}{'%'}
-                    </span>
+                    {this.diffContainer(activity.diff)}
                     <span className={styles.modaltime}>14:45</span>
                   </p>
                 </div>
