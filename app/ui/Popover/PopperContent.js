@@ -32,6 +32,7 @@ class PopperContent extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.props.isOpen);
     if (this.props.isOpen !== prevProps.isOpen) {
       this.handleProps();
     } else if (this._element) {
@@ -104,22 +105,14 @@ class PopperContent extends React.Component {
       flip,
       offset,
       fallbackPlacement,
-      placementPrefix,
       hideArrow,
       className,
       tag,
       modifiers,
-      isOpen,
-      container,
-      ...attributes
+      ...attributes,
     } = this.props;
 
-    const placement = (this.state.placement || attributes.placement).split('-')[0];
-
-    const popperClassName = classNames(
-      styles[className],
-      placementPrefix ? styles[`bs-popover-${placement}`] : styles[placement]
-    );
+    const popperClassName = className;
 
     const extendedModifiers = {
       offset: { offset },
@@ -159,7 +152,6 @@ PopperContent.propTypes = {
   hideArrow: PropTypes.bool,
   tag: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,
-  cssModule: PropTypes.object,
   offset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fallbackPlacement: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   flip: PropTypes.bool,

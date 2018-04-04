@@ -8,8 +8,8 @@ import { getTarget, DOMElement, PopperPlacements } from '../../utils/utils';
 
 import styles from './Popover.css';
 
-
-class Popover extends React.Component {  // eslint-disable-line react/prefer-stateless-function
+class Popover extends React.Component {
+  // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
 
@@ -88,14 +88,14 @@ class Popover extends React.Component {  // eslint-disable-line react/prefer-sta
   }
 
   addTargetEvents() {
-    ['click', 'touchstart'].forEach((event) =>
-      document.addEventListener(event, this.handleDocumentClick, true)
+    ['click', 'touchstart'].forEach(event =>
+      document.addEventListener(event, this.handleDocumentClick, true),
     );
   }
 
   removeTargetEvents() {
-    ['click', 'touchstart'].forEach((event) =>
-      document.removeEventListener(event, this.handleDocumentClick, true)
+    ['click', 'touchstart'].forEach(event =>
+      document.removeEventListener(event, this.handleDocumentClick, true),
     );
   }
 
@@ -108,7 +108,15 @@ class Popover extends React.Component {  // eslint-disable-line react/prefer-sta
   }
 
   render() {
-    const { isOpen, target, hideArrow, placement, placementPrefix, container, modifiers, children } = this.props;
+    const {
+      isOpen,
+      target,
+      hideArrow,
+      placement,
+      container,
+      modifiers,
+      children,
+    } = this.props;
 
     if (!this.props.isOpen) {
       return null;
@@ -116,17 +124,23 @@ class Popover extends React.Component {  // eslint-disable-line react/prefer-sta
 
     const classes = classNames(
       styles['popover-inner'],
-      styles[this.props.innerClassName]
+      styles[this.props.innerClassName],
     );
+
+    const popoverOuterClasses = classNames(
+      styles.popover,
+      styles[`popover-${placement}`],
+    );
+
+    console.log(placement);
 
     return (
       <PopperContent
-        className="popover"
+        className={popoverOuterClasses}
         target={target}
         isOpen={isOpen}
         hideArrow={hideArrow}
         placement={placement}
-        placementPrefix={placementPrefix}
         container={container}
         modifiers={modifiers}
       >
@@ -140,11 +154,8 @@ class Popover extends React.Component {  // eslint-disable-line react/prefer-sta
 
 Popover.propTypes = {
   placement: PropTypes.oneOf(PopperPlacements),
-  target: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func,
-    DOMElement,
-  ]).isRequired,
+  target: PropTypes.oneOfType([PropTypes.string, PropTypes.func, DOMElement])
+    .isRequired,
   container: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
@@ -154,7 +165,6 @@ Popover.propTypes = {
   disabled: PropTypes.bool,
   hideArrow: PropTypes.bool,
   innerClassName: PropTypes.string,
-  placementPrefix: PropTypes.string,
   toggle: PropTypes.func,
   modifiers: PropTypes.object,
   children: PropTypes.node,
@@ -163,7 +173,7 @@ Popover.propTypes = {
 Popover.defaultProps = {
   isOpen: false,
   hideArrow: false,
-  placement: 'bottom',
+  placement: 'right',
   toggle: () => {},
 };
 
