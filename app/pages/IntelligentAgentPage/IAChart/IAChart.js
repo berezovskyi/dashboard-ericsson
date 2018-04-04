@@ -1,28 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import { connect } from 'react-redux';
 import { Chord } from '@nivo/chord';
 
 import Card from '../../../ui/Card/Card';
 import styles from './IAChart.css';
 
-const DATA = [
-  [1345, 295, 103, 365, 75],
-  [421, 129, 366, 350, 395],
-  [421, 787, 591, 298, 329],
-  [1492, 24, 217, 322, 478],
-  [65, 1903, 313, 80, 205],
-];
 
 class IAChart extends Component {
   render() {
-    const { id } = this.props;
+    const { id, graphdata } = this.props;
+    const data = graphdata.get('day');
     return (
       <Card title="Interoperatability curve" id={id}>
         <div className={styles.row}>
           <div className={styles.oneFull}>
             <Chord
-              matrix={DATA}
+              matrix={data}
               keys={['AR1', 'AR2', 'ARM1', 'ARM2', 'ARM3']}
               margin={{
                 top: 60,
@@ -74,8 +68,14 @@ class IAChart extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    graphdata: state.get('interoperatability'),
+  };
+}
+
 IAChart.propTypes = {
   id: PropTypes.string,
 };
 
-export default IAChart;
+export default connect(mapStateToProps)(IAChart);

@@ -1,140 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Line } from '@nivo/line';
 
 import Card from '../../../ui/Card/Card';
 import styles from './RPChart.css';
 
-const DATA = [
-  {
-    id: 'performance',
-    data: [
-      {
-        x: '0000',
-        y: 57,
-      },
-      {
-        x: '0200',
-        y: 58,
-      },
-      {
-        x: '0400',
-        y: 29,
-      },
-      {
-        x: '0600',
-        y: 18,
-      },
-      {
-        x: '0800',
-        y: 15,
-      },
-      {
-        x: '1000',
-        y: 14,
-      },
-      {
-        x: '1200',
-        y: 2,
-      },
-      {
-        x: '1400',
-        y: 20,
-      },
-      {
-        x: '1600',
-        y: 26,
-      },
-      {
-        x: '1800',
-        y: 26,
-      },
-      {
-        x: '2000',
-        y: 26,
-      },
-      {
-        x: '2200',
-        y: 26,
-      },
-      {
-        x: '2359',
-        y: 26,
-      },
-    ],
-  },
-  {
-    id: 'risk',
-    data: [
-      {
-        x: '0000',
-        y: 56,
-      },
-      {
-        x: '0200',
-        y: 45,
-      },
-      {
-        x: '0400',
-        y: 56,
-      },
-      {
-        x: '0600',
-        y: 1,
-      },
-      {
-        x: '0800',
-        y: 32,
-      },
-      {
-        x: '1000',
-        y: 39,
-      },
-      {
-        x: '1200',
-        y: 26,
-      },
-      {
-        x: '1400',
-        y: 44,
-      },
-      {
-        x: '1600',
-        y: 9,
-      },
-      {
-        x: '1800',
-        y: 9,
-      },
-      {
-        x: '2000',
-        y: 9,
-      },
-      {
-        x: '2200',
-        y: 9,
-      },
-      {
-        x: '2359',
-        y: 9,
-      },
-    ],
-  },
-];
-
 class RPChart extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    const { id } = this.props;
+    const { id, graphdata } = this.props;
+    const data = graphdata.get('day');
     return (
       <Card title="Profitability - Risk vs Time Curve" id={id}>
         <div className={styles.row}>
           <div className={styles.oneFull}>
             <Line
-              data={DATA}
+              data={data}
               margin={{
                 top: 50,
                 right: 110,
@@ -195,4 +76,10 @@ RPChart.propTypes = {
   id: PropTypes.string,
 };
 
-export default RPChart;
+function mapStateToProps(state) {
+  return {
+    graphdata: state.get('performancerisk'),
+  };
+};
+
+export default connect(mapStateToProps)(RPChart);

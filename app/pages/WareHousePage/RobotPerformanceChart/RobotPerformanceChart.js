@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { Bar } from '@nivo/bar';
 
@@ -7,60 +8,17 @@ import Card from '../../../ui/Card/Card';
 
 import styles from './RobotPerformanceChart.css';
 
-const DATA = [
-  {
-    time: '0000',
-    arm1: 20,
-    arm2: 34,
-    robot1: 19,
-  },
-  {
-    time: '0400',
-    arm1: 24,
-    arm2: 44,
-    robot1: 17,
-  },
-  {
-    time: '0800',
-    arm1: 18,
-    arm2: 51,
-    robot1: 16,
-  },
-  {
-    time: '1200',
-    arm1: 45,
-    arm2: 37,
-    robot1: 4,
-  },
-  {
-    time: '1600',
-    arm1: 11,
-    arm2: 38,
-    robot1: 21,
-  },
-  {
-    time: '2000',
-    arm1: 0,
-    arm2: 0,
-    robot1: 0,
-  },
-  {
-    time: '2359',
-    arm1: 0,
-    arm2: 0,
-    robot1: 0,
-  },
-];
-
 class RobotPerformanceChart extends Component {
   render() {
-    const { id } = this.props;
+    const { id, graphdata } = this.props;
+    /* Change day to a parameter*/
+    const data = graphdata.get('day');
     return (
       <Card title="Robot Performance Over Time" id={id}>
         <div className={styles.row}>
           <div className={styles.oneFull}>
             <Bar
-              data={DATA}
+              data={data}
               keys={['arm1', 'arm2', 'robot1']}
               indexBy="time"
               margin={{
@@ -120,8 +78,14 @@ class RobotPerformanceChart extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    graphdata: state.get('robotperformance'),
+  };
+}
+
 RobotPerformanceChart.propTypes = {
   id: PropTypes.string,
 };
 
-export default RobotPerformanceChart;
+export default connect(mapStateToProps)(RobotPerformanceChart);

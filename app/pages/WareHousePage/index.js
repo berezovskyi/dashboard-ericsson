@@ -9,11 +9,12 @@ import RobotPerformanceChart from './RobotPerformanceChart/RobotPerformanceChart
 class WareHousePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
+    const { graphdata } = this.props;
     return (
       <div className={styles.fullPage}>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
-            <RobotPerformanceChart />
+            <RobotPerformanceChart graphdata={graphdata} />
           </div>
           <div className={styles.oneHalf}>
             <Battery id="battery" />

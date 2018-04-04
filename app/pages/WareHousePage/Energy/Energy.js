@@ -72,7 +72,7 @@ Energy.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    capacity: state.get('energy'),
+    energy: state.get('energy'),
   };
 }
 
