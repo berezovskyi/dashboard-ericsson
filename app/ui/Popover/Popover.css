@@ -32,35 +32,32 @@
 
 }
 
-.popover .arrow {
-  left: calc((.5rem + 1px) * -1);
-  width: .5rem;
-  height: 1rem;
-  margin: .3rem 0;
-}
-
 .popover, .popover .arrow {
   position: absolute;
   display: block;
 }
 
-.arrow {
-  top: calc((.5rem + 1px) * -1);
+
+.popover-left .arrow {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #4D5AFF;
+  right: -10px;
+  margin-top: 10px;
 }
 
-.arrow:before {
-  position: absolute;
-  display: block;
-  content: "";
-  border-color: transparent;
-  border-style: solid;
-  top: 3px;
-  border-bottom-color: #4D5AFF;
-  border-width: 0 10px 10px;
+.popover-right {
+
 }
 
-.arrow:after {
-  top: 1px;
-  border-bottom-color: #fff;
-  border-width: 0 .5rem .5rem;
+.popover-bottom {
+
 }
+
+.popover-top {
+
+}
+
+

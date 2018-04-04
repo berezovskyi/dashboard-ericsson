@@ -36,7 +36,7 @@ class Card extends Component { // eslint-disable-line react/prefer-stateless-fun
           {children}
         </div>
         <Popover
-          placement="right"
+          placement="left"
           isOpen={this.state.helperstate}
           target={'HelpText' + id}
           toggle={this._handlePopover}
