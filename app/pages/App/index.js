@@ -29,16 +29,16 @@ import styles from './App.css';
 import Header from '../../ui/Header/Header';
 
 
-export default function App() {
+export default function App(props) {
   return (
     <main>
-      <Header />
+      <Header {...props} />
       <Sidebar />
       <div className={styles.content}>
         <div className={styles.innercontent}>
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route path="/supplychain/:id" component={SupplyChainPage} />
+            <Route path="/supplychain" component={SupplyChainPage} />
             <Route path="/warehouse" component={WareHousePage} />
             <Route path="/intellegentagent" component={IntelligentAgentPage} />
             <Route path="" component={NotFoundPage} />

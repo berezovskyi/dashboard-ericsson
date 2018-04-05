@@ -1,4 +1,5 @@
 import React from 'react';
+import * as qs from 'query-string';
 
 import Capacity from './Capacity/Capacity';
 import Truck from './Truck/Truck';
@@ -11,20 +12,22 @@ import RPChart from './RPChart/RPChart';
 class SupplyChainPage extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { match } = this.props;
+    const { location } = this.props;
+    const route = qs.parse(location.search);
+
     return (
       <div className={styles.fullPage}>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
-            <Capacity id="capactiy" />
+            <Capacity id="capactiy" route={route.type} />
           </div>
           <div className={styles.oneHalf}>
-            <Truck id="truck" />
+            <Truck id="truck" route={route.type} />
           </div>
         </div>
         <div className={styles.row}>
           <div className={styles.oneFull}>
-            <RPChart id="rpchrt" type={match.params.id} />
+            <RPChart id="rpchrt" route={route.type} />
           </div>
         </div>
         <div className={styles.row}>
@@ -33,10 +36,11 @@ class SupplyChainPage extends React.Component {
               id="stakeholder"
               type="sc"
               name="Supply Chain Level"
+              route={route.type}
             />
           </div>
           <div className={styles.oneHalf}>
-            <Notes id="notes" type="sc" name="Supply Chain Level" />
+            <Notes id="notes" type="sc" name="Supply Chain Level" route={route.type} />
           </div>
         </div>
       </div>
