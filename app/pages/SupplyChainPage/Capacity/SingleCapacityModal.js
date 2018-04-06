@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styles from './Capacity.css';
 import Knob from '../../../ui/Knob/Knob';
 
@@ -9,7 +10,13 @@ class SingleCapacityModal extends Component {
   }
 
   _handlehighlight(row) {
-    console.log(row);
+    console.log(!row.highlight);
+    const dispatch = this.props.dispatch;
+    dispatch({
+      type: 'UPDATE_CAPACITY_HIGHLIGHT',
+      id: row.id,
+      highlighted: !row.highlighted,
+    });
   }
 
   render() {
@@ -54,4 +61,10 @@ class SingleCapacityModal extends Component {
   }
 }
 
-export default SingleCapacityModal;
+function mapStateToProps(state) {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps)(SingleCapacityModal);
