@@ -12,16 +12,12 @@ import {
   omit,
 } from '../../utils/utils';
 
-
 const propTypes = {
   isOpen: PropTypes.bool,
   autoFocus: PropTypes.bool,
   toggle: PropTypes.func,
   labelledBy: PropTypes.string,
-  backdrop: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.oneOf(['static']),
-  ]),
+  backdrop: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['static'])]),
   children: PropTypes.node,
   external: PropTypes.node,
   in: PropTypes.bool,
@@ -85,7 +81,11 @@ class Modal extends React.Component {
   }
 
   setFocus() {
-    if (this._dialog && this._dialog.parentNode && typeof this._dialog.parentNode.focus === 'function') {
+    if (
+      this._dialog &&
+      this._dialog.parentNode &&
+      typeof this._dialog.parentNode.focus === 'function'
+    ) {
       this._dialog.parentNode.focus();
     }
   }
@@ -98,14 +98,11 @@ class Modal extends React.Component {
 
     if (e.target && !container.contains(e.target) && this.props.toggle) {
       this.props.toggle();
+      this.setState({
+        isOpen: false,
+      });
+      this.destroy();
     }
-
-    // Fix this, this should be dependent on props.
-    this.setState({
-      isOpen: false,
-    });
-
-    this.destroy();
   }
 
   init() {
@@ -121,18 +118,21 @@ class Modal extends React.Component {
 
     document.body.className = classNames(
       document.body.className,
-      styles['modal-open']
+      styles['modal-open'],
     );
   }
 
   destroy() {
-    document.body.removeChild(this._element);
-    this._element = null;
-
     const modalOpenClassName = styles['modal-open'];
-    document.body.className = document.body.className.replace(modalOpenClassName, ' ').trim();
-
-    setScrollbarWidth(this._originalBodyPadding);
+    if (this._element) {
+      document.body.removeChild(this._element);
+      document.body.className = document.body.className
+        .replace(modalOpenClassName, ' ')
+        .trim();
+      this._element = null;
+      setScrollbarWidth(this._originalBodyPadding);
+    }
+    return null;
   }
 
   renderModalDialog() {
@@ -149,13 +149,11 @@ class Modal extends React.Component {
         {...attributes}
         className={centeredModalClasses}
         role="document"
-        ref={(c) => {
+        ref={c => {
           this._dialog = c;
         }}
       >
-        <div
-          className={styles['modal-content']}
-        >
+        <div className={styles['modal-content']}>
           {children}
         </div>
       </div>
@@ -164,11 +162,7 @@ class Modal extends React.Component {
 
   render() {
     if (this.props.isOpen) {
-      const {
-        labelledBy,
-        external,
-        isOpen,
-      } = this.props;
+      const { labelledBy, external, isOpen } = this.props;
 
       return (
         <Portal node={this._element}>
@@ -185,10 +179,7 @@ class Modal extends React.Component {
               {external}
               {this.renderModalDialog()}
             </div>
-            <div
-              in={isOpen.toString()}
-              className={styles['modal-backdrop']}
-            />
+            <div in={isOpen.toString()} className={styles['modal-backdrop']} />
           </div>
         </Portal>
       );

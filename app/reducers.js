@@ -12,18 +12,30 @@ import performanceriskReducer from './pages/SupplyChainPage/RPChart/reducer';
 import interoperatabilityReducer
   from './pages/IntelligentAgentPage/IAChart/reducer';
 
-const INITIAL_STATE = new Map({});
+const INITIAL_STATE = Map({
+  notes: notesReducer,
+  stakeholders: stakeholdersReducer,
+  capacity: capacityReducer,
+  truck: truckReducer,
+  robot: robotReducer,
+  battery: batteryReducer,
+  robotperformance: robotperformanceReducer,
+  performancerisk: performanceriskReducer,
+  interoperatability: interoperatabilityReducer,
+});
 
-export default function(state = INITIAL_STATE, action) {
-  return Map({
-    notes: notesReducer,
-    stakeholders: stakeholdersReducer,
-    capacity: capacityReducer,
-    truck: truckReducer,
-    robot: robotReducer,
-    battery: batteryReducer,
-    robotperformance: robotperformanceReducer,
-    performancerisk: performanceriskReducer,
-    interoperatability: interoperatabilityReducer,
-  });
+export default function (state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case 'UPDATE_CAPACITY_HIGHLIGHT':
+      console.log(state.setIn(
+        ['capacity', action.id, 'highlighted'],
+        action.highlighted,
+      ));
+      return state.setIn(
+        ['capacity', action.id, 'highlighted'],
+        action.highlighted,
+      );
+    default:
+      return state;
+  }
 }

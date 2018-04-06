@@ -33,12 +33,12 @@ class Capacity extends Component {
     const { id, capacity } = this.props;
     return (
       <Card
-        title="Capacity"
-        helpText="This explains the meaning of this section."
+        title="Highlighted Retailers and Warehouse Capacity"
+        helpText="The section indicates how much the warehouses and the retailers are full. The get more information, click view all."
         id={id}
       >
-        <SingleCapacity capacity={capacity} total={5} type="wh" />
-        <SingleCapacity capacity={capacity} total={5} type="rt" />
+        <SingleCapacity capacity={capacity} total={3} type="wh" />
+        <SingleCapacity capacity={capacity} total={3} type="rt" />
         <Button
           size="medium"
           color="primary"
@@ -54,7 +54,10 @@ class Capacity extends Component {
             Capacity of all Trucks and Warehouses
           </ModalHeader>
           <ModalBody>
-            <SingleCapacityModal capacity={capacity} />
+            <h4>All Warehouses</h4>
+            <SingleCapacityModal capacity={capacity} type="wh" />
+            <h4>All Retailers</h4>
+            <SingleCapacityModal capacity={capacity} type="rt" />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handlealltrucksModal}>

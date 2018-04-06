@@ -21,6 +21,7 @@ const Capacity = new Record({
   name: '',
   value: 0,
   type: '',
+  highlighted: false,
 });
 
 const Truck = new Record({
