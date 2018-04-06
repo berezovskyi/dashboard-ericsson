@@ -32,6 +32,7 @@ export default function (state = INITIAL_STATE, action) {
         action.highlighted,
       );
     case 'UPDATE_NOTES_HIGHLIGHT':
+      console.log(action);
       return state.setIn(
         ['notes', action.id, 'highlighted'],
         action.highlighted,

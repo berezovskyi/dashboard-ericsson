@@ -9,13 +9,12 @@ class SingleCapacityModal extends Component {
     this._handlehighlight = this._handlehighlight.bind(this);
   }
 
-  _handlehighlight(row) {
-    console.log(!row.highlight);
+  _handlehighlight(data) {
     const dispatch = this.props.dispatch;
     dispatch({
       type: 'UPDATE_CAPACITY_HIGHLIGHT',
-      id: row.id,
-      highlighted: !row.highlighted,
+      id: data.id,
+      highlighted: !data.highlighted,
     });
   }
 
