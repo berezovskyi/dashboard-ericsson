@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import className from 'classnames';
+
+import Checkbox from '../../../ui/Form/Checkbox';
 import styles from './Stakeholders.css';
 
 class StakeholderModalProfile extends Component {
@@ -39,19 +41,13 @@ class StakeholderModalProfile extends Component {
                 <p className={styles.stakeholderphone}>{stakeholder.phone}</p>
               </div>
             </div>
-            <div className={styles.checkbox}>
-              <input
-                id={`checkbox-${stakeholder.id}`}
-                type="checkbox"
-                checked={stakeholder.highlighted}
-                name="Highlight Entity"
-                onChange={() => this._handlehighlight(stakeholder)}
-              />
-              <label
-                className={styles.checkboxlabel}
-                htmlFor={`checkbox-${stakeholder.id}`}
-              />
-            </div>
+            <Checkbox
+              className={styles.stakeholdercheckbox}
+              id={stakeholder.id}
+              checked={stakeholder.highlighted}
+              name="Highlight Entity"
+              onChange={() => this._handlehighlight(stakeholder)}
+            />
           </div>
         );
       }

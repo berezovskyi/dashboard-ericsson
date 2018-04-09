@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Checkbox from '../../../ui/Form/Checkbox';
 import styles from './Notes.css';
 
 class NotesListModal extends Component {
@@ -31,19 +32,13 @@ class NotesListModal extends Component {
                   <span className={styles.author}>{note.author}</span> {' | '}
                   <span className={styles.timestamp}>{note.timestamp}</span>
                 </div>
-                <div className={styles.checkbox}>
-                  <input
-                    id={`checkbox-${note.id}`}
-                    type="checkbox"
-                    checked={note.highlighted}
-                    name="Highlight Entity"
-                    onChange={() => this._handlehighlight(note)}
-                  />
-                  <label
-                    className={styles.checkboxlabel}
-                    htmlFor={`checkbox-${note.id}`}
-                  />
-                </div>
+                <Checkbox
+                  className={styles.notescheckbox}
+                  id={note.id}
+                  checked={note.highlighted}
+                  name="Highlight Entity"
+                  onChange={() => this._handlehighlight(note)}
+                />
               </li>
             );
           }

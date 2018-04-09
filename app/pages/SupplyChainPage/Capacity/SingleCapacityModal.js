@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './Capacity.css';
 import Knob from '../../../ui/Knob/Knob';
+import Checkbox from '../../../ui/Form/Checkbox';
 
 class SingleCapacityModal extends Component {
   constructor(props) {
@@ -37,19 +38,12 @@ class SingleCapacityModal extends Component {
                   />
                   <h4 className={styles.title}>{row.name}</h4>
                   <p className={styles.subtitle}>{row.id}</p>
-                  <div className={styles.checkbox}>
-                    <input
-                      id={`checkbox-${row.id}`}
-                      type="checkbox"
-                      checked={row.highlighted}
-                      name="Highlight Entity"
-                      onChange={() => this._handlehighlight(row)}
-                    />
-                    <label
-                      className={styles.checkboxlabel}
-                      htmlFor={`checkbox-${row.id}`}
-                    />
-                  </div>
+                  <Checkbox
+                    id={row.id}
+                    checked={row.highlighted}
+                    name="Highlight Entity"
+                    onChange={() => this._handlehighlight(row)}
+                  />
                 </div>
               </div>
             );
@@ -61,9 +55,7 @@ class SingleCapacityModal extends Component {
 }
 
 function mapStateToProps(state) {
-  return {
-
-  }
+  return {};
 }
 
 export default connect(mapStateToProps)(SingleCapacityModal);

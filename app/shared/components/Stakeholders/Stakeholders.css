@@ -100,60 +100,8 @@
   font-size: 12px;
 }
 
-.checkbox {
+.stakeholdercheckbox {
   position: absolute;
-  top: 0px;
+  top: 0;
   right: 10px;
-}
-
-.checkbox input[type='checkbox'] {
-  opacity: 0;
-}
-
-.checkboxlabel {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  margin-left: -20px;
-  cursor: pointer;
-}
-
-.checkbox label:before {
-  content: '';
-  background: url(../../../shared/media/images/icons/checkbox-undone.png) center no-repeat;
-  background-size: 24px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 24px;
-  width: 24px;
-}
-
-.checkbox label:after {
-  content: '';
-  background: url(../../../shared/media/images/icons/checkbox-undone.png) center no-repeat;
-  background-size: 24px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 24px;
-  width: 24px;
-}
-
-.checkbox input[type="checkbox"]:not(:checked) + label:after {
-  opacity: 0;
-  transform: scale(0);
-  -ms-transform: scale(0);
-  -webkit-transform: scale(0);
-}
-
-.checkbox input[type="checkbox"]:not(:checked) + label:after, .checkbox input[type="checkbox"]:checked + label:after {
-  content: '';
-  background: url(../../../shared/media/images/icons/checkbox-done.png) center no-repeat;
-  background-size: 24px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 24px;
-  width: 24px;
 }
