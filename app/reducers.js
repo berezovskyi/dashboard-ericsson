@@ -27,12 +27,34 @@ const INITIAL_STATE = Map({
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'UPDATE_CAPACITY_HIGHLIGHT':
-      console.log(state.setIn(
-        ['capacity', action.id, 'highlighted'],
-        action.highlighted,
-      ));
       return state.setIn(
         ['capacity', action.id, 'highlighted'],
+        action.highlighted,
+      );
+    case 'UPDATE_NOTES_HIGHLIGHT':
+      console.log(action);
+      return state.setIn(
+        ['notes', action.id, 'highlighted'],
+        action.highlighted,
+      );
+    case 'UPDATE_STAKEHOLDERS_HIGHLIGHT':
+      return state.setIn(
+        ['stakeholders', action.id, 'highlighted'],
+        action.highlighted,
+      );
+    case 'UPDATE_TRUCKS_HIGHLIGHT':
+      return state.setIn(
+        ['truck', action.id, 'highlighted'],
+        action.highlighted,
+      );
+    case 'UPDATE_ROBOT_HIGHLIGHT':
+      return state.setIn(
+        ['robot', action.id, 'highlighted'],
+        action.highlighted,
+      );
+    case 'UPDATE_BATTERY_HIGHLIGHT':
+      return state.setIn(
+        ['robot', action.id, 'highlighted'],
         action.highlighted,
       );
     default:

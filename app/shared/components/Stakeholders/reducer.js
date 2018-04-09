@@ -15,6 +15,7 @@ const stakeholdersReducer = Map({
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
     type: 'sc',
+    highlighted: true,
   }),
   ['12345-45677']: Stakeholder({
     id: '12345-45677',
@@ -22,6 +23,7 @@ const stakeholdersReducer = Map({
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
     type: 'sc',
+    highlighted: true,
   }),
   ['12345-45676']: Stakeholder({
     id: '12345-45676',
@@ -29,6 +31,7 @@ const stakeholdersReducer = Map({
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
     type: 'ia',
+    highlighted: true,
   }),
   ['12345-45675']: Stakeholder({
     id: '12345-45675',
@@ -36,6 +39,7 @@ const stakeholdersReducer = Map({
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
     type: 'wh',
+    highlighted: true,
   }),
   ['12345-45676']: Stakeholder({
     id: '12345-45676',
@@ -43,6 +47,7 @@ const stakeholdersReducer = Map({
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
     type: 'wh',
+    highlighted: true,
   }),
   ['12345-45677']: Stakeholder({
     id: '12345-45677',
@@ -50,6 +55,7 @@ const stakeholdersReducer = Map({
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
     type: 'sc',
+    highlighted: true,
   }),
   ['12345-45678']: Stakeholder({
     id: '12345-45678',
@@ -57,6 +63,7 @@ const stakeholdersReducer = Map({
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
     type: 'sc',
+    highlighted: false,
   }),
   ['12345-45679']: Stakeholder({
     id: '12345-45679',
@@ -64,13 +71,15 @@ const stakeholdersReducer = Map({
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
     type: 'wh',
+    highlighted: true,
   }),
   ['12345-45680']: Stakeholder({
     id: '12345-45680',
-    name: 'Pawan nayyar',
+    name: 'Pawan Nayyar',
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
     type: 'sc',
+    highlighted: true,
   }),
   ['12345-45681']: Stakeholder({
     id: '12345-45681',
@@ -78,6 +87,7 @@ const stakeholdersReducer = Map({
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
     type: 'sc',
+    highlighted: true,
   }),
   ['12345-45682']: Stakeholder({
     id: '12345-45682',
@@ -85,6 +95,7 @@ const stakeholdersReducer = Map({
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
     type: 'wh',
+    highlighted: true,
   }),
   ['12345-45683']: Stakeholder({
     id: '12345-45683',
@@ -92,6 +103,7 @@ const stakeholdersReducer = Map({
     phone: '12 345 5678',
     email: 'sebastian@codingthesmartway.com',
     type: 'ia',
+    highlighted: true,
   }),
   ['12345-45684']: Stakeholder({
     id: '12345-45684',
@@ -99,6 +111,7 @@ const stakeholdersReducer = Map({
     phone: '12 345 5678',
     email: 'sebastian@yolo.com',
     type: 'wh',
+    highlighted: true,
   }),
 });
 

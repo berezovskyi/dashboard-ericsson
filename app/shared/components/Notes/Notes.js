@@ -16,6 +16,7 @@ import ModalBody from '../../../ui/Modal/ModalBody';
 import styles from './Notes.css';
 import NoNotes from './NoNotes';
 import NotesList from './NotesList';
+import NotesListModal from './NotesListModal';
 
 class Notes extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -26,16 +27,7 @@ class Notes extends React.Component {
     this.state = {
       addnotesModal: false,
       allnotesModal: false,
-      notes: [],
     };
-  }
-
-  componentWillMount() {
-    const { type, notes } = this.props;
-    const filterednotes = notes.filter(note => type === note.type);
-    this.setState({
-      notes: filterednotes,
-    });
   }
 
   _handleaddNoteModal() {
@@ -53,9 +45,7 @@ class Notes extends React.Component {
   }
 
   render() {
-    const { id, type, name } = this.props;
-    const { notes } = this.state;
-
+    const { id, type, name, notes } = this.props;
     const title = 'Highlighted Notes for ' + name;
 
     return (
@@ -64,7 +54,7 @@ class Notes extends React.Component {
         helpText="Add Notes relevant to Supply Chain over here"
         id={id}
       >
-        {notes.size > 0 ? <NotesList notes={notes} total={2} /> : <NoNotes />}
+        {notes.size > 0 ? <NotesList notes={notes} type={type} /> : <NoNotes />}
         <div className={styles.footer}>
           {notes.size > 0
             ? <Button size="medium" color="primary" onClick={this._handleallNotesModal}>
@@ -110,11 +100,11 @@ class Notes extends React.Component {
             All Notes for {name}
           </ModalHeader>
           <ModalBody>
-            <NotesList notes={notes} />
+            <NotesListModal notes={notes} type={type} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handleallNotesModal}>
-              Add
+              Close
             </Button>
             {' '}
           </ModalFooter>

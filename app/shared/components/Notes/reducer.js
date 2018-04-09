@@ -15,6 +15,7 @@ const notesReducer = Map({
     timestamp: '2015-10-11',
     author: 'Raghu Nayyar',
     type: 'sc',
+    highlighted: false,
   }),
   ['12341-45675']: Note({
     id: '12341-45675',
@@ -22,6 +23,7 @@ const notesReducer = Map({
     timestamp: '2015-10-11',
     author: 'Raghu Nayyar',
     type: 'sc',
+    highlighted: true,
   }),
   ['12341-45676']: Note({
     id: '12341-45676',
@@ -29,6 +31,7 @@ const notesReducer = Map({
     timestamp: '2015-10-11',
     author: 'Raghu Nayyar',
     type: 'wh',
+    highlighted: false,
   }),
   ['12341-45677']: Note({
     id: '12341-45677',
@@ -36,6 +39,7 @@ const notesReducer = Map({
     timestamp: '2015-10-11',
     author: 'Raghu Nayyar',
     type: 'ia',
+    highlighted: true,
   }),
   ['12341-45678']: Note({
     id: '12341-45678',
@@ -43,6 +47,7 @@ const notesReducer = Map({
     timestamp: '2015-10-11',
     author: 'Raghu Nayyar',
     type: 'ia',
+    highlighted: false,
   }),
   ['12341-45679']: Note({
     id: '12341-45679',
@@ -50,6 +55,7 @@ const notesReducer = Map({
     timestamp: '2015-10-11',
     author: 'Raghu Nayyar',
     type: 'sc',
+    highlighted: true,
   }),
   ['12341-45680']: Note({
     id: '12341-45680',
@@ -57,6 +63,7 @@ const notesReducer = Map({
     timestamp: '2015-10-11',
     author: 'Didem Gurdur',
     type: 'ia',
+    highlighted: false,
   }),
   ['12341-45681']: Note({
     id: '12341-45681',
@@ -64,6 +71,7 @@ const notesReducer = Map({
     timestamp: '2015-10-11',
     author: 'Daniel Craig',
     type: 'ia',
+    highlighted: true,
   }),
   ['12341-45682']: Note({
     id: '12341-45682',
@@ -71,6 +79,7 @@ const notesReducer = Map({
     timestamp: '2015-10-11',
     author: 'Denise Richards',
     type: 'wh',
+    highlighted: true,
   }),
 });
 

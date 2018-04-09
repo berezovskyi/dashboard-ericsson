@@ -25,18 +25,8 @@ class Stakeholders extends React.Component {
     );
     this.state = {
       stakeholderModal: false,
-      stakeholders: [],
     };
   }
-
-  componentWillMount() {
-    const { type, stakeholders } = this.props;
-    const filteredstakeholders = stakeholders.filter(stakeholder => type === stakeholder.type);
-    this.setState({
-      stakeholders: filteredstakeholders,
-    });
-  }
-
   _handleallstakeholderModal() {
     this.setState({
       stakeholderModal: !this.state.stakeholderModal,
@@ -44,8 +34,7 @@ class Stakeholders extends React.Component {
   }
 
   render() {
-    const { id, type, name } = this.props;
-    const { stakeholders } = this.state;
+    const { id, type, name, stakeholders } = this.props;
 
     const title = 'Highlighted Stakeholders for ' + name;
 
@@ -57,7 +46,7 @@ class Stakeholders extends React.Component {
         type={type}
       >
         <div className={styles.row}>
-          <StakeholderProfile stakeholders={stakeholders} total={3} />
+          <StakeholderProfile stakeholders={stakeholders} type={type} />
         </div>
         <Button
           size="medium"
@@ -74,7 +63,7 @@ class Stakeholders extends React.Component {
             Stakeholders for {name}
           </ModalHeader>
           <ModalBody>
-            <StakeholderModalProfile stakeholders={stakeholders} name={name} />
+            <StakeholderModalProfile stakeholders={stakeholders} name={name} type={type} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handleallstakeholderModal}>

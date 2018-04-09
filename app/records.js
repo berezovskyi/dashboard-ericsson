@@ -6,6 +6,7 @@ const Note = new Record({
   timestamp: '0000-00-00',
   author: '',
   type: '',
+  highlighted: false,
 });
 
 const Stakeholder = new Record({
@@ -14,6 +15,7 @@ const Stakeholder = new Record({
   phone: '',
   email: '',
   type: '',
+  highlighted: false,
 });
 
 const Capacity = new Record({
