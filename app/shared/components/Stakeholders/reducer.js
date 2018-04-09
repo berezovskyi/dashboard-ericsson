@@ -117,10 +117,7 @@ const INITIAL_STATE = Map({
 export default function stakeholderReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'UPDATE_STAKEHOLDERS_HIGHLIGHT':
-      return state.setIn(
-        ['stakeholders', action.id, 'highlighted'],
-        action.highlighted,
-      );
+      return state.setIn([action.id, 'highlighted'], action.highlighted);
     default:
       return state;
   }
