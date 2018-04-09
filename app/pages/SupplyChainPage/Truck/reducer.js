@@ -7,8 +7,7 @@
 import { Map } from 'immutable';
 import { Truck } from '../../../records';
 
-
-const truckReducer = Map({
+const INITIA_STATE = Map({
   ['12341-41230']: Truck({
     id: '12341-41230',
     to: 'Stockholm',
@@ -71,4 +70,11 @@ const truckReducer = Map({
   }),
 });
 
-export default truckReducer;
+export default function truckReducer(state = INITIA_STATE, action) {
+  switch (action.type) {
+    case 'UPDATE_TRUCKS_HIGHLIGHT':
+      return state.setIn([action.id, 'highlighted'], action.highlighted);
+    default:
+      return state;
+  }
+}

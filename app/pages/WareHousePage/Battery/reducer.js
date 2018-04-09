@@ -7,7 +7,7 @@
 import { Map } from 'immutable';
 import { Battery } from '../../../records';
 
-const batteryReducer = Map({
+const INITIAL_STATE = Map({
   ['11111-41230']: Battery({
     id: '11111-41230',
     name: 'Robot Arm 1',
@@ -110,4 +110,14 @@ const batteryReducer = Map({
   }),
 });
 
-export default batteryReducer;
+export default function batteryReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case 'UPDATE_ROBOT_HIGHLIGHT':
+      return state.setIn(
+        [action.id, 'highlighted'],
+        action.highlighted,
+      );
+    default:
+      return state;
+  }
+}

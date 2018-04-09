@@ -7,7 +7,7 @@
 import { Map } from 'immutable';
 import { Robot } from '../../../records';
 
-const robotReducer = Map({
+const INITIAL_STATE = Map({
   ['12341-41230']: Robot({
     id: '12341-41230',
     name: 'Robot 1',
@@ -62,4 +62,11 @@ const robotReducer = Map({
   }),
 });
 
-export default robotReducer;
+export default function robotReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case 'UPDATE_ROBOT_HIGHLIGHT':
+      return state.setIn([action.id, 'highlighted'], action.highlighted);
+    default:
+      return state;
+  }
+}
