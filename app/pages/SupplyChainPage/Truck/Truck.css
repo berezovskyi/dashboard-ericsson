@@ -1,0 +1,90 @@
+.trucktitle {
+  margin-bottom: 10px;
+}
+
+
+.row {
+  lost-center: 100%;
+}
+
+.oneHalf {
+  lost-column: 1/2;
+}
+
+.modaltitle {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.modaldescription {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+.modalbox {
+  background: #F7F7F7;
+  padding: 30px;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.modalbox p {
+  margin: 0;
+}
+
+.modalboxtitle {
+  font-size: 64px;
+  font-weight: 300;
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+
+.modalprogress {
+  margin-bottom: 50px;
+}
+
+.modaldiff,
+.modaltime {
+  padding: 0 20px;
+}
+
+.modaldiff svg {
+  height: 12px;
+}
+
+.modaldecrease {
+  color: #FD1B1B;
+}
+
+.modalincrease {
+  color: #60C303;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.fourFifth {
+  lost-column: 4/5;
+}
+
+.oneFifth {
+  lost-column: 1/5;
+}
+
+.fiveSixth {
+  lost-column: 5/6;
+}
+
+.oneSixth {
+  lost-column: 1/6;
+}
+
+.text {
+  font-size: 12px;
+  display: block;
+  text-align: right;
+  color: #aaa;
+}

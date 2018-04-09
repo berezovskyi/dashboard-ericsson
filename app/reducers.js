@@ -1,48 +1,63 @@
-/**
- * Combine all reducers in this file and export the combined reducers.
- */
+import { Map } from 'immutable';
 
-import { combineReducers } from 'redux-immutable';
-import { fromJS } from 'immutable';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import stakeholdersReducer from './shared/components/Stakeholders/reducer';
+import notesReducer from './shared/components/Notes/reducer';
+import capacityReducer from './pages/SupplyChainPage/Capacity/reducer';
+import truckReducer from './pages/SupplyChainPage/Truck/reducer';
+import robotReducer from './pages/IntelligentAgentPage/Robot/reducer';
+import batteryReducer from './pages/WareHousePage/Battery/reducer';
+import robotperformanceReducer
+  from './pages/WareHousePage/RobotPerformanceChart/reducer';
+import performanceriskReducer from './pages/SupplyChainPage/RPChart/reducer';
+import interoperatabilityReducer
+  from './pages/IntelligentAgentPage/IAChart/reducer';
 
-import languageProviderReducer from 'containers/LanguageProvider/reducer';
-
-/*
- * routeReducer
- *
- * The reducer merges route location changes into our immutable state.
- * The change is necessitated by moving to react-router-redux@4
- *
- */
-
-// Initial routing state
-const routeInitialState = fromJS({
-  location: null,
+const INITIAL_STATE = Map({
+  notes: notesReducer,
+  stakeholders: stakeholdersReducer,
+  capacity: capacityReducer,
+  truck: truckReducer,
+  robot: robotReducer,
+  battery: batteryReducer,
+  robotperformance: robotperformanceReducer,
+  performancerisk: performanceriskReducer,
+  interoperatability: interoperatabilityReducer,
 });
 
-/**
- * Merge route into the global application state
- */
-function routeReducer(state = routeInitialState, action) {
+export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
-    /* istanbul ignore next */
-    case LOCATION_CHANGE:
-      return state.merge({
-        location: action.payload,
-      });
+    case 'UPDATE_CAPACITY_HIGHLIGHT':
+      return state.setIn(
+        ['capacity', action.id, 'highlighted'],
+        action.highlighted,
+      );
+    case 'UPDATE_NOTES_HIGHLIGHT':
+      console.log(action);
+      return state.setIn(
+        ['notes', action.id, 'highlighted'],
+        action.highlighted,
+      );
+    case 'UPDATE_STAKEHOLDERS_HIGHLIGHT':
+      return state.setIn(
+        ['stakeholders', action.id, 'highlighted'],
+        action.highlighted,
+      );
+    case 'UPDATE_TRUCKS_HIGHLIGHT':
+      return state.setIn(
+        ['truck', action.id, 'highlighted'],
+        action.highlighted,
+      );
+    case 'UPDATE_ROBOT_HIGHLIGHT':
+      return state.setIn(
+        ['robot', action.id, 'highlighted'],
+        action.highlighted,
+      );
+    case 'UPDATE_BATTERY_HIGHLIGHT':
+      return state.setIn(
+        ['robot', action.id, 'highlighted'],
+        action.highlighted,
+      );
     default:
       return state;
   }
-}
-
-/**
- * Creates the main reducer with the dynamically injected ones
- */
-export default function createReducer(injectedReducers) {
-  return combineReducers({
-    route: routeReducer,
-    language: languageProviderReducer,
-    ...injectedReducers,
-  });
 }

@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  background-color: #fff;
+}
+
+.content {
+  background: #F4F8F9;
+  overflow-y: auto;
+  color: #6A7088;
+  margin-left: 100px;
+  font-family: 'Lato', sans-serif;
+  margin-top: 80px;
+  right: 0;
+  left: 0;
+  height: 100%;
+}
+
+.innercontent {
+  padding: 10px 30px 10px 10px;
+}

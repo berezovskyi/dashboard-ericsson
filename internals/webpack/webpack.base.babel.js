@@ -5,12 +5,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-// Remove this line once the following warning goes away (it was meant for webpack loader authors not users):
-// 'DeprecationWarning: loaderUtils.parseQuery() received a non-string value which can be problematic,
-// see https://github.com/webpack/loader-utils/issues/56 parseQuery() will be replaced with getOptions()
-// in the next major version of loader-utils.'
-process.noDeprecation = true;
-
 module.exports = (options) => ({
   entry: options.entry,
   output: Object.assign({ // Compile into js/build.js
@@ -18,100 +12,62 @@ module.exports = (options) => ({
     publicPath: '/',
   }, options.output), // Merge with env dependent settings
   module: {
-    rules: [
-      {
-        test: /\.js$/, // Transform all .js files required somewhere with Babel
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: options.babelQuery,
-        },
-      },
-      {
-        // Preprocess our own .css files
-        // This is the place to add your own loaders (e.g. sass/less etc.)
-        // for a list of loaders, see https://webpack.js.org/loaders/#styling
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        // Preprocess 3rd party .css files located in node_modules
-        test: /\.css$/,
-        include: /node_modules/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(eot|svg|otf|ttf|woff|woff2)$/,
-        use: 'file-loader',
-      },
-      {
-        test: /\.(jpg|png|gif)$/,
-        use: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              progressive: true,
-              optimizationLevel: 7,
-              interlaced: false,
-              pngquant: {
-                quality: '65-90',
-                speed: 4,
-              },
-            },
-          },
-        ],
-      },
-      {
-        test: /\.html$/,
-        use: 'html-loader',
-      },
-      {
-        test: /\.json$/,
-        use: 'json-loader',
-      },
-      {
-        test: /\.(mp4|webm)$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-          },
-        },
-      },
-    ],
+    loaders: [{
+      test: /\.js$/, // Transform all .js files required somewhere with Babel
+      loader: 'babel',
+      exclude: /node_modules/,
+      query: options.babelQuery,
+    }, {
+      // Transform our own .css files with PostCSS and CSS-modules
+      test: /\.css$/,
+      exclude: /node_modules/,
+      loader: options.cssLoaders,
+    }, {
+      // Do not transform vendor's CSS with CSS-modules
+      // The point is that they remain in global scope.
+      // Since we require these CSS files in our JS or CSS files,
+      // they will be a part of our compilation either way.
+      // So, no need for ExtractTextPlugin here.
+      test: /\.css$/,
+      include: /node_modules/,
+      loaders: ['style-loader', 'css-loader'],
+    }, {
+      test: /\.jpe?g$|\.gif$|\.png$|\.svgo?\?data-uri$/,
+      loader: 'url-loader',
+    }, {
+      test: /\.svg$/,
+      exclude: /node_modules/,
+      loader: 'babel!react-svg-loader',
+    }, {
+      test: /\.html$/,
+      loader: 'html-loader',
+    }],
   },
   plugins: options.plugins.concat([
+    new webpack.optimize.CommonsChunkPlugin('common.js'),
     new webpack.ProvidePlugin({
       // make fetch available
-      fetch: 'exports-loader?self.fetch!whatwg-fetch',
+      fetch: 'exports?self.fetch!whatwg-fetch',
     }),
-
-    // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
-    // inside your code for any environment checks; UglifyJS will automatically
-    // drop any unreachable code.
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      },
-    }),
-    new webpack.NamedModulesPlugin(),
   ]),
+  postcss: () => options.postcssPlugins,
   resolve: {
-    modules: ['app', 'node_modules'],
+    modulesDirectories: [
+      'pages',
+      'components',
+      'shared',
+      'assets',
+      'node_modules',
+    ],
     extensions: [
+      '',
       '.js',
       '.jsx',
       '.react.js',
     ],
-    mainFields: [
-      'browser',
-      'jsnext:main',
-      'main',
-    ],
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window
-  performance: options.performance || {},
+  stats: false, // Don't show stats in the console
+  progress: true,
 });

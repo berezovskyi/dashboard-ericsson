@@ -1,0 +1,11 @@
+.row {
+  lost-center: 100%;
+}
+
+.oneFull {
+  lost-column: 1/1;
+}
+
+svg text {
+  font-size: 12px;
+}

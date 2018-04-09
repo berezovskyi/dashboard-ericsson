@@ -1,0 +1,46 @@
+.noNotesContainer {
+  padding: 80px 0;
+  text-align: center;
+  background: #efefef;
+}
+
+.notesContainer {
+  list-style: none outside none;
+  padding: 0 20px 0 0;
+  font-size: 14px;
+}
+
+.notesContainer li {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  border-bottom: 1px solid #efefef;
+  position: relative;
+}
+
+.notescheckbox {
+  top: 10px;
+  right: 10px;
+  position: absolute;
+}
+
+.text {
+  margin-bottom: 15px;
+  margin-right: 45px;
+}
+
+.meta {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.author {
+  padding-right: 10px;
+}
+
+.timestamp {
+  padding-left: 10px;
+}
+
+.footer button {
+  margin-right: 5px;
+}

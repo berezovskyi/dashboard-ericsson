@@ -1,0 +1,47 @@
+.row {
+  lost-center: 100%;
+  margin-bottom: 20px;
+}
+
+.oneFull {
+  lost-column: 1/1;
+}
+
+.oneHalf {
+  lost-column: 1/2;
+}
+
+.threeFifth {
+  lost-column: 4/5;
+}
+
+.oneFifth {
+  lost-column: 1/5;
+}
+
+.fourFifth {
+  lost-column: 4/5;
+}
+
+.oneThird {
+  lost-column: 1/3;
+}
+
+.imageThumbnail {
+  text-align: center;
+}
+
+.imageThumbnailInner {
+  border-radius: 5px;
+  box-shadow: 0 0 5px #aaaaaa;
+  width: 100px;
+  margin:10px auto;
+  padding:10px 0;
+  cursor: pointer;
+}
+
+.imageThumbnail p {
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}
