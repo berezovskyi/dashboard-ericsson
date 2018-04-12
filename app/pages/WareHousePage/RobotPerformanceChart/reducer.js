@@ -5,7 +5,7 @@
 */
 import { Map } from 'immutable';
 
-const robotperformanceReducer = new Map({
+const INITIAL_STATE = new Map({
   day: [
     {
       time: '0000',
@@ -185,4 +185,11 @@ const robotperformanceReducer = new Map({
   ],
 });
 
-export default robotperformanceReducer;
+export default function robotperformanceReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case 'SOME_ACTION':
+      return state;
+    default:
+      return state;
+  }
+}

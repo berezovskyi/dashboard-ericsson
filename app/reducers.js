@@ -1,5 +1,6 @@
-import { Map } from 'immutable';
-
+import { combineReducers } from 'redux-immutable';
+import { fromJS } from 'immutable';
+import { LOCATION_CHANGE } from 'react-router-redux';
 import stakeholdersReducer from './shared/components/Stakeholders/reducer';
 import notesReducer from './shared/components/Notes/reducer';
 import capacityReducer from './pages/SupplyChainPage/Capacity/reducer';
@@ -11,53 +12,35 @@ import robotperformanceReducer
 import performanceriskReducer from './pages/SupplyChainPage/RPChart/reducer';
 import interoperatabilityReducer
   from './pages/IntelligentAgentPage/IAChart/reducer';
+import {MyRoute} from "./records";
 
-const INITIAL_STATE = Map({
-  notes: notesReducer,
-  stakeholders: stakeholdersReducer,
-  capacity: capacityReducer,
-  truck: truckReducer,
-  robot: robotReducer,
-  battery: batteryReducer,
-  robotperformance: robotperformanceReducer,
-  performancerisk: performanceriskReducer,
-  interoperatability: interoperatabilityReducer,
+// Initial routing state
+const routeInitialState = new MyRoute({
+  location: null,
 });
 
-export default function (state = INITIAL_STATE, action) {
+function routeReducer(state = routeInitialState, action) {
   switch (action.type) {
-    case 'UPDATE_CAPACITY_HIGHLIGHT':
-      return state.setIn(
-        ['capacity', action.id, 'highlighted'],
-        action.highlighted,
-      );
-    case 'UPDATE_NOTES_HIGHLIGHT':
-      console.log(action);
-      return state.setIn(
-        ['notes', action.id, 'highlighted'],
-        action.highlighted,
-      );
-    case 'UPDATE_STAKEHOLDERS_HIGHLIGHT':
-      return state.setIn(
-        ['stakeholders', action.id, 'highlighted'],
-        action.highlighted,
-      );
-    case 'UPDATE_TRUCKS_HIGHLIGHT':
-      return state.setIn(
-        ['truck', action.id, 'highlighted'],
-        action.highlighted,
-      );
-    case 'UPDATE_ROBOT_HIGHLIGHT':
-      return state.setIn(
-        ['robot', action.id, 'highlighted'],
-        action.highlighted,
-      );
-    case 'UPDATE_BATTERY_HIGHLIGHT':
-      return state.setIn(
-        ['robot', action.id, 'highlighted'],
-        action.highlighted,
-      );
+    /* istanbul ignore next */
+    case LOCATION_CHANGE:
+      return state.setIn(['location'], action.payload);
     default:
       return state;
   }
+}
+
+export default function createReducer(injectedReducers) {
+  return combineReducers({
+    route: routeReducer,
+    notes: notesReducer,
+    stakeholders: stakeholdersReducer,
+    capacity: capacityReducer,
+    truck: truckReducer,
+    robot: robotReducer,
+    battery: batteryReducer,
+    robotperformance: robotperformanceReducer,
+    performancerisk: performanceriskReducer,
+    interoperatability: interoperatabilityReducer,
+    ...injectedReducers,
+  });
 }
