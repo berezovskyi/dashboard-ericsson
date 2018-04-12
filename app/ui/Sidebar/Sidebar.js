@@ -1,8 +1,6 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
-import HomeIcon from '../../shared/media/images/icons/home.svg';
 import WarehouseIcon from '../../shared/media/images/icons/warehouse.svg';
 import SupplyChainIcon from '../../shared/media/images/icons/supplychian.svg';
 import IntellegentAgentIcon from '../../shared/media/images/icons/intellegent.svg';

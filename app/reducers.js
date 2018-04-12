@@ -12,9 +12,10 @@ import robotperformanceReducer
 import performanceriskReducer from './pages/SupplyChainPage/RPChart/reducer';
 import interoperatabilityReducer
   from './pages/IntelligentAgentPage/IAChart/reducer';
+import {MyRoute} from "./records";
 
 // Initial routing state
-const routeInitialState = fromJS({
+const routeInitialState = new MyRoute({
   location: null,
 });
 
@@ -22,9 +23,7 @@ function routeReducer(state = routeInitialState, action) {
   switch (action.type) {
     /* istanbul ignore next */
     case LOCATION_CHANGE:
-      return state.merge({
-        location: action.payload,
-      });
+      return state.setIn(['location'], action.payload);
     default:
       return state;
   }
