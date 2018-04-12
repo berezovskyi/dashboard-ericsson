@@ -7,8 +7,7 @@
 import { Map } from 'immutable';
 import { Capacity } from '../../../records';
 
-
-const capacityReducer = Map({
+const INITIAL_STATE = Map({
   ['12341-45123']: Capacity({
     id: '12341-45123',
     name: 'Retailer 1',
@@ -63,21 +62,28 @@ const capacityReducer = Map({
     name: 'Warehouse 4',
     value: 23,
     type: 'wh',
-  }),  ['12341-45110']: Capacity({
+  }),
+  ['12341-45110']: Capacity({
     id: '12341-45110',
     name: 'Warehouse 5',
     value: 23,
     type: 'wh',
     highlighted: false,
-  }),  ['12341-45111']: Capacity({
+  }),
+  ['12341-45111']: Capacity({
     id: '12341-45111',
     name: 'Warehouse 6',
     value: 23,
     type: 'wh',
     highlighted: false,
   }),
-
-
 });
 
-export default capacityReducer;
+export default function capacityReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case 'UPDATE_CAPACITY_HIGHLIGHT':
+      return state.setIn([action.id, 'highlighted'], action.highlighted);
+    default:
+      return state;
+  }
+}

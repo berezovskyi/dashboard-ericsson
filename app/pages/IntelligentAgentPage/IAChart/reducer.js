@@ -6,7 +6,7 @@
 
 import { Map } from 'immutable';
 
-const interoperatabilityReducer = Map({
+const INITIAL_STATE = Map({
   day: [
     [1345, 295, 103, 365, 75],
     [421, 129, 366, 350, 395],
@@ -19,4 +19,11 @@ const interoperatabilityReducer = Map({
   year: [],
 });
 
-export default interoperatabilityReducer;
+export default function interoperatabilityReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case 'SOME_ACTION':
+      return state;
+    default:
+      return state;
+  }
+}

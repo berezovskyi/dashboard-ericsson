@@ -6,7 +6,7 @@
 
 import { Map } from 'immutable';
 
-const performanceriskReducer = Map({
+const INITIAL_STATE = Map({
   day: [
     {
       id: 'performance',
@@ -128,4 +128,11 @@ const performanceriskReducer = Map({
   year: [],
 });
 
-export default performanceriskReducer;
+export default function performanceriskReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case 'SOME_ACTION':
+      return state;
+    default:
+      return state;
+  }
+}

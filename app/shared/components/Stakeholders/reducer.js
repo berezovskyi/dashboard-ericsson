@@ -7,8 +7,7 @@
 import { Map } from 'immutable';
 import { Stakeholder } from '../../../records';
 
-
-const stakeholdersReducer = Map({
+const INITIAL_STATE = Map({
   ['12345-45678']: Stakeholder({
     id: '12345-45678',
     name: 'Raghu Nayyar',
@@ -115,4 +114,11 @@ const stakeholdersReducer = Map({
   }),
 });
 
-export default stakeholdersReducer;
+export default function stakeholderReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case 'UPDATE_STAKEHOLDERS_HIGHLIGHT':
+      return state.setIn([action.id, 'highlighted'], action.highlighted);
+    default:
+      return state;
+  }
+}

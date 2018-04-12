@@ -79,6 +79,7 @@ class RobotPerformanceChart extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     graphdata: state.get('robotperformance'),
   };
