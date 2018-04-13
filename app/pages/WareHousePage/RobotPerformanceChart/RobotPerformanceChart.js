@@ -5,14 +5,15 @@ import { connect } from 'react-redux';
 import { Bar } from '@nivo/bar';
 
 import Card from '../../../ui/Card/Card';
+import { getCurrentRoute } from '../../../utils/utils';
 
 import styles from './RobotPerformanceChart.css';
 
 class RobotPerformanceChart extends Component {
   render() {
-    const { id, graphdata } = this.props;
-    /* Change day to a parameter*/
-    const data = graphdata.get('day');
+    const { id, graphdata, navigation } = this.props;
+    const search = getCurrentRoute(navigation);
+    const data = graphdata.get(search.subroute.time);
     return (
       <Card title="Robot Performance Over Time" id={id}>
         <div className={styles.row}>
@@ -79,9 +80,9 @@ class RobotPerformanceChart extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     graphdata: state.get('robotperformance'),
+    navigation: state.get('route'),
   };
 }
 

@@ -1,12 +1,10 @@
 import { isFunction } from 'lodash';
+import qs from 'qs';
 
 export function getOriginalBodyPadding() {
   const style = window.getComputedStyle(document.body, null);
 
-  return parseInt(
-    (style && style.getPropertyValue('padding-right')) || 0,
-    10
-  );
+  return parseInt((style && style.getPropertyValue('padding-right')) || 0, 10);
 }
 
 export function setScrollbarWidth(padding) {
@@ -17,15 +15,15 @@ export function isBodyOverflowing() {
   return document.body.clientWidth < window.innerWidth;
 }
 
-
 export function conditionallyUpdateScrollbar() {
   const scrollbarWidth = getScrollbarWidth();
   // https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.6/js/src/modal.js#L433
-  const fixedContent = document.querySelectorAll('.fixed-top, .fixed-bottom, .is-fixed, .sticky-top')[0];
-  const bodyPadding = fixedContent ? parseInt(
-    fixedContent.style.paddingRight || 0,
-    10
-  ) : 0;
+  const fixedContent = document.querySelectorAll(
+    '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top',
+  )[0];
+  const bodyPadding = fixedContent
+    ? parseInt(fixedContent.style.paddingRight || 0, 10)
+    : 0;
 
   if (isBodyOverflowing()) {
     setScrollbarWidth(bodyPadding + scrollbarWidth);
@@ -52,7 +50,7 @@ export function getScrollbarWidth() {
  */
 export function omit(obj, omitKeys) {
   const result = {};
-  Object.keys(obj).forEach((key) => {
+  Object.keys(obj).forEach(key => {
     if (omitKeys.indexOf(key) === -1) {
       result[key] = obj[key];
     }
@@ -92,7 +90,9 @@ export function warnOnce(message) {
 export function deprecated(propType, explanation) {
   return function validate(props, propName, componentName, ...rest) {
     if (props[propName] !== null && typeof props[propName] !== 'undefined') {
-      warnOnce(`"${propName}" property of "${componentName}" has been deprecated.\n${explanation}`);
+      warnOnce(
+        `"${propName}" property of "${componentName}" has been deprecated.\n${explanation}`,
+      );
     }
 
     return propType(props, propName, componentName, ...rest);
@@ -102,7 +102,7 @@ export function deprecated(propType, explanation) {
 export function DOMElement(props, propName, componentName) {
   if (!(props[propName] instanceof Element)) {
     return new Error(
-      `Invalid prop ${propName} supplied to ${componentName}. Expected prop to be an instance of Element. Validation failed.`
+      `Invalid prop ${propName} supplied to ${componentName}. Expected prop to be an instance of Element. Validation failed.`,
     );
   }
 }
@@ -120,7 +120,9 @@ export function getTarget(target) {
 
     // Needs Fixing here.
     if (selection === null) {
-      throw new Error(`The target '${target}' could not be identified in the dom, tip: check spelling`);
+      throw new Error(
+        `The target '${target}' could not be identified in the dom, tip: check spelling`,
+      );
     }
     return selection;
   }
@@ -128,14 +130,26 @@ export function getTarget(target) {
   return target;
 }
 
+export function getCurrentRoute(param) {
+  if (param.location.search === '') {
+    return {
+      subroute: { time: 'day' },
+      url: param.location.pathname,
+    };
+  }
+  return {
+    subroute: qs.parse(param.location.search.substring(1)),
+    url: param.location.pathname,
+  };
+}
 
 /* eslint key-spacing: ["error", { afterColon: true, align: "value" }] */
 // These are all setup to match what is in the bootstrap _variables.scss
 // https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
 export const TransitionTimeouts = {
-  Fade:     150, // $transition-fade
+  Fade: 150, // $transition-fade
   Collapse: 350, // $transition-collapse
-  Modal:    300, // $modal-transition
+  Modal: 300, // $modal-transition
   Carousel: 600, // $carousel-transition
 };
 
@@ -160,17 +174,17 @@ export const TransitionPropTypeKeys = [
 
 export const TransitionStatuses = {
   ENTERING: 'entering',
-  ENTERED:  'entered',
-  EXITING:  'exiting',
-  EXITED:   'exited',
+  ENTERED: 'entered',
+  EXITING: 'exiting',
+  EXITED: 'exited',
 };
 
 export const keyCodes = {
-  esc:   27,
+  esc: 27,
   space: 32,
-  tab:   9,
-  up:    38,
-  down:  40,
+  tab: 9,
+  up: 38,
+  down: 40,
 };
 
 export const PopperPlacements = [
