@@ -13,19 +13,19 @@ class Sidebar extends Component { // eslint-disable-line react/prefer-stateless-
       <div className={styles.sidebarpanel}>
         <ul>
           <li>
-            <NavLink activeClassName={styles.active} to="/supplychain?time=day">
+            <NavLink activeClassName={styles.active} to="/supplychain">
               <SupplyChainIcon width={50} />
               <span>Supply Chain Level</span>
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName={styles.active} to="/warehouse?time=day">
+            <NavLink activeClassName={styles.active} to="/warehouse">
               <WarehouseIcon width={50} />
               <span>Warehouse Level</span>
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName={styles.active} to="/intellegentagent?time=day">
+            <NavLink activeClassName={styles.active} to="/intellegentagent">
               <IntellegentAgentIcon width={50} />
               <span>Intelligent Agent Level</span>
             </NavLink>

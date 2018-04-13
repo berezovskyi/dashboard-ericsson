@@ -131,7 +131,16 @@ export function getTarget(target) {
 }
 
 export function getCurrentRoute(param) {
-  return qs.parse(param.location.search.substring(1));
+  if (param.location.search === '') {
+    return {
+      subroute: { time: 'day' },
+      url: param.location.pathname,
+    };
+  }
+  return {
+    subroute: qs.parse(param.location.search.substring(1)),
+    url: param.location.pathname,
+  };
 }
 
 /* eslint key-spacing: ["error", { afterColon: true, align: "value" }] */
