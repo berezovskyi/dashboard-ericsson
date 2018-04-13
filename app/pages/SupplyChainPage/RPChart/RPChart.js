@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Line } from '@nivo/line';
 
+import { getCurrentRoute } from '../../../utils/utils';
 import Card from '../../../ui/Card/Card';
 import styles from './RPChart.css';
 
 class RPChart extends Component {
   render() {
-    const { id, graphdata } = this.props;
-    const data = graphdata.get('day');
+    const { id, graphdata, navigation } = this.props;
+    const search = getCurrentRoute(navigation);
+    const data = graphdata.get(search.subroute.time);
     return (
       <Card title="Profitability - Risk vs Time Curve" id={id}>
         <div className={styles.row}>
@@ -79,7 +81,8 @@ RPChart.propTypes = {
 function mapStateToProps(state) {
   return {
     graphdata: state.get('performancerisk'),
+    navigation: state.get('route'),
   };
-};
+}
 
 export default connect(mapStateToProps)(RPChart);

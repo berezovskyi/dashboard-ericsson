@@ -5,15 +5,11 @@ import styles from './Header.css';
 import { getCurrentRoute } from '../../utils/utils';
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const { navigation } = this.props;
     const search = getCurrentRoute(navigation);
     const subroute = search.subroute.time;
     const location = search.url;
-    console.log(location);
     return (
       <div className={styles.headerouter}>
         <div className={styles.headerinner}>
@@ -38,7 +34,6 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     navigation: state.get('route'),
   };
