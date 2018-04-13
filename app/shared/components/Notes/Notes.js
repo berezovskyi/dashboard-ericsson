@@ -24,10 +24,39 @@ class Notes extends React.Component {
     super(props);
     this._handleaddNoteModal = this._handleaddNoteModal.bind(this);
     this._handleallNotesModal = this._handleallNotesModal.bind(this);
+    this._handlesubmitNote = this._handlesubmitNote.bind(this);
+    this._handleChange = this._handleChange.bind(this);
     this.state = {
       addnotesModal: false,
       allnotesModal: false,
+      newnote: '',
     };
+  }
+
+  _handlesubmitNote(level) {
+    const { dispatch } = this.props;
+    /* TODO: Make this dynamic */
+    dispatch({
+      type: 'ADD_NOTE',
+      payload: {
+        timestamp: '2015-10-12',
+        type: level,
+        text: this.state.newnote,
+        author: 'Raghu Nayyar',
+        id: 'xxxx-xxxx-xxxx',
+        highlighted: true,
+      },
+    });
+    this.setState({
+      newnote: '',
+      addnotesModal: !this.state.addnotesModal,
+    });
+  }
+
+  _handleChange(e) {
+    this.setState({
+      newnote: e.target.value,
+    });
   }
 
   _handleaddNoteModal() {
@@ -45,7 +74,7 @@ class Notes extends React.Component {
   }
 
   render() {
-    const { id, type, name, notes } = this.props;
+    const { id, type, name, notes, newnote } = this.props;
     const title = 'Highlighted Notes for ' + name;
 
     return (
@@ -57,7 +86,11 @@ class Notes extends React.Component {
         {notes.size > 0 ? <NotesList notes={notes} type={type} /> : <NoNotes />}
         <div className={styles.footer}>
           {notes.size > 0
-            ? <Button size="medium" color="primary" onClick={this._handleallNotesModal}>
+            ? <Button
+                size="medium"
+                color="primary"
+                onClick={this._handleallNotesModal}
+              >
                 View all Notes
               </Button>
             : null}
@@ -74,19 +107,24 @@ class Notes extends React.Component {
           isOpen={this.state.addnotesModal}
           toggle={this._handleaddNoteModal}
         >
-          <ModalHeader toggle={this._handleaddNoteModal}>Add Notes to {name}</ModalHeader>
+          <ModalHeader toggle={this._handleaddNoteModal}>
+            Add Notes to {name}
+          </ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
                 <Label>
                   Add Note
                 </Label>
-                <Textarea />
+                <Textarea value={newnote} onChange={this._handleChange} />
               </FormGroup>
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this._handleaddNoteModal}>
+            <Button
+              color="primary"
+              onClick={() => this._handlesubmitNote(type)}
+            >
               Add
             </Button>
             {' '}

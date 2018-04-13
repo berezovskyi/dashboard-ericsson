@@ -86,6 +86,9 @@ export default function notesReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'UPDATE_NOTES_HIGHLIGHT':
       return state.setIn([action.id, 'highlighted'], action.highlighted);
+    case 'ADD_NOTE': {
+      return state.setIn([action.payload.id], action.payload);
+    }
     default:
       return state;
   }

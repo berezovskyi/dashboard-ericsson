@@ -7,7 +7,7 @@ class Textarea extends React.Component {
   render() {
 
     return (
-      <textarea className={styles.textarea} />
+      <textarea className={styles.textarea} onChange={this.props.onChange} />
     );
   }
 }
@@ -15,6 +15,7 @@ class Textarea extends React.Component {
 Textarea.propTypes = {
   rows: PropTypes.number,
   resize: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 
 export default Textarea;
