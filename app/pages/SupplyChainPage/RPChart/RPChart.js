@@ -3,33 +3,59 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Line } from '@nivo/line';
 
+import { getCurrentRoute } from '../../../utils/utils';
 import Card from '../../../ui/Card/Card';
 import styles from './RPChart.css';
 
+const COLORS = ['#2B9062', '#F5515F'];
+
 class RPChart extends Component {
+  constructor(props) {
+    super(props);
+    this._handlelegend = this._handlelegend.bind(this);
+  }
+
+  _handlelegend(data) {
+    switch (data) {
+      case 'day':
+        return 'Time (24h)';
+      case 'week':
+        return 'Time (days)';
+      case 'month':
+        return 'Time (month)';
+      case 'year':
+        return 'Time (years)';
+      default:
+        return 'Time';
+    }
+  }
   render() {
-    const { id, graphdata } = this.props;
-    const data = graphdata.get('day');
+    const { id, graphdata, navigation } = this.props;
+    const search = getCurrentRoute(navigation);
+    const data = graphdata.get(search.subroute.time);
+    const legend = this._handlelegend(search.subroute.time);
     return (
       <Card title="Profitability - Risk vs Time Curve" id={id}>
         <div className={styles.row}>
           <div className={styles.oneFull}>
             <Line
               data={data}
+              colors={COLORS}
               margin={{
                 top: 50,
                 right: 110,
                 bottom: 50,
                 left: 60,
               }}
+              lineWidth="1"
               minY="auto"
-              curve="monotoneX"
+              curve="linear"
               axisBottom={{
                 orient: 'bottom',
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'Time (24h)',
+                legend: legend,
                 legendOffset: 50,
                 legendPosition: 'center',
               }}
@@ -79,7 +105,8 @@ RPChart.propTypes = {
 function mapStateToProps(state) {
   return {
     graphdata: state.get('performancerisk'),
+    navigation: state.get('route'),
   };
-};
+}
 
 export default connect(mapStateToProps)(RPChart);
