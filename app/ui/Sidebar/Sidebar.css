@@ -4,7 +4,7 @@
   height: 100%;
   left: 0;
   background: #14141c;
-  font-family: "lato", sans-serif;
+  font-family: Lato;
   top: 0;
 }
 
@@ -42,8 +42,4 @@
 .sidebarpanel .active svg g,
 .sidebarpanel .active svg path {
   fill: #FFFFFF;
-}
-
-.sidebarpanel li.active span {
-  color: white;
 }

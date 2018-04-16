@@ -48,12 +48,3 @@
   background: #4D5AFF;
   color: white;
 }
-
-.tabs li a {
-  color: #aaa;
-  text-decoration: none;
-}
-
-.tabs li.active a {
-  color: #ffffff;
-}

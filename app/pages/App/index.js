@@ -28,6 +28,7 @@ import WareHousePage from '../../pages/WareHousePage';
 import styles from './App.css';
 import Header from '../../ui/Header/Header';
 
+
 export default function App() {
   return (
     <main>
@@ -37,18 +38,9 @@ export default function App() {
         <div className={styles.innercontent}>
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route
-              path="/supplychain/"
-              component={SupplyChainPage}
-            />
-            <Route
-              path="/warehouse/"
-              component={WareHousePage}
-            />
-            <Route
-              path="/intellegentagent/"
-              component={IntelligentAgentPage}
-            />
+            <Route path="/supplychain" component={SupplyChainPage} />
+            <Route path="/warehouse" component={WareHousePage} />
+            <Route path="/intellegentagent" component={IntelligentAgentPage} />
             <Route path="" component={NotFoundPage} />
           </Switch>
         </div>

@@ -1,31 +1,16 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
 import styles from './Header.css';
-import { getCurrentRoute } from '../../utils/utils';
 
-class Header extends Component {
+class Header extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { navigation } = this.props;
-    const search = getCurrentRoute(navigation);
-    const subroute = search.subroute.time;
-    const location = search.url;
     return (
       <div className={styles.headerouter}>
         <div className={styles.headerinner}>
           <ul className={styles.tabs}>
-            <li className={subroute === 'day' ? styles.active : ''}>
-              <NavLink to={location + '?time=day'}>Daily</NavLink>
-            </li>
-            <li className={subroute === 'week' ? styles.active : ''}>
-              <NavLink to={location + '?time=week'}>Weekly</NavLink>
-            </li>
-            <li className={subroute === 'month' ? styles.active : ''}>
-              <NavLink to={location + '?time=month'}>Monthly</NavLink>
-            </li>
-            <li className={subroute === 'year' ? styles.active : ''}>
-              <NavLink to={location + '?time=year'}>Yearly</NavLink>
-            </li>
+            <li className={styles.active}>Daily</li>
+            <li>Weekly</li>
+            <li>Monthly</li>
+            <li>Yearly</li>
           </ul>
         </div>
       </div>
@@ -33,10 +18,4 @@ class Header extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    navigation: state.get('route'),
-  };
-}
-
-export default connect(mapStateToProps)(Header);
+export default Header;
