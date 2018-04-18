@@ -57,3 +57,16 @@
 .tabs li.active a {
   color: #ffffff;
 }
+
+.refreshcontainer {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.time {
+  margin-top:0;
+  font-size: 14px;
+  font-weight: 300;
+  margin-right: 20px;
+}
