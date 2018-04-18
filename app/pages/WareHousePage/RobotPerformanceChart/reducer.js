@@ -4,203 +4,423 @@
 *
 */
 import { Map } from 'immutable';
+import { Robot } from '../../../records';
 
 const INITIAL_STATE = new Map({
-  day: [
-    {
-      time: '0000',
-      arm1: 20,
-      arm2: 34,
-      robot1: 19,
+  ['12345-12345']: new Robot({
+    id: '12345-12345',
+    name: 'Arm 1',
+    performance: {
+      day: [
+        {
+          time: '0000',
+          value: 20,
+        },
+        {
+          time: '0400',
+          value: 24,
+        },
+        {
+          time: '0800',
+          value: 18,
+        },
+        {
+          time: '1200',
+          value: 45,
+        },
+        {
+          time: '1600',
+          value: 11,
+        },
+        {
+          time: '2000',
+          value: 0,
+        },
+        {
+          time: '2359',
+          value: 0,
+        },
+      ],
+      week: [
+        {
+          time: 'Monday',
+          value: 20,
+        },
+        {
+          time: 'Tuesday',
+          value: 24,
+        },
+        {
+          time: 'Wednesday',
+          value: 18,
+        },
+        {
+          time: 'Thursday',
+          value: 45,
+        },
+        {
+          time: 'Friday',
+          value: 11,
+        },
+        {
+          time: 'Saturday',
+          value: 0,
+        },
+        {
+          time: 'Sunday',
+          value: 0,
+        },
+      ],
+      month: [
+        {
+          time: 'Jan',
+          value: 20,
+        },
+        {
+          time: 'Feb',
+          value: 24,
+        },
+        {
+          time: 'Mar',
+          value: 18,
+        },
+        {
+          time: 'Apr',
+          value: 45,
+        },
+        {
+          time: 'May',
+          value: 11,
+        },
+        {
+          time: 'Jun',
+          value: 0,
+        },
+        {
+          time: 'Jul',
+          value: 0,
+        },
+        {
+          time: 'Aug',
+          value: 0,
+        },
+        {
+          time: 'Sep',
+          value: 0,
+        },
+        {
+          time: 'Oct',
+          value: 0,
+        },
+        {
+          time: 'Nov',
+          value: 0,
+        },
+        {
+          time: 'Dec',
+          value: 0,
+        },
+      ],
+      year: [
+        {
+          time: '2013',
+          value: 20,
+        },
+        {
+          time: '2014',
+          value: 24,
+        },
+        {
+          time: '2015',
+          value: 18,
+        },
+        {
+          time: '2016',
+          value: 45,
+        },
+        {
+          time: '2017',
+          value: 11,
+        },
+      ],
     },
-    {
-      time: '0400',
-      arm1: 24,
-      arm2: 44,
-      robot1: 17,
+  }),
+  ['12345-12346']: new Robot({
+    id: '12345-12346',
+    name: 'Arm 2',
+    performance: {
+      day: [
+        {
+          time: '0000',
+          value: 34,
+        },
+        {
+          time: '0400',
+          value: 10,
+        },
+        {
+          time: '0800',
+          value: 9,
+        },
+        {
+          time: '1200',
+          value: 11,
+        },
+        {
+          time: '1600',
+          value: 23,
+        },
+        {
+          time: '2000',
+          value: 0,
+        },
+        {
+          time: '2359',
+          value: 0,
+        },
+      ],
+      week: [
+        {
+          time: 'Monday',
+          value: 20,
+        },
+        {
+          time: 'Tuesday',
+          value: 24,
+        },
+        {
+          time: 'Wednesday',
+          value: 18,
+        },
+        {
+          time: 'Thursday',
+          value: 45,
+        },
+        {
+          time: 'Friday',
+          value: 11,
+        },
+        {
+          time: 'Saturday',
+          value: 0,
+        },
+        {
+          time: 'Sunday',
+          value: 0,
+        },
+      ],
+      month: [
+        {
+          time: 'Jan',
+          value: 20,
+        },
+        {
+          time: 'Feb',
+          value: 24,
+        },
+        {
+          time: 'Mar',
+          value: 18,
+        },
+        {
+          time: 'Apr',
+          value: 45,
+        },
+        {
+          time: 'May',
+          value: 11,
+        },
+        {
+          time: 'Jun',
+          value: 0,
+        },
+        {
+          time: 'Jul',
+          value: 0,
+        },
+        {
+          time: 'Aug',
+          value: 0,
+        },
+        {
+          time: 'Sep',
+          value: 0,
+        },
+        {
+          time: 'Oct',
+          value: 0,
+        },
+        {
+          time: 'Nov',
+          value: 0,
+        },
+        {
+          time: 'Dec',
+          value: 0,
+        },
+      ],
+      year: [
+        {
+          time: '2013',
+          value: 7,
+        },
+        {
+          time: '2014',
+          value: 14,
+        },
+        {
+          time: '2015',
+          value: 45,
+        },
+        {
+          time: '2016',
+          value: 34,
+        },
+        {
+          time: '2017',
+          value: 18,
+        },
+      ],
     },
-    {
-      time: '0800',
-      arm1: 18,
-      arm2: 51,
-      robot1: 16,
+  }),
+  ['12345-12367']: new Robot({
+    id: '12345-12367',
+    name: 'Robot 1',
+    performance: {
+      day: [
+        {
+          time: '0000',
+          value: 34,
+        },
+        {
+          time: '0400',
+          value: 10,
+        },
+        {
+          time: '0800',
+          value: 9,
+        },
+        {
+          time: '1200',
+          value: 11,
+        },
+        {
+          time: '1600',
+          value: 23,
+        },
+        {
+          time: '2000',
+          value: 0,
+        },
+        {
+          time: '2359',
+          value: 0,
+        },
+      ],
+      week: [
+        {
+          time: 'Monday',
+          value: 20,
+        },
+        {
+          time: 'Tuesday',
+          value: 24,
+        },
+        {
+          time: 'Wednesday',
+          value: 18,
+        },
+        {
+          time: 'Thursday',
+          value: 45,
+        },
+        {
+          time: 'Friday',
+          value: 11,
+        },
+        {
+          time: 'Saturday',
+          value: 0,
+        },
+        {
+          time: 'Sunday',
+          value: 0,
+        },
+      ],
+      month: [
+        {
+          time: 'Jan',
+          value: 20,
+        },
+        {
+          time: 'Feb',
+          value: 24,
+        },
+        {
+          time: 'Mar',
+          value: 18,
+        },
+        {
+          time: 'Apr',
+          value: 45,
+        },
+        {
+          time: 'May',
+          value: 11,
+        },
+        {
+          time: 'Jun',
+          value: 0,
+        },
+        {
+          time: 'Jul',
+          value: 0,
+        },
+        {
+          time: 'Aug',
+          value: 0,
+        },
+        {
+          time: 'Sep',
+          value: 0,
+        },
+        {
+          time: 'Oct',
+          value: 0,
+        },
+        {
+          time: 'Nov',
+          value: 0,
+        },
+        {
+          time: 'Dec',
+          value: 0,
+        },
+      ],
+      year: [
+        {
+          time: '2013',
+          value: 7,
+        },
+        {
+          time: '2014',
+          value: 14,
+        },
+        {
+          time: '2015',
+          value: 45,
+        },
+        {
+          time: '2016',
+          value: 34,
+        },
+        {
+          time: '2017',
+          value: 18,
+        },
+      ],
     },
-    {
-      time: '1200',
-      arm1: 45,
-      arm2: 37,
-      robot1: 4,
-    },
-    {
-      time: '1600',
-      arm1: 11,
-      arm2: 38,
-      robot1: 21,
-    },
-    {
-      time: '2000',
-      arm1: 0,
-      arm2: 0,
-      robot1: 0,
-    },
-    {
-      time: '2359',
-      arm1: 0,
-      arm2: 0,
-      robot1: 0,
-    },
-  ],
-
-  week: [
-    {
-      time: 'Monday',
-      arm1: 20,
-      arm2: 34,
-      robot1: 19,
-    },
-    {
-      time: 'Tuesday',
-      arm1: 24,
-      arm2: 44,
-      robot1: 17,
-    },
-    {
-      time: 'Wednesday',
-      arm1: 18,
-      arm2: 51,
-      robot1: 16,
-    },
-    {
-      time: 'Thursday',
-      arm1: 45,
-      arm2: 37,
-      robot1: 4,
-    },
-    {
-      time: 'Friday',
-      arm1: 11,
-      arm2: 38,
-      robot1: 21,
-    },
-    {
-      time: 'Saturday',
-      arm1: 0,
-      arm2: 0,
-      robot1: 0,
-    },
-    {
-      time: 'Sunday',
-      arm1: 0,
-      arm2: 0,
-      robot1: 0,
-    },
-  ],
-  month: [
-    {
-      time: 'January',
-      arm1: 20,
-      arm2: 34,
-      robot1: 19,
-    },
-    {
-      time: 'February',
-      arm1: 24,
-      arm2: 44,
-      robot1: 17,
-    },
-    {
-      time: 'March',
-      arm1: 18,
-      arm2: 51,
-      robot1: 16,
-    },
-    {
-      time: 'April',
-      arm1: 45,
-      arm2: 37,
-      robot1: 4,
-    },
-    {
-      time: 'May',
-      arm1: 11,
-      arm2: 38,
-      robot1: 21,
-    },
-    {
-      time: 'June',
-      arm1: 11,
-      arm2: 12,
-      robot1: 25,
-    },
-    {
-      time: 'July',
-      arm1: 10,
-      arm2: 17,
-      robot1: 10,
-    },
-    {
-      time: 'August',
-      arm1: 20,
-      arm2: 34,
-      robot1: 19,
-    },
-    {
-      time: 'September',
-      arm1: 24,
-      arm2: 44,
-      robot1: 17,
-    },
-    {
-      time: 'October',
-      arm1: 18,
-      arm2: 51,
-      robot1: 16,
-    },
-    {
-      time: 'November',
-      arm1: 20,
-      arm2: 34,
-      robot1: 19,
-    },
-    {
-      time: 'December',
-      arm1: 24,
-      arm2: 44,
-      robot1: 17,
-    },
-  ],
-  year: [
-    {
-      time: 2013,
-      arm1: 20,
-      arm2: 34,
-      robot1: 19,
-    },
-    {
-      time: 2014,
-      arm1: 24,
-      arm2: 44,
-      robot1: 17,
-    },
-    {
-      time: 2015,
-      arm1: 18,
-      arm2: 51,
-      robot1: 16,
-    },
-    {
-      time: 2016,
-      arm1: 45,
-      arm2: 37,
-      robot1: 4,
-    },
-    {
-      time: 2017,
-      arm1: 11,
-      arm2: 38,
-      robot1: 21,
-    },
-  ],
+  }),
 });
 
 export default function robotperformanceReducer(state = INITIAL_STATE, action) {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Bar } from '@nivo/bar';
-
+import Select from 'react-select';
 import Card from '../../../ui/Card/Card';
 import { getCurrentRoute } from '../../../utils/utils';
 
@@ -12,10 +12,18 @@ import styles from './RobotPerformanceChart.css';
 class RobotPerformanceChart extends Component {
   constructor(props) {
     super(props);
-    this._handlelegend = this._handlelegend.bind(this);
+    this._handleLegend = this._handleLegend.bind(this);
+    this._handleChange = this._handleChange.bind(this);
+    this.state = {
+      selectedOption: '',
+    };
   }
 
-  _handlelegend(data) {
+  _handleChange(selectedOption) {
+    this.setState({ selectedOption });
+  }
+
+  _handleLegend(data) {
     switch (data) {
       case 'day':
         return 'Time (24h)';
@@ -31,17 +39,37 @@ class RobotPerformanceChart extends Component {
   }
 
   render() {
-    const { id, graphdata, navigation } = this.props;
+    const { id, keys, robotid, graphdata, navigation } = this.props;
+    const { selectedOption } = this.state;
     const search = getCurrentRoute(navigation);
-    const data = graphdata.get(search.subroute.time);
-    const legend = this._handlelegend(search.subroute.time);
+    const legend = this._handleLegend(search.subroute.time);
+    const datafrom0 = graphdata.get(robotid[0]).performance[
+      search.subroute.time
+    ];
+    const datafrom1 = graphdata.get(robotid[1]).performance[
+      search.subroute.time
+    ];
+    const datafrom2 = graphdata.get(robotid[2]).performance[
+      search.subroute.time
+    ];
+    const data1 = [...datafrom0 , ...datafrom1,...datafrom2];
+    console.log(data1);
     return (
       <Card title="Robot Performance Over Time" id={id}>
         <div className={styles.row}>
           <div className={styles.oneFull}>
+            <Select
+              name="form-field-name"
+              value={selectedOption}
+              onChange={this._handleChange}
+              options={[
+                { value: 'one', label: 'One' },
+                { value: 'two', label: 'Two' },
+              ]}
+            />
             <Bar
-              data={data}
-              keys={['arm1', 'arm2', 'robot1']}
+              data={data1}
+              keys={keys}
               indexBy="time"
               margin={{
                 top: 50,
@@ -103,12 +131,19 @@ class RobotPerformanceChart extends Component {
 function mapStateToProps(state) {
   return {
     graphdata: state.get('robotperformance'),
+    keys: state.get('robotperformance').map(row => row.name).toArray(),
+    robotid: state.get('robotperformance').map(row => row.id).toArray(),
     navigation: state.get('route'),
   };
 }
 
 RobotPerformanceChart.propTypes = {
   id: PropTypes.string,
+  legend: PropTypes.array,
+};
+
+RobotPerformanceChart.defaultProps = {
+  legend: [],
 };
 
 export default connect(mapStateToProps)(RobotPerformanceChart);

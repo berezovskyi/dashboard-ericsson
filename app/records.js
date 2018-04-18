@@ -51,12 +51,14 @@ const Robot = new Record({
   name: '',
   value: 0,
   performance: {
-    value: '',
-    diff: '',
+    day: [],
+    week: [],
+    year: [],
   },
   secpertask: {
-    time: '',
-    diff: '',
+    day: [],
+    week: [],
+    year: [],
   },
 });
 
