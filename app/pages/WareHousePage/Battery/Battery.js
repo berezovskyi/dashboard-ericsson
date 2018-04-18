@@ -15,11 +15,9 @@ class Battery extends Component {
   }
 
   render() {
-    const { battery } = this.props;
-
-    console.log(battery);
+    const { battery, id } = this.props;
     return (
-      <Card title="Highlighted Robot State" helpText="The data relevant to the Robot Batteries">
+      <Card title="Highlighted Robot State" helpText="The data relevant to the Robot Batteries" id={id}>
         <SingleBattery battery={battery} total={3} />
         <Button size="medium" color="primary">View all</Button>
       </Card>

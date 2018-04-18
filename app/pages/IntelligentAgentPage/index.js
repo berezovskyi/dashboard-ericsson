@@ -13,7 +13,7 @@ class IntelligentAgentPage extends React.Component { // eslint-disable-line reac
       <div className={styles.fullPage}>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
-            <IAChart />
+            <IAChart id="iaChart" />
           </div>
           <div className={styles.oneHalf}>
             <Robot id="robot" />
@@ -31,7 +31,7 @@ class IntelligentAgentPage extends React.Component { // eslint-disable-line reac
             />
           </div>
           <div className={styles.oneHalf}>
-            <Notes type="ia" name="Intelligent Agent Level" />
+            <Notes id="ia" type="ia" name="Intelligent Agent Level" />
           </div>
         </div>
       </div>

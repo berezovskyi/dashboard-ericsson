@@ -21,9 +21,9 @@ class Robot extends Component { // eslint-disable-line react/prefer-stateless-fu
   }
 
   render() {
-    const { robot } = this.props;
+    const { robot, id } = this.props;
     return (
-      <Card title="Intelligent Agents" helpText="The data relevant to the robots">
+      <Card title="Intelligent Agents" helpText="The data relevant to the robots" id={id}>
         <SingleRobot robots={robot} />
         <Button size="medium" color="primary">View all</Button>
       </Card>

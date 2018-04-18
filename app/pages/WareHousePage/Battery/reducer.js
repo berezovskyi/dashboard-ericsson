@@ -13,11 +13,11 @@ const INITIAL_STATE = Map({
     name: 'Robot Arm 1',
     from: {
       name: 'conveyor belt 1',
-      id: '',
+      id: '11111-22222',
     },
     to: {
       name: 'Charge Station 7',
-      id: '',
+      id: '11111-33333',
     },
     batterystatus: {
       value: 45,
@@ -63,11 +63,11 @@ const INITIAL_STATE = Map({
     name: 'Robot Arm 3',
     from: {
       name: 'Conveyor Belt 3',
-      id: '',
+      id: '11111-11111',
     },
     to: {
       name: 'Charge Station 2',
-      id: '',
+      id: '00000-33333',
     },
     batterystatus: {
       value: 90,
@@ -88,11 +88,11 @@ const INITIAL_STATE = Map({
     name: 'Robot Arm 4',
     from: {
       name: 'Conveyor Belt 4',
-      id: '',
+      id: '11111-43333',
     },
     to: {
       name: 'Charge Station 3',
-      id: '',
+      id: '11111-53333',
     },
     batterystatus: {
       value: 100,

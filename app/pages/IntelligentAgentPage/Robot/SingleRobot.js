@@ -80,8 +80,6 @@ class SingleRobot extends React.Component {
       id,
     } = this.state.data;
 
-    console.log(robots);
-
     const differenceClass = className(styles.modaldiff, styles.modalincrease);
 
     return (

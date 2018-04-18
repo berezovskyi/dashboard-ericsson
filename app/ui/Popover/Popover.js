@@ -132,8 +132,6 @@ class Popover extends React.Component {
       styles[`popover-${placement}`],
     );
 
-    console.log(placement);
-
     return (
       <PopperContent
         className={popoverOuterClasses}

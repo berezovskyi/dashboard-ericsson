@@ -42,6 +42,7 @@ class NotesListModal extends Component {
               </li>
             );
           }
+          return null;
         })}
       </ul>
     );

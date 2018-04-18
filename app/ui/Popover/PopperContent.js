@@ -32,7 +32,6 @@ class PopperContent extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.isOpen);
     if (this.props.isOpen !== prevProps.isOpen) {
       this.handleProps();
     } else if (this._element) {

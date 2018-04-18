@@ -22,10 +22,10 @@ class Truck extends React.Component {
   }
 
   render() {
-    const { truck } = this.props;
+    const { truck, id } = this.props;
 
     return (
-      <Card title="Trucks" helpText="The data relevant to the trucks">
+      <Card title="Trucks" helpText="The data relevant to the trucks" id={id}>
         <SingleTruck trucks={truck} total={3} />
         <Button size="medium" color="primary">View all</Button>
       </Card>

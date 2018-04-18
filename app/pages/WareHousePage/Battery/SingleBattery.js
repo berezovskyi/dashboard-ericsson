@@ -91,8 +91,6 @@ class SingleBattery extends React.Component {
   render() {
     const { battery } = this.props;
 
-    console.log(battery);
-
     const {
       value,
       id,
@@ -103,8 +101,6 @@ class SingleBattery extends React.Component {
       total,
       batterystatus,
     } = this.state.data;
-
-    console.log(this.state.data);
 
     return (
       <div className={styles.singlecontainer}>

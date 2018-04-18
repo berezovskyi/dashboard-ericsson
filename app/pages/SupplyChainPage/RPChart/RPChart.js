@@ -47,7 +47,7 @@ class RPChart extends Component {
                 bottom: 50,
                 left: 60,
               }}
-              lineWidth="1"
+              lineWidth={1}
               minY="auto"
               curve="linear"
               axisBottom={{

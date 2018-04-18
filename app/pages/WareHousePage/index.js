@@ -14,7 +14,7 @@ class WareHousePage extends React.Component { // eslint-disable-line react/prefe
       <div className={styles.fullPage}>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
-            <RobotPerformanceChart graphdata={graphdata} />
+            <RobotPerformanceChart graphdata={graphdata} id="robotperformanceChart" />
           </div>
           <div className={styles.oneHalf}>
             <Battery id="battery" />
@@ -29,7 +29,7 @@ class WareHousePage extends React.Component { // eslint-disable-line react/prefe
             <Stakeholders id="stakeholder" type="wh" name="Warehouse Level" />
           </div>
           <div className={styles.oneHalf}>
-            <Notes type="wh" name="Warehouse Level" />
+            <Notes type="wh" name="Warehouse Level" id="wh" />
           </div>
         </div>
       </div>

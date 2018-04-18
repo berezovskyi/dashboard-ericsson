@@ -62,7 +62,7 @@ Card.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string.isRequired,
   helpText: PropTypes.string,
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
 };
 
 export default Card;
