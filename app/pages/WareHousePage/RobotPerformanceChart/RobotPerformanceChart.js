@@ -10,10 +10,31 @@ import { getCurrentRoute } from '../../../utils/utils';
 import styles from './RobotPerformanceChart.css';
 
 class RobotPerformanceChart extends Component {
+  constructor(props) {
+    super(props);
+    this._handlelegend = this._handlelegend.bind(this);
+  }
+
+  _handlelegend(data) {
+    switch (data) {
+      case 'day':
+        return 'Time (24h)';
+      case 'week':
+        return 'Time (days)';
+      case 'month':
+        return 'Time (month)';
+      case 'year':
+        return 'Time (years)';
+      default:
+        return 'Time';
+    }
+  }
+
   render() {
     const { id, graphdata, navigation } = this.props;
     const search = getCurrentRoute(navigation);
     const data = graphdata.get(search.subroute.time);
+    const legend = this._handlelegend(search.subroute.time);
     return (
       <Card title="Robot Performance Over Time" id={id}>
         <div className={styles.row}>
@@ -36,9 +57,9 @@ class RobotPerformanceChart extends Component {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'Time (24h)',
+                legend: legend,
                 legendPosition: 'center',
-                legendOffset: 50,
+                legendOffset: 40,
               }}
               axisLeft={{
                 orient: 'left',
