@@ -82,9 +82,32 @@
   lost-column: 1/6;
 }
 
-.text {
-  font-size: 12px;
+.oneFull {
+  lost-column: 1/1;
+}
+
+.text, .text-modal {
   display: block;
   text-align: right;
   color: #aaa;
+}
+
+.text {
+  font-size: 12px;
+}
+
+.text-modal {
+  font-size: 10px;
+}
+
+.oneTruck > div {
+  margin: 10px 0;
+}
+
+.oneTruck:last-child {
+  margin-bottom: 0;
+}
+
+.checkboxTruck {
+  text-align: right;
 }

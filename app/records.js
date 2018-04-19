@@ -44,6 +44,7 @@ const Truck = new Record({
     value: '',
     diff: '',
   },
+  highlighted: false,
 });
 
 const Robot = new Record({

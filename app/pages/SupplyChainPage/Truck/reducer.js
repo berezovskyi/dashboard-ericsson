@@ -22,6 +22,7 @@ const INITIA_STATE = Map({
       value: '65',
       diff: '2',
     },
+    highlighted: false,
   }),
   ['12341-41234']: Truck({
     id: '12341-41234',
@@ -37,6 +38,7 @@ const INITIA_STATE = Map({
       value: '51',
       diff: '3',
     },
+    highlighted: false,
   }),
   ['12341-41235']: Truck({
     id: '12341-41235',
@@ -52,6 +54,7 @@ const INITIA_STATE = Map({
       value: '45',
       diff: '1',
     },
+    highlighted: true,
   }),
   ['12341-41236']: Truck({
     id: '12341-41236',
@@ -67,6 +70,7 @@ const INITIA_STATE = Map({
       value: '25',
       diff: '5',
     },
+    highlighted: false,
   }),
 });
 
