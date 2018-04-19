@@ -2,7 +2,6 @@
   margin-bottom: 10px;
 }
 
-
 .row {
   lost-center: 100%;
 }
@@ -74,9 +73,32 @@
   lost-column: 1/6;
 }
 
-.text {
-  font-size: 12px;
+.text, .text-modal {
   display: block;
   text-align: right;
   color: #aaa;
+}
+
+.text {
+  font-size: 12px;
+}
+
+.text-modal {
+  font-size: 10px;
+}
+
+.oneFull {
+  lost-column: 1/1;
+}
+
+.oneRobot > div {
+  margin: 10px 0;
+}
+
+.oneRobot:last-child {
+  margin-bottom: 0;
+}
+
+.checkboxRobot {
+  text-align: right;
 }
