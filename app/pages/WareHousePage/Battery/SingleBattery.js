@@ -102,121 +102,127 @@ class SingleBattery extends React.Component {
       batterystatus,
     } = this.state.data;
 
-    return (
-      <div className={styles.singlecontainer}>
-        {battery.valueSeq().filter((i, index) => index < 2).map(row => (
-          <div key={row.id}>
-            <div className={styles.row}>
-              <h4 className={styles.title}>
-                {row.name}
-              </h4>
-              <div className={styles.fiveSixth}>
-                <Progress value={row.timetoreturn} />
-              </div>
-              <div className={styles.oneSixth}>
-                <span className={styles.text}>
-                  {row.timetoreturn}{' min left'}
-                </span>
-              </div>
-            </div>
-            <div className={styles.row}>
-              <Button
-                size="medium"
-                color="secondary"
-                onClick={() => this._handlebatteryinfoModal(row)}
-              >
-                View more on {row.name}
-              </Button>
-            </div>
-          </div>
-        ))}
-        <Modal
-          isOpen={this.state.batteryModal}
-          toggle={this._handlebatteryinfoModal}
-        >
-          <ModalHeader toggle={this._handlebatteryinfoModal}>
-            Battery Details
-          </ModalHeader>
-          <ModalBody>
-            <div className={styles.modalprogress}>
-              <h3 className={styles.progresstitle}>
-                Robot Info
-              </h3>
-              <Alert color="primary">
-                <p>
-                  <strong>Name: </strong><span>{name}</span>
-                </p>
-                <p>
-                  <strong>ID: </strong><span>{id}</span>
-                </p>
-                <p>
-                  <strong>From: </strong><span>{from.name}</span>
-                </p>
-                <p>
-                  <strong>To: </strong><span>{to.name}</span>
-                </p>
-              </Alert>
-              <h4 className={styles.progresstitle}>
-                Time to Return
-              </h4>
+    return battery.valueSeq().map(row => {
+      if (row.highlighted) {
+        return (
+          <div className={styles.singlecontainer} key={row.id}>
+            <div>
               <div className={styles.row}>
+                <h4 className={styles.title}>
+                  {row.name}
+                </h4>
                 <div className={styles.fiveSixth}>
-                  <Progress value={value} />
+                  <Progress value={row.timetoreturn} />
                 </div>
                 <div className={styles.oneSixth}>
                   <span className={styles.text}>
-                    {value}{' min left'}
+                    {row.timetoreturn}{' min left'}
                   </span>
                 </div>
               </div>
-            </div>
-            <div className={styles.row}>
-              <div className={styles.oneHalf}>
-                <h4 className={styles.modaltitle}>Battery Remaining</h4>
-                <p className={styles.modaldescription}>
-                  This is what the fuzz is about. This is some really cool description about the battery.
-                </p>
-                <div className={styles.modalbox}>
-                  {this.batteryContainer(batterystatus)}
-                  <h1 className={styles.modalboxtitle}>
-                    {batterystatus.value}{'%'}
-                  </h1>
-                </div>
-              </div>
-              <div className={styles.oneHalf}>
-                <h4 className={styles.modaltitle}>Performance</h4>
-                <p className={styles.modaldescription}>
-                  This is what the fuzz is about. This is some really cool description about the truck.
-                </p>
-                <div className={styles.modalbox}>
-                  <img
-                    src={performanceIcon}
-                    alt="The performance index"
-                    width={64}
-                  />
-                  <h1 className={styles.modalboxtitle}>
-                    {performance.value}{'%'}
-                  </h1>
-                  <p>
-                    {this.diffContainer(total.diff)}
-                    <span className={styles.modaltime}>14:45</span>
-                  </p>
-                </div>
+              <div className={styles.row}>
+                <Button
+                  size="medium"
+                  color="secondary"
+                  onClick={() => this._handlebatteryinfoModal(row)}
+                >
+                  View more on {row.name}
+                </Button>
               </div>
             </div>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={this._handlebatteryinfoModal}>
-              Close
-            </Button>
-            {' '}
-            <Button color="primary" onClick={this._handlebatteryinfoModal}>
-              Update
-            </Button>
-          </ModalFooter>
-        </Modal>
-      </div>
-    );
+            <Modal
+              isOpen={this.state.batteryModal}
+              toggle={this._handlebatteryinfoModal}
+            >
+              <ModalHeader toggle={this._handlebatteryinfoModal}>
+                Battery Details
+              </ModalHeader>
+              <ModalBody>
+                <div className={styles.modalprogress}>
+                  <h3 className={styles.progresstitle}>
+                    Robot Info
+                  </h3>
+                  <Alert color="primary">
+                    <p>
+                      <strong>Name: </strong><span>{name}</span>
+                    </p>
+                    <p>
+                      <strong>ID: </strong><span>{id}</span>
+                    </p>
+                    <p>
+                      <strong>From: </strong><span>{from.name}</span>
+                    </p>
+                    <p>
+                      <strong>To: </strong><span>{to.name}</span>
+                    </p>
+                  </Alert>
+                  <h4 className={styles.progresstitle}>
+                    Time to Return
+                  </h4>
+                  <div className={styles.row}>
+                    <div className={styles.fiveSixth}>
+                      <Progress value={value} />
+                    </div>
+                    <div className={styles.oneSixth}>
+                      <span className={styles.text}>
+                        {value}{' min left'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.oneHalf}>
+                    <h4 className={styles.modaltitle}>Battery Remaining</h4>
+                    <p className={styles.modaldescription}>
+                      This is what the fuzz is about. This is some really cool description about the battery.
+                    </p>
+                    <div className={styles.modalbox}>
+                      {this.batteryContainer(batterystatus)}
+                      <h1 className={styles.modalboxtitle}>
+                        {batterystatus.value}{'%'}
+                      </h1>
+                    </div>
+                  </div>
+                  <div className={styles.oneHalf}>
+                    <h4 className={styles.modaltitle}>Performance</h4>
+                    <p className={styles.modaldescription}>
+                      This is what the fuzz is about. This is some really cool description about the truck.
+                    </p>
+                    <div className={styles.modalbox}>
+                      <img
+                        src={performanceIcon}
+                        alt="The performance index"
+                        width={64}
+                      />
+                      <h1 className={styles.modalboxtitle}>
+                        {performance.value}{'%'}
+                      </h1>
+                      <p>
+                        {this.diffContainer(total.diff)}
+                        <span className={styles.modaltime}>14:45</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="secondary"
+                  onClick={this._handlebatteryinfoModal}
+                >
+                  Close
+                </Button>
+                {' '}
+                <Button color="primary" onClick={this._handlebatteryinfoModal}>
+                  Update
+                </Button>
+              </ModalFooter>
+            </Modal>
+          </div>
+        );
+      }
+      return;
+    });
   }
 }
 

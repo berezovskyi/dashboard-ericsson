@@ -86,6 +86,7 @@ const Battery = new Record({
     diff: '',
   },
   timetoreturn: 0,
+  highlighted: false,
 });
 
 export { MyRoute ,Note, Stakeholder, Capacity, Truck, Robot, Battery };

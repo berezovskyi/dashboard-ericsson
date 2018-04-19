@@ -32,6 +32,7 @@ const INITIAL_STATE = Map({
       diff: 1,
     },
     timetoreturn: 34,
+    highlighted: false,
   }),
   ['11111-41234']: Battery({
     id: '11111-41234',
@@ -57,6 +58,7 @@ const INITIAL_STATE = Map({
       diff: -4,
     },
     timetoreturn: 25,
+    highlighted: false,
   }),
   ['11111-41235']: Battery({
     id: '11111-41235',
@@ -82,6 +84,7 @@ const INITIAL_STATE = Map({
       diff: -5,
     },
     timetoreturn: 45,
+    highlighted: true,
   }),
   ['11111-41236']: Battery({
     id: '11111-41236',
@@ -107,12 +110,13 @@ const INITIAL_STATE = Map({
       diff: -7,
     },
     timetoreturn: 76,
+    highlighted: true,
   }),
 });
 
 export default function batteryReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case 'UPDATE_ROBOT_HIGHLIGHT':
+    case 'UPDATE_BATTERY_HIGHLIGHT':
       return state.setIn(
         [action.id, 'highlighted'],
         action.highlighted,
