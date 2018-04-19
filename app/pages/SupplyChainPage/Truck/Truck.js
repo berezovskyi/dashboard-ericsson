@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Card from '../../../ui/Card/Card';
 import Button from '../../../ui/Button/Button';
 
 import SingleTruck from './SingleTruck';
+import SingleTruckModal from './SingleTruckModal';
 
-class Truck extends React.Component {
-  // eslint-disable-line react/prefer-stateless-function
+import Modal from '../../../ui/Modal/Modal';
+import ModalHeader from '../../../ui/Modal/ModalHeader';
+import ModalFooter from '../../../ui/Modal/ModalFooter';
+import ModalBody from '../../../ui/Modal/ModalBody';
+
+class Truck extends Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
-      truckModal: false,
+      alltrucksModal: false,
     };
+    this._handlealltruckModal = this._handlealltruckModal.bind(this);
   }
 
-  _handletruckinfoModal() {
+  _handlealltruckModal() {
     this.setState({
-      truckModal: !this.state.truckModal,
+      alltrucksModal: !this.state.alltrucksModal,
     });
   }
 
@@ -27,7 +33,24 @@ class Truck extends React.Component {
     return (
       <Card title="Trucks" helpText="The data relevant to the trucks" id={id}>
         <SingleTruck trucks={truck} total={3} />
-        <Button size="medium" color="primary">View all</Button>
+        <Button size="medium" color="primary" onClick={this._handlealltruckModal}>View all</Button>
+        <Modal
+          isOpen={this.state.alltrucksModal}
+          toggle={this._handlealltruckModal}
+        >
+          <ModalHeader toggle={this._handlealltruckModal}>
+            Energy of all Trucks and Warehouses
+          </ModalHeader>
+          <ModalBody>
+            <SingleTruckModal trucks={truck} />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this._handlealltruckModal}>
+              Close
+            </Button>
+            {' '}
+          </ModalFooter>
+        </Modal>
       </Card>
     );
   }

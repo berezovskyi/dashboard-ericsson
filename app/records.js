@@ -44,6 +44,7 @@ const Truck = new Record({
     value: '',
     diff: '',
   },
+  highlighted: false,
 });
 
 const Robot = new Record({
@@ -58,6 +59,7 @@ const Robot = new Record({
     time: '',
     diff: '',
   },
+  highlighted: false,
 });
 
 const Battery = new Record({
@@ -84,6 +86,7 @@ const Battery = new Record({
     diff: '',
   },
   timetoreturn: 0,
+  highlighted: false,
 });
 
 export { MyRoute ,Note, Stakeholder, Capacity, Truck, Robot, Battery };
