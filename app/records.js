@@ -58,6 +58,7 @@ const Robot = new Record({
     time: '',
     diff: '',
   },
+  highlighted: false,
 });
 
 const Battery = new Record({

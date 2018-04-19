@@ -20,6 +20,7 @@ const INITIAL_STATE = Map({
       time: '5',
       diff: '1',
     },
+    highlighted: false,
   }),
   ['12341-41234']: Robot({
     id: '12341-41234',
@@ -33,6 +34,7 @@ const INITIAL_STATE = Map({
       time: '1',
       diff: '1',
     },
+    highlighted: false,
   }),
   ['12341-41235']: Robot({
     id: '12341-41235',
@@ -46,6 +48,7 @@ const INITIAL_STATE = Map({
       time: '8',
       diff: '1',
     },
+    highlighted: false,
   }),
   ['12341-41236']: Robot({
     id: '12341-41236',
@@ -59,6 +62,7 @@ const INITIAL_STATE = Map({
       time: '6',
       diff: '1',
     },
+    highlighted: true,
   }),
 });
 
