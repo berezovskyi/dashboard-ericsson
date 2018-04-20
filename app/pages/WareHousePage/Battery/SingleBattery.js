@@ -140,7 +140,7 @@ class SingleBattery extends React.Component {
               <ModalBody>
                 <div className={styles.modalprogress}>
                   <h3 className={styles.progresstitle}>
-                    Robot Info
+                    Robot Battery Info
                   </h3>
                   <Alert color="primary">
                     <p>

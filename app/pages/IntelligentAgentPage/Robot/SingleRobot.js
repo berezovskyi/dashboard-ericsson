@@ -79,8 +79,8 @@ class SingleRobot extends React.Component {
     return robots.valueSeq().map(row => {
       if (row.highlighted) {
         return (
-          <div className={styles.singlecontainer}>
-            <div key={row.id}>
+          <div className={styles.singlecontainer} key={row.id}>
+            <div>
               <div className={styles.row}>
                 <h4 className={styles.title}>
                   {'Memory for '}{row.name}
@@ -107,12 +107,12 @@ class SingleRobot extends React.Component {
               toggle={this._handlerobotinfoModal}
             >
               <ModalHeader toggle={this._handlerobotinfoModal}>
-                {name}
+                More Info on {name}
               </ModalHeader>
               <ModalBody>
                 <div className={styles.modalprogress}>
                   <h4 className={styles.progresstitle}>
-                    {'Memory for '}{name}{' - '}{id}
+                    {'Memory for '}{name}{' (ID -'}{id}{')'}
                   </h4>
                   <Progress value={value} />
                 </div>
@@ -162,12 +162,8 @@ class SingleRobot extends React.Component {
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="secondary" onClick={this._handlerobotinfoModal}>
-                  Close
-                </Button>
-                {' '}
                 <Button color="primary" onClick={this._handlerobotinfoModal}>
-                  Update
+                  Close
                 </Button>
               </ModalFooter>
             </Modal>

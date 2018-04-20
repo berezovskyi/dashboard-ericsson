@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import className from 'classnames';
 import Progress from '../../../ui/Progress/Progress';
 import Button from '../../../ui/Button/Button';
+import Alert from '../../../ui/Alert/Alert';
 import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
@@ -92,7 +93,7 @@ class SingleTruck extends React.Component {
             <div>
               <div className={styles.row}>
                 <h4 className={styles.title}>
-                  {row.name}{' - '}{row.id}{' - '}{row.to}{' from '}{row.from}
+                  {row.name}{' - '}{row.from}{' to '}{row.to}
                 </h4>
                 <div className={styles.fiveSixth}>
                   <Progress value={row.value} />
@@ -118,13 +119,29 @@ class SingleTruck extends React.Component {
               toggle={this._handletruckinfoModal}
             >
               <ModalHeader toggle={this._handletruckinfoModal}>
-                {name}
+                More Truck Info
               </ModalHeader>
               <ModalBody>
                 <div className={styles.modalprogress}>
-                  <h4 className={styles.progresstitle}>
-                    {name}{' - '}{id}{' - '}{to}{' from '}{from}
-                  </h4>
+                  <Alert color="primary">
+                    <p>
+                      <strong>Name: </strong><span>{name}</span>
+                    </p>
+                    <p>
+                      <strong>Truck ID: </strong><span>{id}</span>
+                    </p>
+                    <p>
+                      <strong>From: </strong><span>{from}</span>
+                    </p>
+                    <p>
+                      <strong>To: </strong><span>{to}</span>
+                    </p>
+                  </Alert>
+                  <div className={styles.row}>
+                    <div className={styles.oneFull}>
+                      <h4>Journey Report</h4>
+                    </div>
+                  </div>
                   <div className={styles.row}>
                     <div className={styles.fourFifth}>
                       <Progress value={value} />

@@ -27,7 +27,7 @@ class SingleTruckModal extends Component {
           <div className={styles.row}>
             <div className={styles.fiveSixth}>
               <h4 className={styles.title}>
-                {row.name}{' - '}{row.id}{' - '}{row.to}{' from '}{row.from}
+                {row.name}{' - '}{row.id}{' - '}{row.from}{' to '}{row.to}
               </h4>
             </div>
             <div className={styles.oneSixth}>

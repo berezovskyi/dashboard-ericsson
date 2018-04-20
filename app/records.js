@@ -89,4 +89,4 @@ const Battery = new Record({
   highlighted: false,
 });
 
-export { MyRoute ,Note, Stakeholder, Capacity, Truck, Robot, Battery };
+export { MyRoute, Note, Stakeholder, Capacity, Truck, Robot, Battery };

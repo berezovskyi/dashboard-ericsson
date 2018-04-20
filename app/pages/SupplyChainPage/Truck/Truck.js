@@ -31,7 +31,7 @@ class Truck extends Component { // eslint-disable-line react/prefer-stateless-fu
     const { truck, id } = this.props;
 
     return (
-      <Card title="Trucks" helpText="The data relevant to the trucks" id={id}>
+      <Card title="Highlighted Trucks" helpText="The data relevant to the trucks" id={id}>
         <SingleTruck trucks={truck} total={3} />
         <Button size="medium" color="primary" onClick={this._handlealltruckModal}>View all</Button>
         <Modal
@@ -39,7 +39,7 @@ class Truck extends Component { // eslint-disable-line react/prefer-stateless-fu
           toggle={this._handlealltruckModal}
         >
           <ModalHeader toggle={this._handlealltruckModal}>
-            Energy of all Trucks and Warehouses
+            Progress of all Trucks
           </ModalHeader>
           <ModalBody>
             <SingleTruckModal trucks={truck} />
