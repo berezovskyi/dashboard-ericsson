@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import className from 'classnames';
+import { UPDATE_STAKEHOLDERS_HIGHLIGHT } from './actions';
 
 import Checkbox from '../../../ui/Form/Checkbox';
 import styles from './Stakeholders.css';
@@ -13,11 +14,12 @@ class StakeholderModalProfile extends Component {
 
   _handlehighlight(data) {
     const { dispatch } = this.props;
-    console.log(data);
     dispatch({
-      type: 'UPDATE_STAKEHOLDERS_HIGHLIGHT',
-      id: data.id,
-      highlighted: !data.highlighted,
+      type: UPDATE_STAKEHOLDERS_HIGHLIGHT,
+      payload: {
+        id: data.id,
+        highlighted: !data.highlighted,
+      },
     });
   }
 

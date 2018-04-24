@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import className from 'classnames';
-import 'whatwg-fetch';
 
 import Card from '../../../ui/Card/Card';
 import Button from '../../../ui/Button/Button';
@@ -15,6 +13,7 @@ import ModalBody from '../../../ui/Modal/ModalBody';
 import StakeholderProfile from './StakeholderProfile';
 import styles from '../../../pages/SupplyChainPage/SupplyChainPage.css';
 import StakeholderModalProfile from './StakeholderModalProfile';
+import { fetchStakeholdersIfNeeded} from './actions';
 
 class Stakeholders extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -27,6 +26,12 @@ class Stakeholders extends React.Component {
       stakeholderModal: false,
     };
   }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchStakeholdersIfNeeded());
+  }
+
   _handleallstakeholderModal() {
     this.setState({
       stakeholderModal: !this.state.stakeholderModal,
@@ -35,9 +40,7 @@ class Stakeholders extends React.Component {
 
   render() {
     const { id, type, name, stakeholders } = this.props;
-
     const title = 'Highlighted Stakeholders for ' + name;
-
     return (
       <Card
         title={title}
@@ -63,7 +66,11 @@ class Stakeholders extends React.Component {
             Stakeholders for {name}
           </ModalHeader>
           <ModalBody>
-            <StakeholderModalProfile stakeholders={stakeholders} name={name} type={type} />
+            <StakeholderModalProfile
+              stakeholders={stakeholders}
+              name={name}
+              type={type}
+            />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handleallstakeholderModal}>
@@ -78,15 +85,18 @@ class Stakeholders extends React.Component {
 }
 
 function mapStateToProps(state) {
+  const data = state.get('stakeholders');
   return {
-    stakeholders: state.get('stakeholders'),
+    loading: data.get('loading'),
+    receivedAt: data.get('receivedAt'),
+    stakeholders: data.get('stakeholders'),
   };
 }
 
 Stakeholders.propTypes = {
-  id: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  stakeholders: PropTypes.object,
+  loading: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Stakeholders);

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import className from 'classnames';
 import styles from './Stakeholders.css';
 
@@ -22,9 +21,4 @@ class StakeholderProfile extends Component {
     });
   }
 }
-
-function mapStateToProps(state) {
-  return {};
-}
-
-export default connect(mapStateToProps)(StakeholderProfile);
+export default StakeholderProfile;

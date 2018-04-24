@@ -79,8 +79,8 @@ class SingleRobot extends React.Component {
     return robots.valueSeq().map(row => {
       if (row.highlighted) {
         return (
-          <div className={styles.singlecontainer}>
-            <div key={row.id}>
+          <div className={styles.singlecontainer} key={row.id}>
+            <div >
               <div className={styles.row}>
                 <h4 className={styles.title}>
                   {'Memory for '}{row.name}
