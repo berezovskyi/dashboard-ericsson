@@ -5,119 +5,52 @@
 */
 
 import { Map } from 'immutable';
-import { Stakeholder } from '../../../records';
+import {
+  UPDATE_STAKEHOLDERS_HIGHLIGHT,
+  REQUEST_ALL_STAKEHOLDERS,
+  RECEIVE_ALL_STAKEHOLDERS,
+  REQUEST_HIGHLIGHTED_STAKEHOLDERS,
+  RECEIVE_HIGHLIGHTED_STAKEHOLDERS,
+} from './actions';
 
-const INITIAL_STATE = Map({
-  ['12345-45678']: Stakeholder({
-    id: '12345-45678',
-    name: 'Raghu Nayyar',
-    phone: '12 345 5678',
-    email: 'sebastian@codingthesmartway.com',
-    type: 'sc',
-    highlighted: true,
-  }),
-  ['12345-45677']: Stakeholder({
-    id: '12345-45677',
-    name: 'Kushal Khand',
-    phone: '12 345 5678',
-    email: 'sebastian@codingthesmartway.com',
-    type: 'sc',
-    highlighted: true,
-  }),
-  ['12345-45676']: Stakeholder({
-    id: '12345-45676',
-    name: 'Aniket pant',
-    phone: '12 345 5678',
-    email: 'sebastian@codingthesmartway.com',
-    type: 'ia',
-    highlighted: true,
-  }),
-  ['12345-45675']: Stakeholder({
-    id: '12345-45675',
-    name: 'Tushar Goyal',
-    phone: '12 345 5678',
-    email: 'sebastian@codingthesmartway.com',
-    type: 'wh',
-    highlighted: true,
-  }),
-  ['12345-45676']: Stakeholder({
-    id: '12345-45676',
-    name: 'Didem Gurdur',
-    phone: '12 345 5678',
-    email: 'sebastian@codingthesmartway.com',
-    type: 'wh',
-    highlighted: true,
-  }),
-  ['12345-45677']: Stakeholder({
-    id: '12345-45677',
-    name: 'Arnav Goel',
-    phone: '12 345 5678',
-    email: 'sebastian@codingthesmartway.com',
-    type: 'sc',
-    highlighted: true,
-  }),
-  ['12345-45678']: Stakeholder({
-    id: '12345-45678',
-    name: 'Deepika Khurana',
-    phone: '12 345 5678',
-    email: 'sebastian@codingthesmartway.com',
-    type: 'sc',
-    highlighted: false,
-  }),
-  ['12345-45679']: Stakeholder({
-    id: '12345-45679',
-    name: 'Ish Khurana',
-    phone: '12 345 5678',
-    email: 'sebastian@codingthesmartway.com',
-    type: 'wh',
-    highlighted: true,
-  }),
-  ['12345-45680']: Stakeholder({
-    id: '12345-45680',
-    name: 'Pawan Nayyar',
-    phone: '12 345 5678',
-    email: 'sebastian@codingthesmartway.com',
-    type: 'sc',
-    highlighted: true,
-  }),
-  ['12345-45681']: Stakeholder({
-    id: '12345-45681',
-    name: 'Arnav Goel',
-    phone: '12 345 5678',
-    email: 'sebastian@codingthesmartway.com',
-    type: 'sc',
-    highlighted: true,
-  }),
-  ['12345-45682']: Stakeholder({
-    id: '12345-45682',
-    name: 'Pierce Brosnan',
-    phone: '12 345 5678',
-    email: 'sebastian@codingthesmartway.com',
-    type: 'wh',
-    highlighted: true,
-  }),
-  ['12345-45683']: Stakeholder({
-    id: '12345-45683',
-    name: 'James Bond',
-    phone: '12 345 5678',
-    email: 'sebastian@codingthesmartway.com',
-    type: 'ia',
-    highlighted: true,
-  }),
-  ['12345-45684']: Stakeholder({
-    id: '12345-45684',
-    name: 'Denise Richards',
-    phone: '12 345 5678',
-    email: 'sebastian@yolo.com',
-    type: 'wh',
-    highlighted: true,
-  }),
+const INITIAL_STATE = new Map({
+  loading: false,
+  receivedAt: null,
+  stakeholders: new Map(),
 });
 
-export default function stakeholderReducer(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case 'UPDATE_STAKEHOLDERS_HIGHLIGHT':
-      return state.setIn([action.id, 'highlighted'], action.highlighted);
+export default function stakeholderReducer(
+  state = INITIAL_STATE,
+  { type, payload },
+) {
+  switch (type) {
+    case UPDATE_STAKEHOLDERS_HIGHLIGHT:
+      return state.setIn(
+        ['stakeholders', payload.id, 'highlighted'],
+        payload.highlighted,
+      );
+    case REQUEST_ALL_STAKEHOLDERS:
+      return state.setIn(['loading'], payload.loading);
+
+    case REQUEST_HIGHLIGHTED_STAKEHOLDERS:
+      return state.setIn(['loading'], payload.loading);
+
+    case RECEIVE_HIGHLIGHTED_STAKEHOLDERS:
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt)
+        .updateIn(['stakeholders'], data =>
+          data.mergeDeep(payload.stakeholders),
+        );
+
+    case RECEIVE_ALL_STAKEHOLDERS:
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt)
+        .updateIn(['stakeholders'], data =>
+          data.mergeDeep(payload.stakeholders),
+        );
+
     default:
       return state;
   }

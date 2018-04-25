@@ -8,6 +8,8 @@ import Label from '../../../ui/Form/Label';
 import Textarea from '../../../ui/Form/Textarea';
 import FormGroup from '../../../ui/Form/FormGroup';
 
+import { fetchHighlightedNotesIfNeeded } from './actions';
+
 import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
@@ -28,6 +30,11 @@ class Notes extends React.Component {
       addnotesModal: false,
       allnotesModal: false,
     };
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedNotesIfNeeded());
   }
 
   _handleaddNoteModal() {
@@ -54,13 +61,15 @@ class Notes extends React.Component {
         helpText="Add Notes relevant to Supply Chain over here"
         id={id}
       >
-        {notes.size > 0 ? <NotesList notes={notes} type={type} /> : <NoNotes />}
+        <NotesList notes={notes} type={type} />
         <div className={styles.footer}>
-          {notes.size > 0
-            ? <Button size="medium" color="primary" onClick={this._handleallNotesModal}>
-                View all Notes
-              </Button>
-            : null}
+          <Button
+            size="medium"
+            color="primary"
+            onClick={this._handleallNotesModal}
+          >
+            View all Notes
+          </Button>
 
           <Button
             size="medium"
@@ -74,7 +83,9 @@ class Notes extends React.Component {
           isOpen={this.state.addnotesModal}
           toggle={this._handleaddNoteModal}
         >
-          <ModalHeader toggle={this._handleaddNoteModal}>Add Notes to {name}</ModalHeader>
+          <ModalHeader toggle={this._handleaddNoteModal}>
+            Add Notes to {name}
+          </ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
@@ -100,7 +111,7 @@ class Notes extends React.Component {
             All Notes for {name}
           </ModalHeader>
           <ModalBody>
-            <NotesListModal notes={notes} type={type} />
+            <NotesListModal type={type} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handleallNotesModal}>
@@ -115,14 +126,18 @@ class Notes extends React.Component {
 }
 
 function mapStateToProps(state) {
+  const data = state.get('notes');
   return {
-    notes: state.get('notes'),
+    loading: data.get('loading'),
+    receivedAt: data.get('receivedAt'),
+    notes: data.get('notes'),
   };
 }
 
 Notes.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string.isRequired,
+  notes: PropTypes.object,
+  loading: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Notes);

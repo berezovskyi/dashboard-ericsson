@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import className from 'classnames';
+import {fetchStakeholdersIfNeeded, UPDATE_STAKEHOLDERS_HIGHLIGHT} from './actions';
 
 import Checkbox from '../../../ui/Form/Checkbox';
 import styles from './Stakeholders.css';
@@ -11,18 +12,25 @@ class StakeholderModalProfile extends Component {
     this._handlehighlight = this._handlehighlight.bind(this);
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchStakeholdersIfNeeded());
+  }
+
   _handlehighlight(data) {
     const { dispatch } = this.props;
-    console.log(data);
     dispatch({
-      type: 'UPDATE_STAKEHOLDERS_HIGHLIGHT',
-      id: data.id,
-      highlighted: !data.highlighted,
+      type: UPDATE_STAKEHOLDERS_HIGHLIGHT,
+      payload: {
+        id: data.id,
+        highlighted: !data.highlighted,
+      },
     });
   }
 
   render() {
     const { stakeholders, type } = this.props;
+    console.log(stakeholders);
     const modalprofileList = className(styles.row, styles.profilelist);
     return stakeholders.valueSeq().map(stakeholder => {
       if (stakeholder.type === type) {
@@ -55,7 +63,13 @@ class StakeholderModalProfile extends Component {
   }
 }
 
-function mapStateToProps(store) {
-  return {};
+function mapStateToProps(state) {
+  const data = state.get('stakeholders');
+  return {
+    loading: data.get('loading'),
+    receivedAt: data.get('receivedAt'),
+    stakeholders: data.get('stakeholders'),
+  };
 }
+
 export default connect(mapStateToProps)(StakeholderModalProfile);
