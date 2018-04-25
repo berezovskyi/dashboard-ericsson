@@ -12,6 +12,7 @@ import ModalBody from '../../../ui/Modal/ModalBody';
 
 import SingleCapacity from './SingleCapacity';
 import SingleCapacityModal from './SingleCapacityModal';
+import { fetchHighlightedCapacityIfNeeded } from './actions';
 
 class Capacity extends Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -21,6 +22,11 @@ class Capacity extends Component {
     this.state = {
       capacityModal: false,
     };
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedCapacityIfNeeded());
   }
 
   _handlealltrucksModal() {
@@ -55,9 +61,9 @@ class Capacity extends Component {
           </ModalHeader>
           <ModalBody>
             <h4>All Warehouses</h4>
-            <SingleCapacityModal capacity={capacity} type="wh" />
+            <SingleCapacityModal type="wh" />
             <h4>All Retailers</h4>
-            <SingleCapacityModal capacity={capacity} type="rt" />
+            <SingleCapacityModal type="rt" />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handlealltrucksModal}>
@@ -76,8 +82,11 @@ Capacity.propTypes = {
 };
 
 function mapStateToProps(state) {
+  const data = state.get('capacity');
   return {
-    capacity: state.get('capacity'),
+    loading: data.get('loading'),
+    receivedAt: data.get('receivedAt'),
+    capacity: data.get('capacity'),
   };
 }
 
