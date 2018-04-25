@@ -13,7 +13,7 @@ import ModalBody from '../../../ui/Modal/ModalBody';
 import StakeholderProfile from './StakeholderProfile';
 import styles from '../../../pages/SupplyChainPage/SupplyChainPage.css';
 import StakeholderModalProfile from './StakeholderModalProfile';
-import { fetchStakeholdersIfNeeded} from './actions';
+import { fetchHighlightedStakeholdersIfNeeded } from './actions';
 
 class Stakeholders extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -29,7 +29,7 @@ class Stakeholders extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchStakeholdersIfNeeded());
+    dispatch(fetchHighlightedStakeholdersIfNeeded());
   }
 
   _handleallstakeholderModal() {
@@ -67,7 +67,6 @@ class Stakeholders extends React.Component {
           </ModalHeader>
           <ModalBody>
             <StakeholderModalProfile
-              stakeholders={stakeholders}
               name={name}
               type={type}
             />
