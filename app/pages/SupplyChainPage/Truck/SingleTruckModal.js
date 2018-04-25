@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styles from './Truck.css';
 import Progress from '../../../ui/Progress/Progress';
 import Checkbox from '../../../ui/Form/Checkbox';
+import { fetchTrucksIfNeeded, UPDATE_TRUCKS_HIGHLIGHT } from './actions';
 
 class SingleTruckModal extends Component {
   constructor(props) {
@@ -10,12 +11,19 @@ class SingleTruckModal extends Component {
     this._handleHighlight = this._handleHighlight.bind(this);
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchTrucksIfNeeded());
+  }
+
   _handleHighlight(data) {
-    const dispatch = this.props.dispatch;
+    const { dispatch } = this.props ;
     dispatch({
-      type: 'UPDATE_TRUCKS_HIGHLIGHT',
-      id: data.id,
-      highlighted: !data.highlighted,
+      type: UPDATE_TRUCKS_HIGHLIGHT,
+      payload: {
+        id: data.id,
+        highlighted: !data.highlighted,
+      },
     });
   }
 
@@ -57,4 +65,13 @@ class SingleTruckModal extends Component {
   }
 }
 
-export default connect()(SingleTruckModal);
+function mapStateToProps(state) {
+  const data = state.get('trucks');
+  return {
+    receivedAt: data.get('receivedAt'),
+    loading: data.get('loading'),
+    trucks: data.get('trucks'),
+  };
+}
+
+export default connect(mapStateToProps)(SingleTruckModal);

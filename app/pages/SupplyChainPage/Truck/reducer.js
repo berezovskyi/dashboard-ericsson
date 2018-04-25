@@ -5,79 +5,45 @@
 */
 
 import { Map } from 'immutable';
-import { Truck } from '../../../records';
+import {
+  UPDATE_TRUCKS_HIGHLIGHT,
+  REQUEST_ALL_TRUCKS,
+  REQUEST_HIGHLIGHTED_TRUCKS,
+  RECEIVE_HIGHLIGHTED_TRUCKS,
+  RECEIVE_ALL_TRUCKS,
+} from './actions';
 
-const INITIAL_STATE = Map({
-  ['12341-41230']: Truck({
-    id: '12341-41230',
-    to: 'Stockholm',
-    from: 'Uppsala',
-    name: 'Truck 1',
-    value: 25,
-    activity: {
-      time: '5h 30m',
-      diff: '3',
-    },
-    sustainability: {
-      value: '65',
-      diff: '2',
-    },
-    highlighted: false,
-  }),
-  ['12341-41234']: Truck({
-    id: '12341-41234',
-    to: 'Goteberg',
-    from: 'Malmo',
-    name: 'Truck 2',
-    value: 60,
-    activity: {
-      time: '5h 30m',
-      diff: '2',
-    },
-    sustainability: {
-      value: '51',
-      diff: '3',
-    },
-    highlighted: false,
-  }),
-  ['12341-41235']: Truck({
-    id: '12341-41235',
-    to: 'Copenhagen',
-    from: 'Linkoping',
-    name: 'Truck 3',
-    value: 15,
-    activity: {
-      time: '5h 30m',
-      diff: '1',
-    },
-    sustainability: {
-      value: '45',
-      diff: '1',
-    },
-    highlighted: true,
-  }),
-  ['12341-41236']: Truck({
-    id: '12341-41236',
-    to: 'Arlanda',
-    from: 'Stockholm',
-    name: 'Truck 4',
-    value: 52,
-    activity: {
-      time: '5h 30m',
-      diff: '4',
-    },
-    sustainability: {
-      value: '25',
-      diff: '5',
-    },
-    highlighted: false,
-  }),
+const INITIAL_STATE = new Map({
+  loading: false,
+  receivedAt: null,
+  trucks: new Map(),
 });
 
-export default function truckReducer(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case 'UPDATE_TRUCKS_HIGHLIGHT':
-      return state.setIn([action.id, 'highlighted'], action.highlighted);
+export default function truckReducer(state = INITIAL_STATE, { type, payload }) {
+  switch (type) {
+    case UPDATE_TRUCKS_HIGHLIGHT:
+      return state.setIn(
+        ['trucks', payload.id, 'highlighted'],
+        payload.highlighted,
+      );
+    case REQUEST_ALL_TRUCKS:
+      return state.setIn(['loading'], payload.loading);
+
+    case REQUEST_HIGHLIGHTED_TRUCKS:
+      return state.setIn(['loading'], payload.loading);
+
+    case RECEIVE_HIGHLIGHTED_TRUCKS:
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt)
+        .updateIn(['trucks'], data => data.mergeDeep(payload.trucks));
+
+    case RECEIVE_ALL_TRUCKS:
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt)
+        .updateIn(['trucks'], data => data.mergeDeep(payload.trucks));
+
     default:
       return state;
   }

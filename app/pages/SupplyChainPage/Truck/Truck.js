@@ -11,14 +11,21 @@ import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
+import { fetchHighlightedTrucksIfNeeded } from './actions';
 
-class Truck extends Component { // eslint-disable-line react/prefer-stateless-function
+class Truck extends Component {
+  // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
       alltrucksModal: false,
     };
     this._handlealltruckModal = this._handlealltruckModal.bind(this);
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedTrucksIfNeeded());
   }
 
   _handlealltruckModal() {
@@ -28,12 +35,18 @@ class Truck extends Component { // eslint-disable-line react/prefer-stateless-fu
   }
 
   render() {
-    const { truck, id } = this.props;
+    const { trucks, id } = this.props;
 
     return (
       <Card title="Trucks" helpText="The data relevant to the trucks" id={id}>
-        <SingleTruck trucks={truck} total={3} />
-        <Button size="medium" color="primary" onClick={this._handlealltruckModal}>View all</Button>
+        <SingleTruck trucks={trucks} total={3} />
+        <Button
+          size="medium"
+          color="primary"
+          onClick={this._handlealltruckModal}
+        >
+          View all
+        </Button>
         <Modal
           isOpen={this.state.alltrucksModal}
           toggle={this._handlealltruckModal}
@@ -42,7 +55,7 @@ class Truck extends Component { // eslint-disable-line react/prefer-stateless-fu
             Energy of all Trucks and Warehouses
           </ModalHeader>
           <ModalBody>
-            <SingleTruckModal trucks={truck} />
+            <SingleTruckModal />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handlealltruckModal}>
@@ -57,13 +70,16 @@ class Truck extends Component { // eslint-disable-line react/prefer-stateless-fu
 }
 
 function mapStateToProps(state) {
+  const data = state.get('trucks');
   return {
-    truck: state.get('truck'),
+    loading: data.get('loading'),
+    receivedAt: data.get('receivedAt'),
+    trucks: data.get('trucks'),
   };
 }
 
 Truck.propTypes = {
-  truck: PropTypes.any,
+  trucks: PropTypes.any,
 };
 
 export default connect(mapStateToProps)(Truck);
