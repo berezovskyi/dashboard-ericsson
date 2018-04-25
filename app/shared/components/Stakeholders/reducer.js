@@ -24,19 +24,16 @@ export default function stakeholderReducer(
   { type, payload },
 ) {
   switch (type) {
+    case UPDATE_STAKEHOLDERS_HIGHLIGHT:
+      return state.setIn(
+        ['stakeholders', payload.id, 'highlighted'],
+        payload.highlighted,
+      );
     case REQUEST_ALL_STAKEHOLDERS:
       return state.setIn(['loading'], payload.loading);
 
     case REQUEST_HIGHLIGHTED_STAKEHOLDERS:
       return state.setIn(['loading'], payload.loading);
-
-    case RECEIVE_ALL_STAKEHOLDERS:
-      return state
-        .setIn(['loading'], payload.loading)
-        .setIn(['receivedAt'], payload.receivedAt)
-        .updateIn(['stakeholders'], data =>
-          data.mergeDeep(payload.stakeholders),
-        );
 
     case RECEIVE_HIGHLIGHTED_STAKEHOLDERS:
       return state
@@ -46,11 +43,14 @@ export default function stakeholderReducer(
           data.mergeDeep(payload.stakeholders),
         );
 
-    case UPDATE_STAKEHOLDERS_HIGHLIGHT:
-      return state.setIn(
-        ['stakeholders', payload.id, 'highlighted'],
-        payload.highlighted,
-      );
+    case RECEIVE_ALL_STAKEHOLDERS:
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt)
+        .updateIn(['stakeholders'], data =>
+          data.mergeDeep(payload.stakeholders),
+        );
+
     default:
       return state;
   }
