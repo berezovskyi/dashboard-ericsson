@@ -2,9 +2,11 @@ import 'whatwg-fetch';
 import { Stakeholder } from '../../../records';
 
 export const REQUEST_ALL_STAKEHOLDERS = 'REQUEST_ALL_STAKEHOLDERS';
-export const REQUEST_HIGHLIGHTED_STAKEHOLDERS = 'REQUEST_HIGHLIGHTED_STAKEHOLDERS';
+export const REQUEST_HIGHLIGHTED_STAKEHOLDERS =
+  'REQUEST_HIGHLIGHTED_STAKEHOLDERS';
 export const RECEIVE_ALL_STAKEHOLDERS = 'RECEIVE_ALL_STAKEHOLDERS';
-export const RECEIVE_HIGHLIGHTED_STAKEHOLDERS = 'RECEIVE_HIGHLIGHTED_STAKEHOLDERS';
+export const RECEIVE_HIGHLIGHTED_STAKEHOLDERS =
+  'RECEIVE_HIGHLIGHTED_STAKEHOLDERS';
 export const UPDATE_STAKEHOLDERS_HIGHLIGHT = 'UPDATE_STAKEHOLDERS_HIGHLIGHT';
 
 /* 2 different kinds of actions: one for highlighted, one for all.  */
@@ -13,7 +15,7 @@ function requestStakeholders() {
   return {
     type: REQUEST_ALL_STAKEHOLDERS,
     payload: {
-      loading: false,
+      loading: true,
     },
   };
 }
@@ -22,7 +24,7 @@ function requesthighlightedStakeholders() {
   return {
     type: REQUEST_HIGHLIGHTED_STAKEHOLDERS,
     payload: {
-      loading: false,
+      loading: true,
     },
   };
 }
@@ -32,7 +34,7 @@ function receiveStakeholders(json) {
     type: RECEIVE_ALL_STAKEHOLDERS,
     payload: {
       receivedAt: Date.now(),
-      loading: true,
+      loading: false,
       stakeholders: json.data.map(item => {
         return [
           item.id,
@@ -51,12 +53,11 @@ function receiveStakeholders(json) {
 }
 
 function receiveHighlightedStakeholders(json) {
-  console.log(json);
   return {
     type: RECEIVE_HIGHLIGHTED_STAKEHOLDERS,
     payload: {
       receivedAt: Date.now(),
-      loading: true,
+      loading: false,
       stakeholders: json.data.map(item => {
         return [
           item.id,
@@ -89,7 +90,7 @@ export function fetchHighlightedStakeholders() {
   return dispatch => {
     dispatch(requesthighlightedStakeholders());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/stakeholders/highlighted'
+      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/stakeholders/highlighted',
     )
       .then(response => response.json())
       .then(json => dispatch(receiveHighlightedStakeholders(json)));
@@ -107,13 +108,11 @@ function shouldFetchStakeholders(state) {
 }
 
 function shouldFetchHighlightedStakeholders(state) {
-  const { data } = state;
-  if (!data) {
+  const data = state.get('stakeholders');
+  if (!data.get('loading') && data.get('stakeholders').size === 0) {
     return true;
-  } else if (data.loading) {
-    return false;
   }
-  return null;
+  return false;
 }
 
 export function fetchStakeholdersIfNeeded() {
