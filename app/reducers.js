@@ -35,7 +35,7 @@ export default function createReducer(injectedReducers) {
     notes: notesReducer,
     stakeholders: stakeholdersReducer,
     capacity: capacityReducer,
-    truck: truckReducer,
+    trucks: truckReducer,
     robot: robotReducer,
     battery: batteryReducer,
     robotperformance: robotperformanceReducer,

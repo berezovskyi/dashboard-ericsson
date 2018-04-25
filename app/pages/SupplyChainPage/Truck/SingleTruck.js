@@ -72,7 +72,7 @@ class SingleTruck extends React.Component {
   }
 
   render() {
-    const { trucks, total } = this.props;
+    const { trucks } = this.props;
     const {
       name,
       to,
