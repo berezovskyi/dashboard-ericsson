@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Card from '../../../ui/Card/Card';
 import Button from '../../../ui/Button/Button';
+import Loading from '../../../ui/Loading/Loading';
 import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
@@ -11,6 +12,7 @@ import ModalBody from '../../../ui/Modal/ModalBody';
 
 import SingleRobot from './SingleRobot';
 import SingleRobotModal from './SingleRobotModal';
+import { fetchHighlightedRobotsIfNeeded } from './actions';
 
 class Robot extends Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -21,6 +23,11 @@ class Robot extends Component { // eslint-disable-line react/prefer-stateless-fu
     };
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedRobotsIfNeeded());
+  }
+
   _handleallrobotsModal() {
     this.setState({
       allrobotModal: !this.state.allrobotModal,
@@ -28,11 +35,32 @@ class Robot extends Component { // eslint-disable-line react/prefer-stateless-fu
   }
 
   render() {
-    const { robot, id } = this.props;
+    const { robots, id, loading } = this.props;
+    if (loading) {
+      return (
+        <Card
+          title="Intelligent Agents"
+          helpText="The data relevant to the robots"
+          id={id}
+        >
+          <Loading />
+        </Card>
+      );
+    }
     return (
-      <Card title="Intelligent Agents" helpText="The data relevant to the robots" id={id}>
-        <SingleRobot robots={robot} />
-        <Button size="medium" color="primary" onClick={this._handleallrobotsModal}>View all</Button>
+      <Card
+        title="Intelligent Agents"
+        helpText="The data relevant to the robots"
+        id={id}
+      >
+        <SingleRobot robots={robots} />
+        <Button
+          size="medium"
+          color="primary"
+          onClick={this._handleallrobotsModal}
+        >
+          View all
+        </Button>
         <Modal
           isOpen={this.state.allrobotModal}
           toggle={this._handleallrobotsModal}
@@ -41,7 +69,7 @@ class Robot extends Component { // eslint-disable-line react/prefer-stateless-fu
             All the available Robots
           </ModalHeader>
           <ModalBody>
-            <SingleRobotModal robots={robot} />
+            <SingleRobotModal robots={robots} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handleallrobotsModal}>
@@ -60,11 +88,16 @@ Robot.propTypes = {
 };
 
 function mapStateToProps(state) {
+  const data = state.get('robots');
   return {
-    robot: state.get('robot'),
+    loading: data.get('loading'),
+    receivedAt: data.get('receivedAt'),
+    robots: data.get('robots'),
   };
 }
 
-Robot.propTypes = {};
+Robot.propTypes = {
+  robots: PropTypes.any,
+};
 
 export default connect(mapStateToProps)(Robot);

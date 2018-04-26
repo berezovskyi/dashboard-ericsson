@@ -36,7 +36,7 @@ export default function createReducer(injectedReducers) {
     stakeholders: stakeholdersReducer,
     capacity: capacityReducer,
     trucks: truckReducer,
-    robot: robotReducer,
+    robots: robotReducer,
     battery: batteryReducer,
     robotperformance: robotperformanceReducer,
     performancerisk: performanceriskReducer,

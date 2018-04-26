@@ -5,71 +5,42 @@
 */
 
 import { Map } from 'immutable';
-import { Robot } from '../../../records';
+import {
+  UPDATE_ROBOTS_HIGHLIGHT,
+  REQUEST_ALL_ROBOTS,
+  REQUEST_HIGHLIGHTED_ROBOTS,
+  RECEIVE_HIGHLIGHTED_ROBOTS,
+  RECEIVE_ALL_ROBOTS,
+} from './actions';
 
-const INITIAL_STATE = Map({
-  ['12341-41230']: Robot({
-    id: '12341-41230',
-    name: 'Robot 1',
-    value: 25,
-    performance: {
-      value: '45',
-      diff: '1',
-    },
-    secpertask: {
-      time: '5',
-      diff: '1',
-    },
-    highlighted: false,
-  }),
-  ['12341-41234']: Robot({
-    id: '12341-41234',
-    name: 'Robot 2',
-    value: 60,
-    performance: {
-      value: '11',
-      diff: '1',
-    },
-    secpertask: {
-      time: '1',
-      diff: '1',
-    },
-    highlighted: false,
-  }),
-  ['12341-41235']: Robot({
-    id: '12341-41235',
-    name: 'Robot 3',
-    value: 15,
-    performance: {
-      value: '51',
-      diff: '1',
-    },
-    secpertask: {
-      time: '8',
-      diff: '1',
-    },
-    highlighted: false,
-  }),
-  ['12341-41236']: Robot({
-    id: '12341-41236',
-    name: 'Robot 4',
-    value: 52,
-    performance: {
-      value: '17',
-      diff: '1',
-    },
-    secpertask: {
-      time: '6',
-      diff: '1',
-    },
-    highlighted: true,
-  }),
+const INITIAL_STATE = new Map({
+  loading: false,
+  receivedAt: null,
+  robots: new Map(),
 });
 
-export default function robotReducer(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case 'UPDATE_ROBOT_HIGHLIGHT':
-      return state.setIn([action.id, 'highlighted'], action.highlighted);
+export default function robotReducer(state = INITIAL_STATE, { type, payload }) {
+  switch (type) {
+    case UPDATE_ROBOTS_HIGHLIGHT:
+      return state.setIn([payload.id, 'highlighted'], payload.highlighted);
+    case REQUEST_ALL_ROBOTS:
+      return state.setIn(['loading'], payload.loading);
+
+    case REQUEST_HIGHLIGHTED_ROBOTS:
+      return state.setIn(['loading'], payload.loading);
+
+    case RECEIVE_HIGHLIGHTED_ROBOTS:
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt)
+        .updateIn(['robots'], data => data.mergeDeep(payload.robots));
+
+    case RECEIVE_ALL_ROBOTS:
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt)
+        .updateIn(['robots'], data => data.mergeDeep(payload.robots));
+
     default:
       return state;
   }
