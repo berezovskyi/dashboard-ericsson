@@ -4,18 +4,27 @@ import styles from './Robot.css';
 import Progress from '../../../ui/Progress/Progress';
 import Checkbox from '../../../ui/Form/Checkbox';
 
+import { UPDATE_ROBOT_HIGHLIGHT, fetchRobotsIfNeeded } from './actions';
+
 class SingleRobotModal extends Component {
   constructor(props) {
     super(props);
     this._handleHighlight = this._handleHighlight.bind(this);
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchRobotsIfNeeded());
+  }
+
   _handleHighlight(data) {
-    const dispatch = this.props.dispatch;
+    const { dispatch } = this.props;
     dispatch({
-      type: 'UPDATE_ROBOT_HIGHLIGHT',
-      id: data.id,
-      highlighted: !data.highlighted,
+      type: UPDATE_ROBOT_HIGHLIGHT,
+      payload: {
+        id: data.id,
+        highlighted: !data.highlighted,
+      },
     });
   }
 
