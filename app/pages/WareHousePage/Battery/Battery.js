@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Card from '../../../ui/Card/Card';
 import Button from '../../../ui/Button/Button';
 import SingleBattery from './SingleBattery';
@@ -9,6 +10,7 @@ import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
+import { fetchHighlightedBatteryIfNeeded } from './actions';
 
 class Battery extends Component {
   constructor(props) {
@@ -16,7 +18,12 @@ class Battery extends Component {
     this._handlebatteryModal = this._handlebatteryModal.bind(this);
     this.state = {
       batteryModal: false,
-    }
+    };
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedBatteryIfNeeded());
   }
 
   _handlebatteryModal() {
@@ -54,9 +61,16 @@ class Battery extends Component {
 }
 
 function mapStateToProps(state) {
+  const data = state.get('battery');
   return {
-    battery: state.get('battery'),
+    loading: data.get('loading'),
+    receivedAt: data.get('receivedAt'),
+    battery: data.get('battery'),
   };
 }
+
+Battery.propTypes = {
+  trucks: PropTypes.any,
+};
 
 export default connect(mapStateToProps)(Battery);

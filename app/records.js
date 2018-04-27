@@ -2,7 +2,7 @@ import { Record } from 'immutable';
 
 const MyRoute = new Record({
   location: '',
-})
+});
 
 const Note = new Record({
   id: '00000-00000',
@@ -89,4 +89,4 @@ const Battery = new Record({
   highlighted: false,
 });
 
-export { MyRoute ,Note, Stakeholder, Capacity, Truck, Robot, Battery };
+export { MyRoute, Note, Stakeholder, Capacity, Truck, Robot, Battery };
