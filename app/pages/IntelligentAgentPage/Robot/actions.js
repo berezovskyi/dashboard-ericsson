@@ -6,6 +6,7 @@ export const REQUEST_HIGHLIGHTED_ROBOTS = 'REQUEST_HIGHLIGHTED_ROBOTS';
 export const RECEIVE_ALL_ROBOTS = 'RECEIVE_ALL_ROBOTS';
 export const RECEIVE_HIGHLIGHTED_ROBOTS = 'RECEIVE_HIGHLIGHTED_ROBOTS';
 export const UPDATE_ROBOTS_HIGHLIGHT = 'UPDATE_ROBOTS_HIGHLIGHT';
+export const FAILED_REQUEST_ROBOTS = 'FAILED_REQUEST_ROBOTS';
 
 function requestRobots() {
   return {
@@ -89,7 +90,13 @@ export function fetchRobots() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/robots',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(response));
+        }
+      })
       .then(json => dispatch(receiveRobots(json)));
   };
 }
@@ -100,7 +107,13 @@ export function fetchHighlightedRobots() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/robots/highlighted',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(response));
+        }
+      })
       .then(json => dispatch(receiveHighlightedRobots(json)));
   };
 }
@@ -121,6 +134,16 @@ function shouldFetchHighlightedRobots(state) {
     return true;
   }
   return false;
+}
+
+function requestFailed(response) {
+  return {
+    type: FAILED_REQUEST_ROBOTS,
+    payload: {
+      status: response.status,
+      statusText: response.statusText,
+    },
+  };
 }
 
 export function fetchRobotsIfNeeded() {

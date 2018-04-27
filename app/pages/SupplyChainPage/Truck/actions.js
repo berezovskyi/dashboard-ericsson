@@ -6,6 +6,7 @@ export const REQUEST_HIGHLIGHTED_TRUCKS = 'REQUEST_HIGHLIGHTED_TRUCKS';
 export const RECEIVE_ALL_TRUCKS = 'RECEIVE_ALL_TRUCKS';
 export const RECEIVE_HIGHLIGHTED_TRUCKS = 'RECEIVE_HIGHLIGHTED_TRUCKS';
 export const UPDATE_TRUCKS_HIGHLIGHT = 'UPDATE_TRUCKS_HIGHLIGHT';
+export const FAILED_HIGHLIGHTED_TRUCKS = 'FAILED_HIGHLIGHTED_TRUCKS';
 
 function requestTrucks() {
   return {
@@ -89,7 +90,13 @@ export function fetchTrucks() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/trucks',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(response));
+        }
+      })
       .then(json => dispatch(receiveTrucks(json)));
   };
 }
@@ -100,8 +107,24 @@ export function fetchHighlightedTrucks() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/trucks/highlighted',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(response));
+        }
+      })
       .then(json => dispatch(receiveHighlightedTrucks(json)));
+  };
+}
+
+function requestFailed(response) {
+  return {
+    type: FAILED_HIGHLIGHTED_TRUCKS,
+    payload: {
+      status: response.status,
+      statusText: response.statusText,
+    },
   };
 }
 

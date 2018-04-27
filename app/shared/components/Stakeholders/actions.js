@@ -8,6 +8,8 @@ export const RECEIVE_ALL_STAKEHOLDERS = 'RECEIVE_ALL_STAKEHOLDERS';
 export const RECEIVE_HIGHLIGHTED_STAKEHOLDERS =
   'RECEIVE_HIGHLIGHTED_STAKEHOLDERS';
 export const UPDATE_STAKEHOLDERS_HIGHLIGHT = 'UPDATE_STAKEHOLDERS_HIGHLIGHT';
+export const FAILED_REQUEST_STAKEHOLDERS = 'FAILED_REQUEST_STAKEHOLDERS';
+
 
 /* 2 different kinds of actions: one for highlighted, one for all.  */
 
@@ -81,7 +83,13 @@ export function fetchStakeholders() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/stakeholders',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(response));
+        }
+      })
       .then(json => dispatch(receiveStakeholders(json)));
   };
 }
@@ -92,10 +100,27 @@ export function fetchHighlightedStakeholders() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/stakeholders/highlighted',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(response));
+        }
+      })
       .then(json => dispatch(receiveHighlightedStakeholders(json)));
   };
 }
+
+function requestFailed(response) {
+  return {
+    type: FAILED_REQUEST_STAKEHOLDERS,
+    payload: {
+      status: response.status,
+      statusText: response.statusText,
+    },
+  };
+}
+
 
 function shouldFetchStakeholders(state) {
   const { data } = state;

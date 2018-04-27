@@ -4,6 +4,7 @@ export const REQUEST_ALL_CAPACITY = 'REQUEST_ALL_CAPACITY';
 export const RECEIVE_ALL_CAPACITY = 'RECEIVE_ALL_CAPACITY';
 export const REQUEST_HIGHLIGHTED_CAPACITY = 'REQUEST_HIGHLIGHTED_CAPACITY';
 export const RECEIVE_HIGHLIGHTED_CAPACITY = 'RECEIVE_HIGHLIGHTED_CAPACITY';
+export const FAILED_REQUEST_CAPACITY = 'FAILED_REQUEST_CAPACITY';
 
 /* 2 different kinds of actions: one for highlighted, one for all.  */
 
@@ -75,7 +76,13 @@ export function fetchCapacity() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/capacity',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(response));
+        }
+      })
       .then(json => dispatch(receiveCapacity(json)));
   };
 }
@@ -86,8 +93,24 @@ export function fetchHighlightedCapacity() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/capacity/highlighted',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(response));
+        }
+      })
       .then(json => dispatch(receiveHighlightedCapacity(json)));
+  };
+}
+
+function requestFailed(response) {
+  return {
+    type: FAILED_REQUEST_CAPACITY,
+    payload: {
+      status: response.status,
+      statusText: response.statusText,
+    },
   };
 }
 
