@@ -91,6 +91,8 @@ class SingleBattery extends React.Component {
   render() {
     const { battery } = this.props;
 
+    console.log(battery);
+
     const {
       value,
       id,
@@ -221,7 +223,7 @@ class SingleBattery extends React.Component {
           </div>
         );
       }
-      return;
+      return null;
     });
   }
 }
