@@ -1,12 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import Alert from '../../../ui/Alert/Alert';
+import Loading from '../../../ui/Loading/Loading';
 import Card from '../../../ui/Card/Card';
 import Button from '../../../ui/Button/Button';
 import Form from '../../../ui/Form/Form';
 import Label from '../../../ui/Form/Label';
 import Textarea from '../../../ui/Form/Textarea';
 import FormGroup from '../../../ui/Form/FormGroup';
+import RefreshImage from '../../../shared/media/images/icons/refresh.svg';
 
 import { fetchHighlightedNotesIfNeeded } from './actions';
 
@@ -26,6 +30,7 @@ class Notes extends React.Component {
     super(props);
     this._handleaddNoteModal = this._handleaddNoteModal.bind(this);
     this._handleallNotesModal = this._handleallNotesModal.bind(this);
+    this._handleRefresh = this._handleRefresh.bind(this);
     this.state = {
       addnotesModal: false,
       allnotesModal: false,
@@ -51,8 +56,14 @@ class Notes extends React.Component {
     });
   }
 
+  _handleRefresh(e) {
+    e.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedNotesIfNeeded());
+  }
+
   render() {
-    const { id, type, name, notes } = this.props;
+    const { id, type, name, notes, loading, status, statusText } = this.props;
     const title = 'Highlighted Notes for ' + name;
 
     return (
@@ -61,6 +72,14 @@ class Notes extends React.Component {
         helpText="Add Notes relevant to Supply Chain over here"
         id={id}
       >
+        {loading ? <Loading /> : <div />}
+        {status > 400 && !loading
+          ? <Alert color="error">
+            <p>
+              Error: {status}<br />Status Text: {statusText}
+            </p>
+          </Alert>
+          : <div />}
         <NotesList notes={notes} type={type} />
         <div className={styles.footer}>
           <Button
@@ -70,7 +89,10 @@ class Notes extends React.Component {
           >
             View all Notes
           </Button>
-
+          {' '}
+          <Button color="primary" onClick={this._handleRefresh}>
+            <RefreshImage height={14} width={14} /> Refresh Notes
+          </Button>
           <Button
             size="medium"
             color="secondary"
@@ -131,6 +153,8 @@ function mapStateToProps(state) {
     loading: data.get('loading'),
     receivedAt: data.get('receivedAt'),
     notes: data.get('notes'),
+    status: data.get('status'),
+    statusText: data.get('statusText'),
   };
 }
 

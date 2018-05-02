@@ -10,10 +10,12 @@ import {
   REQUEST_ALL_BATTERY,
   REQUEST_HIGHLIGHTED_BATTERY,
   RECEIVE_HIGHLIGHTED_BATTERY,
-  RECEIVE_ALL_BATTERY,
+  RECEIVE_ALL_BATTERY, FAILED_REQUEST_BATTERY,
 } from './actions';
 
 const INITIAL_STATE = new Map({
+  status: null,
+  statusText: '',
   loading: false,
   receivedAt: null,
   battery: new Map(),
@@ -43,6 +45,12 @@ export default function batteryReducer(
         .setIn(['loading'], payload.loading)
         .setIn(['receivedAt'], payload.receivedAt)
         .updateIn(['battery'], data => data.mergeDeep(payload.battery));
+
+    case FAILED_REQUEST_BATTERY:
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['status'], payload.status)
+        .setIn(['statusText'], payload.statusText);
     default:
       return state;
   }

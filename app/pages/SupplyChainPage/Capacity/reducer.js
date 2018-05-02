@@ -10,10 +10,12 @@ import {
   REQUEST_ALL_CAPACITY,
   RECEIVE_ALL_CAPACITY,
   REQUEST_HIGHLIGHTED_CAPACITY,
-  RECEIVE_HIGHLIGHTED_CAPACITY,
+  RECEIVE_HIGHLIGHTED_CAPACITY, FAILED_REQUEST_CAPACITY,
 } from './actions';
 
 const INITIAL_STATE = new Map({
+  status: null,
+  statusText: '',
   loading: false,
   receivedAt: null,
   capacity: new Map(),
@@ -52,6 +54,11 @@ export default function capacityReducer(
           data.mergeDeep(payload.capacity),
         );
 
+    case FAILED_REQUEST_CAPACITY:
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['status'], payload.status)
+        .setIn(['statusText'], payload.statusText);
     default:
       return state;
   }

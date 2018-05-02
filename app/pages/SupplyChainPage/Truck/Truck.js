@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Loading from '../../../ui/Loading/Loading';
+import Alert from '../../../ui/Alert/Alert';
 import Card from '../../../ui/Card/Card';
 import Button from '../../../ui/Button/Button';
+import RefreshImage from '../../../shared/media/images/icons/refresh.svg';
 
 import SingleTruck from './SingleTruck';
 import SingleTruckModal from './SingleTruckModal';
@@ -21,6 +24,7 @@ class Truck extends Component {
       alltrucksModal: false,
     };
     this._handlealltruckModal = this._handlealltruckModal.bind(this);
+    this._handleRefresh = this._handleRefresh.bind(this);
   }
 
   componentDidMount() {
@@ -34,11 +38,25 @@ class Truck extends Component {
     });
   }
 
+  _handleRefresh(e) {
+    e.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedTrucksIfNeeded());
+  }
+
   render() {
-    const { trucks, id } = this.props;
+    const { trucks, id, loading, status, statusText } = this.props;
 
     return (
       <Card title="Trucks" helpText="The data relevant to the trucks" id={id}>
+        {loading ? <Loading /> : <div />}
+        {status > 400 && !loading
+          ? <Alert color="error">
+            <p>
+              Error: {status}<br />Status Text: {statusText}
+            </p>
+          </Alert>
+          : <div />}
         <SingleTruck trucks={trucks} total={3} />
         <Button
           size="medium"
@@ -46,6 +64,10 @@ class Truck extends Component {
           onClick={this._handlealltruckModal}
         >
           View all
+        </Button>
+        {' '}
+        <Button color="primary" onClick={this._handleRefresh}>
+          <RefreshImage height={14} width={14} /> Refresh Trucks
         </Button>
         <Modal
           isOpen={this.state.alltrucksModal}
@@ -75,6 +97,8 @@ function mapStateToProps(state) {
     loading: data.get('loading'),
     receivedAt: data.get('receivedAt'),
     trucks: data.get('trucks'),
+    status: data.get('status'),
+    statusText: data.get('statusText'),
   };
 }
 

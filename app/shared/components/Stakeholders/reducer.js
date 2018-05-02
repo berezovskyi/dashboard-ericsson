@@ -11,9 +11,12 @@ import {
   RECEIVE_ALL_STAKEHOLDERS,
   REQUEST_HIGHLIGHTED_STAKEHOLDERS,
   RECEIVE_HIGHLIGHTED_STAKEHOLDERS,
+  FAILED_REQUEST_STAKEHOLDERS,
 } from './actions';
 
 const INITIAL_STATE = new Map({
+  status: null,
+  statusText: '',
   loading: false,
   receivedAt: null,
   stakeholders: new Map(),
@@ -29,6 +32,7 @@ export default function stakeholderReducer(
         ['stakeholders', payload.id, 'highlighted'],
         payload.highlighted,
       );
+
     case REQUEST_ALL_STAKEHOLDERS:
       return state.setIn(['loading'], payload.loading);
 
@@ -50,6 +54,12 @@ export default function stakeholderReducer(
         .updateIn(['stakeholders'], data =>
           data.mergeDeep(payload.stakeholders),
         );
+
+    case FAILED_REQUEST_STAKEHOLDERS:
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['status'], payload.status)
+        .setIn(['statusText'], payload.statusText);
 
     default:
       return state;

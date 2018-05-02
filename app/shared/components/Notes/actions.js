@@ -1,11 +1,13 @@
 import 'whatwg-fetch';
 import { Note } from '../../../records';
+import { requestFailed } from '../../../reducers';
 
 export const REQUEST_ALL_NOTES = 'REQUEST_ALL_NOTES';
 export const REQUEST_HIGHLIGHTED_NOTES = 'REQUEST_HIGHLIGHTED_NOTES';
 export const RECEIVE_ALL_NOTES = 'RECEIVE_ALL_NOTES';
 export const RECEIVE_HIGHLIGHTED_NOTES = 'RECEIVE_HIGHLIGHTED_NOTES';
 export const UPDATE_NOTES_HIGHLIGHT = 'UPDATE_NOTES_HIGHLIGHT';
+export const FAILED_REQUEST_NOTES = 'FAILED_REQUEST_NOTES';
 
 /* 2 different kinds of actions: one for highlighted, one for all.  */
 
@@ -79,7 +81,13 @@ export function fetchNotes() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/notes',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(FAILED_REQUEST_NOTES, response));
+        }
+      })
       .then(json => dispatch(receiveNotes(json)));
   };
 }
@@ -90,7 +98,13 @@ export function fetchHighlightedNotes() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/notes/highlighted',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(FAILED_REQUEST_NOTES, response));
+        }
+      })
       .then(json => dispatch(receiveHighlightedNotes(json)));
   };
 }

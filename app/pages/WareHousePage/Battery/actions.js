@@ -1,11 +1,13 @@
 import 'whatwg-fetch';
 import { Battery } from '../../../records';
+import {requestFailed} from "../../../reducers";
 
 export const REQUEST_ALL_BATTERY = 'REQUEST_ALL_BATTERY';
 export const REQUEST_HIGHLIGHTED_BATTERY = 'REQUEST_HIGHLIGHTED_BATTERY';
 export const RECEIVE_ALL_BATTERY = 'RECEIVE_ALL_BATTERY';
 export const RECEIVE_HIGHLIGHTED_BATTERY = 'RECEIVE_HIGHLIGHTED_BATTERY';
 export const UPDATE_BATTERY_HIGHLIGHT = 'UPDATE_BATTERY_HIGHLIGHT';
+export const FAILED_REQUEST_BATTERY = 'FAILED_REQUEST_BATTERY';
 
 function requestBattery() {
   return {
@@ -101,10 +103,17 @@ export function fetchBattery() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/battery',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(FAILED_REQUEST_BATTERY, response));
+        }
+      })
       .then(json => dispatch(receiveBattery(json)));
   };
 }
+
 
 export function fetchHighlightedBattery() {
   return dispatch => {
@@ -112,7 +121,13 @@ export function fetchHighlightedBattery() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/battery/highlighted',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(FAILED_REQUEST_BATTERY, response));
+        }
+      })
       .then(json => dispatch(receiveHighlightedBattery(json)));
   };
 }

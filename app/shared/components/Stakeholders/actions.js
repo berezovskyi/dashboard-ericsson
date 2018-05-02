@@ -1,6 +1,8 @@
 import 'whatwg-fetch';
 import { Stakeholder } from '../../../records';
 
+import { requestFailed } from '../../../reducers';
+
 export const REQUEST_ALL_STAKEHOLDERS = 'REQUEST_ALL_STAKEHOLDERS';
 export const REQUEST_HIGHLIGHTED_STAKEHOLDERS =
   'REQUEST_HIGHLIGHTED_STAKEHOLDERS';
@@ -8,6 +10,8 @@ export const RECEIVE_ALL_STAKEHOLDERS = 'RECEIVE_ALL_STAKEHOLDERS';
 export const RECEIVE_HIGHLIGHTED_STAKEHOLDERS =
   'RECEIVE_HIGHLIGHTED_STAKEHOLDERS';
 export const UPDATE_STAKEHOLDERS_HIGHLIGHT = 'UPDATE_STAKEHOLDERS_HIGHLIGHT';
+export const FAILED_REQUEST_STAKEHOLDERS = 'FAILED_REQUEST_STAKEHOLDERS';
+
 
 /* 2 different kinds of actions: one for highlighted, one for all.  */
 
@@ -30,26 +34,29 @@ function requesthighlightedStakeholders() {
 }
 
 function receiveStakeholders(json) {
-  return {
-    type: RECEIVE_ALL_STAKEHOLDERS,
-    payload: {
-      receivedAt: Date.now(),
-      loading: false,
-      stakeholders: json.data.map(item => {
-        return [
-          item.id,
-          new Stakeholder({
-            id: item.id,
-            name: item.name,
-            phone: item.phone,
-            email: item.email,
-            type: item.type,
-            highlighted: item.highlighted,
-          }),
-        ];
-      }),
-    },
-  };
+  if (json) {
+    return {
+      type: RECEIVE_ALL_STAKEHOLDERS,
+      payload: {
+        receivedAt: Date.now(),
+        loading: false,
+        stakeholders: json.data.map(item => {
+          return [
+            item.id,
+            new Stakeholder({
+              id: item.id,
+              name: item.name,
+              phone: item.phone,
+              email: item.email,
+              type: item.type,
+              highlighted: item.highlighted,
+            }),
+          ];
+        }),
+      },
+    };
+  }
+  return null;
 }
 
 function receiveHighlightedStakeholders(json) {
@@ -81,7 +88,13 @@ export function fetchStakeholders() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/stakeholders',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(response));
+        }
+      })
       .then(json => dispatch(receiveStakeholders(json)));
   };
 }
@@ -92,13 +105,21 @@ export function fetchHighlightedStakeholders() {
     return fetch(
       'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/stakeholders/highlighted',
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.code >= 200 && response.code < 400) {
+          response.json();
+        } else {
+          dispatch(requestFailed(FAILED_REQUEST_STAKEHOLDERS, response));
+        }
+      })
       .then(json => dispatch(receiveHighlightedStakeholders(json)));
   };
 }
 
+
 function shouldFetchStakeholders(state) {
   const { data } = state;
+  console.log(data);
   if (!data) {
     return true;
   } else if (data.loading) {
