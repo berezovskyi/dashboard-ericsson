@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 import { Battery } from '../../../records';
 import {requestFailed} from "../../../reducers";
+import {API_URL} from "../../../constants";
 
 export const REQUEST_ALL_BATTERY = 'REQUEST_ALL_BATTERY';
 export const REQUEST_HIGHLIGHTED_BATTERY = 'REQUEST_HIGHLIGHTED_BATTERY';
@@ -101,7 +102,7 @@ export function fetchBattery() {
   return dispatch => {
     dispatch(requestBattery());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/battery',
+      API_URL + 'battery',
     )
       .then(response => {
         if (response.code >= 200 && response.code < 400) {
@@ -119,7 +120,7 @@ export function fetchHighlightedBattery() {
   return dispatch => {
     dispatch(requesthighlightedBattery());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/battery/highlighted',
+      API_URL + 'battery/highlighted',
     )
       .then(response => {
         if (response.code >= 200 && response.code < 400) {

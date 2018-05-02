@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 import { Robot } from '../../../records';
 import { requestFailed } from '../../../reducers';
+import {API_URL} from "../../../constants";
 
 export const REQUEST_ALL_ROBOTS = 'REQUEST_ALL_ROBOTS';
 export const REQUEST_HIGHLIGHTED_ROBOTS = 'REQUEST_HIGHLIGHTED_ROBOTS';
@@ -89,7 +90,7 @@ export function fetchRobots() {
   return dispatch => {
     dispatch(requestRobots());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/robots',
+      API_URL + 'robots',
     )
       .then(response => {
         if (response.code >= 200 && response.code < 400) {
@@ -106,7 +107,7 @@ export function fetchHighlightedRobots() {
   return dispatch => {
     dispatch(requesthighlightedRobots());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/robots/highlighted',
+      API_URL + 'robots/highlighted',
     )
       .then(response => {
         if (response.code >= 200 && response.code < 400) {
