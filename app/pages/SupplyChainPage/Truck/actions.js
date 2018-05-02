@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 import { Truck } from '../../../records';
 import { requestFailed } from '../../../reducers';
+import {API_URL} from "../../../constants";
 
 export const REQUEST_ALL_TRUCKS = 'REQUEST_ALL_TRUCKS';
 export const REQUEST_HIGHLIGHTED_TRUCKS = 'REQUEST_HIGHLIGHTED_TRUCKS';
@@ -89,7 +90,7 @@ export function fetchTrucks() {
   return dispatch => {
     dispatch(requestTrucks());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/trucks',
+      API_URL + 'trucks',
     )
       .then(response => {
         if (response.code >= 200 && response.code < 400) {
@@ -106,7 +107,7 @@ export function fetchHighlightedTrucks() {
   return dispatch => {
     dispatch(requesthighlightedTrucks());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/trucks/highlighted',
+      API_URL + 'trucks/highlighted',
     )
       .then(response => {
         if (response.code >= 200 && response.code < 400) {

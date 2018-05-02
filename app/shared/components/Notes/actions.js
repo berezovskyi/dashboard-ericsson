@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 import { Note } from '../../../records';
 import { requestFailed } from '../../../reducers';
+import {API_URL} from "../../../constants";
 
 export const REQUEST_ALL_NOTES = 'REQUEST_ALL_NOTES';
 export const REQUEST_HIGHLIGHTED_NOTES = 'REQUEST_HIGHLIGHTED_NOTES';
@@ -79,7 +80,7 @@ export function fetchNotes() {
   return dispatch => {
     dispatch(requestNotes());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/notes',
+      API_URL + 'notes',
     )
       .then(response => {
         if (response.code >= 200 && response.code < 400) {
@@ -96,7 +97,7 @@ export function fetchHighlightedNotes() {
   return dispatch => {
     dispatch(requesthighlightedNotes());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/notes/highlighted',
+      API_URL + 'notes/highlighted',
     )
       .then(response => {
         if (response.code >= 200 && response.code < 400) {

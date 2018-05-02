@@ -2,6 +2,7 @@ import 'whatwg-fetch';
 import { Stakeholder } from '../../../records';
 
 import { requestFailed } from '../../../reducers';
+import {API_URL} from "../../../constants";
 
 export const REQUEST_ALL_STAKEHOLDERS = 'REQUEST_ALL_STAKEHOLDERS';
 export const REQUEST_HIGHLIGHTED_STAKEHOLDERS =
@@ -86,7 +87,7 @@ export function fetchStakeholders() {
   return dispatch => {
     dispatch(requestStakeholders());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/stakeholders',
+      API_URL + 'stakeholders',
     )
       .then(response => {
         if (response.code >= 200 && response.code < 400) {
@@ -103,7 +104,7 @@ export function fetchHighlightedStakeholders() {
   return dispatch => {
     dispatch(requesthighlightedStakeholders());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/stakeholders/highlighted',
+      API_URL + 'stakeholders/highlighted',
     )
       .then(response => {
         if (response.code >= 200 && response.code < 400) {

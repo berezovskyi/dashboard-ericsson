@@ -1,5 +1,6 @@
 import { Capacity } from '../../../records';
 import { requestFailed } from '../../../reducers';
+import {API_URL} from "../../../constants";
 export const UPDATE_CAPACITY_HIGHLIGHT = 'UPDATE_CAPACITY_HIGHLIGHT';
 export const REQUEST_ALL_CAPACITY = 'REQUEST_ALL_CAPACITY';
 export const RECEIVE_ALL_CAPACITY = 'RECEIVE_ALL_CAPACITY';
@@ -75,7 +76,7 @@ export function fetchCapacity() {
   return dispatch => {
     dispatch(requestCapacity());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/capacity',
+      API_URL + 'capacity',
     )
       .then(response => {
         if (response.code >= 200 && response.code < 400) {
@@ -92,7 +93,7 @@ export function fetchHighlightedCapacity() {
   return dispatch => {
     dispatch(requesthighlightedCapacity());
     return fetch(
-      'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/capacity/highlighted',
+      API_URL + 'capacity/highlighted',
     )
       .then(response => {
         if (response.code >= 200 && response.code < 400) {
