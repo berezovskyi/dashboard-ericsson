@@ -80,7 +80,7 @@ class Notes extends React.Component {
           </Button>
           {' '}
           <Button color="primary" onClick={this._handleRefresh}>
-            <RefreshImage height={14} width={14} /> Refresh Stakeholders
+            <RefreshImage height={14} width={14} /> Refresh Notes
           </Button>
           <Button
             size="medium"

@@ -11,7 +11,7 @@ import {
   REQUEST_ALL_NOTES,
   RECEIVE_ALL_NOTES,
   REQUEST_HIGHLIGHTED_NOTES,
-  RECEIVE_HIGHLIGHTED_NOTES,
+  RECEIVE_HIGHLIGHTED_NOTES, FAILED_REQUEST_NOTES,
 
 } from './actions';
 
@@ -50,6 +50,12 @@ export default function notesReducer(state = INITIAL_STATE, { type, payload }) {
         ['notes', payload.id, 'highlighted'],
         payload.highlighted,
       );
+
+    case FAILED_REQUEST_NOTES:
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['status'], payload.status)
+        .setIn(['statusText'], payload.statusText);
     default:
       return state;
   }

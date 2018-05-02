@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import { Robot } from '../../../records';
+import { requestFailed } from '../../../reducers';
 
 export const REQUEST_ALL_ROBOTS = 'REQUEST_ALL_ROBOTS';
 export const REQUEST_HIGHLIGHTED_ROBOTS = 'REQUEST_HIGHLIGHTED_ROBOTS';
@@ -111,7 +112,7 @@ export function fetchHighlightedRobots() {
         if (response.code >= 200 && response.code < 400) {
           response.json();
         } else {
-          dispatch(requestFailed(response));
+          dispatch(requestFailed(FAILED_REQUEST_ROBOTS, response));
         }
       })
       .then(json => dispatch(receiveHighlightedRobots(json)));
@@ -134,16 +135,6 @@ function shouldFetchHighlightedRobots(state) {
     return true;
   }
   return false;
-}
-
-function requestFailed(response) {
-  return {
-    type: FAILED_REQUEST_ROBOTS,
-    payload: {
-      status: response.status,
-      statusText: response.statusText,
-    },
-  };
 }
 
 export function fetchRobotsIfNeeded() {

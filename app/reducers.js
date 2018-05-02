@@ -28,6 +28,17 @@ function routeReducer(state = routeInitialState, action) {
   }
 }
 
+export function requestFailed(type, response) {
+  return {
+    type: type,
+    payload: {
+      loading: false,
+      status: response.status,
+      statusText: response.statusText,
+    },
+  };
+}
+
 export default function createReducer(injectedReducers) {
   return combineReducers({
     route: routeReducer,

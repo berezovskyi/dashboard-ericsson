@@ -1,4 +1,5 @@
 import { Capacity } from '../../../records';
+import { requestFailed } from '../../../reducers';
 export const UPDATE_CAPACITY_HIGHLIGHT = 'UPDATE_CAPACITY_HIGHLIGHT';
 export const REQUEST_ALL_CAPACITY = 'REQUEST_ALL_CAPACITY';
 export const RECEIVE_ALL_CAPACITY = 'RECEIVE_ALL_CAPACITY';
@@ -97,20 +98,10 @@ export function fetchHighlightedCapacity() {
         if (response.code >= 200 && response.code < 400) {
           response.json();
         } else {
-          dispatch(requestFailed(response));
+          dispatch(requestFailed(FAILED_REQUEST_CAPACITY, response));
         }
       })
       .then(json => dispatch(receiveHighlightedCapacity(json)));
-  };
-}
-
-function requestFailed(response) {
-  return {
-    type: FAILED_REQUEST_CAPACITY,
-    payload: {
-      status: response.status,
-      statusText: response.statusText,
-    },
   };
 }
 

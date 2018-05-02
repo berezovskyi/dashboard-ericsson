@@ -1,6 +1,8 @@
 import 'whatwg-fetch';
 import { Stakeholder } from '../../../records';
 
+import { requestFailed } from '../../../reducers';
+
 export const REQUEST_ALL_STAKEHOLDERS = 'REQUEST_ALL_STAKEHOLDERS';
 export const REQUEST_HIGHLIGHTED_STAKEHOLDERS =
   'REQUEST_HIGHLIGHTED_STAKEHOLDERS';
@@ -107,21 +109,10 @@ export function fetchHighlightedStakeholders() {
         if (response.code >= 200 && response.code < 400) {
           response.json();
         } else {
-          dispatch(requestFailed(response));
+          dispatch(requestFailed(FAILED_REQUEST_STAKEHOLDERS, response));
         }
       })
       .then(json => dispatch(receiveHighlightedStakeholders(json)));
-  };
-}
-
-function requestFailed(response) {
-  return {
-    type: FAILED_REQUEST_STAKEHOLDERS,
-    payload: {
-      loading: false,
-      status: response.status,
-      statusText: response.statusText,
-    },
   };
 }
 

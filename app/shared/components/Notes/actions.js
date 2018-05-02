@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import { Note } from '../../../records';
+import { requestFailed } from '../../../reducers';
 
 export const REQUEST_ALL_NOTES = 'REQUEST_ALL_NOTES';
 export const REQUEST_HIGHLIGHTED_NOTES = 'REQUEST_HIGHLIGHTED_NOTES';
@@ -84,7 +85,7 @@ export function fetchNotes() {
         if (response.code >= 200 && response.code < 400) {
           response.json();
         } else {
-          dispatch(requestFailed(response));
+          dispatch(requestFailed(FAILED_REQUEST_NOTES, response));
         }
       })
       .then(json => dispatch(receiveNotes(json)));
@@ -107,18 +108,6 @@ export function fetchHighlightedNotes() {
       .then(json => dispatch(receiveHighlightedNotes(json)));
   };
 }
-
-
-function requestFailed(response) {
-  return {
-    type: FAILED_REQUEST_NOTES,
-    payload: {
-      status: response.status,
-      statusText: response.statusText,
-    },
-  };
-}
-
 
 function shouldFetchNotes(state) {
   const { data } = state;

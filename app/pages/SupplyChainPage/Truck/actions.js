@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import { Truck } from '../../../records';
+import { requestFailed } from '../../../reducers';
 
 export const REQUEST_ALL_TRUCKS = 'REQUEST_ALL_TRUCKS';
 export const REQUEST_HIGHLIGHTED_TRUCKS = 'REQUEST_HIGHLIGHTED_TRUCKS';
@@ -111,20 +112,10 @@ export function fetchHighlightedTrucks() {
         if (response.code >= 200 && response.code < 400) {
           response.json();
         } else {
-          dispatch(requestFailed(response));
+          dispatch(requestFailed(FAILED_HIGHLIGHTED_TRUCKS, response));
         }
       })
       .then(json => dispatch(receiveHighlightedTrucks(json)));
-  };
-}
-
-function requestFailed(response) {
-  return {
-    type: FAILED_HIGHLIGHTED_TRUCKS,
-    payload: {
-      status: response.status,
-      statusText: response.statusText,
-    },
   };
 }
 

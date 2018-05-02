@@ -11,9 +11,12 @@ import {
   REQUEST_HIGHLIGHTED_TRUCKS,
   RECEIVE_HIGHLIGHTED_TRUCKS,
   RECEIVE_ALL_TRUCKS,
+  FAILED_REQUEST_TRUCKS,
 } from './actions';
 
 const INITIAL_STATE = new Map({
+  status: null,
+  statusText: '',
   loading: false,
   receivedAt: null,
   trucks: new Map(),
@@ -44,6 +47,11 @@ export default function truckReducer(state = INITIAL_STATE, { type, payload }) {
         .setIn(['receivedAt'], payload.receivedAt)
         .updateIn(['trucks'], data => data.mergeDeep(payload.trucks));
 
+    case FAILED_REQUEST_TRUCKS:
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['status'], payload.status)
+        .setIn(['statusText'], payload.statusText);
     default:
       return state;
   }

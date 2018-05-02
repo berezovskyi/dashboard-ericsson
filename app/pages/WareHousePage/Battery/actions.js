@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import { Battery } from '../../../records';
+import {requestFailed} from "../../../reducers";
 
 export const REQUEST_ALL_BATTERY = 'REQUEST_ALL_BATTERY';
 export const REQUEST_HIGHLIGHTED_BATTERY = 'REQUEST_HIGHLIGHTED_BATTERY';
@@ -106,21 +107,10 @@ export function fetchBattery() {
         if (response.code >= 200 && response.code < 400) {
           response.json();
         } else {
-          dispatch(requestFailed(response));
+          dispatch(requestFailed(FAILED_REQUEST_BATTERY, response));
         }
       })
       .then(json => dispatch(receiveBattery(json)));
-  };
-}
-
-
-function requestFailed(response) {
-  return {
-    type: FAILED_REQUEST_BATTERY,
-    payload: {
-      status: response.status,
-      statusText: response.statusText,
-    },
   };
 }
 
@@ -135,7 +125,7 @@ export function fetchHighlightedBattery() {
         if (response.code >= 200 && response.code < 400) {
           response.json();
         } else {
-          dispatch(requestFailed(response));
+          dispatch(requestFailed(FAILED_REQUEST_BATTERY, response));
         }
       })
       .then(json => dispatch(receiveHighlightedBattery(json)));
