@@ -32,26 +32,29 @@ function requesthighlightedStakeholders() {
 }
 
 function receiveStakeholders(json) {
-  return {
-    type: RECEIVE_ALL_STAKEHOLDERS,
-    payload: {
-      receivedAt: Date.now(),
-      loading: false,
-      stakeholders: json.data.map(item => {
-        return [
-          item.id,
-          new Stakeholder({
-            id: item.id,
-            name: item.name,
-            phone: item.phone,
-            email: item.email,
-            type: item.type,
-            highlighted: item.highlighted,
-          }),
-        ];
-      }),
-    },
-  };
+  if (json) {
+    return {
+      type: RECEIVE_ALL_STAKEHOLDERS,
+      payload: {
+        receivedAt: Date.now(),
+        loading: false,
+        stakeholders: json.data.map(item => {
+          return [
+            item.id,
+            new Stakeholder({
+              id: item.id,
+              name: item.name,
+              phone: item.phone,
+              email: item.email,
+              type: item.type,
+              highlighted: item.highlighted,
+            }),
+          ];
+        }),
+      },
+    };
+  }
+  return null;
 }
 
 function receiveHighlightedStakeholders(json) {
@@ -115,6 +118,7 @@ function requestFailed(response) {
   return {
     type: FAILED_REQUEST_STAKEHOLDERS,
     payload: {
+      loading: false,
       status: response.status,
       statusText: response.statusText,
     },
@@ -124,6 +128,7 @@ function requestFailed(response) {
 
 function shouldFetchStakeholders(state) {
   const { data } = state;
+  console.log(data);
   if (!data) {
     return true;
   } else if (data.loading) {
