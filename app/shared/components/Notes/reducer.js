@@ -16,6 +16,8 @@ import {
 } from './actions';
 
 const INITIAL_STATE = new Map({
+  status: null,
+  statusText: '',
   loading: false,
   receivedAt: null,
   notes: new Map(),

@@ -30,12 +30,6 @@ class Header extends Component {
               <NavLink to={location + '?time=year'}>Yearly</NavLink>
             </li>
           </ul>
-          <div className={styles.refreshcontainer}>
-            <span className={styles.time}>Last Updated:<strong>{' '}October 11th, 2018, 2:45 PM</strong></span>
-            <Button color="primary">
-              <RefreshImage height={16} width={16} />
-            </Button>
-          </div>
         </div>
       </div>
     );

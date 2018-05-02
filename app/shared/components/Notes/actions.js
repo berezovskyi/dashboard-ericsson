@@ -102,7 +102,7 @@ export function fetchHighlightedNotes() {
         if (response.code >= 200 && response.code < 400) {
           response.json();
         } else {
-          dispatch(requestFailed(response));
+          dispatch(requestFailed(FAILED_REQUEST_NOTES, response));
         }
       })
       .then(json => dispatch(receiveHighlightedNotes(json)));

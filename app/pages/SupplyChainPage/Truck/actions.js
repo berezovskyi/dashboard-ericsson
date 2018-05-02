@@ -7,7 +7,7 @@ export const REQUEST_HIGHLIGHTED_TRUCKS = 'REQUEST_HIGHLIGHTED_TRUCKS';
 export const RECEIVE_ALL_TRUCKS = 'RECEIVE_ALL_TRUCKS';
 export const RECEIVE_HIGHLIGHTED_TRUCKS = 'RECEIVE_HIGHLIGHTED_TRUCKS';
 export const UPDATE_TRUCKS_HIGHLIGHT = 'UPDATE_TRUCKS_HIGHLIGHT';
-export const FAILED_HIGHLIGHTED_TRUCKS = 'FAILED_HIGHLIGHTED_TRUCKS';
+export const FAILED_REQUEST_TRUCKS = 'FAILED_REQUEST_TRUCKS';
 
 function requestTrucks() {
   return {
@@ -95,7 +95,7 @@ export function fetchTrucks() {
         if (response.code >= 200 && response.code < 400) {
           response.json();
         } else {
-          dispatch(requestFailed(response));
+          dispatch(requestFailed(FAILED_REQUEST_TRUCKS, response));
         }
       })
       .then(json => dispatch(receiveTrucks(json)));
@@ -112,7 +112,7 @@ export function fetchHighlightedTrucks() {
         if (response.code >= 200 && response.code < 400) {
           response.json();
         } else {
-          dispatch(requestFailed(FAILED_HIGHLIGHTED_TRUCKS, response));
+          dispatch(requestFailed(FAILED_REQUEST_TRUCKS, response));
         }
       })
       .then(json => dispatch(receiveHighlightedTrucks(json)));
