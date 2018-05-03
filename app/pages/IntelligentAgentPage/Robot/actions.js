@@ -96,7 +96,7 @@ export function fetchRobots() {
         if (response.code >= 200 && response.code < 400) {
           response.json();
         } else {
-          dispatch(requestFailed(response));
+          dispatch(requestFailed(FAILED_REQUEST_ROBOTS, response));
         }
       })
       .then(json => dispatch(receiveRobots(json)));
