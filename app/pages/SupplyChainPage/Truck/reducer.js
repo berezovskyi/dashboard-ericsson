@@ -29,11 +29,16 @@ export default function truckReducer(state = INITIAL_STATE, { type, payload }) {
         ['trucks', payload.id, 'highlighted'],
         payload.highlighted,
       );
+
     case REQUEST_ALL_TRUCKS:
-      return state.setIn(['loading'], payload.loading);
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt);
 
     case REQUEST_HIGHLIGHTED_TRUCKS:
-      return state.setIn(['loading'], payload.loading);
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt);
 
     case RECEIVE_HIGHLIGHTED_TRUCKS:
       return state

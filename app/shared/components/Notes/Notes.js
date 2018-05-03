@@ -63,7 +63,8 @@ class Notes extends React.Component {
   }
 
   render() {
-    const { id, type, name, notes, loading, status, statusText } = this.props;
+    const { id, type, name, notes, loading, status, statusText, receivedAt } = this.props;
+    const date = new Date(receivedAt).toLocaleTimeString('en-US');
     const title = 'Highlighted Notes for ' + name;
 
     return (
@@ -71,6 +72,7 @@ class Notes extends React.Component {
         title={title}
         helpText="Add Notes relevant to Supply Chain over here"
         id={id}
+        date={date}
       >
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading

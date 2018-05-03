@@ -45,10 +45,11 @@ class Truck extends Component {
   }
 
   render() {
-    const { trucks, id, loading, status, statusText } = this.props;
+    const { trucks, id, loading, status, statusText, receivedAt } = this.props;
+    const date = new Date(receivedAt).toLocaleTimeString('en-US');
 
     return (
-      <Card title="Trucks" helpText="The data relevant to the trucks" id={id}>
+      <Card title="Trucks" helpText="The data relevant to the trucks" id={id} date={date}>
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading
           ? <Alert color="error">

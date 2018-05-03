@@ -44,9 +44,10 @@ class Battery extends Component {
   }
 
   render() {
-    const { battery, id, loading, status, statusText } = this.props;
+    const { battery, id, loading, status, statusText, receivedAt } = this.props;
+    const date = new Date(receivedAt).toLocaleTimeString('en-US');
     return (
-      <Card title="Highlighted Robot State" helpText="The data relevant to the Robot Batteries" id={id}>
+      <Card title="Highlighted Robot State" helpText="The data relevant to the Robot Batteries" id={id} date={date}>
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading
           ? <Alert color="error">

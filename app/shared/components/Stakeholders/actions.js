@@ -20,6 +20,7 @@ function requestStakeholders() {
   return {
     type: REQUEST_ALL_STAKEHOLDERS,
     payload: {
+      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -29,6 +30,7 @@ function requesthighlightedStakeholders() {
   return {
     type: REQUEST_HIGHLIGHTED_STAKEHOLDERS,
     payload: {
+      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -39,7 +41,6 @@ function receiveStakeholders(json) {
     return {
       type: RECEIVE_ALL_STAKEHOLDERS,
       payload: {
-        receivedAt: Date.now(),
         loading: false,
         stakeholders: json.data.map(item => {
           return [
