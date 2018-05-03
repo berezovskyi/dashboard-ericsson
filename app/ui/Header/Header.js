@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import Button from '../../ui/Button/Button';
 import styles from './Header.css';
+import RefreshImage from '../../shared/media/images/icons/refresh.svg';
 import { getCurrentRoute } from '../../utils/utils';
 
 class Header extends Component {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styles from './Capacity.css';
 import Knob from '../../../ui/Knob/Knob';
 import Checkbox from '../../../ui/Form/Checkbox';
+import { fetchCapacityIfNeeded, UPDATE_CAPACITY_HIGHLIGHT } from './actions';
 
 class SingleCapacityModal extends Component {
   constructor(props) {
@@ -10,17 +11,25 @@ class SingleCapacityModal extends Component {
     this._handlehighlight = this._handlehighlight.bind(this);
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchCapacityIfNeeded());
+  }
+
   _handlehighlight(data) {
-    const dispatch = this.props.dispatch;
+    const { dispatch } = this.props;
     dispatch({
-      type: 'UPDATE_CAPACITY_HIGHLIGHT',
-      id: data.id,
-      highlighted: !data.highlighted,
+      type: UPDATE_CAPACITY_HIGHLIGHT,
+      payload: {
+        id: data.id,
+        highlighted: !data.highlighted,
+      },
     });
   }
 
   render() {
     const { capacity, type } = this.props;
+    console.log(capacity);
     return (
       <div className={styles.row}>
         {capacity.valueSeq().map(row => {
@@ -55,7 +64,12 @@ class SingleCapacityModal extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  const data = state.get('capacity');
+  return {
+    loading: data.get('loading'),
+    receivedAt: data.get('receivedAt'),
+    capacity: data.get('capacity'),
+  };
 }
 
 export default connect(mapStateToProps)(SingleCapacityModal);

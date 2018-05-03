@@ -72,7 +72,7 @@ class SingleTruck extends React.Component {
   }
 
   render() {
-    const { trucks, total } = this.props;
+    const { trucks } = this.props;
     const {
       name,
       to,
@@ -85,113 +85,119 @@ class SingleTruck extends React.Component {
 
     const differenceClass = className(styles.modaldiff, styles.modalincrease);
 
-    return (
-      <div className={styles.singlecontainer}>
-        {trucks.valueSeq().filter((i, index) => index < total).map(row => (
-          <div key={row.id}>
-            <div className={styles.row}>
-              <h4 className={styles.title}>
-                {row.name}{' - '}{row.id}{' - '}{row.to}{' from '}{row.from}
-              </h4>
-              <div className={styles.fiveSixth}>
-                <Progress value={row.value} />
-              </div>
-              <div className={styles.oneSixth}>
-                <span className={styles.text}>{row.value}{'% completed'}</span>
-              </div>
-            </div>
-            <div className={styles.row}>
-              <Button
-                size="medium"
-                color="secondary"
-                onClick={() => this._handletruckinfoModal(row)}
-              >
-                View more on {row.name}
-              </Button>
-            </div>
-          </div>
-        ))}
-        <Modal
-          isOpen={this.state.truckModal}
-          toggle={this._handletruckinfoModal}
-        >
-          <ModalHeader toggle={this._handletruckinfoModal}>
-            {name}
-          </ModalHeader>
-          <ModalBody>
-            <div className={styles.modalprogress}>
-              <h4 className={styles.progresstitle}>
-                {name}{' - '}{id}{' - '}{to}{' from '}{from}
-              </h4>
+    return trucks.valueSeq().map(row => {
+      if (row.highlighted) {
+        return (
+          <div className={styles.singlecontainer} key={row.id}>
+            <div>
               <div className={styles.row}>
-                <div className={styles.fourFifth}>
-                  <Progress value={value} />
+                <h4 className={styles.title}>
+                  {row.name}{' - '}{row.id}{' - '}{row.to}{' from '}{row.from}
+                </h4>
+                <div className={styles.fiveSixth}>
+                  <Progress value={row.value} />
                 </div>
-                <div className={styles.oneFifth}>
-                  <span className={styles.text}>{value}{'% completed'}</span>
+                <div className={styles.oneSixth}>
+                  <span className={styles.text}>
+                    {row.value}{'% completed'}
+                  </span>
                 </div>
+              </div>
+              <div className={styles.row}>
+                <Button
+                  size="medium"
+                  color="secondary"
+                  onClick={() => this._handletruckinfoModal(row)}
+                >
+                  View more on {row.name}
+                </Button>
               </div>
             </div>
-            <div className={styles.row}>
-              <div className={styles.oneHalf}>
-                <h4 className={styles.modaltitle}>Sustainability</h4>
-                <p className={styles.modaldescription}>
-                  This is what the fuzz is about. This is some really cool description about the truck.
-                </p>
-                <div className={styles.modalbox}>
-                  <img
-                    src={sustainabilityIcon}
-                    alt="The sustainability Index"
-                    width={64}
-                  />
-                  <h1 className={styles.modalboxtitle}>
-                    {sustainability.value}{'%'}
-                  </h1>
-                  <p>
-                    <span className={differenceClass}>
-                      <IncreaseIcon />{sustainability.diff}{'%'}
-                    </span>
-                    <span className={styles.modaltime}>14:45</span>
-                  </p>
+            <Modal
+              isOpen={this.state.truckModal}
+              toggle={this._handletruckinfoModal}
+            >
+              <ModalHeader toggle={this._handletruckinfoModal}>
+                {name}
+              </ModalHeader>
+              <ModalBody>
+                <div className={styles.modalprogress}>
+                  <h4 className={styles.progresstitle}>
+                    {name}{' - '}{id}{' - '}{to}{' from '}{from}
+                  </h4>
+                  <div className={styles.row}>
+                    <div className={styles.fourFifth}>
+                      <Progress value={value} />
+                    </div>
+                    <div className={styles.oneFifth}>
+                      <span className={styles.text}>
+                        {value}{'% completed'}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className={styles.oneHalf}>
-                <h4 className={styles.modaltitle}>Total Active Hours</h4>
-                <p className={styles.modaldescription}>
-                  This is what the fuzz is about. This is some really cool description about the truck.
-                </p>
-                <div className={styles.modalbox}>
-                  <img
-                    src={activityIcon}
-                    alt="The total hours spent."
-                    width={64}
-                  />
-                  <h1 className={styles.modalboxtitle}>{activity.time}</h1>
-                  <p>
-                    {this.diffContainer(activity.diff)}
-                    <span className={styles.modaltime}>14:45</span>
-                  </p>
+                <div className={styles.row}>
+                  <div className={styles.oneHalf}>
+                    <h4 className={styles.modaltitle}>Sustainability</h4>
+                    <p className={styles.modaldescription}>
+                      This is what the fuzz is about. This is some really cool description about the truck.
+                    </p>
+                    <div className={styles.modalbox}>
+                      <img
+                        src={sustainabilityIcon}
+                        alt="The sustainability Index"
+                        width={64}
+                      />
+                      <h1 className={styles.modalboxtitle}>
+                        {sustainability.value}{'%'}
+                      </h1>
+                      <p>
+                        <span className={differenceClass}>
+                          <IncreaseIcon />{sustainability.diff}{'%'}
+                        </span>
+                        <span className={styles.modaltime}>14:45</span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className={styles.oneHalf}>
+                    <h4 className={styles.modaltitle}>Total Active Hours</h4>
+                    <p className={styles.modaldescription}>
+                      This is what the fuzz is about. This is some really cool description about the truck.
+                    </p>
+                    <div className={styles.modalbox}>
+                      <img
+                        src={activityIcon}
+                        alt="The total hours spent."
+                        width={64}
+                      />
+                      <h1 className={styles.modalboxtitle}>{activity.time}</h1>
+                      <p>
+                        {this.diffContainer(activity.diff)}
+                        <span className={styles.modaltime}>14:45</span>
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={this._handletruckinfoModal}>
-              Close
-            </Button>
-            {' '}
-            <Button color="primary" onClick={this._handletruckinfoModal}>
-              Update
-            </Button>
-          </ModalFooter>
-        </Modal>
-      </div>
-    );
+              </ModalBody>
+              <ModalFooter>
+                <Button color="secondary" onClick={this._handletruckinfoModal}>
+                  Close
+                </Button>
+                {' '}
+                <Button color="primary" onClick={this._handletruckinfoModal}>
+                  Update
+                </Button>
+              </ModalFooter>
+            </Modal>
+          </div>
+        );
+      }
+    });
   }
 }
 
 SingleTruck.proptypes = {
   total: PropTypes.number,
   trucks: PropTypes.any,
-}
+};
 export default SingleTruck;

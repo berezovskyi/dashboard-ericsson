@@ -1,12 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import Alert from '../../../ui/Alert/Alert';
+import Loading from '../../../ui/Loading/Loading';
 import Card from '../../../ui/Card/Card';
 import Button from '../../../ui/Button/Button';
 import Form from '../../../ui/Form/Form';
 import Label from '../../../ui/Form/Label';
 import Textarea from '../../../ui/Form/Textarea';
 import FormGroup from '../../../ui/Form/FormGroup';
+import RefreshImage from '../../../shared/media/images/icons/refresh.svg';
+
+import { fetchHighlightedNotesIfNeeded } from './actions';
 
 import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
@@ -24,10 +30,16 @@ class Notes extends React.Component {
     super(props);
     this._handleaddNoteModal = this._handleaddNoteModal.bind(this);
     this._handleallNotesModal = this._handleallNotesModal.bind(this);
+    this._handleRefresh = this._handleRefresh.bind(this);
     this.state = {
       addnotesModal: false,
       allnotesModal: false,
     };
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedNotesIfNeeded());
   }
 
   _handleaddNoteModal() {
@@ -44,8 +56,15 @@ class Notes extends React.Component {
     });
   }
 
+  _handleRefresh(e) {
+    e.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedNotesIfNeeded());
+  }
+
   render() {
-    const { id, type, name, notes } = this.props;
+    const { id, type, name, notes, loading, status, statusText, receivedAt } = this.props;
+    const date = new Date(receivedAt).toLocaleTimeString('en-US');
     const title = 'Highlighted Notes for ' + name;
 
     return (
@@ -53,15 +72,29 @@ class Notes extends React.Component {
         title={title}
         helpText="Add Notes relevant to Supply Chain over here"
         id={id}
+        date={date}
       >
-        {notes.size > 0 ? <NotesList notes={notes} type={type} /> : <NoNotes />}
+        {loading ? <Loading /> : <div />}
+        {status > 400 && !loading
+          ? <Alert color="error">
+            <p>
+              Error: {status}<br />Status Text: {statusText}
+            </p>
+          </Alert>
+          : <div />}
+        <NotesList notes={notes} type={type} />
         <div className={styles.footer}>
-          {notes.size > 0
-            ? <Button size="medium" color="primary" onClick={this._handleallNotesModal}>
-                View all Notes
-              </Button>
-            : null}
-
+          <Button
+            size="medium"
+            color="primary"
+            onClick={this._handleallNotesModal}
+          >
+            View all Notes
+          </Button>
+          {' '}
+          <Button color="primary" onClick={this._handleRefresh}>
+            <RefreshImage height={14} width={14} /> Refresh Notes
+          </Button>
           <Button
             size="medium"
             color="secondary"
@@ -74,7 +107,9 @@ class Notes extends React.Component {
           isOpen={this.state.addnotesModal}
           toggle={this._handleaddNoteModal}
         >
-          <ModalHeader toggle={this._handleaddNoteModal}>Add Notes to {name}</ModalHeader>
+          <ModalHeader toggle={this._handleaddNoteModal}>
+            Add Notes to {name}
+          </ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
@@ -100,7 +135,7 @@ class Notes extends React.Component {
             All Notes for {name}
           </ModalHeader>
           <ModalBody>
-            <NotesListModal notes={notes} type={type} />
+            <NotesListModal type={type} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handleallNotesModal}>
@@ -115,14 +150,20 @@ class Notes extends React.Component {
 }
 
 function mapStateToProps(state) {
+  const data = state.get('notes');
   return {
-    notes: state.get('notes'),
+    loading: data.get('loading'),
+    receivedAt: data.get('receivedAt'),
+    notes: data.get('notes'),
+    status: data.get('status'),
+    statusText: data.get('statusText'),
   };
 }
 
 Notes.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string.isRequired,
+  notes: PropTypes.object,
+  loading: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Notes);

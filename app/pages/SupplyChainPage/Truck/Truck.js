@@ -1,59 +1,110 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import className from 'classnames';
+import Loading from '../../../ui/Loading/Loading';
+import Alert from '../../../ui/Alert/Alert';
 import Card from '../../../ui/Card/Card';
-import Progress from '../../../ui/Progress/Progress';
 import Button from '../../../ui/Button/Button';
+import RefreshImage from '../../../shared/media/images/icons/refresh.svg';
+
+import SingleTruck from './SingleTruck';
+import SingleTruckModal from './SingleTruckModal';
+
 import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
+import { fetchHighlightedTrucksIfNeeded } from './actions';
 
-import SingleTruck from './SingleTruck';
-
-import sustainabilityIcon from '../../../shared/media/images/icons/sustainability.png';
-import activityIcon from '../../../shared/media/images/icons/activity.png';
-import IncreaseIcon from '../../../shared/media/images/icons/increase.svg';
-import DecreaseIcon from '../../../shared/media/images/icons/decrease.svg';
-
-import styles from './Truck.css';
-
-class Truck extends React.Component {
+class Truck extends Component {
   // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
-      truckModal: false,
+      alltrucksModal: false,
     };
+    this._handlealltruckModal = this._handlealltruckModal.bind(this);
+    this._handleRefresh = this._handleRefresh.bind(this);
   }
 
-  _handletruckinfoModal() {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedTrucksIfNeeded());
+  }
+
+  _handlealltruckModal() {
     this.setState({
-      truckModal: !this.state.truckModal,
+      alltrucksModal: !this.state.alltrucksModal,
     });
   }
 
+  _handleRefresh(e) {
+    e.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedTrucksIfNeeded());
+  }
+
   render() {
-    const { truck } = this.props;
+    const { trucks, id, loading, status, statusText, receivedAt } = this.props;
+    const date = new Date(receivedAt).toLocaleTimeString('en-US');
 
     return (
-      <Card title="Trucks" helpText="The data relevant to the trucks">
-        <SingleTruck trucks={truck} total={3} />
-        <Button size="medium" color="primary">View all</Button>
+      <Card title="Trucks" helpText="The data relevant to the trucks" id={id} date={date}>
+        {loading ? <Loading /> : <div />}
+        {status > 400 && !loading
+          ? <Alert color="error">
+            <p>
+              Error: {status}<br />Status Text: {statusText}
+            </p>
+          </Alert>
+          : <div />}
+        <SingleTruck trucks={trucks} total={3} />
+        <Button
+          size="medium"
+          color="primary"
+          onClick={this._handlealltruckModal}
+        >
+          View all
+        </Button>
+        {' '}
+        <Button color="primary" onClick={this._handleRefresh}>
+          <RefreshImage height={14} width={14} /> Refresh Trucks
+        </Button>
+        <Modal
+          isOpen={this.state.alltrucksModal}
+          toggle={this._handlealltruckModal}
+        >
+          <ModalHeader toggle={this._handlealltruckModal}>
+            Energy of all Trucks and Warehouses
+          </ModalHeader>
+          <ModalBody>
+            <SingleTruckModal />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this._handlealltruckModal}>
+              Close
+            </Button>
+            {' '}
+          </ModalFooter>
+        </Modal>
       </Card>
     );
   }
 }
 
 function mapStateToProps(state) {
+  const data = state.get('trucks');
   return {
-    truck: state.get('truck'),
+    loading: data.get('loading'),
+    receivedAt: data.get('receivedAt'),
+    trucks: data.get('trucks'),
+    status: data.get('status'),
+    statusText: data.get('statusText'),
   };
 }
 
 Truck.propTypes = {
-  truck: PropTypes.any,
+  trucks: PropTypes.any,
 };
 
 export default connect(mapStateToProps)(Truck);

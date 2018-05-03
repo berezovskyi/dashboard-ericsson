@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import className from 'classnames';
-import 'whatwg-fetch';
 
 import Card from '../../../ui/Card/Card';
 import Button from '../../../ui/Button/Button';
@@ -11,10 +9,14 @@ import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
+import Alert from '../../../ui/Alert/Alert';
 
 import StakeholderProfile from './StakeholderProfile';
 import styles from '../../../pages/SupplyChainPage/SupplyChainPage.css';
 import StakeholderModalProfile from './StakeholderModalProfile';
+import { fetchHighlightedStakeholdersIfNeeded } from './actions';
+import RefreshImage from '../../../shared/media/images/icons/refresh.svg';
+import Loading from '../../../ui/Loading/Loading';
 
 class Stakeholders extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -23,29 +25,60 @@ class Stakeholders extends React.Component {
     this._handleallstakeholderModal = this._handleallstakeholderModal.bind(
       this,
     );
+    this._handleRefresh = this._handleRefresh.bind(this);
     this.state = {
       stakeholderModal: false,
     };
   }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedStakeholdersIfNeeded());
+  }
+
   _handleallstakeholderModal() {
     this.setState({
       stakeholderModal: !this.state.stakeholderModal,
     });
   }
 
+  _handleRefresh(e) {
+    e.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(fetchHighlightedStakeholdersIfNeeded());
+  }
+
   render() {
-    const { id, type, name, stakeholders } = this.props;
+    const {
+      id,
+      type,
+      name,
+      stakeholders,
+      loading,
+      status,
+      statusText,
+      receivedAt,
+    } = this.props;
 
+    const date = new Date(receivedAt).toLocaleTimeString('en-US');
     const title = 'Highlighted Stakeholders for ' + name;
-
     return (
       <Card
         title={title}
         helpText="All the people involved in the Supply Chain area."
         id={id}
         type={type}
+        date={date}
       >
         <div className={styles.row}>
+          {loading ? <Loading /> : <div />}
+          {status > 400 && !loading
+            ? <Alert color="error">
+                <p>
+                  Error: {status}<br />Status Text: {statusText}
+                </p>
+              </Alert>
+            : <div />}
           <StakeholderProfile stakeholders={stakeholders} type={type} />
         </div>
         <Button
@@ -55,6 +88,10 @@ class Stakeholders extends React.Component {
         >
           Know More
         </Button>
+        {' '}
+        <Button color="primary" onClick={this._handleRefresh}>
+          <RefreshImage height={14} width={14} /> Refresh Stakeholders
+        </Button>
         <Modal
           isOpen={this.state.stakeholderModal}
           toggle={this._handleallstakeholderModal}
@@ -63,13 +100,13 @@ class Stakeholders extends React.Component {
             Stakeholders for {name}
           </ModalHeader>
           <ModalBody>
-            <StakeholderModalProfile stakeholders={stakeholders} name={name} type={type} />
+            <StakeholderModalProfile name={name} type={type} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handleallstakeholderModal}>
               Close
             </Button>
-            {' '}
+
           </ModalFooter>
         </Modal>
       </Card>
@@ -78,15 +115,20 @@ class Stakeholders extends React.Component {
 }
 
 function mapStateToProps(state) {
+  const data = state.get('stakeholders');
   return {
-    stakeholders: state.get('stakeholders'),
+    loading: data.get('loading'),
+    receivedAt: data.get('receivedAt'),
+    status: data.get('status'),
+    statusText: data.get('statusText'),
+    stakeholders: data.get('stakeholders'),
   };
 }
 
 Stakeholders.propTypes = {
-  id: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  stakeholders: PropTypes.object,
+  loading: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Stakeholders);

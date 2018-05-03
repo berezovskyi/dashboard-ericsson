@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux-immutable';
-import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import stakeholdersReducer from './shared/components/Stakeholders/reducer';
 import notesReducer from './shared/components/Notes/reducer';
@@ -12,7 +11,7 @@ import robotperformanceReducer
 import performanceriskReducer from './pages/SupplyChainPage/RPChart/reducer';
 import interoperatabilityReducer
   from './pages/IntelligentAgentPage/IAChart/reducer';
-import {MyRoute} from "./records";
+import { MyRoute } from './records';
 
 // Initial routing state
 const routeInitialState = new MyRoute({
@@ -29,14 +28,25 @@ function routeReducer(state = routeInitialState, action) {
   }
 }
 
+export function requestFailed(type, response) {
+  return {
+    type: type,
+    payload: {
+      loading: false,
+      status: response.status,
+      statusText: response.statusText,
+    },
+  };
+}
+
 export default function createReducer(injectedReducers) {
   return combineReducers({
     route: routeReducer,
     notes: notesReducer,
     stakeholders: stakeholdersReducer,
     capacity: capacityReducer,
-    truck: truckReducer,
-    robot: robotReducer,
+    trucks: truckReducer,
+    robots: robotReducer,
     battery: batteryReducer,
     robotperformance: robotperformanceReducer,
     performancerisk: performanceriskReducer,

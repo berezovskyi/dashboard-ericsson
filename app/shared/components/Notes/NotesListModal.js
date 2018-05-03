@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Checkbox from '../../../ui/Form/Checkbox';
 import styles from './Notes.css';
+import {fetchNotesIfNeeded, UPDATE_NOTES_HIGHLIGHT} from './actions';
 
 class NotesListModal extends Component {
   constructor(props) {
@@ -9,12 +10,19 @@ class NotesListModal extends Component {
     this._handlehighlight = this._handlehighlight.bind(this);
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchNotesIfNeeded());
+  }
+
   _handlehighlight(data) {
     const { dispatch } = this.props;
     dispatch({
-      type: 'UPDATE_NOTES_HIGHLIGHT',
-      id: data.id,
-      highlighted: !data.highlighted,
+      type: UPDATE_NOTES_HIGHLIGHT,
+      payload: {
+        highlighted: !data.highlighted,
+        id: data.id,
+      }
     });
   }
 
@@ -42,6 +50,7 @@ class NotesListModal extends Component {
               </li>
             );
           }
+          return null;
         })}
       </ul>
     );
@@ -49,7 +58,12 @@ class NotesListModal extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  const data = state.get('notes');
+  return {
+    loading: data.get('loading'),
+    receivedAt: data.get('receivedAt'),
+    notes: data.get('notes'),
+  };
 }
 
 export default connect(mapStateToProps)(NotesListModal);

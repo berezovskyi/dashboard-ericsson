@@ -10,3 +10,4 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
+export const API_URL = 'https://582fa7de-1c91-4294-91b8-e721fe00a1f6.mock.pstmn.io/';
