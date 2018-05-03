@@ -96,6 +96,7 @@ export function fetchTrucks() {
         if (response.code >= 200 && response.code < 400) {
           response.json();
         } else {
+          console.log('yolo');
           dispatch(requestFailed(FAILED_REQUEST_TRUCKS, response));
         }
       })
