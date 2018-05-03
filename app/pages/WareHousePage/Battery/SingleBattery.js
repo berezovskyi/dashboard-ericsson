@@ -91,8 +91,6 @@ class SingleBattery extends React.Component {
   render() {
     const { battery } = this.props;
 
-    console.log(battery);
-
     const {
       value,
       id,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Select from 'react-select';
 
 import { Bar } from '@nivo/bar';
 
@@ -10,17 +11,52 @@ import { getCurrentRoute } from '../../../utils/utils';
 import styles from './RobotPerformanceChart.css';
 
 class RobotPerformanceChart extends Component {
-  render() {
-    const { id, graphdata, navigation } = this.props;
+  constructor(props) {
+    super(props);
+    this._handleSelectChange = this._handleSelectChange.bind(this);
+    this._handleRemove = this._handleRemove.bind(this);
+    this.state = {
+      selectValue: ['arm1', 'arm2', 'robot1'],
+      data: [],
+    };
+  }
+
+  componentDidMount() {
+    const { navigation, graphdata } = this.props;
     const search = getCurrentRoute(navigation);
     const data = graphdata.get(search.subroute.time);
+    console.log(data);
+    this.setState({
+      data: data,
+    });
+  }
+
+  _handleSelectChange() {}
+
+  _handleRemove() {}
+
+  render() {
+    const { id, options } = this.props;
+    const { selectValue, data } = this.state;
+
     return (
       <Card title="Robot Performance Over Time" id={id}>
         <div className={styles.row}>
           <div className={styles.oneFull}>
+            <Select
+              closeOnSelect={false}
+              multi
+              disabled={selectValue.length > 3}
+              onChange={this._handleSelectChange}
+              options={options}
+              placeholder="Select Robots (Upto 3)"
+              removeSelected={this.state._handleRemove}
+              simpleValue
+              value={selectValue}
+            />
             <Bar
               data={data}
-              keys={['arm1', 'arm2', 'robot1']}
+              keys={selectValue}
               indexBy="time"
               margin={{
                 top: 50,
