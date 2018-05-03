@@ -10,7 +10,8 @@ import {
   REQUEST_ALL_CAPACITY,
   RECEIVE_ALL_CAPACITY,
   REQUEST_HIGHLIGHTED_CAPACITY,
-  RECEIVE_HIGHLIGHTED_CAPACITY, FAILED_REQUEST_CAPACITY,
+  RECEIVE_HIGHLIGHTED_CAPACITY,
+  FAILED_REQUEST_CAPACITY,
 } from './actions';
 
 const INITIAL_STATE = new Map({
@@ -20,7 +21,6 @@ const INITIAL_STATE = new Map({
   receivedAt: null,
   capacity: new Map(),
 });
-
 
 export default function capacityReducer(
   state = INITIAL_STATE,
@@ -33,26 +33,26 @@ export default function capacityReducer(
         payload.highlighted,
       );
     case REQUEST_ALL_CAPACITY:
-      return state.setIn(['loading'], payload.loading);
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt);
 
     case REQUEST_HIGHLIGHTED_CAPACITY:
-      return state.setIn(['loading'], payload.loading);
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt);
 
     case RECEIVE_HIGHLIGHTED_CAPACITY:
       return state
         .setIn(['loading'], payload.loading)
         .setIn(['receivedAt'], payload.receivedAt)
-        .updateIn(['capacity'], data =>
-          data.mergeDeep(payload.capacity),
-        );
+        .updateIn(['capacity'], data => data.mergeDeep(payload.capacity));
 
     case RECEIVE_ALL_CAPACITY:
       return state
         .setIn(['loading'], payload.loading)
         .setIn(['receivedAt'], payload.receivedAt)
-        .updateIn(['capacity'], data =>
-          data.mergeDeep(payload.capacity),
-        );
+        .updateIn(['capacity'], data => data.mergeDeep(payload.capacity));
 
     case FAILED_REQUEST_CAPACITY:
       return state
@@ -63,4 +63,3 @@ export default function capacityReducer(
       return state;
   }
 }
-

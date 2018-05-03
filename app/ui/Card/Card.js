@@ -22,12 +22,12 @@ class Card extends Component { // eslint-disable-line react/prefer-stateless-fun
   }
 
   render() {
-    const { children, title, helpText, id } = this.props;
+    const { children, title, helpText, id, date } = this.props;
 
     return (
       <div className={styles.cardouter}>
         <div>
-          <h3 className={styles.cardtitle}>{title}</h3>
+          <h3 className={styles.cardtitle}>{title} - <strong className={styles.updated}>Last Updated: {date}</strong></h3>
         </div>
         <div className={styles.helperImage}>
           <HelperImage height="24" width="24" alt="Help me" onClick={this._handlePopover} id={'HelpText' + id} />
@@ -63,6 +63,7 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   helpText: PropTypes.string,
   id: PropTypes.string.isRequired,
+  date: PropTypes.string,
 };
 
 export default Card;

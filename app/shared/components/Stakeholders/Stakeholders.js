@@ -57,7 +57,10 @@ class Stakeholders extends React.Component {
       loading,
       status,
       statusText,
+      receivedAt,
     } = this.props;
+
+    const date = new Date(receivedAt).toLocaleTimeString('en-US');
     const title = 'Highlighted Stakeholders for ' + name;
     return (
       <Card
@@ -65,6 +68,7 @@ class Stakeholders extends React.Component {
         helpText="All the people involved in the Supply Chain area."
         id={id}
         type={type}
+        date={date}
       >
         <div className={styles.row}>
           {loading ? <Loading /> : <div />}

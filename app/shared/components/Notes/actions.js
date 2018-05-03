@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { Note } from '../../../records';
 import { requestFailed } from '../../../reducers';
-import {API_URL} from "../../../constants";
+import { API_URL } from '../../../constants';
 
 export const REQUEST_ALL_NOTES = 'REQUEST_ALL_NOTES';
 export const REQUEST_HIGHLIGHTED_NOTES = 'REQUEST_HIGHLIGHTED_NOTES';
@@ -16,6 +16,7 @@ function requestNotes() {
   return {
     type: REQUEST_ALL_NOTES,
     payload: {
+      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -25,6 +26,7 @@ function requesthighlightedNotes() {
   return {
     type: REQUEST_HIGHLIGHTED_NOTES,
     payload: {
+      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -34,7 +36,6 @@ function receiveNotes(json) {
   return {
     type: RECEIVE_ALL_NOTES,
     payload: {
-      receivedAt: Date.now(),
       loading: false,
       notes: json.data.map(item => {
         return [
@@ -79,9 +80,7 @@ function receiveHighlightedNotes(json) {
 export function fetchNotes() {
   return dispatch => {
     dispatch(requestNotes());
-    return fetch(
-      API_URL + 'notes',
-    )
+    return fetch(API_URL + 'notes')
       .then(response => {
         if (response.code >= 200 && response.code < 400) {
           response.json();
@@ -96,9 +95,7 @@ export function fetchNotes() {
 export function fetchHighlightedNotes() {
   return dispatch => {
     dispatch(requesthighlightedNotes());
-    return fetch(
-      API_URL + 'notes/highlighted',
-    )
+    return fetch(API_URL + 'notes/highlighted')
       .then(response => {
         if (response.code >= 200 && response.code < 400) {
           response.json();

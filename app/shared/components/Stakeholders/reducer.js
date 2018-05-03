@@ -34,10 +34,14 @@ export default function stakeholderReducer(
       );
 
     case REQUEST_ALL_STAKEHOLDERS:
-      return state.setIn(['loading'], payload.loading);
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt);
 
     case REQUEST_HIGHLIGHTED_STAKEHOLDERS:
-      return state.setIn(['loading'], payload.loading);
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt);
 
     case RECEIVE_HIGHLIGHTED_STAKEHOLDERS:
       return state

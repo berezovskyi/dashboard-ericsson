@@ -14,6 +14,7 @@ function requestRobots() {
   return {
     type: REQUEST_ALL_ROBOTS,
     payload: {
+      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -23,6 +24,7 @@ function requesthighlightedRobots() {
   return {
     type: REQUEST_HIGHLIGHTED_ROBOTS,
     payload: {
+      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -32,7 +34,6 @@ function receiveRobots(json) {
   return {
     type: RECEIVE_ALL_ROBOTS,
     payload: {
-      receivedAt: Date.now(),
       loading: false,
       robots: json.data.map(item => {
         return [
@@ -61,7 +62,6 @@ function receiveHighlightedRobots(json) {
   return {
     type: RECEIVE_HIGHLIGHTED_ROBOTS,
     payload: {
-      receivedAt: Date.now(),
       loading: false,
       robots: json.data.map(item => {
         return [

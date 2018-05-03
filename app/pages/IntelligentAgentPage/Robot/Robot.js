@@ -44,23 +44,14 @@ class Robot extends Component { // eslint-disable-line react/prefer-stateless-fu
   }
 
   render() {
-    const { robots, id, loading, status, statusText } = this.props;
-    if (loading) {
-      return (
-        <Card
-          title="Intelligent Agents"
-          helpText="The data relevant to the robots"
-          id={id}
-        >
-          <Loading />
-        </Card>
-      );
-    }
+    const { robots, id, loading, status, statusText, receivedAt } = this.props;
+    const date = new Date(receivedAt).toLocaleTimeString('en-US');
     return (
       <Card
         title="Intelligent Agents"
         helpText="The data relevant to the robots"
         id={id}
+        date={date}
       >
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading

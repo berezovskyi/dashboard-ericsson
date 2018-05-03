@@ -46,20 +46,30 @@ class Capacity extends Component {
   }
 
   render() {
-    const { id, capacity, loading, status, statusText } = this.props;
+    const {
+      id,
+      capacity,
+      loading,
+      status,
+      statusText,
+      receivedAt,
+    } = this.props;
+    const date = new Date(receivedAt).toLocaleTimeString('en-US');
+
     return (
       <Card
         title="Highlighted Retailers and Warehouse Capacity"
         helpText="The section indicates how much the warehouses and the retailers are full. The get more information, click view all."
         id={id}
+        date={date}
       >
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading
           ? <Alert color="error">
-            <p>
-              Error: {status}<br />Status Text: {statusText}
-            </p>
-          </Alert>
+              <p>
+                Error: {status}<br />Status Text: {statusText}
+              </p>
+            </Alert>
           : <div />}
         <SingleCapacity capacity={capacity} total={3} type="wh" />
         <SingleCapacity capacity={capacity} total={3} type="rt" />

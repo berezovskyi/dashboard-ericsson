@@ -10,7 +10,8 @@ import {
   REQUEST_ALL_BATTERY,
   REQUEST_HIGHLIGHTED_BATTERY,
   RECEIVE_HIGHLIGHTED_BATTERY,
-  RECEIVE_ALL_BATTERY, FAILED_REQUEST_BATTERY,
+  RECEIVE_ALL_BATTERY,
+  FAILED_REQUEST_BATTERY,
 } from './actions';
 
 const INITIAL_STATE = new Map({
@@ -29,10 +30,14 @@ export default function batteryReducer(
     case UPDATE_BATTERY_HIGHLIGHT:
       return state.setIn([payload.id, 'highlighted'], payload.highlighted);
     case REQUEST_ALL_BATTERY:
-      return state.setIn(['loading'], payload.loading);
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt);
 
     case REQUEST_HIGHLIGHTED_BATTERY:
-      return state.setIn(['loading'], payload.loading);
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt);
 
     case RECEIVE_HIGHLIGHTED_BATTERY:
       return state

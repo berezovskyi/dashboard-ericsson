@@ -10,7 +10,8 @@ import {
   REQUEST_ALL_ROBOTS,
   REQUEST_HIGHLIGHTED_ROBOTS,
   RECEIVE_HIGHLIGHTED_ROBOTS,
-  RECEIVE_ALL_ROBOTS, FAILED_REQUEST_ROBOTS,
+  RECEIVE_ALL_ROBOTS,
+  FAILED_REQUEST_ROBOTS,
 } from './actions';
 
 const INITIAL_STATE = new Map({
@@ -26,10 +27,14 @@ export default function robotReducer(state = INITIAL_STATE, { type, payload }) {
     case UPDATE_ROBOTS_HIGHLIGHT:
       return state.setIn([payload.id, 'highlighted'], payload.highlighted);
     case REQUEST_ALL_ROBOTS:
-      return state.setIn(['loading'], payload.loading);
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt);
 
     case REQUEST_HIGHLIGHTED_ROBOTS:
-      return state.setIn(['loading'], payload.loading);
+      return state
+        .setIn(['loading'], payload.loading)
+        .setIn(['receivedAt'], payload.receivedAt);
 
     case RECEIVE_HIGHLIGHTED_ROBOTS:
       return state

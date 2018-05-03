@@ -16,3 +16,9 @@
   top: 10px;
   right: 10px;
 }
+
+.updated {
+  font-size: 12px;
+  color: #333333;
+  text-decoration: underline;
+}

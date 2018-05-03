@@ -14,6 +14,7 @@ function requestBattery() {
   return {
     type: REQUEST_ALL_BATTERY,
     payload: {
+      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -23,6 +24,7 @@ function requesthighlightedBattery() {
   return {
     type: REQUEST_HIGHLIGHTED_BATTERY,
     payload: {
+      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -32,7 +34,6 @@ function receiveBattery(json) {
   return {
     type: RECEIVE_ALL_BATTERY,
     payload: {
-      receivedAt: Date.now(),
       loading: false,
       battery: json.data.map(item => {
         return [

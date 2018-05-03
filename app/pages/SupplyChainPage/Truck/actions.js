@@ -14,6 +14,7 @@ function requestTrucks() {
   return {
     type: REQUEST_ALL_TRUCKS,
     payload: {
+      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -23,6 +24,7 @@ function requesthighlightedTrucks() {
   return {
     type: REQUEST_HIGHLIGHTED_TRUCKS,
     payload: {
+      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -32,7 +34,6 @@ function receiveTrucks(json) {
   return {
     type: RECEIVE_ALL_TRUCKS,
     payload: {
-      receivedAt: Date.now(),
       loading: false,
       trucks: json.data.map(item => {
         return [
@@ -61,7 +62,6 @@ function receiveHighlightedTrucks(json) {
   return {
     type: RECEIVE_HIGHLIGHTED_TRUCKS,
     payload: {
-      receivedAt: Date.now(),
       loading: false,
       trucks: json.data.map(item => {
         return [

@@ -14,6 +14,7 @@ function requestCapacity() {
   return {
     type: REQUEST_ALL_CAPACITY,
     payload: {
+      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -23,6 +24,7 @@ function requesthighlightedCapacity() {
   return {
     type: REQUEST_HIGHLIGHTED_CAPACITY,
     payload: {
+      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -32,7 +34,6 @@ function receiveCapacity(json) {
   return {
     type: RECEIVE_ALL_CAPACITY,
     payload: {
-      receivedAt: Date.now(),
       loading: false,
       capacity: json.data.map(item => {
         return [
@@ -54,7 +55,6 @@ function receiveHighlightedCapacity(json) {
   return {
     type: RECEIVE_HIGHLIGHTED_CAPACITY,
     payload: {
-      receivedAt: Date.now(),
       loading: false,
       capacity: json.data.map(item => {
         return [
