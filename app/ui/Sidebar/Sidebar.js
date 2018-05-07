@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import WarehouseIcon from '../../shared/media/images/icons/warehouse.svg';
 import SupplyChainIcon from '../../shared/media/images/icons/supplychian.svg';
+import HomeIcon from '../../shared/media/images/icons/home.svg';
 import IntellegentAgentIcon
   from '../../shared/media/images/icons/intellegent.svg';
 
@@ -14,6 +15,18 @@ class Sidebar extends Component {
     return (
       <div className={styles.sidebarpanel}>
         <ul>
+          <li
+            className={
+              navigation.location.pathname === '/'
+                ? styles.active
+                : ''
+            }
+          >
+            <NavLink to="/">
+              <HomeIcon width={50} />
+              <span>Home</span>
+            </NavLink>
+          </li>
           <li
             className={
               navigation.location.pathname === '/supplychain'
