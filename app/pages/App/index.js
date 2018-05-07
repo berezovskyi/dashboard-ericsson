@@ -19,7 +19,7 @@ import Sidebar from '../../ui/Sidebar/Sidebar';
 
 /* Import all the Pages */
 
-import HomePage from '../../pages/HomePage';
+import HomePage from '../../pages/HomePage/HomePage';
 import NotFoundPage from '../../pages/NotFoundPage';
 import IntelligentAgentPage from '../../pages/IntelligentAgentPage';
 import SupplyChainPage from '../../pages/SupplyChainPage';

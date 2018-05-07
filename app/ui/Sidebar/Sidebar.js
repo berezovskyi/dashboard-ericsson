@@ -9,10 +9,6 @@ import IntellegentAgentIcon
 import styles from './Sidebar.css';
 
 class Sidebar extends Component {
-  // eslint-disable-line react/prefer-stateless-function
-  constructor(props) {
-    super(props);
-  }
   render() {
     const { navigation } = this.props;
     return (
@@ -20,12 +16,12 @@ class Sidebar extends Component {
         <ul>
           <li
             className={
-              navigation.location.pathname === '/supplychain' ? styles.active : ''
+              navigation.location.pathname === '/supplychain'
+                ? styles.active
+                : ''
             }
           >
-            <NavLink
-              to="/supplychain?time=day"
-            >
+            <NavLink to="/supplychain?time=day">
               <SupplyChainIcon width={50} />
               <span>Supply Chain Level</span>
             </NavLink>
@@ -42,12 +38,12 @@ class Sidebar extends Component {
           </li>
           <li
             className={
-              navigation.location.pathname === '/intellegentagent' ? styles.active : ''
+              navigation.location.pathname === '/intellegentagent'
+                ? styles.active
+                : ''
             }
           >
-            <NavLink
-              to="/intellegentagent?time=day"
-            >
+            <NavLink to="/intellegentagent?time=day">
               <IntellegentAgentIcon width={50} />
               <span>Intelligent Agent Level</span>
             </NavLink>

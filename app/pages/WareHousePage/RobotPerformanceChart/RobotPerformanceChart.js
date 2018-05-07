@@ -25,7 +25,6 @@ class RobotPerformanceChart extends Component {
     const { navigation, graphdata } = this.props;
     const search = getCurrentRoute(navigation);
     const data = graphdata.get(search.subroute.time);
-    console.log(data);
     this.setState({
       data: data,
     });
