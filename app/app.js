@@ -7,7 +7,7 @@ import createHistory from 'history/createBrowserHistory';
 import configureStore from './configureStore';
 
 // Import root app
-import App from './pages/App';
+import App from './pages/App/App';
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */

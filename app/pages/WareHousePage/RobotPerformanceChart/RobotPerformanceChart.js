@@ -15,6 +15,7 @@ class RobotPerformanceChart extends Component {
     super(props);
     this._handleSelectChange = this._handleSelectChange.bind(this);
     this._handleRemove = this._handleRemove.bind(this);
+    this._handleUpdate = this._handleUpdate.bind(this);
     this.state = {
       selectValue: ['arm1', 'arm2', 'robot1'],
       data: [],
@@ -23,11 +24,21 @@ class RobotPerformanceChart extends Component {
 
   componentDidMount() {
     const { navigation, graphdata } = this.props;
+    this._handleUpdate(navigation, graphdata);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { navigation, graphdata } = nextProps;
+    this._handleUpdate(navigation, graphdata);
+  }
+
+  _handleUpdate(navigation, graphdata) {
     const search = getCurrentRoute(navigation);
     const data = graphdata.get(search.subroute.time);
     this.setState({
       data: data,
     });
+    console.log(this.state.data);
   }
 
   _handleSelectChange() {}

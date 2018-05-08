@@ -16,10 +16,6 @@ import styles from './App.css';
 import DisplayHeader from '../../ui/Header/Header';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    console.log(this.location);
-  }
   render() {
     return (
       <main>
