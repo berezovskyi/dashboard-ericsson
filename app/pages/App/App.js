@@ -8,7 +8,7 @@ import Sidebar from '../../ui/Sidebar/Sidebar';
 /* Import all the Pages */
 
 import HomePage from '../../pages/HomePage/HomePage';
-import NotFoundPage from '../../pages/NotFoundPage';
+import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import IntelligentAgentPage from '../../pages/IntelligentAgentPage';
 import SupplyChainPage from '../../pages/SupplyChainPage';
 import WareHousePage from '../../pages/WareHousePage';
