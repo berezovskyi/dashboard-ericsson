@@ -64,6 +64,7 @@ class RobotPerformanceChart extends Component {
   render() {
     const { id } = this.props;
     const { disabled, selectVal, options, valueArray, data } = this.state;
+    console.log(valueArray);
 
     return (
       <Card title="Robot Performance Over Time" id={id}>
@@ -80,60 +81,68 @@ class RobotPerformanceChart extends Component {
               simpleValue
               value={selectVal}
             />
-            <Bar
-              data={data}
-              keys={valueArray}
-              indexBy="time"
-              margin={{
-                top: 50,
-                right: 130,
-                bottom: 90,
-                left: 60,
-              }}
-              padding={0.4}
-              colors="nivo"
-              colorBy="id"
-              axisBottom={{
-                orient: 'bottom',
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: 'Time (24h)',
-                legendPosition: 'center',
-                legendOffset: 50,
-              }}
-              axisLeft={{
-                orient: 'left',
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: 'Performance (%)',
-                legendPosition: 'center',
-                legendOffset: -50,
-              }}
-              labelSkipWidth={12}
-              labelSkipHeight={12}
-              labelTextColor="#333333"
-              motionStiffness={90}
-              motionDamping={15}
-              legends={[
-                {
-                  dataFrom: 'keys',
-                  anchor: 'bottom',
-                  direction: 'row',
-                  symbolShape: 'circle',
-                  translateX: 10,
-                  translateY: 90,
-                  itemWidth: 64,
-                  itemHeight: 16,
-                  itemsSpacing: 5,
-                  symbolSize: 16,
-                },
-              ]}
-              maxValue={100}
-              height={420}
-              width={800}
-            />
+            {
+              valueArray.length > 0 && valueArray[0] !== '' ?
+                <Bar
+                  data={data}
+                  keys={valueArray}
+                  indexBy="time"
+                  margin={{
+                    top: 50,
+                    right: 130,
+                    bottom: 90,
+                    left: 60,
+                  }}
+                  padding={0.4}
+                  colors="nivo"
+                  colorBy="id"
+                  axisBottom={{
+                    orient: 'bottom',
+                    tickSize: 5,
+                    tickPadding: 5,
+                    tickRotation: 0,
+                    legend: 'Time (24h)',
+                    legendPosition: 'center',
+                    legendOffset: 50,
+                  }}
+                  axisLeft={{
+                    orient: 'left',
+                    tickSize: 5,
+                    tickPadding: 5,
+                    tickRotation: 0,
+                    legend: 'Performance (%)',
+                    legendPosition: 'center',
+                    legendOffset: -50,
+                  }}
+                  labelSkipWidth={12}
+                  labelSkipHeight={12}
+                  labelTextColor="#333333"
+                  motionStiffness={90}
+                  motionDamping={15}
+                  legends={[
+                    {
+                      dataFrom: 'keys',
+                      anchor: 'bottom',
+                      direction: 'row',
+                      symbolShape: 'circle',
+                      translateX: 10,
+                      translateY: 90,
+                      itemWidth: 64,
+                      itemHeight: 16,
+                      itemsSpacing: 5,
+                      symbolSize: 16,
+                    },
+                  ]}
+                  maxValue={100}
+                  height={420}
+                  width={800}
+                />
+                :
+                <div>
+                  <h1>Select some values first.</h1>
+                </div>
+            }
+
           </div>
         </div>
       </Card>
