@@ -216,3 +216,13 @@ export function getArrayofObjectsKeys(arr) {
   }
   return newarray.splice(1);
 }
+
+export function getAvailableRobots(arr) {
+  const newarray = [];
+  if (arr.length > 0) {
+    for (const i in arr) {
+      newarray.push({ label: arr[i], value: arr[i] });
+    }
+  }
+  return newarray;
+}

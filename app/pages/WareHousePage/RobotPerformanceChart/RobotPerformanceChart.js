@@ -12,24 +12,10 @@ import { getArrayofObjectsKeys } from '../../../utils/utils';
 
 import styles from './RobotPerformanceChart.css';
 
-const FLAVOURS = [
-  { label: 'Chocolate', value: 'chocolate' },
-  { label: 'Vanilla', value: 'vanilla' },
-  { label: 'Strawberry', value: 'strawberry' },
-  { label: 'Caramel', value: 'caramel' },
-  { label: 'Cookies and Cream', value: 'cookiescream' },
-  { label: 'Peppermint', value: 'peppermint' },
-];
-
-const WHY_WOULD_YOU = [
-  { label: 'Chocolate (are you crazy?)', value: 'chocolate', disabled: true },
-].concat(FLAVOURS.slice(1));
-
 class RobotPerformanceChart extends Component {
   constructor(props) {
     super(props);
     this._handleSelectChange = this._handleSelectChange.bind(this);
-    this._handleRemove = this._handleRemove.bind(this);
     this._handleUpdate = this._handleUpdate.bind(this);
     this._toggleCheckbox = this._toggleCheckbox.bind(this);
     this.state = {
@@ -38,6 +24,7 @@ class RobotPerformanceChart extends Component {
       disabled: false,
       value: [],
       options: [],
+      valueArray: [],
     };
   }
 
@@ -58,13 +45,8 @@ class RobotPerformanceChart extends Component {
     this.setState({
       data,
       options,
-      disabled: false,
-      selectVal: [],
-      valueArray: [],
     });
   }
-
-  _handleRemove() {}
 
   _handleSelectChange(value) {
     let { valueArray } = this.state;
@@ -81,8 +63,7 @@ class RobotPerformanceChart extends Component {
 
   render() {
     const { id } = this.props;
-    const { data } = this.state;
-    const { disabled, selectVal, options, valueArray } = this.state;
+    const { disabled, selectVal, options, valueArray, data } = this.state;
 
     return (
       <Card title="Robot Performance Over Time" id={id}>
