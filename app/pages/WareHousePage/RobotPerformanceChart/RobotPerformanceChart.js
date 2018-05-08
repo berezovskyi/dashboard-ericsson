@@ -8,7 +8,22 @@ import { Bar } from '@nivo/bar';
 import Card from '../../../ui/Card/Card';
 import { getCurrentRoute } from '../../../utils/utils';
 
+import { getArrayofObjectsKeys } from '../../../utils/utils';
+
 import styles from './RobotPerformanceChart.css';
+
+const FLAVOURS = [
+  { label: 'Chocolate', value: 'chocolate' },
+  { label: 'Vanilla', value: 'vanilla' },
+  { label: 'Strawberry', value: 'strawberry' },
+  { label: 'Caramel', value: 'caramel' },
+  { label: 'Cookies and Cream', value: 'cookiescream' },
+  { label: 'Peppermint', value: 'peppermint' },
+];
+
+const WHY_WOULD_YOU = [
+  { label: 'Chocolate (are you crazy?)', value: 'chocolate', disabled: true },
+].concat(FLAVOURS.slice(1));
 
 class RobotPerformanceChart extends Component {
   constructor(props) {
@@ -16,9 +31,13 @@ class RobotPerformanceChart extends Component {
     this._handleSelectChange = this._handleSelectChange.bind(this);
     this._handleRemove = this._handleRemove.bind(this);
     this._handleUpdate = this._handleUpdate.bind(this);
+    this._toggleCheckbox = this._toggleCheckbox.bind(this);
     this.state = {
-      selectValue: ['arm1', 'arm2', 'robot1'],
       data: [],
+      removeSelected: true,
+      disabled: false,
+      value: [],
+      options: [],
     };
   }
 
@@ -35,42 +54,59 @@ class RobotPerformanceChart extends Component {
   _handleUpdate(navigation, graphdata) {
     const search = getCurrentRoute(navigation);
     const data = graphdata.get(search.subroute.time);
+    const options = getArrayofObjectsKeys(data);
     this.setState({
-      data: data,
+      data,
+      options,
+      disabled: false,
+      selectVal: [],
+      valueArray: [],
     });
   }
 
-  _handleSelectChange() {}
-
   _handleRemove() {}
 
+  _handleSelectChange(value) {
+    let { valueArray } = this.state;
+    this.setState({ selectVal: value });
+    valueArray = value.split(',');
+    this.setState({ valueArray });
+  }
+
+  _toggleCheckbox(e) {
+    this.setState({
+      [e.target.name]: e.target.checked,
+    });
+  }
+
   render() {
-    const { id, options } = this.props;
-    const { selectValue, data } = this.state;
+    const { id } = this.props;
+    const { data } = this.state;
+    const { disabled, selectVal, options, valueArray } = this.state;
 
     return (
       <Card title="Robot Performance Over Time" id={id}>
         <div className={styles.row}>
-          <div className={styles.oneFull}>
+          <div className={styles.oneHalf}>
             <Select
               closeOnSelect={false}
+              disabled={disabled}
               multi
-              disabled={selectValue.length > 3}
               onChange={this._handleSelectChange}
               options={options}
-              placeholder="Select Robots (Upto 3)"
-              removeSelected={this.state._handleRemove}
+              placeholder="Select upto 3 Robots or Arms to compare"
+              removeSelected={false}
               simpleValue
-              value={selectValue}
+              value={selectVal}
             />
             <Bar
               data={data}
-              keys={selectValue}
+              keys={valueArray}
               indexBy="time"
               margin={{
                 top: 50,
                 right: 130,
-                bottom: 50,
+                bottom: 90,
                 left: 60,
               }}
               padding={0.4}
@@ -102,11 +138,11 @@ class RobotPerformanceChart extends Component {
               legends={[
                 {
                   dataFrom: 'keys',
-                  anchor: 'top-right',
+                  anchor: 'bottom',
                   direction: 'row',
                   symbolShape: 'circle',
                   translateX: 10,
-                  translateY: -40,
+                  translateY: 90,
                   itemWidth: 64,
                   itemHeight: 16,
                   itemsSpacing: 5,
@@ -115,7 +151,7 @@ class RobotPerformanceChart extends Component {
               ]}
               maxValue={100}
               height={420}
-              width={840}
+              width={800}
             />
           </div>
         </div>

@@ -204,3 +204,15 @@ export const PopperPlacements = [
   'left',
   'left-start',
 ];
+
+// Assumes all the array of objects have the same keys, example arr[0] and arr[1] has the same keys.
+
+export function getArrayofObjectsKeys(arr) {
+  const newarray = [];
+  if (arr) {
+    for (const i in arr[0]) {
+      newarray.push({ label: i, value: i });
+    }
+  }
+  return newarray.splice(1);
+}
