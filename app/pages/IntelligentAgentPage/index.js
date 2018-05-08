@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 import Robot from './Robot/Robot';
 import Notes from '../../shared/components/Notes/Notes';
@@ -11,7 +12,7 @@ class IntelligentAgentPage extends React.Component { // eslint-disable-line reac
   render() {
     return (
       <div className={styles.fullPage}>
-
+        <Helmet title="Intelligent Agents - SCOTT Dashboard" />
         <div className={styles.row}>
           <div className={styles.oneHalf}>
             <IAChart id="iaChart" />

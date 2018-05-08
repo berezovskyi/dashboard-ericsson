@@ -39,14 +39,6 @@ class Header extends Component {
   }
 }
 
-export const DisplayHeader = ({ isVisible }) => {
-  console.log(isVisible);
-  if (isVisible) {
-    return <Header />;
-  }
-  return <div />;
-};
-
 function mapStateToProps(state) {
   return {
     navigation: state.get('route'),

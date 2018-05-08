@@ -38,7 +38,6 @@ class RobotPerformanceChart extends Component {
     this.setState({
       data: data,
     });
-    console.log(this.state.data);
   }
 
   _handleSelectChange() {}

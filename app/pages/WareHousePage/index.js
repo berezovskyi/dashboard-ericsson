@@ -1,4 +1,6 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
+
 import Notes from '../../shared/components/Notes/Notes';
 import Stakeholders from '../../shared/components/Stakeholders/Stakeholders';
 
@@ -12,6 +14,7 @@ class WareHousePage extends React.Component { // eslint-disable-line react/prefe
     const { graphdata } = this.props;
     return (
       <div className={styles.fullPage}>
+        <Helmet title="Warehouse - SCOTT Dashboard" />
         <div className={styles.row}>
           <div className={styles.oneHalf}>
             <RobotPerformanceChart graphdata={graphdata} id="robotperformanceChart" />
