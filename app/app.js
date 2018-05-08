@@ -7,13 +7,14 @@ import createHistory from 'history/createBrowserHistory';
 import configureStore from './configureStore';
 
 // Import root app
-import App from './pages/App';
+import App from './pages/App/App';
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./shared/media/images/favicons/favicon.ico';
 import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess';
+import 'react-select/dist/react-select.css';
 
 const history = createHistory();
 const initialState = {};

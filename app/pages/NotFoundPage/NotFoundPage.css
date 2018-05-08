@@ -1,0 +1,26 @@
+.notfound {
+  position: fixed;
+  height: 100vh;
+  background: #F4F8F9;
+  right: 0;
+  left: 100px;
+  top: 0;
+}
+
+.title {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 32px;
+  font-weight: 300;
+
+}
+
+.row {
+  lost-center: 100%;
+}
+
+.oneFull {
+  lost-column: 1;
+}

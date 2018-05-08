@@ -13,6 +13,9 @@ class Header extends Component {
     const search = getCurrentRoute(navigation);
     const subroute = search.subroute.time;
     const location = search.url;
+    if (location === '/') {
+      return <div />;
+    }
     return (
       <div className={styles.headerouter}>
         <div className={styles.headerinner}>
