@@ -13,6 +13,9 @@ class Header extends Component {
     const search = getCurrentRoute(navigation);
     const subroute = search.subroute.time;
     const location = search.url;
+    if (location === '/') {
+      return <div />;
+    }
     return (
       <div className={styles.headerouter}>
         <div className={styles.headerinner}>
@@ -35,6 +38,14 @@ class Header extends Component {
     );
   }
 }
+
+export const DisplayHeader = ({ isVisible }) => {
+  console.log(isVisible);
+  if (isVisible) {
+    return <Header />;
+  }
+  return <div />;
+};
 
 function mapStateToProps(state) {
   return {

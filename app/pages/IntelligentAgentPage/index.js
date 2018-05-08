@@ -11,6 +11,7 @@ class IntelligentAgentPage extends React.Component { // eslint-disable-line reac
   render() {
     return (
       <div className={styles.fullPage}>
+
         <div className={styles.row}>
           <div className={styles.oneHalf}>
             <IAChart id="iaChart" />
