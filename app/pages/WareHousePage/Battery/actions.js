@@ -105,14 +105,11 @@ export function fetchBattery() {
     return fetch(
       API_URL + 'battery',
     )
-      .then(response => {
-        if (response.code >= 200 && response.code < 400) {
-          response.json();
-        } else {
-          dispatch(requestFailed(FAILED_REQUEST_BATTERY, response));
-        }
-      })
-      .then(json => dispatch(receiveBattery(json)));
+      .then(response => response.json())
+      .then(json => dispatch(receiveBattery(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_BATTERY, response)),
+      );
   };
 }
 
@@ -123,14 +120,11 @@ export function fetchHighlightedBattery() {
     return fetch(
       API_URL + 'battery/highlighted',
     )
-      .then(response => {
-        if (response.code >= 200 && response.code < 400) {
-          response.json();
-        } else {
-          dispatch(requestFailed(FAILED_REQUEST_BATTERY, response));
-        }
-      })
-      .then(json => dispatch(receiveHighlightedBattery(json)));
+      .then(response => response.json())
+      .then(json => dispatch(receiveHighlightedBattery(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_BATTERY, response)),
+      );
   };
 }
 

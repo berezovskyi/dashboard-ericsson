@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { Truck } from '../../../records';
 import { requestFailed } from '../../../reducers';
-import {API_URL} from "../../../constants";
+import { API_URL } from '../../../constants';
 
 export const REQUEST_ALL_TRUCKS = 'REQUEST_ALL_TRUCKS';
 export const REQUEST_HIGHLIGHTED_TRUCKS = 'REQUEST_HIGHLIGHTED_TRUCKS';
@@ -89,35 +89,24 @@ function receiveHighlightedTrucks(json) {
 export function fetchTrucks() {
   return dispatch => {
     dispatch(requestTrucks());
-    return fetch(
-      API_URL + 'trucks',
-    )
-      .then(response => {
-        if (response.code >= 200 && response.code < 400) {
-          response.json();
-        } else {
-          console.log('yolo');
-          dispatch(requestFailed(FAILED_REQUEST_TRUCKS, response));
-        }
-      })
-      .then(json => dispatch(receiveTrucks(json)));
+    return fetch(API_URL + 'trucks')
+      .then(response => response.json())
+      .then(json => dispatch(receiveTrucks(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_TRUCKS, response)),
+      );
   };
 }
 
 export function fetchHighlightedTrucks() {
   return dispatch => {
     dispatch(requesthighlightedTrucks());
-    return fetch(
-      API_URL + 'trucks/highlighted',
-    )
-      .then(response => {
-        if (response.code >= 200 && response.code < 400) {
-          response.json();
-        } else {
-          dispatch(requestFailed(FAILED_REQUEST_TRUCKS, response));
-        }
-      })
-      .then(json => dispatch(receiveHighlightedTrucks(json)));
+    return fetch(API_URL + 'trucks/highlighted')
+      .then(response => response.json())
+      .then(json => dispatch(receiveHighlightedTrucks(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_TRUCKS, response)),
+      );
   };
 }
 

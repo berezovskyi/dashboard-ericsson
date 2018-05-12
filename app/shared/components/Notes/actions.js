@@ -81,14 +81,11 @@ export function fetchNotes() {
   return dispatch => {
     dispatch(requestNotes());
     return fetch(API_URL + 'notes')
-      .then(response => {
-        if (response.code >= 200 && response.code < 400) {
-          response.json();
-        } else {
-          dispatch(requestFailed(FAILED_REQUEST_NOTES, response));
-        }
-      })
-      .then(json => dispatch(receiveNotes(json)));
+      .then(response => response.json())
+      .then(json => dispatch(receiveNotes(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_NOTES, response)),
+      );
   };
 }
 
@@ -96,14 +93,11 @@ export function fetchHighlightedNotes() {
   return dispatch => {
     dispatch(requesthighlightedNotes());
     return fetch(API_URL + 'notes/highlighted')
-      .then(response => {
-        if (response.code >= 200 && response.code < 400) {
-          response.json();
-        } else {
-          dispatch(requestFailed(FAILED_REQUEST_NOTES, response));
-        }
-      })
-      .then(json => dispatch(receiveHighlightedNotes(json)));
+      .then(response => response.json())
+      .then(json => dispatch(receiveHighlightedNotes(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_NOTES, response)),
+      );
   };
 }
 
