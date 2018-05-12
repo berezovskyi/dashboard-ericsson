@@ -2,7 +2,6 @@ import { combineReducers } from 'redux-immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import stakeholdersReducer from './shared/components/Stakeholders/reducer';
 import notesReducer from './shared/components/Notes/reducer';
-import capacityReducer from './pages/SupplyChainPage/Capacity/reducer';
 import truckReducer from './pages/SupplyChainPage/Truck/reducer';
 import robotReducer from './pages/IntelligentAgentPage/Robot/reducer';
 import batteryReducer from './pages/WareHousePage/Battery/reducer';
@@ -12,6 +11,8 @@ import performanceriskReducer from './pages/SupplyChainPage/RPChart/reducer';
 import interoperatabilityReducer
   from './pages/IntelligentAgentPage/IAChart/reducer';
 import { MyRoute } from './records';
+import warehouseReducer from './entities/warehouse/reducer';
+import retailerReducer from './entities/retailer/reducer';
 
 // Initial routing state
 const routeInitialState = new MyRoute({
@@ -30,7 +31,7 @@ function routeReducer(state = routeInitialState, action) {
 
 export function requestFailed(type, response) {
   return {
-    type: type,
+    type,
     payload: {
       loading: false,
       status: response.status,
@@ -44,13 +45,14 @@ export default function createReducer(injectedReducers) {
     route: routeReducer,
     notes: notesReducer,
     stakeholders: stakeholdersReducer,
-    capacity: capacityReducer,
     trucks: truckReducer,
     robots: robotReducer,
     battery: batteryReducer,
     robotperformance: robotperformanceReducer,
     performancerisk: performanceriskReducer,
     interoperatability: interoperatabilityReducer,
+    warehouse: warehouseReducer,
+    retailer: retailerReducer,
     ...injectedReducers,
   });
 }

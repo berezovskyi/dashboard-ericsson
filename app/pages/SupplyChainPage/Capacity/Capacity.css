@@ -21,6 +21,10 @@
   lost-column: 1/6;
 }
 
+.oneFull {
+  lost-column: 1/1;
+}
+
 .text {
   font-size: 12px;
   display: block;
