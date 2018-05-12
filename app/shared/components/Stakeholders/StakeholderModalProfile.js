@@ -30,7 +30,6 @@ class StakeholderModalProfile extends Component {
 
   render() {
     const { stakeholders, type } = this.props;
-    console.log(stakeholders);
     const modalprofileList = className(styles.row, styles.profilelist);
     return stakeholders.valueSeq().map(stakeholder => {
       if (stakeholder.type === type) {

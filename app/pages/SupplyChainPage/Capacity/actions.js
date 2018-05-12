@@ -1,6 +1,6 @@
 import { Capacity } from '../../../records';
 import { requestFailed } from '../../../reducers';
-import {API_URL} from "../../../constants";
+import { API_URL } from '../../../constants';
 export const UPDATE_CAPACITY_HIGHLIGHT = 'UPDATE_CAPACITY_HIGHLIGHT';
 export const REQUEST_ALL_CAPACITY = 'REQUEST_ALL_CAPACITY';
 export const RECEIVE_ALL_CAPACITY = 'RECEIVE_ALL_CAPACITY';
@@ -75,34 +75,24 @@ function receiveHighlightedCapacity(json) {
 export function fetchCapacity() {
   return dispatch => {
     dispatch(requestCapacity());
-    return fetch(
-      API_URL + 'capacity',
-    )
-      .then(response => {
-        if (response.code >= 200 && response.code < 400) {
-          response.json();
-        } else {
-          dispatch(requestFailed(FAILED_REQUEST_CAPACITY, response));
-        }
-      })
-      .then(json => dispatch(receiveCapacity(json)));
+    return fetch(API_URL + 'capacity')
+      .then(response => response.json())
+      .then(json => dispatch(receiveCapacity(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_CAPACITY, response)),
+      );
   };
 }
 
 export function fetchHighlightedCapacity() {
   return dispatch => {
     dispatch(requesthighlightedCapacity());
-    return fetch(
-      API_URL + 'capacity/highlighted',
-    )
-      .then(response => {
-        if (response.code >= 200 && response.code < 400) {
-          response.json();
-        } else {
-          dispatch(requestFailed(FAILED_REQUEST_CAPACITY, response));
-        }
-      })
-      .then(json => dispatch(receiveHighlightedCapacity(json)));
+    return fetch(API_URL + 'capacity/highlighted')
+      .then(response => response.json())
+      .then(json => dispatch(receiveHighlightedCapacity(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_CAPACITY, response)),
+      );
   };
 }
 

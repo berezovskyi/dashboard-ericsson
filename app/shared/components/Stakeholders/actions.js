@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import { Stakeholder } from '../../../records';
 
 import { requestFailed } from '../../../reducers';
-import {API_URL} from "../../../constants";
+import { API_URL } from '../../../constants';
 
 export const REQUEST_ALL_STAKEHOLDERS = 'REQUEST_ALL_STAKEHOLDERS';
 export const REQUEST_HIGHLIGHTED_STAKEHOLDERS =
@@ -12,7 +12,6 @@ export const RECEIVE_HIGHLIGHTED_STAKEHOLDERS =
   'RECEIVE_HIGHLIGHTED_STAKEHOLDERS';
 export const UPDATE_STAKEHOLDERS_HIGHLIGHT = 'UPDATE_STAKEHOLDERS_HIGHLIGHT';
 export const FAILED_REQUEST_STAKEHOLDERS = 'FAILED_REQUEST_STAKEHOLDERS';
-
 
 /* 2 different kinds of actions: one for highlighted, one for all.  */
 
@@ -87,37 +86,26 @@ function receiveHighlightedStakeholders(json) {
 export function fetchStakeholders() {
   return dispatch => {
     dispatch(requestStakeholders());
-    return fetch(
-      API_URL + 'stakeholders',
-    )
-      .then(response => {
-        if (response.code >= 200 && response.code < 400) {
-          response.json();
-        } else {
-          dispatch(requestFailed(FAILED_REQUEST_STAKEHOLDERS, response));
-        }
-      })
-      .then(json => dispatch(receiveStakeholders(json)));
+    return fetch(API_URL + 'stakeholders')
+      .then(response => response.json())
+      .then(json => dispatch(receiveStakeholders(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_STAKEHOLDERS, response)),
+      );
   };
 }
 
 export function fetchHighlightedStakeholders() {
   return dispatch => {
     dispatch(requesthighlightedStakeholders());
-    return fetch(
-      API_URL + 'stakeholders/highlighted',
-    )
-      .then(response => {
-        if (response.code >= 200 && response.code < 400) {
-          response.json();
-        } else {
-          dispatch(requestFailed(FAILED_REQUEST_STAKEHOLDERS, response));
-        }
-      })
-      .then(json => dispatch(receiveHighlightedStakeholders(json)));
+    return fetch(API_URL + 'stakeholders/highlighted')
+      .then(response => response.json())
+      .then(json => dispatch(receiveHighlightedStakeholders(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_STAKEHOLDERS, response)),
+      );
   };
 }
-
 
 function shouldFetchStakeholders(state) {
   const { data } = state;

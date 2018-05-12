@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { Robot } from '../../../records';
 import { requestFailed } from '../../../reducers';
-import {API_URL} from "../../../constants";
+import { API_URL } from '../../../constants';
 
 export const REQUEST_ALL_ROBOTS = 'REQUEST_ALL_ROBOTS';
 export const REQUEST_HIGHLIGHTED_ROBOTS = 'REQUEST_HIGHLIGHTED_ROBOTS';
@@ -89,34 +89,24 @@ function receiveHighlightedRobots(json) {
 export function fetchRobots() {
   return dispatch => {
     dispatch(requestRobots());
-    return fetch(
-      API_URL + 'robots',
-    )
-      .then(response => {
-        if (response.code >= 200 && response.code < 400) {
-          response.json();
-        } else {
-          dispatch(requestFailed(FAILED_REQUEST_ROBOTS, response));
-        }
-      })
-      .then(json => dispatch(receiveRobots(json)));
+    return fetch(API_URL + 'robots')
+      .then(response => response.json())
+      .then(json => dispatch(receiveRobots(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_ROBOTS, response)),
+      );
   };
 }
 
 export function fetchHighlightedRobots() {
   return dispatch => {
     dispatch(requesthighlightedRobots());
-    return fetch(
-      API_URL + 'robots/highlighted',
-    )
-      .then(response => {
-        if (response.code >= 200 && response.code < 400) {
-          response.json();
-        } else {
-          dispatch(requestFailed(FAILED_REQUEST_ROBOTS, response));
-        }
-      })
-      .then(json => dispatch(receiveHighlightedRobots(json)));
+    return fetch(API_URL + 'robots/highlighted')
+      .then(response => response.json())
+      .then(json => dispatch(receiveHighlightedRobots(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_ROBOTS, response)),
+      );
   };
 }
 
