@@ -60,6 +60,7 @@ function receiveRobots(json) {
             battery: {
               value: item.battery.value,
               diff: item.battery.diff,
+              status: item.battery.status,
             },
             highlightedRobot: item.highlightedRobot,
             highlightedBattery: item.highlightedBattery,

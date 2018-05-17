@@ -47,8 +47,8 @@ class Battery extends Component {
     const { robots, id, loading, status, statusText, receivedAt } = this.props;
     return (
       <Card
-        title="Highlighted Robot State"
-        helpText="The data relevant to the Robot Batteries"
+        title="Battery Status for Robots"
+        helpText="This card signifies the power consumption of the robots in the warehouse. You can highlight robots of relevance by clicking View All or view more info by clicking the View More button for that robot."
         id={id}
         date={receivedAt}
       >
@@ -70,14 +70,14 @@ class Battery extends Component {
         </Button>
         {' '}
         <Button color="primary" onClick={this._handleRefresh}>
-          <RefreshImage height={14} width={14} /> Refresh Battery
+          <RefreshImage height={14} width={14} /> Refresh Robot Data
         </Button>
         <Modal
           isOpen={this.state.batteryModal}
           toggle={this._handlebatteryModal}
         >
           <ModalHeader toggle={this._handlebatteryModal}>
-            Battery in the Robots
+            Power Consumption in the Robots
           </ModalHeader>
           <ModalBody>
             <SingleBatteryModal robots={robots} />

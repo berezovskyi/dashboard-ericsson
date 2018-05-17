@@ -40,6 +40,7 @@ class SingleBattery extends React.Component {
   }
 
   batteryContainer(data) {
+    console.log(data);
     switch (data.status) {
       case 'low':
         return <img src={lowBatteryIcon} width={44} />;
@@ -73,7 +74,7 @@ class SingleBattery extends React.Component {
     const { robots } = this.props;
 
     return robots.valueSeq().map(row => {
-      if (row.highlighted) {
+      if (row.highlightedBattery) {
         return (
           <div className={styles.singlecontainer} key={row.id}>
             <div>
@@ -114,16 +115,16 @@ class SingleBattery extends React.Component {
                   </h3>
                   <Alert color="primary">
                     <p>
-                      <strong>Name: </strong><span>{name}</span>
+                      <strong>Name: </strong><span>{row.name}</span>
                     </p>
                     <p>
-                      <strong>ID: </strong><span>{id}</span>
+                      <strong>Robot ID: </strong><span>{row.id}</span>
                     </p>
                     <p>
-                      <strong>From: </strong><span>{from.name}</span>
+                      <strong>From: </strong><span>{row.from.name}</span>
                     </p>
                     <p>
-                      <strong>To: </strong><span>{to.name}</span>
+                      <strong>To: </strong><span>{row.to.name}</span>
                     </p>
                   </Alert>
                   <h4 className={styles.progresstitle}>
@@ -131,11 +132,11 @@ class SingleBattery extends React.Component {
                   </h4>
                   <div className={styles.row}>
                     <div className={styles.fiveSixth}>
-                      <Progress value={value} />
+                      <Progress value={row.value} />
                     </div>
                     <div className={styles.oneSixth}>
                       <span className={styles.text}>
-                        {value}{' min left'}
+                        {row.value}{' min left'}
                       </span>
                     </div>
                   </div>
@@ -147,9 +148,9 @@ class SingleBattery extends React.Component {
                       This is what the fuzz is about. This is some really cool description about the battery.
                     </p>
                     <div className={styles.modalbox}>
-                      {this.batteryContainer(batterystatus)}
+                      {this.batteryContainer(row.battery)}
                       <h1 className={styles.modalboxtitle}>
-                        {batterystatus.value}{'%'}
+                        {row.battery.value}
                       </h1>
                     </div>
                   </div>
@@ -165,11 +166,10 @@ class SingleBattery extends React.Component {
                         width={64}
                       />
                       <h1 className={styles.modalboxtitle}>
-                        {performance.value}{'%'}
+                        {row.performance.value}{'%'}
                       </h1>
                       <p>
-                        {this.diffContainer(total.diff)}
-                        <span className={styles.modaltime}>14:45</span>
+                        {this.diffContainer(row.performance.diff)}
                       </p>
                     </div>
                   </div>
