@@ -16,21 +16,42 @@ import DecreaseIcon from '../../../shared/media/images/icons/decrease.svg';
 import { Robot } from '../../../records';
 
 import styles from './Robot.css';
-import Alert from "../../../ui/Alert/Alert";
+import Alert from '../../../ui/Alert/Alert';
 
 class SingleRobot extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       robotModal: false,
+      data: Robot({}),
     };
     this._handlerobotinfoModal = this._handlerobotinfoModal.bind(this);
+  }
+
+  setModal(data) {
+    if (!this.state.robotModal) {
+      this.setState({
+        data: {
+          value: data.get('value'),
+          id: data.get('id'),
+          name: data.get('name'),
+          to: data.get('to'),
+          from: data.get('from'),
+          performance: data.get('performance'),
+          secpertask: data.get('secpertask'),
+          timetoreturn: data.get('timetoreturn'),
+          highlightedRobot: data.get('highlightedRobot'),
+        },
+      });
+    }
   }
 
   _handlerobotinfoModal(data) {
     this.setState({
       robotModal: !this.state.robotModal,
     });
+
+    this.setModal(data);
   }
 
   diffContainer(diff) {
@@ -60,6 +81,14 @@ class SingleRobot extends React.Component {
 
   render() {
     const { robots } = this.props;
+    const {
+      id,
+      value,
+      to,
+      from,
+      performance,
+      secpertask,
+    } = this.state.data;
 
     return robots.valueSeq().map(row => {
       if (row.highlightedRobot) {
@@ -92,25 +121,25 @@ class SingleRobot extends React.Component {
               toggle={this._handlerobotinfoModal}
             >
               <ModalHeader toggle={this._handlerobotinfoModal}>
-                More Info: {row.name}
+                More Info: {name}
               </ModalHeader>
               <ModalBody>
                 <div className={styles.modalprogress}>
                   <Alert color="primary">
-                    <p><strong>Name:</strong> {row.name}</p>
-                    <p><strong>Robot ID:</strong> {row.id}</p>
+                    <p><strong>Name:</strong> {name}</p>
+                    <p><strong>Robot ID:</strong> {id}</p>
                     <p>
                       <strong>Going to: </strong>
-                      {row.to.name}
+                      {to.name}
                       {' ('}
-                      {row.to.id}
+                      {to.id}
                       {') '}
                     </p>
                     <p>
                       <strong>Coming from: </strong>
-                      {row.from.name}
+                      {from.name}
                       {' ('}
-                      {row.from.id}
+                      {from.id}
                       {') '}
                     </p>
                   </Alert>
@@ -118,12 +147,12 @@ class SingleRobot extends React.Component {
                     Current Activity
                   </h4>
                   <div className={styles.fourFifth}>
-                    <Progress value={row.value} />
+                    <Progress value={value} />
                   </div>
                   <div className={styles.oneFifth}>
-                      <span className={styles.text}>
-                        {row.value}{'% over'}
-                      </span>
+                    <span className={styles.text}>
+                      {value}{'% over'}
+                    </span>
                   </div>
                 </div>
                 <div className={styles.row}>
@@ -139,10 +168,10 @@ class SingleRobot extends React.Component {
                         width={64}
                       />
                       <h1 className={styles.modalboxtitle}>
-                        {row.performance.value}{'%'}
+                        {performance.value}{'%'}
                       </h1>
                       <p>
-                        {this.diffContainer(row.performance.diff)}
+                        {this.diffContainer(performance.diff)}
                       </p>
                     </div>
                   </div>
@@ -158,10 +187,10 @@ class SingleRobot extends React.Component {
                         width={90}
                       />
                       <h1 className={styles.modalboxtitle}>
-                        {row.secpertask.value}{'h'}
+                        {secpertask.value}{'h'}
                       </h1>
                       <p>
-                        {this.diffContainer(row.secpertask.diff)}
+                        {this.diffContainer(secpertask.diff)}
                       </p>
                     </div>
                   </div>
