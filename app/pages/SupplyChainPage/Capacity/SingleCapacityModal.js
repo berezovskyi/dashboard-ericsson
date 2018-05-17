@@ -86,7 +86,7 @@ class SingleCapacityModal extends Component {
                     id={row.id}
                     checked={row.highlighted}
                     name="Highlight Entity"
-                    onChange={() => this._handlehighlight(row, 'warehouse')}
+                    onChange={() => this._handlehighlight(row, 'retailer')}
                   />
                 </div>
               </div>

@@ -23,7 +23,7 @@ export default function SingleCapacity({ data }) {
             </div>
           );
         }
-        return <span key={row.id} />
+        return <span key={row.id} />;
       })}
     </div>
   );
