@@ -22,14 +22,6 @@ const Stakeholder = new Record({
   highlighted: false,
 });
 
-const Capacity = new Record({
-  id: '00000-00000',
-  name: '',
-  value: 0,
-  type: '',
-  highlighted: false,
-});
-
 const Truck = new Record({
   to: '',
   from: '',
@@ -43,6 +35,28 @@ const Truck = new Record({
   sustainability: {
     value: '',
     diff: '',
+  },
+  highlighted: false,
+});
+
+const Warehouse = new Record({
+  id: '00000-00000',
+  name: '',
+  capacity: 0,
+  location: {
+    x: 0,
+    y: 0,
+  },
+  highlighted: false,
+});
+
+const Retailer = new Record({
+  id: '00000-00000',
+  name: '',
+  capacity: 0,
+  location: {
+    x: 0,
+    y: 0,
   },
   highlighted: false,
 });
@@ -89,4 +103,4 @@ const Battery = new Record({
   highlighted: false,
 });
 
-export { MyRoute, Note, Stakeholder, Capacity, Truck, Robot, Battery };
+export { MyRoute, Note, Stakeholder, Truck, Robot, Battery, Warehouse, Retailer };

@@ -15,7 +15,8 @@ import ModalBody from '../../../ui/Modal/ModalBody';
 
 import SingleCapacity from './SingleCapacity';
 import SingleCapacityModal from './SingleCapacityModal';
-import { fetchHighlightedCapacityIfNeeded } from './actions';
+import { fetchWarehouseIfNeeded } from '../../../entities/warehouse/actions';
+import { fetchRetailerIfNeeded } from '../../../entities/retailer/actions';
 
 class Capacity extends Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -30,7 +31,8 @@ class Capacity extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedCapacityIfNeeded());
+    dispatch(fetchWarehouseIfNeeded());
+    dispatch(fetchRetailerIfNeeded());
   }
 
   _handlealltrucksModal() {
@@ -42,13 +44,15 @@ class Capacity extends Component {
   _handleRefresh(e) {
     e.preventDefault();
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedCapacityIfNeeded());
+    dispatch(fetchWarehouseIfNeeded());
+    dispatch(fetchRetailerIfNeeded());
   }
 
   render() {
     const {
       id,
-      capacity,
+      warehouse,
+      retailer,
       loading,
       status,
       statusText,
@@ -71,8 +75,8 @@ class Capacity extends Component {
               </p>
             </Alert>
           : <div />}
-        <SingleCapacity capacity={capacity} total={3} type="wh" />
-        <SingleCapacity capacity={capacity} total={3} type="rt" />
+        <SingleCapacity data={warehouse} />
+        <SingleCapacity data={retailer} />
         <Button
           size="medium"
           color="primary"
@@ -92,10 +96,7 @@ class Capacity extends Component {
             Capacity of all Trucks and Warehouses
           </ModalHeader>
           <ModalBody>
-            <h4>All Warehouses</h4>
-            <SingleCapacityModal type="wh" />
-            <h4>All Retailers</h4>
-            <SingleCapacityModal type="rt" />
+            <SingleCapacityModal warehouse={warehouse} retailer={retailer} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handlealltrucksModal}>
@@ -114,13 +115,15 @@ Capacity.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const data = state.get('capacity');
+  const warehouse = state.get('warehouse');
+  const retailer = state.get('retailer');
   return {
-    loading: data.get('loading'),
-    receivedAt: data.get('receivedAt'),
-    capacity: data.get('capacity'),
-    status: data.get('status'),
-    statusText: data.get('statusText'),
+    loading: warehouse.get('loading'),
+    receivedAt: warehouse.get('receivedAt'),
+    warehouse: warehouse.get('data'),
+    retailer: retailer.get('data'),
+    status: warehouse.get('status'),
+    statusText: warehouse.get('statusText'),
   };
 }
 

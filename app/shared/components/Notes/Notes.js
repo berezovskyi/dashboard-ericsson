@@ -10,7 +10,6 @@ import Form from '../../../ui/Form/Form';
 import Label from '../../../ui/Form/Label';
 import Textarea from '../../../ui/Form/Textarea';
 import FormGroup from '../../../ui/Form/FormGroup';
-import RefreshImage from '../../../shared/media/images/icons/refresh.svg';
 
 import { fetchHighlightedNotesIfNeeded } from './actions';
 
@@ -20,7 +19,6 @@ import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
 
 import styles from './Notes.css';
-import NoNotes from './NoNotes';
 import NotesList from './NotesList';
 import NotesListModal from './NotesListModal';
 
@@ -30,7 +28,6 @@ class Notes extends React.Component {
     super(props);
     this._handleaddNoteModal = this._handleaddNoteModal.bind(this);
     this._handleallNotesModal = this._handleallNotesModal.bind(this);
-    this._handleRefresh = this._handleRefresh.bind(this);
     this.state = {
       addnotesModal: false,
       allnotesModal: false,
@@ -54,12 +51,6 @@ class Notes extends React.Component {
       addnotesModal: false,
       allnotesModal: !this.state.allnotesModal,
     });
-  }
-
-  _handleRefresh(e) {
-    e.preventDefault();
-    const { dispatch } = this.props;
-    dispatch(fetchHighlightedNotesIfNeeded());
   }
 
   render() {
@@ -92,9 +83,6 @@ class Notes extends React.Component {
             View all Notes
           </Button>
           {' '}
-          <Button color="primary" onClick={this._handleRefresh}>
-            <RefreshImage height={14} width={14} /> Refresh Notes
-          </Button>
           <Button
             size="medium"
             color="secondary"
