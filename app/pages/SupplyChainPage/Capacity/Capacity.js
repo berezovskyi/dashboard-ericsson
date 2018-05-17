@@ -61,8 +61,8 @@ class Capacity extends Component {
 
     return (
       <Card
-        title="Highlighted Retailers and Warehouse Capacity"
-        helpText="The section indicates how much the warehouses and the retailers are full. The get more information, click view all."
+        title="Capacity of Retailers and Warehouses"
+        helpText="The card indicates how much the warehouses and the retailers are full. The get more information, click view all."
         id={id}
         date={receivedAt}
       >
