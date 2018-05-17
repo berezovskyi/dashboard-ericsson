@@ -45,17 +45,21 @@ class Truck extends Component {
 
   render() {
     const { trucks, id, loading, status, statusText, receivedAt } = this.props;
-    const date = new Date(receivedAt).toLocaleTimeString('en-US');
 
     return (
-      <Card title="Trucks" helpText="The data relevant to the trucks" id={id} date={date}>
+      <Card
+        title="Ongoing Truck Journeys"
+        helpText="This card talk about all the truck and related data. The highlighted data is on the card home. To see all trucks and highlight trucks of your choice click View All. You can also see more truck info in the View More for that truck."
+        id={id}
+        date={receivedAt}
+      >
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading
           ? <Alert color="error">
-            <p>
-              Error: {status}<br />Status Text: {statusText}
-            </p>
-          </Alert>
+              <p>
+                Error: {status}<br />Status Text: {statusText}
+              </p>
+            </Alert>
           : <div />}
         <SingleTruck trucks={trucks} total={3} />
         <Button
@@ -74,7 +78,7 @@ class Truck extends Component {
           toggle={this._handlealltruckModal}
         >
           <ModalHeader toggle={this._handlealltruckModal}>
-            Energy of all Trucks and Warehouses
+            All Truck Journeys
           </ModalHeader>
           <ModalBody>
             <SingleTruckModal />

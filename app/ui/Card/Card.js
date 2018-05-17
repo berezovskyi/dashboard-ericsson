@@ -6,13 +6,21 @@ import HelperImage from '../../shared/media/images/icons/help.svg';
 import Popover from '../Popover/Popover';
 import PopoverBody from '../Popover/PopoverBody';
 
-class Card extends Component { // eslint-disable-line react/prefer-stateless-function
+class Card extends Component {
+  // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
       helperstate: false,
+      formattedDate: '-',
     };
     this._handlePopover = this._handlePopover.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { date } = nextProps;
+    const formattedDate = new Date(date).toLocaleTimeString('en-US');
+    this.setState({ formattedDate });
   }
 
   _handlePopover() {
@@ -22,15 +30,29 @@ class Card extends Component { // eslint-disable-line react/prefer-stateless-fun
   }
 
   render() {
-    const { children, title, helpText, id, date } = this.props;
-
+    const { children, title, helpText, id } = this.props;
+    const { formattedDate } = this.state;
     return (
       <div className={styles.cardouter}>
         <div>
-          <h3 className={styles.cardtitle}>{title} - <strong className={styles.updated}>Last Updated: {date}</strong></h3>
+          <h3 className={styles.cardtitle}>
+            {title}
+            {' '}
+            -
+            {' '}
+            <strong className={styles.updated}>
+              Last Updated: {formattedDate}
+            </strong>
+          </h3>
         </div>
         <div className={styles.helperImage}>
-          <HelperImage height="24" width="24" alt="Help me" onClick={this._handlePopover} id={'HelpText' + id} />
+          <HelperImage
+            height="24"
+            width="24"
+            alt="Help me"
+            onClick={this._handlePopover}
+            id={'HelpText' + id}
+          />
         </div>
         <div>
           {children}
@@ -63,7 +85,7 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   helpText: PropTypes.string,
   id: PropTypes.string.isRequired,
-  date: PropTypes.string,
+  date: PropTypes.number.isRequired,
 };
 
 export default Card;

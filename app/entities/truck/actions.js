@@ -12,7 +12,6 @@ function requestTrucks() {
   return {
     type: REQUEST_ALL_TRUCKS,
     payload: {
-      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -22,6 +21,7 @@ function receiveTrucks(json) {
   return {
     type: RECEIVE_ALL_TRUCKS,
     payload: {
+      receivedAt: Date.now(),
       loading: false,
       trucks: json.data.map(item => {
         return [

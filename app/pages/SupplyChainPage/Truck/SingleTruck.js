@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import className from 'classnames';
 import Progress from '../../../ui/Progress/Progress';
 import Button from '../../../ui/Button/Button';
+import Alert from '../../../ui/Alert/Alert';
 import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
@@ -31,28 +32,32 @@ class SingleTruck extends Component {
   }
 
   diffContainer(diff) {
-    console.log(diff);
     let differenceClass;
     if (diff > 0) {
       differenceClass = className(styles.modaldiff, styles.modalincrease);
       return (
-        <span className={differenceClass}>
-          <IncreaseIcon />
-          {`${diff} %`}
-        </span>
+        <p>
+          <span className={differenceClass}>
+            <IncreaseIcon />
+            {`${diff} %`}
+          </span>
+          <span className={styles.diffdetail}>compared to overall average</span>
+        </p>
       );
     }
     differenceClass = className(styles.modaldiff, styles.modaldecrease);
     return (
-      <span className={differenceClass}>
-        <DecreaseIcon />{`${Math.abs(diff)} %`}
-      </span>
+      <p>
+        <span className={differenceClass}>
+          <DecreaseIcon />{`${Math.abs(diff)} %`}
+        </span>
+        <span>compared to overall average</span>
+      </p>
     );
   }
 
   render() {
     const { trucks } = this.props;
-
     return trucks.valueSeq().map(row => {
       if (row.highlighted) {
         return (
@@ -86,12 +91,30 @@ class SingleTruck extends Component {
               toggle={this._handletruckinfoModal}
             >
               <ModalHeader toggle={this._handletruckinfoModal}>
-                {row.name}
+                More Info: {row.name}
               </ModalHeader>
               <ModalBody>
                 <div className={styles.modalprogress}>
+                  <Alert color="primary">
+                    <p><strong>Name:</strong> {row.name}</p>
+                    <p><strong>Truck ID:</strong> {row.id}</p>
+                    <p>
+                      <strong>Going to: </strong>
+                      {row.to.name}
+                      {' ('}
+                      {row.to.id}
+                      {') '}
+                    </p>
+                    <p>
+                      <strong>Coming from: </strong>
+                      {row.from.name}
+                      {' ('}
+                      {row.from.id}
+                      {') '}
+                    </p>
+                  </Alert>
                   <h4 className={styles.progresstitle}>
-                    {row.name}{' - '}{row.to.name}{' from '}{row.from.name}
+                    Journey Status
                   </h4>
                   <div className={styles.row}>
                     <div className={styles.fourFifth}>
@@ -108,7 +131,7 @@ class SingleTruck extends Component {
                   <div className={styles.oneHalf}>
                     <h4 className={styles.modaltitle}>Sustainability</h4>
                     <p className={styles.modaldescription}>
-                      This is what the fuzz is about. This is some really cool description about the truck.
+                      The sustainability index. This updates each time the truck completes a journey.
                     </p>
                     <div className={styles.modalbox}>
                       <img
@@ -127,7 +150,7 @@ class SingleTruck extends Component {
                   <div className={styles.oneHalf}>
                     <h4 className={styles.modaltitle}>Total Active Hours</h4>
                     <p className={styles.modaldescription}>
-                      This is what the fuzz is about. This is some really cool description about the truck.
+                      Total continuous activity time for this truck. This updates each time the server updates.
                     </p>
                     <div className={styles.modalbox}>
                       <img
@@ -135,7 +158,9 @@ class SingleTruck extends Component {
                         alt="The total hours spent."
                         width={64}
                       />
-                      <h1 className={styles.modalboxtitle}>{row.activity.time}</h1>
+                      <h1 className={styles.modalboxtitle}>
+                        {row.activity.time}
+                      </h1>
                       <p>
                         {this.diffContainer(row.activity.diff)}
                       </p>
@@ -152,6 +177,7 @@ class SingleTruck extends Component {
           </div>
         );
       }
+      return <span />;
     });
   }
 }
