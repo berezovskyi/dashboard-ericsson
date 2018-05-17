@@ -15,20 +15,41 @@ import activityIcon from '../../../shared/media/images/icons/activity.png';
 import IncreaseIcon from '../../../shared/media/images/icons/increase.svg';
 import DecreaseIcon from '../../../shared/media/images/icons/decrease.svg';
 import styles from './Truck.css';
+import { Truck } from '../../../records';
 
 class SingleTruck extends Component {
   constructor(props) {
     super(props);
     this.state = {
       truckModal: false,
+      data: Truck({}),
     };
     this._handletruckinfoModal = this._handletruckinfoModal.bind(this);
   }
 
-  _handletruckinfoModal() {
+  setModal(data) {
+    if (!this.state.truckModal) {
+      this.setState({
+        data: {
+          value: data.get('value'),
+          id: data.get('id'),
+          name: data.get('name'),
+          to: data.get('to'),
+          from: data.get('from'),
+          activity: data.get('activity'),
+          sustainability: data.get('sustainability'),
+          highlighted: data.get('highlighted'),
+        },
+      });
+    }
+    return;
+  }
+
+  _handletruckinfoModal(data) {
     this.setState({
       truckModal: !this.state.truckModal,
     });
+    this.setModal(data);
   }
 
   diffContainer(diff) {
@@ -51,13 +72,23 @@ class SingleTruck extends Component {
         <span className={differenceClass}>
           <DecreaseIcon />{`${Math.abs(diff)} %`}
         </span>
-        <span>compared to overall average</span>
+        <span className={styles.diffdetail}>compared to overall average</span>
       </p>
     );
   }
 
   render() {
     const { trucks } = this.props;
+    const {
+      name,
+      value,
+      id,
+      to,
+      from,
+      activity,
+      sustainability,
+    } = this.state.data;
+
     return trucks.valueSeq().map(row => {
       if (row.highlighted) {
         return (
@@ -91,25 +122,25 @@ class SingleTruck extends Component {
               toggle={this._handletruckinfoModal}
             >
               <ModalHeader toggle={this._handletruckinfoModal}>
-                More Info: {row.name}
+                More Info: {name}
               </ModalHeader>
               <ModalBody>
                 <div className={styles.modalprogress}>
                   <Alert color="primary">
-                    <p><strong>Name:</strong> {row.name}</p>
-                    <p><strong>Truck ID:</strong> {row.id}</p>
+                    <p><strong>Name:</strong> {name}</p>
+                    <p><strong>Truck ID:</strong> {id}</p>
                     <p>
                       <strong>Going to: </strong>
-                      {row.to.name}
+                      {to.name}
                       {' ('}
-                      {row.to.id}
+                      {to.id}
                       {') '}
                     </p>
                     <p>
                       <strong>Coming from: </strong>
-                      {row.from.name}
+                      {from.name}
                       {' ('}
-                      {row.from.id}
+                      {from.id}
                       {') '}
                     </p>
                   </Alert>
@@ -118,11 +149,11 @@ class SingleTruck extends Component {
                   </h4>
                   <div className={styles.row}>
                     <div className={styles.fourFifth}>
-                      <Progress value={row.value} />
+                      <Progress value={value} />
                     </div>
                     <div className={styles.oneFifth}>
                       <span className={styles.text}>
-                        {row.value}{'% completed'}
+                        {value}{'% completed'}
                       </span>
                     </div>
                   </div>
@@ -140,10 +171,10 @@ class SingleTruck extends Component {
                         width={64}
                       />
                       <h1 className={styles.modalboxtitle}>
-                        {row.sustainability.value}{'%'}
+                        {sustainability.value}{'%'}
                       </h1>
                       <p>
-                        {this.diffContainer(row.sustainability.diff)}
+                        {this.diffContainer(sustainability.diff)}
                       </p>
                     </div>
                   </div>
@@ -159,10 +190,10 @@ class SingleTruck extends Component {
                         width={64}
                       />
                       <h1 className={styles.modalboxtitle}>
-                        {row.activity.time}
+                        {activity.time}
                       </h1>
                       <p>
-                        {this.diffContainer(row.activity.diff)}
+                        {this.diffContainer(activity.diff)}
                       </p>
                     </div>
                   </div>

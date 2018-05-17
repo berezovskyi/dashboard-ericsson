@@ -4,7 +4,7 @@ import styles from './Robot.css';
 import Progress from '../../../ui/Progress/Progress';
 import Checkbox from '../../../ui/Form/Checkbox';
 
-import { UPDATE_ROBOT_HIGHLIGHT, fetchRobotsIfNeeded } from './actions';
+import { UPDATE_ROBOTS_HIGHLIGHT, fetchRobotsIfNeeded } from '../../../entities/robot/actions';
 
 class SingleRobotModal extends Component {
   constructor(props) {
@@ -20,10 +20,10 @@ class SingleRobotModal extends Component {
   _handleHighlight(data) {
     const { dispatch } = this.props;
     dispatch({
-      type: UPDATE_ROBOT_HIGHLIGHT,
+      type: UPDATE_ROBOTS_HIGHLIGHT,
       payload: {
         id: data.id,
-        highlighted: !data.highlighted,
+        highlightedRobot: !data.highlightedRobot,
       },
     });
   }
@@ -36,14 +36,14 @@ class SingleRobotModal extends Component {
           <div className={styles.row}>
             <div className={styles.fiveSixth}>
               <h4 className={styles.title}>
-                {row.name}{' - '}{row.id}{' - '}{row.to}{' from '}{row.from}
+                {row.name}{' - '}{row.to.name}{' from '}{row.from.name}
               </h4>
             </div>
             <div className={styles.oneSixth}>
               <div className={styles.checkboxRobot}>
                 <Checkbox
                   id={row.id}
-                  checked={row.highlighted}
+                  checked={row.highlightedRobot}
                   name="Highlight Entity"
                   onChange={() => this._handleHighlight(row)}
                 />

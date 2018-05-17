@@ -79,43 +79,41 @@ const Robot = new Record({
   id: '00000-00000',
   name: '',
   value: 0,
-  performance: {
-    value: '',
-    diff: '',
-  },
-  secpertask: {
-    time: '',
-    diff: '',
-  },
-  highlighted: false,
-});
-
-const Battery = new Record({
-  id: '00000-00000',
-  name: '',
-  from: {
-    name: '',
-    id: '00000-00000',
-  },
   to: {
     name: '',
-    id: '00000-00000',
+    id: '',
+    location: {
+      x: 0,
+      y: 0,
+    },
   },
-  batterystatus: {
-    value: '',
-    status: '',
+  from: {
+    name: '',
+    id: '',
+    location: {
+      x: 0,
+      y: 0,
+    },
   },
+  type: '',
   performance: {
     value: '',
-    diff: '',
+    diff: 0,
   },
-  total: {
+  secpertask: {
+    value: '',
+    diff: 0,
+  },
+  battery: {
     hours: '',
-    diff: '',
+    diff: 0,
+    status: '',
   },
   timetoreturn: 0,
-  highlighted: false,
+  highlightedRobot: false,
+  highlightedBattery: false,
 });
+
 
 export {
   MyRoute,
@@ -123,7 +121,6 @@ export {
   Stakeholder,
   Truck,
   Robot,
-  Battery,
   Warehouse,
   Retailer,
 };

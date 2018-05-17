@@ -85,7 +85,7 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   helpText: PropTypes.string,
   id: PropTypes.string.isRequired,
-  date: PropTypes.number.isRequired,
+  date: PropTypes.number,
 };
 
 export default Card;

@@ -44,7 +44,6 @@ class IAChart extends Component {
   render() {
     const { id } = this.props;
     const { data, options } = this.state;
-    console.log(data, options);
     return (
       <Card title="Interoperatability curve between all available robots." id={id}>
         <Chord

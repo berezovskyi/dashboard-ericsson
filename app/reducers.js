@@ -3,8 +3,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import stakeholdersReducer from './entities/stakeholder/reducer';
 import notesReducer from './shared/components/Notes/reducer';
 import truckReducer from './entities/truck/reducer';
-import robotReducer from './pages/IntelligentAgentPage/Robot/reducer';
-import batteryReducer from './pages/WareHousePage/Battery/reducer';
+import robotReducer from './entities/robot/reducer';
 import robotperformanceReducer
   from './pages/WareHousePage/RobotPerformanceChart/reducer';
 import performanceriskReducer from './pages/SupplyChainPage/RPChart/reducer';
@@ -21,7 +20,6 @@ const routeInitialState = new MyRoute({
 
 function routeReducer(state = routeInitialState, action) {
   switch (action.type) {
-    /* istanbul ignore next */
     case LOCATION_CHANGE:
       return state.setIn(['location'], action.payload);
     default:
@@ -47,7 +45,6 @@ export default function createReducer(injectedReducers) {
     stakeholders: stakeholdersReducer,
     trucks: truckReducer,
     robots: robotReducer,
-    battery: batteryReducer,
     robotperformance: robotperformanceReducer,
     performancerisk: performanceriskReducer,
     interoperatability: interoperatabilityReducer,

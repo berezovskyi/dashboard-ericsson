@@ -14,7 +14,9 @@ import Alert from '../../../ui/Alert/Alert';
 import StakeholderProfile from './StakeholderProfile';
 import styles from '../../../pages/SupplyChainPage/SupplyChainPage.css';
 import StakeholderModalProfile from './StakeholderModalProfile';
-import { fetchHighlightedStakeholdersIfNeeded } from '../../../entities/stakeholder/actions';
+import {
+  fetchHighlightedStakeholdersIfNeeded,
+} from '../../../entities/stakeholder/actions';
 import RefreshImage from '../../../shared/media/images/icons/refresh.svg';
 import Loading from '../../../ui/Loading/Loading';
 
@@ -53,7 +55,6 @@ class Stakeholders extends React.Component {
       receivedAt,
     } = this.props;
 
-    const date = new Date(receivedAt).toLocaleTimeString('en-US');
     const title = 'Highlighted Stakeholders for ' + name;
     return (
       <Card
@@ -61,7 +62,7 @@ class Stakeholders extends React.Component {
         helpText="All the people involved in the Supply Chain area."
         id={id}
         type={type}
-        date={date}
+        date={receivedAt}
       >
         <div className={styles.row}>
           {loading ? <Loading /> : <div />}

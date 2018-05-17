@@ -19,7 +19,7 @@ import midBatteryIcon
 import DecreaseIcon from '../../../shared/media/images/icons/decrease.svg';
 import IncreaseIcon from '../../../shared/media/images/icons/increase.svg';
 
-import { Battery } from '../../../records';
+import { Robot } from '../../../records';
 
 import styles from './Battery.css';
 
@@ -28,7 +28,7 @@ class SingleBattery extends React.Component {
     super();
     this.state = {
       batteryModal: false,
-      data: Battery({}),
+      data: Robot({}),
     };
     this._handlebatteryinfoModal = this._handlebatteryinfoModal.bind(this);
   }
@@ -37,18 +37,19 @@ class SingleBattery extends React.Component {
     if (!this.state.batteryModal) {
       this.setState({
         data: {
-          value: data.get('timetoreturn'),
+          value: data.get('value'),
           id: data.get('id'),
           name: data.get('name'),
           to: data.get('to'),
           from: data.get('from'),
           performance: data.get('performance'),
-          batterystatus: data.get('batterystatus'),
-          total: data.get('total'),
+          secpertask: data.get('secpertask'),
+          timetoreturn: data.get('timetoreturn'),
+          highlightedBattery: data.get('highlightedBattery'),
+          battery: data.get('battery'),
         },
       });
     }
-    return;
   }
 
   _handlebatteryinfoModal(data) {
@@ -58,14 +59,14 @@ class SingleBattery extends React.Component {
     this.setModal(data);
   }
 
-  batteryContainer(data) {
-    switch (data.status) {
+  batteryContainer(battery) {
+    switch (battery.status) {
       case 'low':
-        return <img src={lowBatteryIcon} width={44} />;
+        return <img src={lowBatteryIcon} width={28} />;
       case 'high':
-        return <img src={highBatteryIcon} width={44} />;
+        return <img src={highBatteryIcon} width={28} />;
       default:
-        return <img src={midBatteryIcon} width={44} />;
+        return <img src={midBatteryIcon} width={28} />;
     }
   }
 
@@ -74,36 +75,31 @@ class SingleBattery extends React.Component {
     if (diff > 0) {
       differenceClass = className(styles.modaldiff, styles.modalincrease);
       return (
-        <span className={differenceClass}>
-          <IncreaseIcon />
-          {`${diff} %`}
-        </span>
+        <p>
+          <span className={differenceClass}>
+            <IncreaseIcon />
+            {`${diff} %`}
+          </span>
+          <span className={styles.diffdetail}>compared to overall average</span>
+        </p>
       );
     }
     differenceClass = className(styles.modaldiff, styles.modaldecrease);
     return (
-      <span className={differenceClass}>
-        <DecreaseIcon />{`${Math.abs(diff)} %`}
-      </span>
+      <p>
+        <span className={differenceClass}>
+          <DecreaseIcon />{`${Math.abs(diff)} %`}
+        </span>
+        <span className={styles.diffdetail}>compared to overall average</span>
+      </p>
     );
   }
 
   render() {
-    const { battery } = this.props;
-
-    const {
-      value,
-      id,
-      name,
-      to,
-      from,
-      performance,
-      total,
-      batterystatus,
-    } = this.state.data;
-
-    return battery.valueSeq().map(row => {
-      if (row.highlighted) {
+    const { robots } = this.props;
+    const { id, name, value, from, to, battery, performance } = this.state.data;
+    return robots.valueSeq().map(row => {
+      if (row.highlightedBattery) {
         return (
           <div className={styles.singlecontainer} key={row.id}>
             <div>
@@ -116,7 +112,7 @@ class SingleBattery extends React.Component {
                 </div>
                 <div className={styles.oneSixth}>
                   <span className={styles.text}>
-                    {row.timetoreturn}{' min left'}
+                    {100 - row.timetoreturn}{'% left'}
                   </span>
                 </div>
               </div>
@@ -140,14 +136,14 @@ class SingleBattery extends React.Component {
               <ModalBody>
                 <div className={styles.modalprogress}>
                   <h3 className={styles.progresstitle}>
-                    Robot Info
+                    Robot Info : {name}
                   </h3>
                   <Alert color="primary">
                     <p>
                       <strong>Name: </strong><span>{name}</span>
                     </p>
                     <p>
-                      <strong>ID: </strong><span>{id}</span>
+                      <strong>Robot ID: </strong><span>{id}</span>
                     </p>
                     <p>
                       <strong>From: </strong><span>{from.name}</span>
@@ -174,19 +170,22 @@ class SingleBattery extends React.Component {
                   <div className={styles.oneHalf}>
                     <h4 className={styles.modaltitle}>Battery Remaining</h4>
                     <p className={styles.modaldescription}>
-                      This is what the fuzz is about. This is some really cool description about the battery.
+                      Signifies the power remaining in the robot. If the battery is low, it is highly recommended to send the robot to the charging station.
                     </p>
                     <div className={styles.modalbox}>
-                      {this.batteryContainer(batterystatus)}
+                      {this.batteryContainer(battery)}
                       <h1 className={styles.modalboxtitle}>
-                        {batterystatus.value}{'%'}
+                        {battery.value}
                       </h1>
+                      <p>
+                        {this.diffContainer(battery.diff)}
+                      </p>
                     </div>
                   </div>
                   <div className={styles.oneHalf}>
                     <h4 className={styles.modaltitle}>Performance</h4>
                     <p className={styles.modaldescription}>
-                      This is what the fuzz is about. This is some really cool description about the truck.
+                      Signifies how performant the robot it compared to it's full potential. More performance % hogs in more memory and battery power.
                     </p>
                     <div className={styles.modalbox}>
                       <img
@@ -198,8 +197,7 @@ class SingleBattery extends React.Component {
                         {performance.value}{'%'}
                       </h1>
                       <p>
-                        {this.diffContainer(total.diff)}
-                        <span className={styles.modaltime}>14:45</span>
+                        {this.diffContainer(performance.diff)}
                       </p>
                     </div>
                   </div>
@@ -212,7 +210,6 @@ class SingleBattery extends React.Component {
                 >
                   Close
                 </Button>
-                {' '}
                 <Button color="primary" onClick={this._handlebatteryinfoModal}>
                   Update
                 </Button>
