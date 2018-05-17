@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styles from './Card.css';
 
 import HelperImage from '../../shared/media/images/icons/help.svg';
-import Popover from '..//Popover/Popover';
-import PopoverBody from '..//Popover/PopoverBody';
+import Popover from '../Popover/Popover';
+import PopoverBody from '../Popover/PopoverBody';
 
 class Card extends Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {

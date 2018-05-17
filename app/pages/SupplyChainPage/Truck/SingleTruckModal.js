@@ -70,7 +70,7 @@ function mapStateToProps(state) {
   return {
     receivedAt: data.get('receivedAt'),
     loading: data.get('loading'),
-    trucks: data.get('trucks'),
+    trucks: data.get('data'),
   };
 }
 

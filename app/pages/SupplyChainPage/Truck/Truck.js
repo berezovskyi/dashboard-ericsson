@@ -17,7 +17,6 @@ import ModalBody from '../../../ui/Modal/ModalBody';
 import { fetchTrucksIfNeeded } from '../../../entities/truck/actions';
 
 class Truck extends Component {
-  // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
@@ -84,7 +83,6 @@ class Truck extends Component {
             <Button color="primary" onClick={this._handlealltruckModal}>
               Close
             </Button>
-            {' '}
           </ModalFooter>
         </Modal>
       </Card>
@@ -97,7 +95,7 @@ function mapStateToProps(state) {
   return {
     loading: data.get('loading'),
     receivedAt: data.get('receivedAt'),
-    trucks: data.get('trucks'),
+    trucks: data.get('data'),
     status: data.get('status'),
     statusText: data.get('statusText'),
   };

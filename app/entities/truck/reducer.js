@@ -19,14 +19,14 @@ const INITIAL_STATE = new Map({
   statusText: '',
   loading: false,
   receivedAt: null,
-  trucks: new Map(),
+  data: new Map(),
 });
 
 export default function truckReducer(state = INITIAL_STATE, { type, payload }) {
   switch (type) {
     case UPDATE_TRUCKS_HIGHLIGHT:
       return state.setIn(
-        ['trucks', payload.id, 'highlighted'],
+        ['data', payload.id, 'highlighted'],
         payload.highlighted,
       );
 
@@ -39,7 +39,7 @@ export default function truckReducer(state = INITIAL_STATE, { type, payload }) {
       return state
         .setIn(['loading'], payload.loading)
         .setIn(['receivedAt'], payload.receivedAt)
-        .updateIn(['trucks'], data => data.mergeDeep(payload.trucks));
+        .updateIn(['data'], data => data.mergeDeep(payload.trucks));
 
     case FAILED_REQUEST_TRUCKS:
       return state

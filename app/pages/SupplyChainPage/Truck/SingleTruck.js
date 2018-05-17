@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import className from 'classnames';
 import Progress from '../../../ui/Progress/Progress';
@@ -13,46 +13,25 @@ import sustainabilityIcon
 import activityIcon from '../../../shared/media/images/icons/activity.png';
 import IncreaseIcon from '../../../shared/media/images/icons/increase.svg';
 import DecreaseIcon from '../../../shared/media/images/icons/decrease.svg';
-
-import { Truck } from '../../../records';
-
 import styles from './Truck.css';
 
-class SingleTruck extends React.Component {
+class SingleTruck extends Component {
   constructor(props) {
     super(props);
     this.state = {
       truckModal: false,
-      data: Truck({}),
     };
     this._handletruckinfoModal = this._handletruckinfoModal.bind(this);
   }
 
-  setModal(data) {
-    if (!this.state.truckModal) {
-      this.setState({
-        data: {
-          value: data.get('value'),
-          id: data.get('id'),
-          name: data.get('name'),
-          to: data.get('to'),
-          from: data.get('from'),
-          activity: data.get('activity'),
-          sustainability: data.get('sustainability'),
-        },
-      });
-    }
-    return;
-  }
-
-  _handletruckinfoModal(data) {
+  _handletruckinfoModal() {
     this.setState({
       truckModal: !this.state.truckModal,
     });
-    this.setModal(data);
   }
 
   diffContainer(diff) {
+    console.log(diff);
     let differenceClass;
     if (diff > 0) {
       differenceClass = className(styles.modaldiff, styles.modalincrease);
@@ -73,17 +52,6 @@ class SingleTruck extends React.Component {
 
   render() {
     const { trucks } = this.props;
-    const {
-      name,
-      to,
-      from,
-      activity,
-      value,
-      sustainability,
-      id,
-    } = this.state.data;
-
-    const differenceClass = className(styles.modaldiff, styles.modalincrease);
 
     return trucks.valueSeq().map(row => {
       if (row.highlighted) {
@@ -92,7 +60,7 @@ class SingleTruck extends React.Component {
             <div>
               <div className={styles.row}>
                 <h4 className={styles.title}>
-                  {row.name}{' - '}{row.id}{' - '}{row.to}{' from '}{row.from}
+                  {row.name}{' - '}{row.to.name}{' from '}{row.from.name}
                 </h4>
                 <div className={styles.fiveSixth}>
                   <Progress value={row.value} />
@@ -118,20 +86,20 @@ class SingleTruck extends React.Component {
               toggle={this._handletruckinfoModal}
             >
               <ModalHeader toggle={this._handletruckinfoModal}>
-                {name}
+                {row.name}
               </ModalHeader>
               <ModalBody>
                 <div className={styles.modalprogress}>
                   <h4 className={styles.progresstitle}>
-                    {name}{' - '}{id}{' - '}{to}{' from '}{from}
+                    {row.name}{' - '}{row.to.name}{' from '}{row.from.name}
                   </h4>
                   <div className={styles.row}>
                     <div className={styles.fourFifth}>
-                      <Progress value={value} />
+                      <Progress value={row.value} />
                     </div>
                     <div className={styles.oneFifth}>
                       <span className={styles.text}>
-                        {value}{'% completed'}
+                        {row.value}{'% completed'}
                       </span>
                     </div>
                   </div>
@@ -149,13 +117,10 @@ class SingleTruck extends React.Component {
                         width={64}
                       />
                       <h1 className={styles.modalboxtitle}>
-                        {sustainability.value}{'%'}
+                        {row.sustainability.value}{'%'}
                       </h1>
                       <p>
-                        <span className={differenceClass}>
-                          <IncreaseIcon />{sustainability.diff}{'%'}
-                        </span>
-                        <span className={styles.modaltime}>14:45</span>
+                        {this.diffContainer(row.sustainability.diff)}
                       </p>
                     </div>
                   </div>
@@ -170,10 +135,9 @@ class SingleTruck extends React.Component {
                         alt="The total hours spent."
                         width={64}
                       />
-                      <h1 className={styles.modalboxtitle}>{activity.time}</h1>
+                      <h1 className={styles.modalboxtitle}>{row.activity.time}</h1>
                       <p>
-                        {this.diffContainer(activity.diff)}
-                        <span className={styles.modaltime}>14:45</span>
+                        {this.diffContainer(row.activity.diff)}
                       </p>
                     </div>
                   </div>
@@ -182,10 +146,6 @@ class SingleTruck extends React.Component {
               <ModalFooter>
                 <Button color="secondary" onClick={this._handletruckinfoModal}>
                   Close
-                </Button>
-                {' '}
-                <Button color="primary" onClick={this._handletruckinfoModal}>
-                  Update
                 </Button>
               </ModalFooter>
             </Modal>

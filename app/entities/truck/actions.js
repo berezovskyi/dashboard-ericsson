@@ -4,9 +4,7 @@ import { requestFailed } from '../../reducers';
 import { API_URL } from '../../constants';
 
 export const REQUEST_ALL_TRUCKS = 'REQUEST_ALL_TRUCKS';
-export const REQUEST_HIGHLIGHTED_TRUCKS = 'REQUEST_HIGHLIGHTED_TRUCKS';
 export const RECEIVE_ALL_TRUCKS = 'RECEIVE_ALL_TRUCKS';
-export const RECEIVE_HIGHLIGHTED_TRUCKS = 'RECEIVE_HIGHLIGHTED_TRUCKS';
 export const UPDATE_TRUCKS_HIGHLIGHT = 'UPDATE_TRUCKS_HIGHLIGHT';
 export const FAILED_REQUEST_TRUCKS = 'FAILED_REQUEST_TRUCKS';
 
@@ -34,13 +32,29 @@ function receiveTrucks(json) {
             value: item.value,
             activity: {
               time: item.activity.time,
-              diff: item.activity.value,
+              diff: item.activity.diff,
             },
             sustainability: {
               value: item.sustainability.value,
               diff: item.sustainability.diff,
             },
             highlighted: item.highlighted,
+            from: {
+              name: item.from.name,
+              id: item.from.id,
+              location: {
+                x: item.from.location.x,
+                y: item.from.location.y,
+              },
+            },
+            to: {
+              name: item.to.name,
+              id: item.to.id,
+              location: {
+                x: item.to.location.x,
+                y: item.to.location.y,
+              },
+            },
           }),
         ];
       }),
