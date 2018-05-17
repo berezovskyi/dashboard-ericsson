@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styles from './Battery.css';
 import Progress from '../../../ui/Progress/Progress';
 import Checkbox from '../../../ui/Form/Checkbox';
+import { UPDATE_BATTERY_HIGHLIGHT } from '../../../entities/robot/actions';
 
 class SingleBatteryModal extends Component {
   constructor(props) {
@@ -13,9 +14,11 @@ class SingleBatteryModal extends Component {
   _handleHighlight(data) {
     const dispatch = this.props.dispatch;
     dispatch({
-      type: 'UPDATE_BATTERY_HIGHLIGHT',
-      id: data.id,
-      highlightedBattery: !data.highlightedBattery,
+      type: UPDATE_BATTERY_HIGHLIGHT,
+      payload: {
+        id: data.id,
+        highlightedBattery: !data.highlightedBattery,
+      }
     });
   }
 
@@ -43,11 +46,11 @@ class SingleBatteryModal extends Component {
           </div>
           <div className={styles.row}>
             <div className={styles.fiveSixth}>
-              <Progress value={row.timetoreturn} />
+              <Progress value={row.timetoreturn} reverse />
             </div>
             <div className={styles.oneSixth}>
               <span className={styles['text-modal']}>
-                {row.timetoreturn}{'% left'}
+                {row.timetoreturn}{'% consumed'}
               </span>
             </div>
           </div>

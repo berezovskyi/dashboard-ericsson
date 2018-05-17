@@ -144,7 +144,7 @@ class Knob extends React.Component {
     height: `${(this.w / 3) >> 0}px`,
     position: 'absolute',
     verticalAlign: 'middle',
-    marginTop: `${(this.w / 3) + 5 >> 0}px`,
+    marginTop: `${(this.w / 3 + 5) >> 0}px`,
     marginLeft: `-${(this.w * 3 / 4 + 2) >> 0}px`,
     border: 0,
     background: 'none',
@@ -154,6 +154,16 @@ class Knob extends React.Component {
     padding: '0px',
     WebkitAppearance: 'none',
   });
+
+  correctColor(value) {
+    if (value > 90) {
+      return '#dc2d21';
+    } else if (value < 20) {
+      return '#60C303';
+    } else {
+      return this.props.fgColor;
+    }
+  }
 
   drawCanvas() {
     const ctx = this.canvasRef.getContext('2d');
@@ -181,7 +191,7 @@ class Knob extends React.Component {
     // foreground arc
     const a = this.getArcToValue(this.props.value);
     ctx.beginPath();
-    ctx.strokeStyle = this.props.fgColor;
+    ctx.strokeStyle = this.correctColor(this.props.value);
     ctx.arc(this.xy, this.xy, this.radius, a.startAngle, a.endAngle, a.acw);
     ctx.stroke();
   }

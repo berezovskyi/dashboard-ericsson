@@ -4,17 +4,12 @@ import styles from './Robot.css';
 import Progress from '../../../ui/Progress/Progress';
 import Checkbox from '../../../ui/Form/Checkbox';
 
-import { UPDATE_ROBOTS_HIGHLIGHT, fetchRobotsIfNeeded } from '../../../entities/robot/actions';
+import { UPDATE_ROBOTS_HIGHLIGHT } from '../../../entities/robot/actions';
 
 class SingleRobotModal extends Component {
   constructor(props) {
     super(props);
     this._handleHighlight = this._handleHighlight.bind(this);
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchRobotsIfNeeded());
   }
 
   _handleHighlight(data) {
@@ -52,11 +47,11 @@ class SingleRobotModal extends Component {
           </div>
           <div className={styles.row}>
             <div className={styles.fiveSixth}>
-              <Progress value={row.value} />
+              <Progress value={row.value} reverse />
             </div>
             <div className={styles.oneSixth}>
               <span className={styles['text-modal']}>
-                {row.value}{'% completed'}
+                {row.value}{'% over'}
               </span>
             </div>
           </div>

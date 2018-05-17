@@ -101,7 +101,7 @@ class SingleRobot extends React.Component {
                   {'Memory for '}{row.name}
                 </h4>
                 <div className={styles.fiveSixth}>
-                  <Progress value={row.value} />
+                  <Progress value={row.value} reverse />
                 </div>
                 <div className={styles.oneSixth}>
                   <span className={styles.text}>{row.value}{'% over'}</span>
@@ -148,7 +148,7 @@ class SingleRobot extends React.Component {
                     Current Activity
                   </h4>
                   <div className={styles.fourFifth}>
-                    <Progress value={value} />
+                    <Progress value={value} reverse />
                   </div>
                   <div className={styles.oneFifth}>
                     <span className={styles.text}>
@@ -171,9 +171,7 @@ class SingleRobot extends React.Component {
                       <h1 className={styles.modalboxtitle}>
                         {performance.value}{'%'}
                       </h1>
-                      <p>
-                        {this.diffContainer(performance.diff)}
-                      </p>
+                      {this.diffContainer(performance.diff)}
                     </div>
                   </div>
                   <div className={styles.oneHalf}>
@@ -190,9 +188,7 @@ class SingleRobot extends React.Component {
                       <h1 className={styles.modalboxtitle}>
                         {secpertask.value}{'h'}
                       </h1>
-                      <p>
-                        {this.diffContainer(secpertask.diff)}
-                      </p>
+                      {this.diffContainer(secpertask.diff)}
                     </div>
                   </div>
                 </div>

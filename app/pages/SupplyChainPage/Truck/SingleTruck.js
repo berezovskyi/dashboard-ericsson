@@ -173,9 +173,7 @@ class SingleTruck extends Component {
                       <h1 className={styles.modalboxtitle}>
                         {sustainability.value}{'%'}
                       </h1>
-                      <p>
-                        {this.diffContainer(sustainability.diff)}
-                      </p>
+                      {this.diffContainer(sustainability.diff)}
                     </div>
                   </div>
                   <div className={styles.oneHalf}>
@@ -192,9 +190,7 @@ class SingleTruck extends Component {
                       <h1 className={styles.modalboxtitle}>
                         {activity.time}
                       </h1>
-                      <p>
-                        {this.diffContainer(activity.diff)}
-                      </p>
+                      {this.diffContainer(activity.diff)}
                     </div>
                   </div>
                 </div>
@@ -208,7 +204,7 @@ class SingleTruck extends Component {
           </div>
         );
       }
-      return <span />;
+      return <span key={row.id} />;
     });
   }
 }
