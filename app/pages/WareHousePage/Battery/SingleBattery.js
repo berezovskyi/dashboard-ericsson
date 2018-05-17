@@ -62,11 +62,11 @@ class SingleBattery extends React.Component {
   batteryContainer(battery) {
     switch (battery.status) {
       case 'low':
-        return <img src={lowBatteryIcon} width={44} />;
+        return <img src={lowBatteryIcon} width={28} />;
       case 'high':
-        return <img src={highBatteryIcon} width={44} />;
+        return <img src={highBatteryIcon} width={28} />;
       default:
-        return <img src={midBatteryIcon} width={44} />;
+        return <img src={midBatteryIcon} width={28} />;
     }
   }
 
@@ -75,17 +75,23 @@ class SingleBattery extends React.Component {
     if (diff > 0) {
       differenceClass = className(styles.modaldiff, styles.modalincrease);
       return (
-        <span className={differenceClass}>
-          <IncreaseIcon />
-          {`${diff} %`}
-        </span>
+        <p>
+          <span className={differenceClass}>
+            <IncreaseIcon />
+            {`${diff} %`}
+          </span>
+          <span className={styles.diffdetail}>compared to overall average</span>
+        </p>
       );
     }
     differenceClass = className(styles.modaldiff, styles.modaldecrease);
     return (
-      <span className={differenceClass}>
-        <DecreaseIcon />{`${Math.abs(diff)} %`}
-      </span>
+      <p>
+        <span className={differenceClass}>
+          <DecreaseIcon />{`${Math.abs(diff)} %`}
+        </span>
+        <span className={styles.diffdetail}>compared to overall average</span>
+      </p>
     );
   }
 
@@ -164,19 +170,22 @@ class SingleBattery extends React.Component {
                   <div className={styles.oneHalf}>
                     <h4 className={styles.modaltitle}>Battery Remaining</h4>
                     <p className={styles.modaldescription}>
-                      This is what the fuzz is about. This is some really cool description about the battery.
+                      Signifies the power remaining in the robot. If the battery is low, it is highly recommended to send the robot to the charging station.
                     </p>
                     <div className={styles.modalbox}>
                       {this.batteryContainer(battery)}
                       <h1 className={styles.modalboxtitle}>
                         {battery.value}
                       </h1>
+                      <p>
+                        {this.diffContainer(battery.diff)}
+                      </p>
                     </div>
                   </div>
                   <div className={styles.oneHalf}>
                     <h4 className={styles.modaltitle}>Performance</h4>
                     <p className={styles.modaldescription}>
-                      This is what the fuzz is about. This is some really cool description about the truck.
+                      Signifies how performant the robot it compared to it's full potential. More performance % hogs in more memory and battery power.
                     </p>
                     <div className={styles.modalbox}>
                       <img

@@ -88,6 +88,7 @@ class SingleRobot extends React.Component {
       from,
       performance,
       secpertask,
+      name,
     } = this.state.data;
 
     return robots.valueSeq().map(row => {
