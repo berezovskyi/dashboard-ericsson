@@ -20,7 +20,6 @@ const routeInitialState = new MyRoute({
 
 function routeReducer(state = routeInitialState, action) {
   switch (action.type) {
-    /* istanbul ignore next */
     case LOCATION_CHANGE:
       return state.setIn(['location'], action.payload);
     default:

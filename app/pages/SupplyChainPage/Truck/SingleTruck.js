@@ -51,7 +51,7 @@ class SingleTruck extends Component {
         <span className={differenceClass}>
           <DecreaseIcon />{`${Math.abs(diff)} %`}
         </span>
-        <span>compared to overall average</span>
+        <span className={styles.diffdetail}>compared to overall average</span>
       </p>
     );
   }

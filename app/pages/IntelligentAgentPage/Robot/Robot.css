@@ -47,6 +47,7 @@
 .modaldiff,
 .modaltime {
   padding: 0 20px;
+  display: block;
 }
 
 .modaldiff svg {
@@ -63,6 +64,14 @@
 
 .title {
   margin-bottom: 10px;
+}
+
+.fourFifth{
+  lost-column: 4/5;
+}
+
+.oneFifth {
+  lost-column: 1/5;
 }
 
 .fiveSixth {
@@ -101,4 +110,9 @@
 
 .checkboxRobot {
   text-align: right;
+}
+
+.diffdetail {
+  text-align: center;
+  font-size: 12px;
 }

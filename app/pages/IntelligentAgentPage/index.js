@@ -11,13 +11,12 @@ import IAChart from './IAChart/IAChart';
 class IntelligentAgentPage extends Component {
   // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { graphdata } = this.props;
     return (
       <div className={styles.fullPage}>
         <Helmet title="Intelligent Agents - SCOTT Dashboard" />
         <div className={styles.row}>
           <div className={styles.oneHalf}>
-            <IAChart id="iaChart" graphdata={graphdata} />
+            <IAChart id="iaChart" />
           </div>
           <div className={styles.oneHalf}>
             <Robot id="robot" />

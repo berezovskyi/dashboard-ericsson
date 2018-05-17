@@ -47,8 +47,8 @@ class Robot extends Component { // eslint-disable-line react/prefer-stateless-fu
     const { robots, id, loading, status, statusText, receivedAt } = this.props;
     return (
       <Card
-        title="Intelligent Agents"
-        helpText="The data relevant to the robots"
+        title="Activity Monitor for Robots"
+        helpText="The card signifies the activity monitor for all the robots in the warehouse out of which you can highlight the ones relevant to you. To know more about one robot click View More."
         id={id}
         date={receivedAt}
       >
@@ -77,7 +77,7 @@ class Robot extends Component { // eslint-disable-line react/prefer-stateless-fu
           toggle={this._handleallrobotsModal}
         >
           <ModalHeader toggle={this._handleallrobotsModal}>
-            All the available Robots
+            Activity Monitor for all Robots in the warehouse.
           </ModalHeader>
           <ModalBody>
             <SingleRobotModal robots={robots} />
@@ -94,16 +94,12 @@ class Robot extends Component { // eslint-disable-line react/prefer-stateless-fu
   }
 }
 
-Robot.propTypes = {
-  id: PropTypes.string,
-};
-
 function mapStateToProps(state) {
   const data = state.get('robots');
   return {
     loading: data.get('loading'),
     receivedAt: data.get('receivedAt'),
-    robots: data.get('robots'),
+    robots: data.get('data'),
     status: data.get('status'),
     statusText: data.get('statusText'),
   };

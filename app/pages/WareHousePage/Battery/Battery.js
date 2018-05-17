@@ -44,14 +44,13 @@ class Battery extends Component {
   }
 
   render() {
-    const { battery, id, loading, status, statusText, receivedAt } = this.props;
-    const date = new Date(receivedAt).toLocaleTimeString('en-US');
+    const { robots, id, loading, status, statusText, receivedAt } = this.props;
     return (
       <Card
         title="Highlighted Robot State"
         helpText="The data relevant to the Robot Batteries"
         id={id}
-        date={date}
+        date={receivedAt}
       >
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading
@@ -61,7 +60,7 @@ class Battery extends Component {
               </p>
             </Alert>
           : <div />}
-        <SingleBattery battery={battery} />
+        <SingleBattery robots={robots} />
         <Button
           size="medium"
           color="primary"
@@ -81,7 +80,7 @@ class Battery extends Component {
             Battery in the Robots
           </ModalHeader>
           <ModalBody>
-            <SingleBatteryModal battery={battery} />
+            <SingleBatteryModal robots={robots} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handlebatteryModal}>
@@ -96,18 +95,14 @@ class Battery extends Component {
 }
 
 function mapStateToProps(state) {
-  const data = state.get('battery');
+  const data = state.get('robots');
   return {
     loading: data.get('loading'),
     receivedAt: data.get('receivedAt'),
-    battery: data.get('battery'),
+    robots: data.get('data'),
     status: data.get('status'),
     statusText: data.get('statusText'),
   };
 }
-
-Battery.propTypes = {
-  trucks: PropTypes.any,
-};
 
 export default connect(mapStateToProps)(Battery);

@@ -23,7 +23,7 @@ class SingleRobotModal extends Component {
       type: UPDATE_ROBOTS_HIGHLIGHT,
       payload: {
         id: data.id,
-        highlighted: !data.highlighted,
+        highlightedRobot: !data.highlightedRobot,
       },
     });
   }
@@ -36,14 +36,14 @@ class SingleRobotModal extends Component {
           <div className={styles.row}>
             <div className={styles.fiveSixth}>
               <h4 className={styles.title}>
-                {row.name}{' - '}{row.id}{' - '}{row.to}{' from '}{row.from}
+                {row.name}{' - '}{row.to.name}{' from '}{row.from.name}
               </h4>
             </div>
             <div className={styles.oneSixth}>
               <div className={styles.checkboxRobot}>
                 <Checkbox
                   id={row.id}
-                  checked={row.highlighted}
+                  checked={row.highlightedRobot}
                   name="Highlight Entity"
                   onChange={() => this._handleHighlight(row)}
                 />

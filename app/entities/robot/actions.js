@@ -7,12 +7,12 @@ export const REQUEST_ALL_ROBOTS = 'REQUEST_ALL_ROBOTS';
 export const RECEIVE_ALL_ROBOTS = 'RECEIVE_ALL_ROBOTS';
 export const UPDATE_ROBOTS_HIGHLIGHT = 'UPDATE_ROBOTS_HIGHLIGHT';
 export const FAILED_REQUEST_ROBOTS = 'FAILED_REQUEST_ROBOTS';
+export const UPDATE_BATTERY_HIGHLIGHT = 'UPDATE_BATTERY_HIGHLIGHT';
 
 function requestRobots() {
   return {
     type: REQUEST_ALL_ROBOTS,
     payload: {
-      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -22,6 +22,7 @@ function receiveRobots(json) {
   return {
     type: RECEIVE_ALL_ROBOTS,
     payload: {
+      receivedAt: Date.now(),
       loading: false,
       robots: json.data.map(item => {
         return [
@@ -31,10 +32,7 @@ function receiveRobots(json) {
             name: item.name,
             value: item.value,
             timetoreturn: item.timetoreturn,
-            performance: {
-              value: item.performance.value,
-              diff: item.performance.diff,
-            },
+            type: item.type,
             from: {
               name: item.from.name,
               id: item.from.id,
@@ -51,11 +49,14 @@ function receiveRobots(json) {
                 y: item.to.location.y,
               },
             },
+            performance: {
+              value: item.performance.value,
+              diff: item.performance.diff,
+            },
             secpertask: {
               value: item.secpertask.time,
               diff: item.secpertask.diff,
             },
-            type: item.type,
             battery: {
               value: item.battery.value,
               diff: item.battery.diff,

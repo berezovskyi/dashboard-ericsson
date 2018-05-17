@@ -15,13 +15,13 @@ class SingleBatteryModal extends Component {
     dispatch({
       type: 'UPDATE_BATTERY_HIGHLIGHT',
       id: data.id,
-      highlighted: !data.highlighted,
+      highlightedBattery: !data.highlightedBattery,
     });
   }
 
   render() {
-    const { battery } = this.props;
-    return battery.valueSeq().map(row => {
+    const { robots } = this.props;
+    return robots.valueSeq().map(row => {
       return (
         <div key={row.id} className={styles.oneBattery}>
           <div className={styles.row}>

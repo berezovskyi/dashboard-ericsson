@@ -16,13 +16,13 @@ import DecreaseIcon from '../../../shared/media/images/icons/decrease.svg';
 import { Robot } from '../../../records';
 
 import styles from './Robot.css';
+import Alert from "../../../ui/Alert/Alert";
 
 class SingleRobot extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       robotModal: false,
-      data: Robot({}),
     };
     this._handlerobotinfoModal = this._handlerobotinfoModal.bind(this);
   }
@@ -31,7 +31,6 @@ class SingleRobot extends React.Component {
     this.setState({
       robotModal: !this.state.robotModal,
     });
-    this.setModal(data);
   }
 
   diffContainer(diff) {
@@ -39,31 +38,34 @@ class SingleRobot extends React.Component {
     if (diff > 0) {
       differenceClass = className(styles.modaldiff, styles.modalincrease);
       return (
-        <span className={differenceClass}>
-          <IncreaseIcon />
-          {`${diff} %`}
-        </span>
+        <p>
+          <span className={differenceClass}>
+            <IncreaseIcon />
+            {`${diff} %`}
+          </span>
+          <span className={styles.diffdetail}>compared to overall average</span>
+        </p>
       );
     }
     differenceClass = className(styles.modaldiff, styles.modaldecrease);
     return (
-      <span className={differenceClass}>
-        <DecreaseIcon />{`${Math.abs(diff)} %`}
-      </span>
+      <p>
+        <span className={differenceClass}>
+          <DecreaseIcon />{`${Math.abs(diff)} %`}
+        </span>
+        <span className={styles.diffdetail}>compared to overall average</span>
+      </p>
     );
   }
 
   render() {
     const { robots } = this.props;
-    const { name, secpertask, value, performance, id } = this.state.data;
-
-    const differenceClass = className(styles.modaldiff, styles.modalincrease);
 
     return robots.valueSeq().map(row => {
-      if (row.highlighted) {
+      if (row.highlightedRobot) {
         return (
           <div className={styles.singlecontainer} key={row.id}>
-            <div >
+            <div>
               <div className={styles.row}>
                 <h4 className={styles.title}>
                   {'Memory for '}{row.name}
@@ -90,20 +92,45 @@ class SingleRobot extends React.Component {
               toggle={this._handlerobotinfoModal}
             >
               <ModalHeader toggle={this._handlerobotinfoModal}>
-                {name}
+                More Info: {row.name}
               </ModalHeader>
               <ModalBody>
                 <div className={styles.modalprogress}>
+                  <Alert color="primary">
+                    <p><strong>Name:</strong> {row.name}</p>
+                    <p><strong>Robot ID:</strong> {row.id}</p>
+                    <p>
+                      <strong>Going to: </strong>
+                      {row.to.name}
+                      {' ('}
+                      {row.to.id}
+                      {') '}
+                    </p>
+                    <p>
+                      <strong>Coming from: </strong>
+                      {row.from.name}
+                      {' ('}
+                      {row.from.id}
+                      {') '}
+                    </p>
+                  </Alert>
                   <h4 className={styles.progresstitle}>
-                    {'Memory for '}{name}{' - '}{id}
+                    Current Activity
                   </h4>
-                  <Progress value={value} />
+                  <div className={styles.fourFifth}>
+                    <Progress value={row.value} />
+                  </div>
+                  <div className={styles.oneFifth}>
+                      <span className={styles.text}>
+                        {row.value}{'% over'}
+                      </span>
+                  </div>
                 </div>
                 <div className={styles.row}>
                   <div className={styles.oneHalf}>
                     <h4 className={styles.modaltitle}>Performance</h4>
                     <p className={styles.modaldescription}>
-                      This is what the fuzz is about. This is some really cool description about the truck.
+                      Signifies how performant the robot it compared to it's full potential. More performance % hogs in more memory and battery power.
                     </p>
                     <div className={styles.modalbox}>
                       <img
@@ -112,20 +139,17 @@ class SingleRobot extends React.Component {
                         width={64}
                       />
                       <h1 className={styles.modalboxtitle}>
-                        {performance.value}{'%'}
+                        {row.performance.value}{'%'}
                       </h1>
                       <p>
-                        <span className={differenceClass}>
-                          <IncreaseIcon />{performance.diff}{'%'}
-                        </span>
-                        <span className={styles.modaltime}>14:45</span>
+                        {this.diffContainer(row.performance.diff)}
                       </p>
                     </div>
                   </div>
                   <div className={styles.oneHalf}>
                     <h4 className={styles.modaltitle}>Total Active Hours</h4>
                     <p className={styles.modaldescription}>
-                      This is what the fuzz is about. This is some really cool description about the truck.
+                      Signifies how long has been the robot working continuously. The longer the robot works, the less efficient it is.
                     </p>
                     <div className={styles.modalbox}>
                       <img
@@ -134,11 +158,10 @@ class SingleRobot extends React.Component {
                         width={90}
                       />
                       <h1 className={styles.modalboxtitle}>
-                        {secpertask.time}{'h'}
+                        {row.secpertask.value}{'h'}
                       </h1>
                       <p>
-                        {this.diffContainer(secpertask.diff)}
-                        <span className={styles.modaltime}>14:45</span>
+                        {this.diffContainer(row.secpertask.diff)}
                       </p>
                     </div>
                   </div>

@@ -19,7 +19,7 @@ import midBatteryIcon
 import DecreaseIcon from '../../../shared/media/images/icons/decrease.svg';
 import IncreaseIcon from '../../../shared/media/images/icons/increase.svg';
 
-import { Battery } from '../../../records';
+import { Robot } from '../../../records';
 
 import styles from './Battery.css';
 
@@ -28,27 +28,8 @@ class SingleBattery extends React.Component {
     super();
     this.state = {
       batteryModal: false,
-      data: Battery({}),
     };
     this._handlebatteryinfoModal = this._handlebatteryinfoModal.bind(this);
-  }
-
-  setModal(data) {
-    if (!this.state.batteryModal) {
-      this.setState({
-        data: {
-          value: data.get('timetoreturn'),
-          id: data.get('id'),
-          name: data.get('name'),
-          to: data.get('to'),
-          from: data.get('from'),
-          performance: data.get('performance'),
-          batterystatus: data.get('batterystatus'),
-          total: data.get('total'),
-        },
-      });
-    }
-    return;
   }
 
   _handlebatteryinfoModal(data) {
@@ -89,20 +70,9 @@ class SingleBattery extends React.Component {
   }
 
   render() {
-    const { battery } = this.props;
+    const { robots } = this.props;
 
-    const {
-      value,
-      id,
-      name,
-      to,
-      from,
-      performance,
-      total,
-      batterystatus,
-    } = this.state.data;
-
-    return battery.valueSeq().map(row => {
+    return robots.valueSeq().map(row => {
       if (row.highlighted) {
         return (
           <div className={styles.singlecontainer} key={row.id}>
