@@ -27,23 +27,6 @@ class SingleRobot extends React.Component {
     this._handlerobotinfoModal = this._handlerobotinfoModal.bind(this);
   }
 
-  setModal(data) {
-    if (!this.state.robotModal) {
-      this.setState({
-        data: {
-          value: data.get('value'),
-          id: data.get('id'),
-          name: data.get('name'),
-          to: data.get('to'),
-          from: data.get('from'),
-          performance: data.get('performance'),
-          secpertask: data.get('secpertask'),
-        },
-      });
-    }
-    return;
-  }
-
   _handlerobotinfoModal(data) {
     this.setState({
       robotModal: !this.state.robotModal,

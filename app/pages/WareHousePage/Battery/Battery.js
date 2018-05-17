@@ -14,7 +14,7 @@ import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
-import { fetcj } from '../../../entities/robot/actions';
+import { fetchRobotsIfNeeded } from '../../../entities/robot/actions';
 
 class Battery extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Battery extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedBatteryIfNeeded());
+    dispatch(fetchRobotsIfNeeded());
   }
 
   _handlebatteryModal() {
@@ -40,24 +40,35 @@ class Battery extends Component {
   _handleRefresh(e) {
     e.preventDefault();
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedBatteryIfNeeded());
+    dispatch(fetchRobotsIfNeeded());
   }
 
   render() {
     const { battery, id, loading, status, statusText, receivedAt } = this.props;
     const date = new Date(receivedAt).toLocaleTimeString('en-US');
     return (
-      <Card title="Highlighted Robot State" helpText="The data relevant to the Robot Batteries" id={id} date={date}>
+      <Card
+        title="Highlighted Robot State"
+        helpText="The data relevant to the Robot Batteries"
+        id={id}
+        date={date}
+      >
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading
           ? <Alert color="error">
-            <p>
-              Error: {status}<br />Status Text: {statusText}
-            </p>
-          </Alert>
+              <p>
+                Error: {status}<br />Status Text: {statusText}
+              </p>
+            </Alert>
           : <div />}
         <SingleBattery battery={battery} />
-        <Button size="medium" color="primary" onClick={this._handlebatteryModal}>View all</Button>
+        <Button
+          size="medium"
+          color="primary"
+          onClick={this._handlebatteryModal}
+        >
+          View all
+        </Button>
         {' '}
         <Button color="primary" onClick={this._handleRefresh}>
           <RefreshImage height={14} width={14} /> Refresh Battery

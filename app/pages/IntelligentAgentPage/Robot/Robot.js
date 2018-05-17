@@ -14,7 +14,7 @@ import ModalBody from '../../../ui/Modal/ModalBody';
 
 import SingleRobot from './SingleRobot';
 import SingleRobotModal from './SingleRobotModal';
-import { fetchHighlightedRobotsIfNeeded } from './actions';
+import { fetchRobotsIfNeeded } from '../../../entities/robot/actions';
 
 class Robot extends Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -28,7 +28,7 @@ class Robot extends Component { // eslint-disable-line react/prefer-stateless-fu
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedRobotsIfNeeded());
+    dispatch(fetchRobotsIfNeeded());
   }
 
   _handleallrobotsModal() {
@@ -40,18 +40,17 @@ class Robot extends Component { // eslint-disable-line react/prefer-stateless-fu
   _handleRefresh(e) {
     e.preventDefault();
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedRobotsIfNeeded());
+    dispatch(fetchRobotsIfNeeded());
   }
 
   render() {
     const { robots, id, loading, status, statusText, receivedAt } = this.props;
-    const date = new Date(receivedAt).toLocaleTimeString('en-US');
     return (
       <Card
         title="Intelligent Agents"
         helpText="The data relevant to the robots"
         id={id}
-        date={date}
+        date={receivedAt}
       >
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading

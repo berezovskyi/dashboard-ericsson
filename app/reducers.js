@@ -3,7 +3,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import stakeholdersReducer from './entities/stakeholder/reducer';
 import notesReducer from './shared/components/Notes/reducer';
 import truckReducer from './entities/truck/reducer';
-import robotReducer from './pages/IntelligentAgentPage/Robot/reducer';
+import robotReducer from './entities/robot/reducer';
 import robotperformanceReducer
   from './pages/WareHousePage/RobotPerformanceChart/reducer';
 import performanceriskReducer from './pages/SupplyChainPage/RPChart/reducer';
