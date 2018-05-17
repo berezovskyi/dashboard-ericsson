@@ -20,45 +20,7 @@ function requestRobots() {
   };
 }
 
-function requesthighlightedRobots() {
-  return {
-    type: REQUEST_HIGHLIGHTED_ROBOTS,
-    payload: {
-      receivedAt: Date.now(),
-      loading: true,
-    },
-  };
-}
-
 function receiveRobots(json) {
-  return {
-    type: RECEIVE_ALL_ROBOTS,
-    payload: {
-      loading: false,
-      robots: json.data.map(item => {
-        return [
-          item.id,
-          new Robot({
-            id: item.id,
-            name: item.name,
-            value: item.value,
-            performance: {
-              value: item.performance.value,
-              diff: item.performance.diff,
-            },
-            secpertask: {
-              time: item.secpertask.time,
-              diff: item.secpertask.diff,
-            },
-            highlighted: item.highlighted,
-          }),
-        ];
-      }),
-    },
-  };
-}
-
-function receiveHighlightedRobots(json) {
   return {
     type: RECEIVE_HIGHLIGHTED_ROBOTS,
     payload: {
@@ -70,15 +32,38 @@ function receiveHighlightedRobots(json) {
             id: item.id,
             name: item.name,
             value: item.value,
+            timetoreturn: item.timetoreturn,
             performance: {
               value: item.performance.value,
               diff: item.performance.diff,
             },
+            from: {
+              name: item.from.name,
+              id: item.from.id,
+              location: {
+                x: item.from.location.x,
+                y: item.from.location.y,
+              },
+            },
+            to: {
+              name: item.to.name,
+              id: item.to.id,
+              location: {
+                x: item.to.location.x,
+                y: item.to.location.y,
+              },
+            },
             secpertask: {
-              time: item.secpertask.time,
+              value: item.secpertask.time,
               diff: item.secpertask.diff,
             },
-            highlighted: item.highlighted,
+            type: item.type,
+            battery: {
+              value: item.battery.value,
+              diff: item.battery.diff,
+            },
+            highlightedRobot: item.highlightedRobot,
+            highlightedBattery: item.highlightedBattery,
           }),
         ];
       }),
@@ -98,18 +83,6 @@ export function fetchRobots() {
   };
 }
 
-export function fetchHighlightedRobots() {
-  return dispatch => {
-    dispatch(requesthighlightedRobots());
-    return fetch(API_URL + 'robots/highlighted')
-      .then(response => response.json())
-      .then(json => dispatch(receiveHighlightedRobots(json)))
-      .catch(response =>
-        dispatch(requestFailed(FAILED_REQUEST_ROBOTS, response)),
-      );
-  };
-}
-
 function shouldFetchRobots(state) {
   const { data } = state;
   if (!data) {
@@ -120,28 +93,3 @@ function shouldFetchRobots(state) {
   return null;
 }
 
-function shouldFetchHighlightedRobots(state) {
-  const data = state.get('robots');
-  if (!data.get('loading') && data.get('robots').size === 0) {
-    return true;
-  }
-  return false;
-}
-
-export function fetchRobotsIfNeeded() {
-  return (dispatch, getState) => {
-    if (shouldFetchRobots(getState())) {
-      return dispatch(fetchRobots());
-    }
-    return null;
-  };
-}
-
-export function fetchHighlightedRobotsIfNeeded() {
-  return (dispatch, getState) => {
-    if (shouldFetchHighlightedRobots(getState())) {
-      return dispatch(fetchHighlightedRobots());
-    }
-    return null;
-  };
-}

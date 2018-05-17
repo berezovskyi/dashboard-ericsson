@@ -14,7 +14,7 @@ import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
-import { fetchHighlightedBatteryIfNeeded } from './actions';
+import { fetcj } from '../../../entities/robot/actions';
 
 class Battery extends Component {
   constructor(props) {
