@@ -14,7 +14,7 @@ import Alert from '../../../ui/Alert/Alert';
 import StakeholderProfile from './StakeholderProfile';
 import styles from '../../../pages/SupplyChainPage/SupplyChainPage.css';
 import StakeholderModalProfile from './StakeholderModalProfile';
-import { fetchHighlightedStakeholdersIfNeeded } from '../../../entities/Stakeholder/actions';
+import { fetchHighlightedStakeholdersIfNeeded } from '../../../entities/stakeholder/actions';
 import RefreshImage from '../../../shared/media/images/icons/refresh.svg';
 import Loading from '../../../ui/Loading/Loading';
 
@@ -25,7 +25,6 @@ class Stakeholders extends React.Component {
     this._handleallstakeholderModal = this._handleallstakeholderModal.bind(
       this,
     );
-    this._handleRefresh = this._handleRefresh.bind(this);
     this.state = {
       stakeholderModal: false,
     };
@@ -40,12 +39,6 @@ class Stakeholders extends React.Component {
     this.setState({
       stakeholderModal: !this.state.stakeholderModal,
     });
-  }
-
-  _handleRefresh(e) {
-    e.preventDefault();
-    const { dispatch } = this.props;
-    dispatch(fetchHighlightedStakeholdersIfNeeded());
   }
 
   render() {
@@ -89,9 +82,6 @@ class Stakeholders extends React.Component {
           Know More
         </Button>
         {' '}
-        <Button color="primary" onClick={this._handleRefresh}>
-          <RefreshImage height={14} width={14} /> Refresh Stakeholders
-        </Button>
         <Modal
           isOpen={this.state.stakeholderModal}
           toggle={this._handleallstakeholderModal}
