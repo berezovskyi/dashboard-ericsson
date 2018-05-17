@@ -2,7 +2,7 @@ import { combineReducers } from 'redux-immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import stakeholdersReducer from './entities/stakeholder/reducer';
 import notesReducer from './shared/components/Notes/reducer';
-import truckReducer from './pages/SupplyChainPage/Truck/reducer';
+import truckReducer from './entities/truck/reducer';
 import robotReducer from './pages/IntelligentAgentPage/Robot/reducer';
 import batteryReducer from './pages/WareHousePage/Battery/reducer';
 import robotperformanceReducer

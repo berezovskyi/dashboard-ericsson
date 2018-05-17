@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styles from './Truck.css';
 import Progress from '../../../ui/Progress/Progress';
 import Checkbox from '../../../ui/Form/Checkbox';
-import { fetchTrucksIfNeeded, UPDATE_TRUCKS_HIGHLIGHT } from './actions';
+import { fetchTrucksIfNeeded, UPDATE_TRUCKS_HIGHLIGHT } from '../../../entities/truck/actions';
 
 class SingleTruckModal extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class SingleTruckModal extends Component {
           <div className={styles.row}>
             <div className={styles.fiveSixth}>
               <h4 className={styles.title}>
-                {row.name}{' - '}{row.id}{' - '}{row.to}{' from '}{row.from}
+                {row.name}{' - '}{row.to.name}{' from '}{row.from.name}
               </h4>
             </div>
             <div className={styles.oneSixth}>
@@ -70,7 +70,7 @@ function mapStateToProps(state) {
   return {
     receivedAt: data.get('receivedAt'),
     loading: data.get('loading'),
-    trucks: data.get('trucks'),
+    trucks: data.get('data'),
   };
 }
 

@@ -47,6 +47,7 @@
 .modaldiff,
 .modaltime {
   padding: 0 20px;
+  display: block;
 }
 
 .modaldiff svg {
@@ -109,4 +110,8 @@
 
 .checkboxTruck {
   text-align: right;
+}
+
+.diffdetail {
+  font-size: 12px;
 }
