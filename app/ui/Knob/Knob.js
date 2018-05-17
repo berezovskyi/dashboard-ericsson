@@ -161,7 +161,7 @@ class Knob extends React.Component {
     } else if (value < 20) {
       return '#60C303';
     } else {
-      return this.props.fgColor;
+      return '#ffb347';
     }
   }
 

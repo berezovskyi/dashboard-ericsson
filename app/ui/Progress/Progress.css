@@ -7,7 +7,7 @@
 }
 
 .progress-bar.bg-primary {
-  background: #4D5AFF;
+  background: linear-gradient(to right, #ffb347, #ffcc33);
   border-radius: 2px;
 }
 
