@@ -14,7 +14,7 @@ import Alert from '../../../ui/Alert/Alert';
 import StakeholderProfile from './StakeholderProfile';
 import styles from '../../../pages/SupplyChainPage/SupplyChainPage.css';
 import StakeholderModalProfile from './StakeholderModalProfile';
-import { fetchHighlightedStakeholdersIfNeeded } from './actions';
+import { fetchHighlightedStakeholdersIfNeeded } from '../../../entities/Stakeholder/actions';
 import RefreshImage from '../../../shared/media/images/icons/refresh.svg';
 import Loading from '../../../ui/Loading/Loading';
 

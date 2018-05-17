@@ -1,8 +1,8 @@
 import 'whatwg-fetch';
-import { Stakeholder } from '../../../records';
+import { Stakeholder } from '../../records';
 
-import { requestFailed } from '../../../reducers';
-import { API_URL } from '../../../constants';
+import { requestFailed } from '../../reducers';
+import { API_URL } from '../../constants';
 
 export const REQUEST_ALL_STAKEHOLDERS = 'REQUEST_ALL_STAKEHOLDERS';
 export const REQUEST_HIGHLIGHTED_STAKEHOLDERS =
@@ -109,7 +109,6 @@ export function fetchHighlightedStakeholders() {
 
 function shouldFetchStakeholders(state) {
   const { data } = state;
-  console.log(data);
   if (!data) {
     return true;
   } else if (data.loading) {
