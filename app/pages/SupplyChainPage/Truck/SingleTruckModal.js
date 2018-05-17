@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styles from './Truck.css';
 import Progress from '../../../ui/Progress/Progress';
 import Checkbox from '../../../ui/Form/Checkbox';
-import { fetchTrucksIfNeeded, UPDATE_TRUCKS_HIGHLIGHT } from './actions';
+import { fetchTrucksIfNeeded, UPDATE_TRUCKS_HIGHLIGHT } from '../../../entities/truck/actions';
 
 class SingleTruckModal extends Component {
   constructor(props) {

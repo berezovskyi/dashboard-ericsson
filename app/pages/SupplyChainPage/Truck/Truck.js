@@ -14,7 +14,7 @@ import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
-import { fetchHighlightedTrucksIfNeeded } from './actions';
+import { fetchTrucksIfNeeded } from '../../../entities/truck/actions';
 
 class Truck extends Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -29,7 +29,7 @@ class Truck extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedTrucksIfNeeded());
+    dispatch(fetchTrucksIfNeeded());
   }
 
   _handlealltruckModal() {
@@ -41,7 +41,7 @@ class Truck extends Component {
   _handleRefresh(e) {
     e.preventDefault();
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedTrucksIfNeeded());
+    dispatch(fetchTrucksIfNeeded());
   }
 
   render() {

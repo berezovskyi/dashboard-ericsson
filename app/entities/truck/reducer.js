@@ -35,17 +35,6 @@ export default function truckReducer(state = INITIAL_STATE, { type, payload }) {
         .setIn(['loading'], payload.loading)
         .setIn(['receivedAt'], payload.receivedAt);
 
-    case REQUEST_HIGHLIGHTED_TRUCKS:
-      return state
-        .setIn(['loading'], payload.loading)
-        .setIn(['receivedAt'], payload.receivedAt);
-
-    case RECEIVE_HIGHLIGHTED_TRUCKS:
-      return state
-        .setIn(['loading'], payload.loading)
-        .setIn(['receivedAt'], payload.receivedAt)
-        .updateIn(['trucks'], data => data.mergeDeep(payload.trucks));
-
     case RECEIVE_ALL_TRUCKS:
       return state
         .setIn(['loading'], payload.loading)
