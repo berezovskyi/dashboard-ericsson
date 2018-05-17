@@ -12,7 +12,6 @@ function requestWarehouse() {
   return {
     type: REQUEST_ALL_WAREHOUSE,
     payload: {
-      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -23,6 +22,7 @@ function receiveWarehouse(json) {
     type: RECEIVE_ALL_WAREHOUSE,
     payload: {
       loading: false,
+      receivedAt: Date.now(),
       warehouse: json.data.map(item => {
         return [
           item.id,

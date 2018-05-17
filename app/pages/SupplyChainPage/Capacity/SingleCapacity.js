@@ -15,7 +15,6 @@ export default function SingleCapacity({ data }) {
                   height={100}
                   width={100}
                   bgColor="#E9EFF4"
-                  fgColor="#4D5AFF"
                   inputColor="#474F58"
                 />
                 <h4 className={styles.title}>{row.name}</h4>
@@ -24,6 +23,7 @@ export default function SingleCapacity({ data }) {
             </div>
           );
         }
+        return <span key={row.id} />
       })}
     </div>
   );

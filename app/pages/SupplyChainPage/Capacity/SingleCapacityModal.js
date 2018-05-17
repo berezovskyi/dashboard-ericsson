@@ -38,8 +38,8 @@ class SingleCapacityModal extends Component {
   render() {
     const { warehouse, retailer } = this.props;
     return (
-      <div className={styles.row}>
-        <div className={styles.oneFull}>
+      <div className={styles.container}>
+        <div className={styles.row}>
           <h4>All Warehouses</h4>
           {warehouse.valueSeq().map(row => {
             return (
@@ -66,7 +66,7 @@ class SingleCapacityModal extends Component {
             );
           })}
         </div>
-        <div className={styles.oneFull}>
+        <div className={styles.row}>
           <h4>All Retailers</h4>
           {retailer.valueSeq().map(row => {
             return (
