@@ -108,11 +108,11 @@ class SingleBattery extends React.Component {
                   {row.name}
                 </h4>
                 <div className={styles.fiveSixth}>
-                  <Progress value={row.timetoreturn} />
+                  <Progress value={row.timetoreturn} reverse />
                 </div>
                 <div className={styles.oneSixth}>
                   <span className={styles.text}>
-                    {100 - row.timetoreturn}{'% left'}
+                    {row.timetoreturn}{'% consumed'}
                   </span>
                 </div>
               </div>
