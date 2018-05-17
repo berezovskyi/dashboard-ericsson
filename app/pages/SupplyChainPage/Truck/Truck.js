@@ -49,7 +49,7 @@ class Truck extends Component {
     return (
       <Card
         title="Ongoing Truck Journeys"
-        helpText="This card talk about all the truck and related data. The highlighted data is on the card home. To see all trucks and highlight trucks of your choice click View All. You can also see more truck info in the View More for that truck."
+        helpText="This card talks about all the truck and related data. The highlighted data is on the card home. To see all trucks and highlight trucks of your choice click View All. You can also see more truck info in the View More for that truck."
         id={id}
         date={receivedAt}
       >
