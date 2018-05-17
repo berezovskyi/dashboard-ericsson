@@ -1,17 +1,17 @@
 /*
 *
-* CapacityReducer
+* retailerReducer
 *
 */
 
 import { Map } from 'immutable';
 import {
-  UPDATE_CAPACITY_HIGHLIGHT,
-  REQUEST_ALL_CAPACITY,
-  RECEIVE_ALL_CAPACITY,
-  REQUEST_HIGHLIGHTED_CAPACITY,
-  RECEIVE_HIGHLIGHTED_CAPACITY,
-  FAILED_REQUEST_CAPACITY,
+  UPDATE_RETAILER_HIGHLIGHT,
+  REQUEST_ALL_RETAILER,
+  RECEIVE_ALL_RETAILER,
+  REQUEST_HIGHLIGHTED_RETAILER,
+  RECEIVE_HIGHLIGHTED_RETAILER,
+  FAILED_REQUEST_RETAILER,
 } from './actions';
 
 const INITIAL_STATE = new Map({
@@ -19,46 +19,46 @@ const INITIAL_STATE = new Map({
   statusText: '',
   loading: false,
   receivedAt: null,
-  capacity: new Map(),
+  data: new Map(),
 });
 
-export default function capacityReducer(
+export default function retailerReducer(
   state = INITIAL_STATE,
   { type, payload },
 ) {
   switch (type) {
-    case UPDATE_CAPACITY_HIGHLIGHT:
+    case UPDATE_RETAILER_HIGHLIGHT:
       return state.setIn(
-        ['capacity', payload.id, 'highlighted'],
+        ['data', payload.id, 'highlighted'],
         payload.highlighted,
       );
-    case REQUEST_ALL_CAPACITY:
+    case REQUEST_ALL_RETAILER:
       return state
         .setIn(['loading'], payload.loading)
         .setIn(['receivedAt'], payload.receivedAt);
 
-    case REQUEST_HIGHLIGHTED_CAPACITY:
+    case REQUEST_HIGHLIGHTED_RETAILER:
       return state
         .setIn(['loading'], payload.loading)
         .setIn(['receivedAt'], payload.receivedAt);
 
-    case RECEIVE_HIGHLIGHTED_CAPACITY:
+    case RECEIVE_HIGHLIGHTED_RETAILER:
       return state
         .setIn(['loading'], payload.loading)
         .setIn(['receivedAt'], payload.receivedAt)
-        .updateIn(['capacity'], data => data.mergeDeep(payload.capacity));
+        .updateIn(['data'], data => data.mergeDeep(payload.retailer));
 
-    case RECEIVE_ALL_CAPACITY:
+    case RECEIVE_ALL_RETAILER:
       return state
         .setIn(['loading'], payload.loading)
         .setIn(['receivedAt'], payload.receivedAt)
-        .updateIn(['capacity'], data => data.mergeDeep(payload.capacity));
+        .updateIn(['data'], data => data.mergeDeep(payload.retailer));
 
-    case FAILED_REQUEST_CAPACITY:
+    case FAILED_REQUEST_RETAILER:
       return state
         .setIn(['loading'], payload.loading)
         .setIn(['status'], payload.status)
-        .setIn(['statusText'], payload.statusText);
+        .setIn(['data'], payload.statusText);
     default:
       return state;
   }

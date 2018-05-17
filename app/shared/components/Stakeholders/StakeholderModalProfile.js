@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import className from 'classnames';
-import {fetchStakeholdersIfNeeded, UPDATE_STAKEHOLDERS_HIGHLIGHT} from './actions';
+import {fetchStakeholdersIfNeeded, UPDATE_STAKEHOLDERS_HIGHLIGHT} from '../../../entities/stakeholder/actions';
 
 import Checkbox from '../../../ui/Form/Checkbox';
 import styles from './Stakeholders.css';
