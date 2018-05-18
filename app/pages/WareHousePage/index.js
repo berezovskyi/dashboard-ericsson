@@ -8,13 +8,20 @@ import Battery from './Battery/Battery';
 import styles from './WareHousePage.css';
 import RobotPerformanceChart
   from './RobotPerformanceChart/RobotPerformanceChart';
+import WarehouseMap from './WarehouseMap/WarehouseMap';
 
-class WareHousePage extends Component { // eslint-disable-line react/prefer-stateless-function
+class WareHousePage extends Component {
+  // eslint-disable-line react/prefer-stateless-function
   render() {
     const { graphdata } = this.props;
     return (
       <div className={styles.fullPage}>
         <Helmet title="Warehouse - SCOTT Dashboard" />
+        <div className={styles.row}>
+          <div className={styles.oneFull}>
+            <WarehouseMap id="warehousemap" />
+          </div>
+        </div>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
             <RobotPerformanceChart
