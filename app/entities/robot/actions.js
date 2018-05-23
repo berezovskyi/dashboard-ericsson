@@ -4,6 +4,8 @@ import { requestFailed } from '../../reducers';
 import { API_URL } from '../../constants';
 
 export const REQUEST_ALL_ROBOTS = 'REQUEST_ALL_ROBOTS';
+export const REQUEST_ROBOT = 'REQUEST_ROBOT';
+export const RECEIVE_ROBOT = 'RECEIVE_ROBOT';
 export const RECEIVE_ALL_ROBOTS = 'RECEIVE_ALL_ROBOTS';
 export const UPDATE_ROBOTS_HIGHLIGHT = 'UPDATE_ROBOTS_HIGHLIGHT';
 export const FAILED_REQUEST_ROBOTS = 'FAILED_REQUEST_ROBOTS';
@@ -16,6 +18,24 @@ function requestRobots() {
       loading: true,
     },
   };
+}
+
+function requestRobot() {
+  return {
+    type: REQUEST_ROBOT,
+    payload: {
+      loading: true,
+    },
+  };
+}
+
+function receiveRobot(json) {
+  return {
+    type: RECEIVE_ROBOT,
+    payload: {
+      robot: new Robot(json),
+    }
+  }
 }
 
 function receiveRobots(json) {
@@ -77,6 +97,18 @@ export function fetchRobots() {
     return fetch(API_URL + 'robots')
       .then(response => response.json())
       .then(json => dispatch(receiveRobots(json)))
+      .catch(response =>
+        dispatch(requestFailed(FAILED_REQUEST_ROBOTS, response)),
+      );
+  };
+}
+
+export function fetchRobot(id) {
+  return dispatch => {
+    dispatch(requestRobot());
+    return fetch(API_URL + 'robots/' + id)
+      .then(response => response.json())
+      .then(json => dispatch(receiveRobot(json)))
       .catch(response =>
         dispatch(requestFailed(FAILED_REQUEST_ROBOTS, response)),
       );

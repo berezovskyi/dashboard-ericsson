@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
 import { connect } from 'react-redux';
 import { Chord } from '@nivo/chord';
 
-import { getCurrentRoute, getAvailableRobots } from '../../../utils/utils';
+import { getCurrentRoute } from '../../../utils/utils';
 
 import Card from '../../../ui/Card/Card';
-import styles from './IAChart.css';
 
 class IAChart extends Component {
   constructor(props) {

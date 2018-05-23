@@ -105,7 +105,7 @@ const Robot = new Record({
     diff: 0,
   },
   battery: {
-    hours: '',
+    value: '',
     diff: 0,
     status: '',
   },

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="122px" height="122px" viewBox="0 0 122 122" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="0.25781251%" cy="49.7500002%" fx="0.25781251%" fy="49.7500002%" r="159.247076%" id="radialGradient-1">
+            <stop stop-color="#03001E" offset="0%"></stop>
+            <stop stop-color="#260150" offset="0.0510143018%"></stop>
+            <stop stop-color="#400276" offset="10.3275432%"></stop>
+            <stop stop-color="#7303C0" offset="41.6790247%"></stop>
+            <stop stop-color="#EC38BC" offset="80.9925939%"></stop>
+            <stop stop-color="#FDEFF9" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="100%" id="radialGradient-2">
+            <stop stop-color="#F5515F" offset="0%"></stop>
+            <stop stop-color="#9F041B" offset="100%"></stop>
+        </radialGradient>
+        <circle id="path-3" cx="32" cy="32" r="32"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Screen-3---Supply-Chain-Screen" transform="translate(-1119.000000, -846.000000)">
+            <g id="Group-3" transform="translate(1148.000000, 875.000000)">
+                <g id="Oval-3">
+                    <use fill="url(#radialGradient-1)" fill-rule="evenodd" xlink:href="#path-3"></use>
+                    <circle stroke="url(#radialGradient-2)" stroke-width="29" cx="32" cy="32" r="46.5"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

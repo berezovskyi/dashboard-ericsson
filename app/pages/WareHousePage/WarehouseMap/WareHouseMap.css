@@ -1,0 +1,76 @@
+.row {
+  lost-center: 100%;
+}
+
+.oneFull {
+  lost-column: 1;
+}
+
+.oneHalf {
+  lost-column: 1/2;
+}
+
+
+.modalbox {
+  background: #F7F7F7;
+  padding: 30px;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.modalbox p {
+  margin: 0;
+}
+
+.modalboxtitle {
+  font-size: 64px;
+  font-weight: 300;
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+
+.modalprogress {
+  margin-bottom: 0;
+}
+
+.modaldiff,
+.modaltime {
+  padding: 0 20px;
+  display: block;
+}
+
+.modaldiff svg {
+  height: 12px;
+}
+
+.modaldecrease {
+  color: #FD1B1B;
+}
+
+.modalincrease {
+  color: #60C303;
+}
+
+.text {
+  font-size: 12px;
+}
+
+.text-modal {
+  font-size: 12px;
+}
+
+.oneTruck > div {
+  margin: 10px 0;
+}
+
+.oneTruck:last-child {
+  margin-bottom: 0;
+}
+
+.checkboxTruck {
+  text-align: right;
+}
+
+.diffdetail {
+  font-size: 12px;
+}
