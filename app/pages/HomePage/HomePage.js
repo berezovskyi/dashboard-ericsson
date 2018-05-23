@@ -20,21 +20,21 @@ class HomePage extends Component {
                   <Link to="/warehouse?time=day" className={styles.thumbnail}>
                     <img src={Warehouse} className={styles.thumbnailimage} height={48} />
                     <h3 className={styles.heading}>Warehouse level</h3>
-                    <p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it.</p>
+                    <p>The purpose of the Warehouse level is to visualise the movement and exchange of data inside the warehouse primarily by the robots.</p>
                   </Link>
                 </div>
                 <div className={styles.oneThird}>
                   <Link to="/supplychain?time=day" className={styles.thumbnail}>
                     <img src={SupplyChain} className={styles.thumbnailimage} height={48} />
                     <h3 className={styles.heading}>Supply Chain level</h3>
-                    <p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it.</p>
+                    <p>The purpose of the supply chain level is to visualise data available outside  the warehouse scope and how the objects in the warehouse interact with the outside environment (retailers).</p>
                   </Link>
                 </div>
                 <div className={styles.oneThird}>
                   <Link to="/intellegentagent?time=day" className={styles.thumbnail}>
                     <img src={IntellegentAgent} className={styles.thumbnailimage} height={48} />
                     <h3 className={styles.heading}>Intelligent Agent level</h3>
-                    <p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it.</p>
+                    <p>The purpose of the Intelligent Agent (IA) level is to visualise interdependence of different robots on one another.</p>
                   </Link>
                 </div>
               </div>
