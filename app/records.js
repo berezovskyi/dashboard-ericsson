@@ -60,8 +60,10 @@ const Warehouse = new Record({
   location: {
     x: 0,
     y: 0,
+    name: '',
   },
   highlighted: false,
+  current: false,
 });
 
 const Retailer = new Record({
@@ -71,6 +73,7 @@ const Retailer = new Record({
   location: {
     x: 0,
     y: 0,
+    name: '',
   },
   highlighted: false,
 });
@@ -114,13 +117,4 @@ const Robot = new Record({
   highlightedBattery: false,
 });
 
-
-export {
-  MyRoute,
-  Note,
-  Stakeholder,
-  Truck,
-  Robot,
-  Warehouse,
-  Retailer,
-};
+export { MyRoute, Note, Stakeholder, Truck, Robot, Warehouse, Retailer };

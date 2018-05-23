@@ -92,12 +92,13 @@ class Tooltip extends Component {
   }
 
   handleDocumentClick(e) {
+    const { isOpen } = this.props;
     if (e.target === this._target || this._target.contains(e.target)) {
       if (this._hideTimeout) {
         this.clearHideTimeout();
       }
 
-      if (!this.props.isOpen) {
+      if (!isOpen) {
         this.toggle();
       }
     }

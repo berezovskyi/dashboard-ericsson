@@ -33,8 +33,10 @@ function receiveWarehouse(json) {
             location: {
               x: item.location.x,
               y: item.location.y,
+              name: item.location.name,
             },
             highlighted: item.highlighted,
+            current: item.current,
           }),
         ];
       }),
