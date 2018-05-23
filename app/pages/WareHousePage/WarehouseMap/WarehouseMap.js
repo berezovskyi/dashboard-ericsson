@@ -122,7 +122,6 @@ class WarehouseMap extends Component {
 
 function mapStateToProps(state) {
   const robot = state.get('robots');
-  console.log(robot);
   return {
     receivedAt: robot.get('receivedAt'),
   };
