@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import PopperContent from './PopperContent';
+import PopperContent from '../Popper/PopperContent';
 
 import { getTarget, DOMElement, PopperPlacements } from '../../utils/utils';
 
@@ -141,6 +141,7 @@ class Popover extends React.Component {
         placement={placement}
         container={container}
         modifiers={modifiers}
+        type="popover"
       >
         <div className={classes} ref={this.getRef}>
           {children}
