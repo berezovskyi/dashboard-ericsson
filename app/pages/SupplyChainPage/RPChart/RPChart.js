@@ -6,6 +6,7 @@ import { Line } from '@nivo/line';
 import { getCurrentRoute } from '../../../utils/utils';
 import Card from '../../../ui/Card/Card';
 import styles from './RPChart.css';
+import { fetchRPDataIfNeeded } from '../../../entities/riskperformance/actions';
 
 const COLORS = ['#2B9062', '#F5515F'];
 
@@ -13,6 +14,11 @@ class RPChart extends Component {
   constructor(props) {
     super(props);
     this._handlelegend = this._handlelegend.bind(this);
+  }
+
+  componentWillMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchRPDataIfNeeded('year'));
   }
 
   _handlelegend(data) {
@@ -29,6 +35,7 @@ class RPChart extends Component {
         return 'Time';
     }
   }
+
   render() {
     const { id, graphdata, navigation } = this.props;
     const search = getCurrentRoute(navigation);

@@ -4,9 +4,8 @@ import stakeholdersReducer from './entities/stakeholder/reducer';
 import notesReducer from './entities/note/reducer';
 import truckReducer from './entities/truck/reducer';
 import robotReducer from './entities/robot/reducer';
-import robotperformanceReducer
-  from './pages/WareHousePage/RobotPerformanceChart/reducer';
-import performanceriskReducer from './pages/SupplyChainPage/RPChart/reducer';
+import riskperformanceReducer
+  from './entities/riskperformance/reducer';
 import interoperatabilityReducer
   from './pages/IntelligentAgentPage/IAChart/reducer';
 import { MyRoute } from './records';
@@ -45,8 +44,7 @@ export default function createReducer(injectedReducers) {
     stakeholders: stakeholdersReducer,
     trucks: truckReducer,
     robots: robotReducer,
-    robotperformance: robotperformanceReducer,
-    performancerisk: performanceriskReducer,
+    performancerisk: riskperformanceReducer,
     interoperatability: interoperatabilityReducer,
     warehouse: warehouseReducer,
     retailer: retailerReducer,
