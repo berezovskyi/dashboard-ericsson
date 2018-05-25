@@ -14,7 +14,6 @@ function requestNotes() {
   return {
     type: REQUEST_ALL_NOTES,
     payload: {
-      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -25,6 +24,7 @@ function receiveNotes(json) {
     type: RECEIVE_ALL_NOTES,
     payload: {
       loading: false,
+      receivedAt: Date.now(),
       notes: json.data.map(item => {
         return [
           item.id,

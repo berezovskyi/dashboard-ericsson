@@ -15,7 +15,6 @@ function requestStakeholders() {
   return {
     type: REQUEST_ALL_STAKEHOLDERS,
     payload: {
-      receivedAt: Date.now(),
       loading: true,
     },
   };
@@ -27,6 +26,7 @@ function receiveStakeholders(json) {
       type: RECEIVE_ALL_STAKEHOLDERS,
       payload: {
         loading: false,
+        receivedAt: Date.now(),
         stakeholders: json.data.map(item => {
           return [
             item.id,
