@@ -22,7 +22,6 @@ class SingleCapacityItem extends Component {
     const { data, current } = this.props;
 
     const currentWarehouse = current ? styles.currentwarehouse : styles.notcurrentwarehouse;
-    console.log(current);
     return (
       <div key={data.id} className={styles.knobsingleouter}>
         <div className={styles.knobsingleinner}>

@@ -42,18 +42,10 @@ function receiveTrucks(json) {
             from: {
               name: item.from.name,
               id: item.from.id,
-              location: {
-                x: item.from.location.x,
-                y: item.from.location.y,
-              },
             },
             to: {
               name: item.to.name,
               id: item.to.id,
-              location: {
-                x: item.to.location.x,
-                y: item.to.location.y,
-              },
             },
           }),
         ];

@@ -115,3 +115,7 @@
 .diffdetail {
   font-size: 12px;
 }
+
+.truckname {
+  cursor: pointer;
+}
