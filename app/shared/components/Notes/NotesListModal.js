@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Checkbox from '../../../ui/Form/Checkbox';
 import styles from './Notes.css';
-import {fetchNotesIfNeeded, UPDATE_NOTES_HIGHLIGHT} from './actions';
+import {fetchNotesIfNeeded, UPDATE_NOTES_HIGHLIGHT} from '../../../entities/note/actions';
 
 class NotesListModal extends Component {
   constructor(props) {

@@ -30,18 +30,7 @@ export default function notesReducer(state = INITIAL_STATE, { type, payload }) {
         .setIn(['loading'], payload.loading)
         .setIn(['receivedAt'], payload.receivedAt);
 
-    case REQUEST_HIGHLIGHTED_NOTES:
-      return state
-        .setIn(['loading'], payload.loading)
-        .setIn(['receivedAt'], payload.receivedAt);
-
     case RECEIVE_ALL_NOTES:
-      return state
-        .setIn(['loading'], payload.loading)
-        .setIn(['receivedAt'], payload.receivedAt)
-        .updateIn(['notes'], data => data.mergeDeep(payload.notes));
-
-    case RECEIVE_HIGHLIGHTED_NOTES:
       return state
         .setIn(['loading'], payload.loading)
         .setIn(['receivedAt'], payload.receivedAt)

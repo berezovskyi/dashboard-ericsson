@@ -24,7 +24,7 @@ class SingleTruck extends Component {
 
     return trucks.valueSeq().map(row => {
       if (row.highlighted) {
-        return <SingleTruckItem row={row} />;
+        return <SingleTruckItem row={row} key={row.id} />;
       }
       return <span key={row.id} />;
     });
@@ -112,7 +112,7 @@ class SingleTruckItem extends Component {
 
     const { row } = this.props;
     return (
-      <div className={styles.singlecontainer} key={row.id}>
+      <div className={styles.singlecontainer}>
         <div>
           <div className={styles.row}>
             <h4 className={styles.title}>

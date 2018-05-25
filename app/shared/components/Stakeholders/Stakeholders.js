@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -15,12 +15,11 @@ import StakeholderProfile from './StakeholderProfile';
 import styles from '../../../pages/SupplyChainPage/SupplyChainPage.css';
 import StakeholderModalProfile from './StakeholderModalProfile';
 import {
-  fetchHighlightedStakeholdersIfNeeded,
+  fetchStakeholdersIfNeeded,
 } from '../../../entities/stakeholder/actions';
-import RefreshImage from '../../../shared/media/images/icons/refresh.svg';
 import Loading from '../../../ui/Loading/Loading';
 
-class Stakeholders extends React.Component {
+class Stakeholders extends Component {
   // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
@@ -34,7 +33,7 @@ class Stakeholders extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedStakeholdersIfNeeded());
+    dispatch(fetchStakeholdersIfNeeded());
   }
 
   _handleallstakeholderModal() {
