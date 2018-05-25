@@ -205,7 +205,11 @@ Tooltip.propTypes = {
   autohide: PropTypes.bool,
   modifiers: PropTypes.object,
   offset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    PropTypes.node,
+  ]),
 };
 
 Tooltip.defaultProps = {

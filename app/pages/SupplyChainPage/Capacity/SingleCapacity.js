@@ -21,9 +21,11 @@ class SingleCapacityItem extends Component {
   render() {
     const { data, current } = this.props;
 
-    const currentWarehouse = current ? styles.currentwarehouse : styles.notcurrentwarehouse;
+    const currentWarehouse = current
+      ? styles.currentwarehouse
+      : styles.notcurrentwarehouse;
     return (
-      <div key={data.id} className={styles.knobsingleouter}>
+      <div className={styles.knobsingleouter}>
         <div className={styles.knobsingleinner}>
           <div className={currentWarehouse}>
             <Knob
@@ -59,7 +61,13 @@ export default class SingleCapacity extends Component {
       <div className={styles.row}>
         {data.valueSeq().map(row => {
           if (row.highlighted) {
-            return <SingleCapacityItem data={row} current={row.current} />;
+            return (
+              <SingleCapacityItem
+                data={row}
+                current={row.current}
+                key={row.id}
+              />
+            );
           }
           return <span key={row.id} />;
         })}

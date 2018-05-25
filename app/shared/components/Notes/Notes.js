@@ -11,7 +11,7 @@ import Label from '../../../ui/Form/Label';
 import Textarea from '../../../ui/Form/Textarea';
 import FormGroup from '../../../ui/Form/FormGroup';
 
-import { fetchHighlightedNotesIfNeeded } from './actions';
+import { fetchNotesIfNeeded } from '../../../entities/note/actions';
 
 import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
@@ -36,7 +36,7 @@ class Notes extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedNotesIfNeeded());
+    dispatch(fetchNotesIfNeeded());
   }
 
   _handleaddNoteModal() {
@@ -54,7 +54,16 @@ class Notes extends React.Component {
   }
 
   render() {
-    const { id, type, name, notes, loading, status, statusText, receivedAt } = this.props;
+    const {
+      id,
+      type,
+      name,
+      notes,
+      loading,
+      status,
+      statusText,
+      receivedAt,
+    } = this.props;
     const title = 'Highlighted Notes for ' + name;
 
     return (
@@ -67,10 +76,10 @@ class Notes extends React.Component {
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading
           ? <Alert color="error">
-            <p>
-              Error: {status}<br />Status Text: {statusText}
-            </p>
-          </Alert>
+              <p>
+                Error: {status}<br />Status Text: {statusText}
+              </p>
+            </Alert>
           : <div />}
         <NotesList notes={notes} type={type} />
         <div className={styles.footer}>

@@ -20,6 +20,7 @@ const Stakeholder = new Record({
   email: '',
   type: '',
   highlighted: false,
+  role: '',
 });
 
 const Truck = new Record({
