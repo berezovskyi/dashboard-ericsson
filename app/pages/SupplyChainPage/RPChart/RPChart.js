@@ -13,16 +13,43 @@ const COLORS = ['#2B9062', '#F5515F'];
 class RPChart extends Component {
   constructor(props) {
     super(props);
+    this._handlelegend = this._handlelegend.bind(this);
   }
 
   componentDidMount() {
+    const { dispatch, navigation } = this.props;
+    const search = getCurrentRoute(navigation);
+    dispatch(fetchRPDataIfNeeded(search.subroute.time));
+  }
+
+  componentWillReceiveProps(nextProps) {
     const { dispatch } = this.props;
-    dispatch(fetchRPDataIfNeeded('year'));
+    const { navigation } = nextProps;
+    if (nextProps.navigation !== this.props.navigation) {
+      const search = getCurrentRoute(navigation);
+      dispatch(fetchRPDataIfNeeded(search.subroute.time));
+    }
+  }
+
+  _handlelegend(data) {
+    switch (data) {
+      case 'day':
+        return 'Time (24h)';
+      case 'week':
+        return 'Time (days)';
+      case 'month':
+        return 'Time (month)';
+      case 'year':
+        return 'Time (years)';
+      default:
+        return 'Time';
+    }
   }
 
   render() {
-    const { id, data } = this.props;
-    console.log(data);
+    const { id, data, navigation } = this.props;
+    const search = getCurrentRoute(navigation);
+    const legend = this._handlelegend(search.subroute.time);
     return (
       <Card title="Profitability - Risk vs Time Curve" id={id}>
         <div className={styles.row}>
@@ -45,7 +72,7 @@ class RPChart extends Component {
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: 'years',
+                    legend,
                     legendOffset: 50,
                     legendPosition: 'center',
                   }}
@@ -80,6 +107,7 @@ class RPChart extends Component {
                   maxY={100}
                   width={1600}
                   height={500}
+                  animate={false}
                 />
               : <span />}
 

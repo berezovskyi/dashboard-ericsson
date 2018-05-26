@@ -1,7 +1,6 @@
 import 'whatwg-fetch';
 import { requestFailed } from '../../reducers';
 import { API_URL } from '../../constants';
-import { RPData } from '../../records';
 
 export const REQUEST_RP_DATA = 'REQUEST_RP_DATA';
 export const RECEIVE_RP_DATA = 'RECEIVE_RP_DATA';
