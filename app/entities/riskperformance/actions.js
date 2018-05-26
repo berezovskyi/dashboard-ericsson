@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 import { requestFailed } from '../../reducers';
 import { API_URL } from '../../constants';
+import { RPData } from '../../records';
 
 export const REQUEST_RP_DATA = 'REQUEST_RP_DATA';
 export const RECEIVE_RP_DATA = 'RECEIVE_RP_DATA';
@@ -9,6 +10,9 @@ export const FAILED_REQUEST_RP_DATA = 'FAILED_REQUEST_RP_DATA';
 function requestRPData() {
   return {
     type: REQUEST_RP_DATA,
+    payload: {
+      loading: true,
+    },
   };
 }
 
@@ -17,13 +21,12 @@ function receiveRPData(json, type) {
     type: RECEIVE_RP_DATA,
     payload: {
       receivedAt: Date.now(),
+      loading: false,
       rpdata: json.data.map(item => {
-        return [
-          item.id,
-          {
-            [type]: item.value,
-          },
-        ];
+        return {
+          data: item.data,
+          id: item.id,
+        };
       }),
     },
   };

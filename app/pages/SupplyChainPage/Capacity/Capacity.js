@@ -59,6 +59,8 @@ class Capacity extends Component {
       receivedAt,
     } = this.props;
 
+    console.log(warehouse);
+
     return (
       <Card
         title="Capacity of Retailers and Warehouses"
