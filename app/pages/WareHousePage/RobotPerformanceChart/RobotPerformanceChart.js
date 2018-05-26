@@ -8,15 +8,15 @@ import { Bar } from '@nivo/bar';
 import Card from '../../../ui/Card/Card';
 import { getCurrentRoute } from '../../../utils/utils';
 
-import { getArrayofObjectsKeys } from '../../../utils/utils';
-
 import styles from './RobotPerformanceChart.css';
+import {
+  fetchPerfDataIfNeeded,
+} from '../../../entities/robotperformance/actions';
 
 class RobotPerformanceChart extends Component {
   constructor(props) {
     super(props);
     this._handleSelectChange = this._handleSelectChange.bind(this);
-    this._handleUpdate = this._handleUpdate.bind(this);
     this._toggleCheckbox = this._toggleCheckbox.bind(this);
     this.state = {
       data: [],
@@ -29,23 +29,18 @@ class RobotPerformanceChart extends Component {
   }
 
   componentDidMount() {
-    const { navigation, graphdata } = this.props;
-    this._handleUpdate(navigation, graphdata);
+    const { navigation, dispatch } = this.props;
+    const search = getCurrentRoute(navigation);
+    dispatch(fetchPerfDataIfNeeded(search.subroute.time));
   }
 
   componentWillReceiveProps(nextProps) {
-    const { navigation, graphdata } = nextProps;
-    this._handleUpdate(navigation, graphdata);
-  }
-
-  _handleUpdate(navigation, graphdata) {
-    const search = getCurrentRoute(navigation);
-    const data = graphdata.get(search.subroute.time);
-    const options = getArrayofObjectsKeys(data);
-    this.setState({
-      data,
-      options,
-    });
+    const { dispatch } = this.props;
+    const { navigation } = nextProps;
+    if (nextProps.navigation !== this.props.navigation) {
+      const search = getCurrentRoute(navigation);
+      dispatch(fetchPerfDataIfNeeded(search.subroute.time));
+    }
   }
 
   _handleSelectChange(value) {
@@ -62,8 +57,8 @@ class RobotPerformanceChart extends Component {
   }
 
   render() {
-    const { id } = this.props;
-    const { disabled, selectVal, options, valueArray, data } = this.state;
+    const { id, data } = this.props;
+    const { disabled, selectVal, options, valueArray } = this.state;
     console.log(valueArray);
 
     return (
@@ -81,9 +76,8 @@ class RobotPerformanceChart extends Component {
               simpleValue
               value={selectVal}
             />
-            {
-              valueArray.length > 0 && valueArray[0] !== '' ?
-                <Bar
+            {valueArray.length > 0 && valueArray[0] !== ''
+              ? <Bar
                   data={data}
                   keys={valueArray}
                   indexBy="time"
@@ -137,11 +131,9 @@ class RobotPerformanceChart extends Component {
                   height={420}
                   width={800}
                 />
-                :
-                <div>
+              : <div>
                   <h1>Select some values first.</h1>
-                </div>
-            }
+                </div>}
 
           </div>
         </div>
@@ -151,8 +143,10 @@ class RobotPerformanceChart extends Component {
 }
 
 function mapStateToProps(state) {
+  const data = state.get('robotperformance');
   return {
-    graphdata: state.get('robotperformance'),
+    data: data.get('data'),
+    receivedAt: data.get('receivedAt'),
     navigation: state.get('route'),
   };
 }
