@@ -6,8 +6,8 @@ import truckReducer from './entities/truck/reducer';
 import robotReducer from './entities/robot/reducer';
 import riskperformanceReducer
   from './entities/riskperformance/reducer';
-import interoperatabilityReducer
-  from './pages/IntelligentAgentPage/IAChart/reducer';
+import interoperabilityReducer
+  from './entities/interoperability/reducer';
 import { MyRoute } from './records';
 import warehouseReducer from './entities/warehouse/reducer';
 import retailerReducer from './entities/retailer/reducer';
@@ -45,7 +45,7 @@ export default function createReducer(injectedReducers) {
     trucks: truckReducer,
     robots: robotReducer,
     performancerisk: riskperformanceReducer,
-    interoperatability: interoperatabilityReducer,
+    interoperability: interoperabilityReducer,
     warehouse: warehouseReducer,
     retailer: retailerReducer,
     ...injectedReducers,
