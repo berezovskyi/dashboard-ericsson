@@ -38,35 +38,45 @@ class SingleCapacityModal extends Component {
   render() {
     const { warehouse, retailer } = this.props;
     return (
-      <div className={styles.row}>
-        <div className={styles.oneFull}>
+      <div className={styles.container}>
+        <div className={styles.row}>
           <h4>All Warehouses</h4>
           {warehouse.valueSeq().map(row => {
             return (
               <div key={row.id} className={styles.knobsingleouter}>
                 <div className={styles.knobsingleinner}>
-                  <Knob
-                    value={row.capacity}
-                    height={100}
-                    width={100}
-                    bgColor="#E9EFF4"
-                    fgColor="#4D5AFF"
-                    inputColor="#474F58"
-                  />
-                  <h4 className={styles.title}>{row.name}</h4>
-                  <p className={styles.subtitle}>{row.id}</p>
-                  <Checkbox
-                    id={row.id}
-                    checked={row.highlighted}
-                    name="Highlight Entity"
-                    onChange={() => this._handlehighlight(row, 'warehouse')}
-                  />
+                  <div
+                    className={
+                      row.current
+                        ? styles.currentwarehouse
+                        : styles.notcurrentwarehouse
+                    }
+                  >
+                    <Knob
+                      value={row.capacity}
+                      height={100}
+                      width={100}
+                      bgColor="#E9EFF4"
+                      fgColor="#4D5AFF"
+                      inputColor="#474F58"
+                    />
+                    <h4 className={styles.title}>{row.name}</h4>
+                    {row.current === false
+                      ? <Checkbox
+                          id={row.id}
+                          checked={row.highlighted}
+                          name="Highlight Entity"
+                          onChange={() =>
+                            this._handlehighlight(row, 'warehouse')}
+                        />
+                      : null}
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
-        <div className={styles.oneFull}>
+        <div className={styles.row}>
           <h4>All Retailers</h4>
           {retailer.valueSeq().map(row => {
             return (
@@ -81,12 +91,11 @@ class SingleCapacityModal extends Component {
                     inputColor="#474F58"
                   />
                   <h4 className={styles.title}>{row.name}</h4>
-                  <p className={styles.subtitle}>{row.id}</p>
                   <Checkbox
                     id={row.id}
                     checked={row.highlighted}
                     name="Highlight Entity"
-                    onChange={() => this._handlehighlight(row, 'warehouse')}
+                    onChange={() => this._handlehighlight(row, 'retailer')}
                   />
                 </div>
               </div>

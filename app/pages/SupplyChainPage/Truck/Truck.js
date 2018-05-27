@@ -14,10 +14,9 @@ import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
-import { fetchHighlightedTrucksIfNeeded } from './actions';
+import { fetchTrucksIfNeeded } from '../../../entities/truck/actions';
 
 class Truck extends Component {
-  // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +28,7 @@ class Truck extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedTrucksIfNeeded());
+    dispatch(fetchTrucksIfNeeded());
   }
 
   _handlealltruckModal() {
@@ -41,22 +40,26 @@ class Truck extends Component {
   _handleRefresh(e) {
     e.preventDefault();
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedTrucksIfNeeded());
+    dispatch(fetchTrucksIfNeeded());
   }
 
   render() {
     const { trucks, id, loading, status, statusText, receivedAt } = this.props;
-    const date = new Date(receivedAt).toLocaleTimeString('en-US');
 
     return (
-      <Card title="Trucks" helpText="The data relevant to the trucks" id={id} date={date}>
+      <Card
+        title="Ongoing Truck Journeys"
+        helpText="This card talks about all the truck and related data. The highlighted data is on the card home. To see all trucks and highlight trucks of your choice click View All. You can also see more truck info in the View More for that truck."
+        id={id}
+        date={receivedAt}
+      >
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading
           ? <Alert color="error">
-            <p>
-              Error: {status}<br />Status Text: {statusText}
-            </p>
-          </Alert>
+              <p>
+                Error: {status}<br />Status Text: {statusText}
+              </p>
+            </Alert>
           : <div />}
         <SingleTruck trucks={trucks} total={3} />
         <Button
@@ -75,7 +78,7 @@ class Truck extends Component {
           toggle={this._handlealltruckModal}
         >
           <ModalHeader toggle={this._handlealltruckModal}>
-            Energy of all Trucks and Warehouses
+            All Truck Journeys
           </ModalHeader>
           <ModalBody>
             <SingleTruckModal />
@@ -84,7 +87,6 @@ class Truck extends Component {
             <Button color="primary" onClick={this._handlealltruckModal}>
               Close
             </Button>
-            {' '}
           </ModalFooter>
         </Modal>
       </Card>
@@ -97,7 +99,7 @@ function mapStateToProps(state) {
   return {
     loading: data.get('loading'),
     receivedAt: data.get('receivedAt'),
-    trucks: data.get('trucks'),
+    trucks: data.get('data'),
     status: data.get('status'),
     statusText: data.get('statusText'),
   };

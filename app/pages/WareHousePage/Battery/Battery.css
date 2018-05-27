@@ -42,12 +42,13 @@
 }
 
 .modalprogress {
-  margin-bottom: 50px;
+  margin-bottom: 0px;
 }
 
 .modaldiff,
 .modaltime {
   padding: 0 20px;
+  display: block;
 }
 
 .modaldiff svg {
@@ -102,5 +103,10 @@
 
 .checkboxBattery {
   text-align: right;
+}
+
+.diffdetail {
+  text-align: center;
+  font-size: 12px;
 }
 

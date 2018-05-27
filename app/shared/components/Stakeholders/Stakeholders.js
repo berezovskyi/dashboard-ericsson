@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -14,11 +14,12 @@ import Alert from '../../../ui/Alert/Alert';
 import StakeholderProfile from './StakeholderProfile';
 import styles from '../../../pages/SupplyChainPage/SupplyChainPage.css';
 import StakeholderModalProfile from './StakeholderModalProfile';
-import { fetchHighlightedStakeholdersIfNeeded } from '../../../entities/stakeholder/actions';
-import RefreshImage from '../../../shared/media/images/icons/refresh.svg';
+import {
+  fetchStakeholdersIfNeeded,
+} from '../../../entities/stakeholder/actions';
 import Loading from '../../../ui/Loading/Loading';
 
-class Stakeholders extends React.Component {
+class Stakeholders extends Component {
   // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
@@ -32,7 +33,7 @@ class Stakeholders extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedStakeholdersIfNeeded());
+    dispatch(fetchStakeholdersIfNeeded());
   }
 
   _handleallstakeholderModal() {
@@ -53,7 +54,6 @@ class Stakeholders extends React.Component {
       receivedAt,
     } = this.props;
 
-    const date = new Date(receivedAt).toLocaleTimeString('en-US');
     const title = 'Highlighted Stakeholders for ' + name;
     return (
       <Card
@@ -61,7 +61,7 @@ class Stakeholders extends React.Component {
         helpText="All the people involved in the Supply Chain area."
         id={id}
         type={type}
-        date={date}
+        date={receivedAt}
       >
         <div className={styles.row}>
           {loading ? <Loading /> : <div />}

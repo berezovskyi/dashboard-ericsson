@@ -58,14 +58,15 @@ class Capacity extends Component {
       statusText,
       receivedAt,
     } = this.props;
-    const date = new Date(receivedAt).toLocaleTimeString('en-US');
+
+    console.log(warehouse);
 
     return (
       <Card
-        title="Highlighted Retailers and Warehouse Capacity"
-        helpText="The section indicates how much the warehouses and the retailers are full. The get more information, click view all."
+        title="Capacity of Retailers and Warehouses"
+        helpText="The card indicates how much the warehouses and the retailers are full. The get more information, click view all."
         id={id}
-        date={date}
+        date={receivedAt}
       >
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading

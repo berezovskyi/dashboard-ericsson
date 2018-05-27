@@ -14,7 +14,7 @@ import Modal from '../../../ui/Modal/Modal';
 import ModalHeader from '../../../ui/Modal/ModalHeader';
 import ModalFooter from '../../../ui/Modal/ModalFooter';
 import ModalBody from '../../../ui/Modal/ModalBody';
-import { fetchHighlightedBatteryIfNeeded } from './actions';
+import { fetchRobotsIfNeeded } from '../../../entities/robot/actions';
 
 class Battery extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Battery extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedBatteryIfNeeded());
+    dispatch(fetchRobotsIfNeeded());
   }
 
   _handlebatteryModal() {
@@ -40,37 +40,47 @@ class Battery extends Component {
   _handleRefresh(e) {
     e.preventDefault();
     const { dispatch } = this.props;
-    dispatch(fetchHighlightedBatteryIfNeeded());
+    dispatch(fetchRobotsIfNeeded());
   }
 
   render() {
-    const { battery, id, loading, status, statusText, receivedAt } = this.props;
-    const date = new Date(receivedAt).toLocaleTimeString('en-US');
+    const { robots, id, loading, status, statusText, receivedAt } = this.props;
     return (
-      <Card title="Highlighted Robot State" helpText="The data relevant to the Robot Batteries" id={id} date={date}>
+      <Card
+        title="Battery Status for Robots"
+        helpText="This card signifies the power consumption of the robots in the warehouse. You can highlight robots of relevance by clicking View All or view more info by clicking the View More button for that robot."
+        id={id}
+        date={receivedAt}
+      >
         {loading ? <Loading /> : <div />}
         {status > 400 && !loading
           ? <Alert color="error">
-            <p>
-              Error: {status}<br />Status Text: {statusText}
-            </p>
-          </Alert>
+              <p>
+                Error: {status}<br />Status Text: {statusText}
+              </p>
+            </Alert>
           : <div />}
-        <SingleBattery battery={battery} />
-        <Button size="medium" color="primary" onClick={this._handlebatteryModal}>View all</Button>
+        <SingleBattery robots={robots} />
+        <Button
+          size="medium"
+          color="primary"
+          onClick={this._handlebatteryModal}
+        >
+          View all
+        </Button>
         {' '}
         <Button color="primary" onClick={this._handleRefresh}>
-          <RefreshImage height={14} width={14} /> Refresh Battery
+          <RefreshImage height={14} width={14} /> Refresh Robot Data
         </Button>
         <Modal
           isOpen={this.state.batteryModal}
           toggle={this._handlebatteryModal}
         >
           <ModalHeader toggle={this._handlebatteryModal}>
-            Battery in the Robots
+            Power Consumption in the Robots
           </ModalHeader>
           <ModalBody>
-            <SingleBatteryModal battery={battery} />
+            <SingleBatteryModal robots={robots} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this._handlebatteryModal}>
@@ -85,18 +95,14 @@ class Battery extends Component {
 }
 
 function mapStateToProps(state) {
-  const data = state.get('battery');
+  const data = state.get('robots');
   return {
     loading: data.get('loading'),
     receivedAt: data.get('receivedAt'),
-    battery: data.get('battery'),
+    robots: data.get('data'),
     status: data.get('status'),
     statusText: data.get('statusText'),
   };
 }
-
-Battery.propTypes = {
-  trucks: PropTypes.any,
-};
 
 export default connect(mapStateToProps)(Battery);

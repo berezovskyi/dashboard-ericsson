@@ -9,8 +9,6 @@ import {
   UPDATE_STAKEHOLDERS_HIGHLIGHT,
   REQUEST_ALL_STAKEHOLDERS,
   RECEIVE_ALL_STAKEHOLDERS,
-  REQUEST_HIGHLIGHTED_STAKEHOLDERS,
-  RECEIVE_HIGHLIGHTED_STAKEHOLDERS,
   FAILED_REQUEST_STAKEHOLDERS,
 } from './actions';
 
@@ -34,22 +32,7 @@ export default function stakeholderReducer(
       );
 
     case REQUEST_ALL_STAKEHOLDERS:
-      return state
-        .setIn(['loading'], payload.loading)
-        .setIn(['receivedAt'], payload.receivedAt);
-
-    case REQUEST_HIGHLIGHTED_STAKEHOLDERS:
-      return state
-        .setIn(['loading'], payload.loading)
-        .setIn(['receivedAt'], payload.receivedAt);
-
-    case RECEIVE_HIGHLIGHTED_STAKEHOLDERS:
-      return state
-        .setIn(['loading'], payload.loading)
-        .setIn(['receivedAt'], payload.receivedAt)
-        .updateIn(['stakeholders'], data =>
-          data.mergeDeep(payload.stakeholders),
-        );
+      return state.setIn(['loading'], payload.loading);
 
     case RECEIVE_ALL_STAKEHOLDERS:
       return state

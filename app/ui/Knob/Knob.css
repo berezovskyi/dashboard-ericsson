@@ -49,3 +49,15 @@
    border-radius: 50%;
    background: #000;
 }
+
+.knob-primary {
+  background: #4D5AFF;
+}
+
+.knob-success {
+  background: #60C303;
+}
+
+.knob-danger {
+  background: #721c24;
+}

@@ -23,6 +23,8 @@
   margin: 0 auto;
   border-radius: 5px;
   text-decoration: none;
+  min-height: 260px;
+  max-height: 260px;
   box-shadow: 0 0 10px transparent;
   -webkit-transition-duration: 0.1s;
   transition-duration: 0.1s;
@@ -42,6 +44,7 @@
 
 .thumbnail p {
   color: #6A7088;
+  text-align: left;
 }
 
 .thumbnail p {

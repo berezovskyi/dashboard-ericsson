@@ -5,8 +5,7 @@ import classNames from 'classnames';
 import { Arrow, Popper as ReactPopper } from 'react-popper';
 import { getTarget, DOMElement } from '../../utils/utils';
 
-import styles from './Popover.css';
-
+import styles from './PopperContent.css';
 
 class PopperContent extends React.Component {
   constructor(props) {
@@ -85,7 +84,11 @@ class PopperContent extends React.Component {
     this._element = document.createElement('div');
     this.getContainerNode().appendChild(this._element);
     this.renderIntoSubtree();
-    if (this._element.childNodes && this._element.childNodes[0] && this._element.childNodes[0].focus) {
+    if (
+      this._element.childNodes &&
+      this._element.childNodes[0] &&
+      this._element.childNodes[0].focus
+    ) {
       this._element.childNodes[0].focus();
     }
   }
@@ -94,12 +97,13 @@ class PopperContent extends React.Component {
     ReactDOM.unstable_renderSubtreeIntoContainer(
       this,
       this.renderChildren(),
-      this._element
+      this._element,
     );
   }
 
   renderChildren() {
     const {
+      type,
       children,
       flip,
       offset,
@@ -108,7 +112,7 @@ class PopperContent extends React.Component {
       className,
       tag,
       modifiers,
-      ...attributes,
+      ...attributes
     } = this.props;
 
     const popperClassName = className;
@@ -124,19 +128,29 @@ class PopperContent extends React.Component {
       ...modifiers,
     };
 
+    const arrowClass = type === 'popover'
+      ? styles.popoverarrow
+      : styles.tooltiparrow;
+
     return (
-      <ReactPopper modifiers={extendedModifiers} {...attributes} component={tag} className={popperClassName}>
+      <ReactPopper
+        modifiers={extendedModifiers}
+        {...attributes}
+        component={tag}
+        className={popperClassName}
+      >
         {children}
-        {!hideArrow && <Arrow className={styles.arrow} />}
+        {!hideArrow && <Arrow className={arrowClass} />}
       </ReactPopper>
     );
   }
 
   render() {
-    this.setTargetNode(getTarget(this.props.target));
+    const { target, container, isOpen } = this.props;
+    this.setTargetNode(getTarget(target));
 
-    if (this.props.container === 'inline') {
-      return this.props.isOpen ? this.renderChildren() : null;
+    if (container === 'inline') {
+      return isOpen ? this.renderChildren() : null;
     }
 
     return null;
@@ -154,9 +168,15 @@ PopperContent.propTypes = {
   offset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fallbackPlacement: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   flip: PropTypes.bool,
-  container: PropTypes.oneOfType([PropTypes.string, PropTypes.func, DOMElement]),
-  target: PropTypes.oneOfType([PropTypes.string, PropTypes.func, DOMElement]).isRequired,
+  container: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    DOMElement,
+  ]),
+  target: PropTypes.oneOfType([PropTypes.string, PropTypes.func, DOMElement])
+    .isRequired,
   modifiers: PropTypes.object,
+  type: PropTypes.string,
 };
 PopperContent.defaultProps = {
   placement: 'auto',

@@ -5,6 +5,7 @@
   "dependencies": {
     "@nivo/bar": "^0.33.0",
     "@nivo/chord": "^0.33.0",
+    "@nivo/heatmap": "^0.37.0",
     "@nivo/line": "^0.33.0",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.5",
@@ -32,7 +33,6 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "next",
     "react-select": "^1.2.1",
-    "react-toastify": "^4.0.0-rc.5",
     "redux": "^3.3.1",
     "redux-immutable": "^3.0.6",
     "redux-logger": "^3.0.6",

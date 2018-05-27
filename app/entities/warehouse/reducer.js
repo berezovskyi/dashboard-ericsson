@@ -34,8 +34,7 @@ export default function warehouseReducer(
       );
     case REQUEST_ALL_WAREHOUSE:
       return state
-        .setIn(['loading'], payload.loading)
-        .setIn(['receivedAt'], payload.receivedAt);
+        .setIn(['loading'], payload.loading);
 
     case REQUEST_HIGHLIGHTED_WAREHOUSE:
       return state

@@ -1,18 +1,15 @@
 import { combineReducers } from 'redux-immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import stakeholdersReducer from './entities/stakeholder/reducer';
-import notesReducer from './shared/components/Notes/reducer';
-import truckReducer from './pages/SupplyChainPage/Truck/reducer';
-import robotReducer from './pages/IntelligentAgentPage/Robot/reducer';
-import batteryReducer from './pages/WareHousePage/Battery/reducer';
-import robotperformanceReducer
-  from './pages/WareHousePage/RobotPerformanceChart/reducer';
-import performanceriskReducer from './pages/SupplyChainPage/RPChart/reducer';
-import interoperatabilityReducer
-  from './pages/IntelligentAgentPage/IAChart/reducer';
+import notesReducer from './entities/note/reducer';
+import truckReducer from './entities/truck/reducer';
+import robotReducer from './entities/robot/reducer';
+import riskperformanceReducer from './entities/riskperformance/reducer';
+import interoperabilityReducer from './entities/interoperability/reducer';
 import { MyRoute } from './records';
 import warehouseReducer from './entities/warehouse/reducer';
 import retailerReducer from './entities/retailer/reducer';
+import robotperformanceReducer from './entities/robotperformance/reducer';
 
 // Initial routing state
 const routeInitialState = new MyRoute({
@@ -21,7 +18,6 @@ const routeInitialState = new MyRoute({
 
 function routeReducer(state = routeInitialState, action) {
   switch (action.type) {
-    /* istanbul ignore next */
     case LOCATION_CHANGE:
       return state.setIn(['location'], action.payload);
     default:
@@ -47,12 +43,11 @@ export default function createReducer(injectedReducers) {
     stakeholders: stakeholdersReducer,
     trucks: truckReducer,
     robots: robotReducer,
-    battery: batteryReducer,
-    robotperformance: robotperformanceReducer,
-    performancerisk: performanceriskReducer,
-    interoperatability: interoperatabilityReducer,
+    performancerisk: riskperformanceReducer,
+    interoperability: interoperabilityReducer,
     warehouse: warehouseReducer,
     retailer: retailerReducer,
+    robotperformance: robotperformanceReducer,
     ...injectedReducers,
   });
 }

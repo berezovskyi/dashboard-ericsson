@@ -41,12 +41,13 @@
 }
 
 .modalprogress {
-  margin-bottom: 50px;
+  margin-bottom: 0;
 }
 
 .modaldiff,
 .modaltime {
   padding: 0 20px;
+  display: block;
 }
 
 .modaldiff svg {
@@ -109,4 +110,12 @@
 
 .checkboxTruck {
   text-align: right;
+}
+
+.diffdetail {
+  font-size: 12px;
+}
+
+.truckname {
+  cursor: pointer;
 }

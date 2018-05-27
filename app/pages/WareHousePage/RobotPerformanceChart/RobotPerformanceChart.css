@@ -13,3 +13,8 @@
 svg text {
   font-size: 12px;
 }
+
+.novalue {
+  text-align: center;
+  margin: 100px 0;
+}
