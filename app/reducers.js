@@ -4,14 +4,12 @@ import stakeholdersReducer from './entities/stakeholder/reducer';
 import notesReducer from './entities/note/reducer';
 import truckReducer from './entities/truck/reducer';
 import robotReducer from './entities/robot/reducer';
-import robotperformanceReducer
-  from './pages/WareHousePage/RobotPerformanceChart/reducer';
-import performanceriskReducer from './pages/SupplyChainPage/RPChart/reducer';
-import interoperatabilityReducer
-  from './pages/IntelligentAgentPage/IAChart/reducer';
+import riskperformanceReducer from './entities/riskperformance/reducer';
+import interoperabilityReducer from './entities/interoperability/reducer';
 import { MyRoute } from './records';
 import warehouseReducer from './entities/warehouse/reducer';
 import retailerReducer from './entities/retailer/reducer';
+import robotperformanceReducer from './entities/robotperformance/reducer';
 
 // Initial routing state
 const routeInitialState = new MyRoute({
@@ -45,11 +43,11 @@ export default function createReducer(injectedReducers) {
     stakeholders: stakeholdersReducer,
     trucks: truckReducer,
     robots: robotReducer,
-    robotperformance: robotperformanceReducer,
-    performancerisk: performanceriskReducer,
-    interoperatability: interoperatabilityReducer,
+    performancerisk: riskperformanceReducer,
+    interoperability: interoperabilityReducer,
     warehouse: warehouseReducer,
     retailer: retailerReducer,
+    robotperformance: robotperformanceReducer,
     ...injectedReducers,
   });
 }
