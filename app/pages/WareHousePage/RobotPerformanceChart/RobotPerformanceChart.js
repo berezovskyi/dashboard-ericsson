@@ -62,11 +62,11 @@ class RobotPerformanceChart extends Component {
   }
 
   render() {
-    const { id, data } = this.props;
+    const { id, data, receivedAt } = this.props;
     const { disabled, selectVal, valueArray } = this.state;
 
     return (
-      <Card title="Robot Performance Over Time" id={id}>
+      <Card title="Robot Performance Over Time" id={id} date={receivedAt}>
         <div className={styles.row}>
           <div className={styles.oneHalf}>
             <Select

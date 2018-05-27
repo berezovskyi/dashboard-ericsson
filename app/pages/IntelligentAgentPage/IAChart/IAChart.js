@@ -33,12 +33,12 @@ class IAChart extends Component {
   }
 
   render() {
-    const { id, data } = this.props;
-    console.log(data);
+    const { id, data, receivedAt } = this.props;
     return (
       <Card
         title="Interoperatability curve between all available robots."
         id={id}
+        date={receivedAt}
       >
         <div className={styles.row}>
           <div className={styles.oneFull}>
@@ -47,10 +47,10 @@ class IAChart extends Component {
                   matrix={data.value}
                   keys={data.available}
                   margin={{
-                    top: 60,
-                    right: 60,
-                    bottom: 0,
-                    left: 60,
+                    top: 10,
+                    right: 100,
+                    bottom: 100,
+                    left: 160,
                   }}
                   padAngle={0.02}
                   innerRadiusRatio={0.96}
@@ -75,12 +75,12 @@ class IAChart extends Component {
                   legends={[
                     {
                       dataFrom: 'keys',
-                      anchor: 'top-right',
-                      direction: 'row',
+                      anchor: 'bottom-left',
+                      direction: 'column',
                       symbolShape: 'circle',
-                      translateX: 10,
-                      translateY: -40,
-                      itemWidth: 64,
+                      translateX: -130,
+                      translateY: 100,
+                      itemWidth: 120,
                       itemHeight: 16,
                       itemsSpacing: 5,
                       symbolSize: 16,
