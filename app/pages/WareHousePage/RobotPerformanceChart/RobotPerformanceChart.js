@@ -28,7 +28,6 @@ class RobotPerformanceChart extends Component {
     this.state = {
       graphdata: [],
       removeSelected: true,
-      disabled: false,
       value: [],
       options: [],
       valueArray: [],
@@ -161,7 +160,6 @@ class RobotPerformanceChart extends Component {
           <div className={styles.oneFull}>
             <Select
               closeOnSelect={false}
-              disabled={disabled}
               multi
               onChange={this._handleSelectChange}
               options={data.available}
@@ -181,7 +179,7 @@ class RobotPerformanceChart extends Component {
                   indexBy="time"
                   margin={{
                     top: 50,
-                    right: 130,
+                    right: 150,
                     bottom: 90,
                     left: 60,
                   }}
@@ -214,12 +212,12 @@ class RobotPerformanceChart extends Component {
                   legends={[
                     {
                       dataFrom: 'keys',
-                      anchor: 'bottom',
-                      direction: 'row',
+                      anchor: 'bottom-right',
+                      direction: 'column',
                       symbolShape: 'circle',
-                      translateX: 10,
-                      translateY: 90,
-                      itemWidth: 64,
+                      translateX: 150,
+                      translateY: 0,
+                      itemWidth: 140,
                       itemHeight: 16,
                       itemsSpacing: 5,
                       symbolSize: 16,
