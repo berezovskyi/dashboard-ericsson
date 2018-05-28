@@ -2866,6 +2866,10 @@ destroy@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
 
+detect-element-overflow@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/detect-element-overflow/-/detect-element-overflow-1.1.1.tgz#771c50ec9d69f487477fef9728db0766a8f6962d"
+
 detect-file@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/detect-file/-/detect-file-1.0.0.tgz#f0d66d03672a825cb1b73bdb3fe62310c8e552b7"
@@ -6129,6 +6133,10 @@ lodash.omit@^3.1.0:
     lodash.keysin "^3.0.0"
     lodash.restparam "^3.0.0"
 
+lodash.once@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
+
 lodash.pick@^4.2.1:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
@@ -6383,6 +6391,10 @@ meow@~2.0.0:
     indent-string "^1.1.0"
     minimist "^1.1.0"
     object-assign "^1.0.0"
+
+merge-class-names@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/merge-class-names/-/merge-class-names-1.1.1.tgz#3bd2f38eb5418c464a0fef615484fdf6c8932256"
 
 merge-descriptors@1.0.1:
   version "1.0.1"
@@ -8087,6 +8099,32 @@ react-addons-test-utils@^0.14.6, "react-addons-test-utils@^0.14.8 || ^15.0.1":
   version "0.14.8"
   resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-0.14.8.tgz#dcddc039e71fc3c81d80338e53a3714f14d41e1f"
 
+react-calendar@^2.14.0:
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-2.15.0.tgz#773b50c71f42c5b0ad45651314a192b44d9fd52a"
+  dependencies:
+    lodash.once "^4.1.1"
+    merge-class-names "^1.1.1"
+    prop-types "^15.6.0"
+    react-lifecycles-compat "^1.1.0"
+
+react-date-picker@^6.10.1:
+  version "6.10.1"
+  resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-6.10.1.tgz#673f0373f40dbcd2915ffa03f418e73b280d2202"
+  dependencies:
+    detect-element-overflow "^1.1.1"
+    lodash.once "^4.1.1"
+    merge-class-names "^1.1.1"
+    prop-types "^15.6.0"
+    react-calendar "^2.14.0"
+    react-lifecycles-compat "^1.1.0"
+
+react-day-picker@^7.1.9:
+  version "7.1.9"
+  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-7.1.9.tgz#04b0d956faf1bf85bb6ec6f9ca7966433be13f36"
+  dependencies:
+    prop-types "^15.6.1"
+
 react-deep-force-update@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.1.1.tgz#bcd31478027b64b3339f108921ab520b4313dc2c"
@@ -8126,6 +8164,10 @@ react-input-autosize@^2.1.2:
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-2.2.1.tgz#ec428fa15b1592994fb5f9aa15bb1eb6baf420f8"
   dependencies:
     prop-types "^15.5.8"
+
+react-lifecycles-compat@^1.1.0:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-1.1.4.tgz#fc005c72849b7ed364de20a0f64ff58ebdc2009a"
 
 react-measure@^2.0.2:
   version "2.0.2"

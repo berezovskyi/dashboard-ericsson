@@ -29,15 +29,24 @@ function receivePerfData(json) {
   };
 }
 
-export function fetchPerfData(type) {
+export function fetchPerfData(type, timestamp = '') {
   return dispatch => {
     dispatch(requestPerfData());
-    return fetch(API_URL + 'robotperformance/' + type)
-      .then(response => response.json())
-      .then(json => dispatch(receivePerfData(json, type)))
-      .catch(response =>
-        dispatch(requestFailed(FAILED_REQUEST_PERF_DATA, response)),
-      );
+    if (timestamp === 'year') {
+      return fetch(API_URL + 'robotperformance')
+        .then(response => response.json())
+        .then(json => dispatch(receivePerfData(json, type)))
+        .catch(response =>
+          dispatch(requestFailed(FAILED_REQUEST_PERF_DATA, response)),
+        );
+    } else {
+      return fetch(API_URL + 'robotperformance/' + type + '/' + timestamp)
+        .then(response => response.json())
+        .then(json => dispatch(receivePerfData(json, type)))
+        .catch(response =>
+          dispatch(requestFailed(FAILED_REQUEST_PERF_DATA, response)),
+        );
+    }
   };
 }
 
@@ -51,12 +60,11 @@ function shouldFetchPerfData(state) {
   return null;
 }
 
-export function fetchPerfDataIfNeeded(type) {
+export function fetchPerfDataIfNeeded(type, timestamp) {
   return (dispatch, getState) => {
     if (shouldFetchPerfData(getState())) {
-      return dispatch(fetchPerfData(type));
+      return dispatch(fetchPerfData(type, timestamp));
     }
     return null;
   };
 }
-

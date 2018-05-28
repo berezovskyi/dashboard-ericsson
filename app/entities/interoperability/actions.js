@@ -29,15 +29,24 @@ function receiveIOData(json) {
   };
 }
 
-export function fetchIOData(type) {
+export function fetchIOData(type, timestamp = '') {
   return dispatch => {
     dispatch(requestIOData());
-    return fetch(API_URL + 'interoperability/' + type)
-      .then(response => response.json())
-      .then(json => dispatch(receiveIOData(json, type)))
-      .catch(response =>
-        dispatch(requestFailed(FAILED_REQUEST_IO_DATA, response)),
-      );
+    if (timestamp === 'year') {
+      return fetch(API_URL + 'interoperability/' + type)
+        .then(response => response.json())
+        .then(json => dispatch(receiveIOData(json, type)))
+        .catch(response =>
+          dispatch(requestFailed(FAILED_REQUEST_IO_DATA, response)),
+        );
+    } else {
+      return fetch(API_URL + 'interoperability/' + type + '/' + timestamp)
+        .then(response => response.json())
+        .then(json => dispatch(receiveIOData(json, type)))
+        .catch(response =>
+          dispatch(requestFailed(FAILED_REQUEST_IO_DATA, response)),
+        );
+    }
   };
 }
 
@@ -51,10 +60,10 @@ function shouldFetchIOData(state) {
   return null;
 }
 
-export function fetchIODataIfNeeded(type) {
+export function fetchIODataIfNeeded(type, timestamp) {
   return (dispatch, getState) => {
     if (shouldFetchIOData(getState())) {
-      return dispatch(fetchIOData(type));
+      return dispatch(fetchIOData(type, timestamp));
     }
     return null;
   };
