@@ -15,6 +15,7 @@ import '!file-loader?name=[name].[ext]!./shared/media/images/favicons/favicon.ic
 import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess';
 import 'react-select/dist/react-select.css';
+import 'react-day-picker/lib/style.css';
 
 const history = createHistory();
 const initialState = {};

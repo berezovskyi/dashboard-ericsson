@@ -8,10 +8,11 @@ class Input extends Component {
     let {
       type,
       innerRef,
+      placeholder,
     } = this.props;
 
     return (
-      <input type={type} ref={innerRef} className={styles.input} />
+      <input type={type} ref={innerRef} className={styles.input} placeholder={placeholder} />
     );
   }
 }

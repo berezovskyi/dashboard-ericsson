@@ -4,13 +4,16 @@ import { connect } from 'react-redux';
 import { Chord } from '@nivo/chord';
 
 import { getCurrentRoute } from '../../../utils/utils';
-
+import Button from '../../../ui/Button/Button';
+import Input from '../../../ui/Form/Input';
 import Card from '../../../ui/Card/Card';
 import {
   fetchIODataIfNeeded,
 } from '../../../entities/interoperability/actions';
 
 import styles from './IAChart.css';
+import Form from '../../../ui/Form/Form';
+import FormGroup from '../../../ui/Form/FormGroup';
 
 class IAChart extends Component {
   constructor(props) {
@@ -32,8 +35,48 @@ class IAChart extends Component {
     }
   }
 
+  renderDatepicker({ subroute }) {
+    switch (subroute.time) {
+      case 'month':
+        return (
+          <div className={styles.monthpicker}>
+            <Form inline>
+              <FormGroup>
+                <Input type="text" placeholder="YYYY" />
+              </FormGroup>
+              <Button>Search Yearwise</Button>
+            </Form>
+          </div>
+        );
+      case 'week':
+        return (
+          <div className={styles.weekpicker}>
+            <Form inline>
+              <FormGroup>
+                <Input type="text" placeholder="YYYY-WW" />
+              </FormGroup>
+              <Button>Search Weekwise</Button>
+            </Form>
+          </div>
+        );
+      case 'day':
+        return (
+          <div className={styles.daypicker}>
+            <Form inline>
+              <FormGroup>
+                <Input type="text" placeholder="YYY-MM-DD" />
+              </FormGroup>
+              <Button>Search Daywise</Button>
+            </Form>
+          </div>
+        );
+      default:
+        return <span />;
+    }
+  }
+
   render() {
-    const { id, data, receivedAt } = this.props;
+    const { id, data, receivedAt, navigation } = this.props;
     return (
       <Card
         title="Interoperatability curve between all available robots."
@@ -42,6 +85,7 @@ class IAChart extends Component {
       >
         <div className={styles.row}>
           <div className={styles.oneFull}>
+            {this.renderDatepicker(getCurrentRoute(navigation))}
             {data.available.length > 0
               ? <Chord
                   matrix={data.value}
