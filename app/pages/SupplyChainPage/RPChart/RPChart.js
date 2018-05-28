@@ -47,11 +47,11 @@ class RPChart extends Component {
   }
 
   render() {
-    const { id, data, navigation } = this.props;
+    const { id, data, navigation, receivedAt } = this.props;
     const search = getCurrentRoute(navigation);
     const legend = this._handlelegend(search.subroute.time);
     return (
-      <Card title="Profitability - Risk vs Time Curve" id={id}>
+      <Card title="Profitability - Risk vs Time Curve" id={id} date={receivedAt}>
         <div className={styles.row}>
           <div className={styles.oneFull}>
             {data.length > 0
