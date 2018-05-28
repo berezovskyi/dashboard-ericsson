@@ -22,7 +22,6 @@ class RobotPerformanceChart extends Component {
     this.state = {
       graphdata: [],
       removeSelected: true,
-      disabled: false,
       value: [],
       options: [],
       valueArray: [],
@@ -63,15 +62,14 @@ class RobotPerformanceChart extends Component {
 
   render() {
     const { id, data, receivedAt } = this.props;
-    const { disabled, selectVal, valueArray } = this.state;
+    const { selectVal, valueArray } = this.state;
 
     return (
       <Card title="Robot Performance Over Time" id={id} date={receivedAt}>
         <div className={styles.row}>
-          <div className={styles.oneHalf}>
+          <div className={styles.oneFull}>
             <Select
               closeOnSelect={false}
-              disabled={disabled}
               multi
               onChange={this._handleSelectChange}
               options={data.available}
@@ -81,65 +79,68 @@ class RobotPerformanceChart extends Component {
               value={selectVal}
             />
           </div>
-          {valueArray.length > 0 && valueArray[0] !== ''
-            ? <Bar
-                data={data.value}
-                keys={valueArray}
-                indexBy="time"
-                margin={{
-                  top: 50,
-                  right: 130,
-                  bottom: 90,
-                  left: 60,
-                }}
-                padding={0.4}
-                colors="nivo"
-                colorBy="id"
-                axisBottom={{
-                  orient: 'bottom',
-                  tickSize: 5,
-                  tickPadding: 5,
-                  tickRotation: 0,
-                  legend: 'Time (24h)',
-                  legendPosition: 'center',
-                  legendOffset: 50,
-                }}
-                axisLeft={{
-                  orient: 'left',
-                  tickSize: 5,
-                  tickPadding: 5,
-                  tickRotation: 0,
-                  legend: 'Performance (%)',
-                  legendPosition: 'center',
-                  legendOffset: -50,
-                }}
-                labelSkipWidth={12}
-                labelSkipHeight={12}
-                labelTextColor="#333333"
-                motionStiffness={90}
-                motionDamping={15}
-                legends={[
-                  {
-                    dataFrom: 'keys',
-                    anchor: 'bottom',
-                    direction: 'row',
-                    symbolShape: 'circle',
-                    translateX: 10,
-                    translateY: 90,
-                    itemWidth: 64,
-                    itemHeight: 16,
-                    itemsSpacing: 5,
-                    symbolSize: 16,
-                  },
-                ]}
-                maxValue={100}
-                height={420}
-                width={800}
-              />
-            : <div className={styles.oneFull}>
-                <h3 className={styles.novalue}>Select some values first.</h3>
-              </div>}
-
+        </div>
+        <div className={styles.row}>
+          <div className={styles.oneFull}>
+            {valueArray.length > 0 && valueArray[0] !== ''
+              ? <Bar
+                  data={data.value}
+                  keys={valueArray}
+                  indexBy="time"
+                  margin={{
+                    top: 50,
+                    right: 150,
+                    bottom: 90,
+                    left: 60,
+                  }}
+                  padding={0.4}
+                  colors="nivo"
+                  colorBy="id"
+                  axisBottom={{
+                    orient: 'bottom',
+                    tickSize: 5,
+                    tickPadding: 5,
+                    tickRotation: 0,
+                    legend: 'Time (24h)',
+                    legendPosition: 'center',
+                    legendOffset: 50,
+                  }}
+                  axisLeft={{
+                    orient: 'left',
+                    tickSize: 5,
+                    tickPadding: 5,
+                    tickRotation: 0,
+                    legend: 'Performance (%)',
+                    legendPosition: 'center',
+                    legendOffset: -50,
+                  }}
+                  labelSkipWidth={12}
+                  labelSkipHeight={12}
+                  labelTextColor="#333333"
+                  motionStiffness={90}
+                  motionDamping={15}
+                  legends={[
+                    {
+                      dataFrom: 'keys',
+                      anchor: 'bottom-right',
+                      direction: 'column',
+                      symbolShape: 'circle',
+                      translateX: 150,
+                      translateY: 0,
+                      itemWidth: 140,
+                      itemHeight: 16,
+                      itemsSpacing: 5,
+                      symbolSize: 16,
+                    },
+                  ]}
+                  maxValue={100}
+                  height={420}
+                  width={800}
+                />
+              : <div className={styles.oneFull}>
+                  <h3 className={styles.novalue}>Select some values first.</h3>
+                </div>}
+          </div>
         </div>
       </Card>
     );
