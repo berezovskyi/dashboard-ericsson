@@ -4,17 +4,26 @@ import { connect } from 'react-redux';
 import { Chord } from '@nivo/chord';
 
 import { getCurrentRoute } from '../../../utils/utils';
-
+import Button from '../../../ui/Button/Button';
+import Input from '../../../ui/Form/Input';
 import Card from '../../../ui/Card/Card';
 import {
   fetchIODataIfNeeded,
 } from '../../../entities/interoperability/actions';
 
 import styles from './IAChart.css';
+import Form from '../../../ui/Form/Form';
+import FormGroup from '../../../ui/Form/FormGroup';
 
 class IAChart extends Component {
   constructor(props) {
     super(props);
+    this._handleUpdate = this._handleUpdate.bind(this);
+    this._handleChange = this._handleChange.bind(this);
+    this.state = {
+      timestring: '',
+      type: '',
+    };
   }
 
   componentDidMount() {
@@ -29,17 +38,105 @@ class IAChart extends Component {
     if (nextProps.navigation !== this.props.navigation) {
       const search = getCurrentRoute(navigation);
       dispatch(fetchIODataIfNeeded(search.subroute.time));
+      this.setState({
+        timestring: '',
+        type: search.subroute.time,
+      });
+    }
+  }
+
+  _handleUpdate(event) {
+    const { dispatch, navigation } = this.props;
+    const { timestring } = this.state;
+    event.preventDefault();
+    const search = getCurrentRoute(navigation);
+    dispatch(fetchIODataIfNeeded(search.subroute.time, timestring));
+    this.setState({
+      timestring: '',
+    });
+  }
+
+  _handleChange(event) {
+    this.setState({
+      timestring: event.target.value,
+    });
+  }
+
+  renderDatepicker({ subroute }) {
+    const { timestring } = this.state;
+    switch (subroute.time) {
+      case 'month':
+        return (
+          <div className={styles.monthpicker}>
+            <Form inline>
+              <FormGroup>
+                <Input
+                  type="text"
+                  placeholder="YYYY"
+                  onChange={this._handleChange}
+                  value={timestring}
+                />
+              </FormGroup>
+              <Button color="secondary" onClick={this._handleUpdate}>
+                Search Yearwise
+              </Button>
+            </Form>
+          </div>
+        );
+      case 'week':
+        return (
+          <div className={styles.weekpicker}>
+            <Form inline>
+              <FormGroup>
+                <Input
+                  type="text"
+                  placeholder="YYYYWW"
+                  onChange={this._handleChange}
+                  value={timestring}
+                />
+              </FormGroup>
+              <Button color="secondary" onClick={this._handleUpdate}>
+                Search Weekwise
+              </Button>
+            </Form>
+          </div>
+        );
+      case 'day':
+        return (
+          <div className={styles.daypicker}>
+            <Form inline>
+              <FormGroup>
+                <Input
+                  type="text"
+                  placeholder="YYYYMMDD"
+                  onChange={this._handleChange}
+                  value={timestring}
+                />
+              </FormGroup>
+              <Button color="secondary" onClick={this._handleUpdate}>
+                Search Daywise
+              </Button>
+            </Form>
+          </div>
+        );
+      default:
+        return <span />;
     }
   }
 
   render() {
-    const { id, data, receivedAt } = this.props;
+    const { id, data, receivedAt, navigation } = this.props;
     return (
       <Card
         title="Interoperatability curve between all available robots."
         id={id}
         date={receivedAt}
       >
+        <div className={styles.row}>
+          <div className={styles.oneFull}>
+            {this.renderDatepicker(getCurrentRoute(navigation))}
+          </div>
+        </div>
         <div className={styles.row}>
           <div className={styles.oneFull}>
             {data.available.length > 0
@@ -106,8 +203,13 @@ function mapStateToProps(state) {
   };
 }
 
+IAChart.defaultProps = {
+  data: {},
+}
+
 IAChart.propTypes = {
   id: PropTypes.string,
+  data: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(IAChart);

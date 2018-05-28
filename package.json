@@ -23,6 +23,8 @@
     "prop-types": "^15.6.1",
     "qs": "^6.5.1",
     "react": "^16.2.0",
+    "react-date-picker": "^6.10.1",
+    "react-day-picker": "^7.1.9",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.0",
     "react-popper": "^0.8.2",

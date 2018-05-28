@@ -15,7 +15,7 @@ function requestRPData() {
   };
 }
 
-function receiveRPData(json, type) {
+function receiveRPData(json) {
   return {
     type: RECEIVE_RP_DATA,
     payload: {
@@ -31,15 +31,24 @@ function receiveRPData(json, type) {
   };
 }
 
-export function fetchRPData(type) {
+export function fetchRPData(type, timestamp = '') {
   return dispatch => {
     dispatch(requestRPData());
-    return fetch(API_URL + 'riskperformance/' + type)
-      .then(response => response.json())
-      .then(json => dispatch(receiveRPData(json, type)))
-      .catch(response =>
-        dispatch(requestFailed(FAILED_REQUEST_RP_DATA, response)),
-      );
+    if (timestamp === 'year') {
+      return fetch(API_URL + 'riskperformance/' + type)
+        .then(response => response.json())
+        .then(json => dispatch(receiveRPData(json, type)))
+        .catch(response =>
+          dispatch(requestFailed(FAILED_REQUEST_RP_DATA, response)),
+        );
+    } else {
+      return fetch(API_URL + 'riskperformance/' + type + '/' + timestamp)
+        .then(response => response.json())
+        .then(json => dispatch(receiveRPData(json, type)))
+        .catch(response =>
+          dispatch(requestFailed(FAILED_REQUEST_RP_DATA, response)),
+        );
+    }
   };
 }
 
@@ -53,10 +62,10 @@ function shouldFetchRPData(state) {
   return null;
 }
 
-export function fetchRPDataIfNeeded(type) {
+export function fetchRPDataIfNeeded(type, timestamp) {
   return (dispatch, getState) => {
     if (shouldFetchRPData(getState())) {
-      return dispatch(fetchRPData(type));
+      return dispatch(fetchRPData(type, timestamp));
     }
     return null;
   };

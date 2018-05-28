@@ -10,11 +10,12 @@
   display: block;
   width: 100%;
   border: 1px solid #ced4da;
-  border-radius: 3px;
+  border-radius: 2px;
   box-sizing : border-box;
-  padding:10px;
+  padding:6px;
   font-size: 14px;
   font-weight: 300;
+  margin-right: 5px;
   line-height: 1.4;
 }
 
@@ -82,4 +83,26 @@
   transform: translateX(-50%);
   height: 24px;
   width: 24px;
+}
+
+.form-inline {
+  display: -ms-flexbox;
+  display: flex;
+  flex-flow: row wrap;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.form-inline .form-group {
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  flex-flow: row wrap;
+  -ms-flex-align: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.form-inline .input {
+  display: inline-block;
 }
