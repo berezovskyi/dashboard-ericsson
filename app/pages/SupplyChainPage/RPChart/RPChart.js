@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import { Line } from '@nivo/line';
 
 import { getCurrentRoute } from '../../../utils/utils';
+import Button from '../../../ui/Button/Button';
+import Input from '../../../ui/Form/Input';
 import Card from '../../../ui/Card/Card';
+import Form from '../../../ui/Form/Form';
+import FormGroup from '../../../ui/Form/FormGroup';
 import styles from './RPChart.css';
 import { fetchRPDataIfNeeded } from '../../../entities/riskperformance/actions';
 
@@ -14,6 +18,12 @@ class RPChart extends Component {
   constructor(props) {
     super(props);
     this._handlelegend = this._handlelegend.bind(this);
+    this._handleUpdate = this._handleUpdate.bind(this);
+    this._handleChange = this._handleChange.bind(this);
+    this.state = {
+      timestring: '',
+      type: '',
+    };
   }
 
   componentDidMount() {
@@ -46,6 +56,86 @@ class RPChart extends Component {
     }
   }
 
+
+  _handleUpdate(event) {
+    const { dispatch, navigation } = this.props;
+    const { timestring } = this.state;
+    event.preventDefault();
+    const search = getCurrentRoute(navigation);
+    dispatch(fetchRPDataIfNeeded(search.subroute.time, timestring));
+    this.setState({
+      timestring: '',
+    });
+  }
+
+  _handleChange(event) {
+    this.setState({
+      timestring: event.target.value,
+    });
+  }
+
+  renderDatepicker({ subroute }) {
+    const { timestring } = this.state;
+    switch (subroute.time) {
+      case 'month':
+        return (
+          <div className={styles.monthpicker}>
+            <Form inline>
+              <FormGroup>
+                <Input
+                  type="text"
+                  placeholder="YYYY"
+                  onChange={this._handleChange}
+                  value={timestring}
+                />
+              </FormGroup>
+              <Button color="secondary" onClick={this._handleUpdate}>
+                Search Yearwise
+              </Button>
+            </Form>
+          </div>
+        );
+      case 'week':
+        return (
+          <div className={styles.weekpicker}>
+            <Form inline>
+              <FormGroup>
+                <Input
+                  type="text"
+                  placeholder="YYYYWW"
+                  onChange={this._handleChange}
+                  value={timestring}
+                />
+              </FormGroup>
+              <Button color="secondary" onClick={this._handleUpdate}>
+                Search Weekwise
+              </Button>
+            </Form>
+          </div>
+        );
+      case 'day':
+        return (
+          <div className={styles.daypicker}>
+            <Form inline>
+              <FormGroup>
+                <Input
+                  type="text"
+                  placeholder="YYYYMMDD"
+                  onChange={this._handleChange}
+                  value={timestring}
+                />
+              </FormGroup>
+              <Button color="secondary" onClick={this._handleUpdate}>
+                Search Daywise
+              </Button>
+            </Form>
+          </div>
+        );
+      default:
+        return <span />;
+    }
+  }
+
   render() {
     const { id, data, navigation, receivedAt } = this.props;
     const search = getCurrentRoute(navigation);
@@ -54,6 +144,7 @@ class RPChart extends Component {
       <Card title="Profitability - Risk vs Time Curve" id={id} date={receivedAt}>
         <div className={styles.row}>
           <div className={styles.oneFull}>
+            {this.renderDatepicker(getCurrentRoute(navigation))}
             {data.length > 0
               ? <Line
                   data={data}

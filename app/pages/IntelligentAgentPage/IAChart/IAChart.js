@@ -22,6 +22,7 @@ class IAChart extends Component {
     this._handleChange = this._handleChange.bind(this);
     this.state = {
       timestring: '',
+      type: '',
     };
   }
 
@@ -39,13 +40,17 @@ class IAChart extends Component {
       dispatch(fetchIODataIfNeeded(search.subroute.time));
       this.setState({
         timestring: '',
+        type: search.subroute.time,
       });
     }
   }
 
   _handleUpdate(event) {
+    const { dispatch, navigation } = this.props;
+    const { timestring } = this.state;
     event.preventDefault();
-    console.log(this.state.timestring);
+    const search = getCurrentRoute(navigation);
+    dispatch(fetchIODataIfNeeded(search.subroute.time, timestring));
     this.setState({
       timestring: '',
     });
@@ -56,6 +61,7 @@ class IAChart extends Component {
       timestring: event.target.value,
     });
   }
+
   renderDatepicker({ subroute }) {
     const { timestring } = this.state;
     switch (subroute.time) {

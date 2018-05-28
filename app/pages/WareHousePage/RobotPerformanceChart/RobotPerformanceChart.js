@@ -5,9 +5,13 @@ import Select from 'react-select';
 
 import { Bar } from '@nivo/bar';
 
+import Button from '../../../ui/Button/Button';
+import Input from '../../../ui/Form/Input';
 import Card from '../../../ui/Card/Card';
 import { getCurrentRoute } from '../../../utils/utils';
 import { getArrayofObjectsKeys } from '../../../utils/utils';
+import Form from '../../../ui/Form/Form';
+import FormGroup from '../../../ui/Form/FormGroup';
 
 import styles from './RobotPerformanceChart.css';
 import {
@@ -18,7 +22,9 @@ class RobotPerformanceChart extends Component {
   constructor(props) {
     super(props);
     this._handleSelectChange = this._handleSelectChange.bind(this);
+    this._handleChange = this._handleChange.bind(this);
     this._handleUpdate = this._handleUpdate.bind(this);
+    this._handleFormUpdate = this._handleFormUpdate.bind(this);
     this.state = {
       graphdata: [],
       removeSelected: true,
@@ -61,14 +67,96 @@ class RobotPerformanceChart extends Component {
     });
   }
 
+  _handleFormUpdate(event) {
+    const { dispatch, navigation } = this.props;
+    const { timestring } = this.state;
+    event.preventDefault();
+    const search = getCurrentRoute(navigation);
+    dispatch(fetchPerfDataIfNeeded(search.subroute.time, timestring));
+    this.setState({
+      timestring: '',
+    });
+  }
+
+  _handleChange(event) {
+    this.setState({
+      timestring: event.target.value,
+    });
+  }
+
+  renderDatepicker({ subroute }) {
+    const { timestring } = this.state;
+    switch (subroute.time) {
+      case 'month':
+        return (
+          <div className={styles.monthpicker}>
+            <Form inline>
+              <FormGroup>
+                <Input
+                  type="text"
+                  placeholder="YYYY"
+                  onChange={this._handleChange}
+                  value={timestring}
+                />
+              </FormGroup>
+              <Button color="secondary" onClick={this._handleUpdate}>
+                Search Yearwise
+              </Button>
+            </Form>
+          </div>
+        );
+      case 'week':
+        return (
+          <div className={styles.weekpicker}>
+            <Form inline>
+              <FormGroup>
+                <Input
+                  type="text"
+                  placeholder="YYYYWW"
+                  onChange={this._handleChange}
+                  value={timestring}
+                />
+              </FormGroup>
+              <Button color="secondary" onClick={this._handleUpdate}>
+                Search Weekwise
+              </Button>
+            </Form>
+          </div>
+        );
+      case 'day':
+        return (
+          <div className={styles.daypicker}>
+            <Form inline>
+              <FormGroup>
+                <Input
+                  type="text"
+                  placeholder="YYYYMMDD"
+                  onChange={this._handleChange}
+                  value={timestring}
+                />
+              </FormGroup>
+              <Button color="secondary" onClick={this._handleUpdate}>
+                Search Daywise
+              </Button>
+            </Form>
+          </div>
+        );
+      default:
+        return <span />;
+    }
+  }
+
   render() {
-    const { id, data, receivedAt } = this.props;
+    const { id, data, receivedAt, navigation } = this.props;
     const { disabled, selectVal, valueArray } = this.state;
 
     return (
       <Card title="Robot Performance Over Time" id={id} date={receivedAt}>
         <div className={styles.row}>
-          <div className={styles.oneHalf}>
+          {this.renderDatepicker(getCurrentRoute(navigation))}
+        </div>
+        <div className={styles.row}>
+          <div className={styles.oneFull}>
             <Select
               closeOnSelect={false}
               disabled={disabled}
