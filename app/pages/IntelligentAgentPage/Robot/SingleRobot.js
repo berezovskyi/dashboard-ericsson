@@ -41,6 +41,7 @@ class SingleRobot extends React.Component {
           secpertask: data.get('secpertask'),
           timetoreturn: data.get('timetoreturn'),
           highlightedRobot: data.get('highlightedRobot'),
+          privacyGrade: data.get('privacyGrade'),
         },
       });
     }
@@ -89,6 +90,7 @@ class SingleRobot extends React.Component {
       performance,
       secpertask,
       name,
+      privacyGrade,
     } = this.state.data;
 
     return robots.valueSeq().map(row => {
@@ -126,34 +128,46 @@ class SingleRobot extends React.Component {
               </ModalHeader>
               <ModalBody>
                 <div className={styles.modalprogress}>
-                  <Alert color="primary">
-                    <p><strong>Name:</strong> {name}</p>
-                    <p><strong>Robot ID:</strong> {id}</p>
-                    <p>
-                      <strong>Going to: </strong>
-                      {to.name}
-                      {' ('}
-                      {to.id}
-                      {') '}
-                    </p>
-                    <p>
-                      <strong>Coming from: </strong>
-                      {from.name}
-                      {' ('}
-                      {from.id}
-                      {') '}
-                    </p>
-                  </Alert>
+                  <div className={styles.row}>
+                    <div className={styles.oneFourth}>
+                      <div className={styles.grade}>
+                        <h4>Privacy Grade</h4>
+                        <h1>{privacyGrade}</h1>
+                      </div>
+                    </div>
+                    <div className={styles.ThreeFourth}>
+                      <Alert color="primary">
+                        <p><strong>Name:</strong> {name}</p>
+                        <p><strong>Robot ID:</strong> {id}</p>
+                        <p>
+                          <strong>Going to: </strong>
+                          {to.name}
+                          {' ('}
+                          {to.id}
+                          {') '}
+                        </p>
+                        <p>
+                          <strong>Coming from: </strong>
+                          {from.name}
+                          {' ('}
+                          {from.id}
+                          {') '}
+                        </p>
+                      </Alert>
+                    </div>
+                  </div>
                   <h4 className={styles.progresstitle}>
                     Current Activity
                   </h4>
-                  <div className={styles.fourFifth}>
-                    <Progress value={value} reverse />
-                  </div>
-                  <div className={styles.oneFifth}>
-                    <span className={styles.text}>
-                      {value}{'% over'}
-                    </span>
+                  <div className={styles.row}>
+                    <div className={styles.fourFifth}>
+                      <Progress value={value} reverse />
+                    </div>
+                    <div className={styles.oneFifth}>
+                      <span className={styles.text}>
+                        {value}{'% over'}
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div className={styles.row}>

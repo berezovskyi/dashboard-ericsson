@@ -34,8 +34,8 @@ function receiveRobot(json) {
     type: RECEIVE_ROBOT,
     payload: {
       robot: new Robot(json),
-    }
-  }
+    },
+  };
 }
 
 function receiveRobots(json) {
@@ -84,6 +84,8 @@ function receiveRobots(json) {
             },
             highlightedRobot: item.highlightedRobot,
             highlightedBattery: item.highlightedBattery,
+            securityGrade: item.securityGrade,
+            privacyGrade: item.privacyGrade,
           }),
         ];
       }),

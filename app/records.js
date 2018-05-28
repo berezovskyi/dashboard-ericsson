@@ -116,6 +116,8 @@ const Robot = new Record({
   timetoreturn: 0,
   highlightedRobot: false,
   highlightedBattery: false,
+  securityGrade: 0,
+  privacyGrade: '',
 });
 
 export { MyRoute, Note, Stakeholder, Truck, Robot, Warehouse, Retailer };

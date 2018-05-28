@@ -155,9 +155,9 @@ class RPChart extends Component {
                     bottom: 50,
                     left: 60,
                   }}
-                  lineWidth={1}
+                  lineWidth={2}
                   minY="auto"
-                  curve="linear"
+                  curve="basis"
                   axisBottom={{
                     orient: 'bottom',
                     tickSize: 5,
@@ -198,7 +198,6 @@ class RPChart extends Component {
                   maxY={100}
                   width={1600}
                   height={500}
-                  animate={false}
                 />
               : <span />}
 

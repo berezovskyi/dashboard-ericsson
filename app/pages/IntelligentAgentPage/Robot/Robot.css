@@ -10,6 +10,14 @@
   lost-column: 1/2;
 }
 
+.oneFourth {
+  lost-column: 1/4;
+}
+
+.ThreeFourth {
+  lost-column: 3/4;
+}
+
 .modaltitle {
   font-size: 24px;
   font-weight: 400;
@@ -115,4 +123,21 @@
 .diffdetail {
   text-align: center;
   font-size: 12px;
+}
+
+.grade {
+  text-align: center;
+  background: #F4F8F9;
+  border-radius: 2px;
+  padding: 20px 5px;
+  margin-bottom: 10px;
+}
+
+.grade h4 {
+  font-weight: 300;
+  margin: 0;
+}
+
+.grade h1 {
+  margin: 0;
 }
