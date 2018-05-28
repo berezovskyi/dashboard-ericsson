@@ -18,6 +18,11 @@ import FormGroup from '../../../ui/Form/FormGroup';
 class IAChart extends Component {
   constructor(props) {
     super(props);
+    this._handleUpdate = this._handleUpdate.bind(this);
+    this._handleChange = this._handleChange.bind(this);
+    this.state = {
+      timestring: '',
+    };
   }
 
   componentDidMount() {
@@ -32,19 +37,43 @@ class IAChart extends Component {
     if (nextProps.navigation !== this.props.navigation) {
       const search = getCurrentRoute(navigation);
       dispatch(fetchIODataIfNeeded(search.subroute.time));
+      this.setState({
+        timestring: '',
+      });
     }
   }
 
+  _handleUpdate(event) {
+    event.preventDefault();
+    console.log(this.state.timestring);
+    this.setState({
+      timestring: '',
+    });
+  }
+
+  _handleChange(event) {
+    this.setState({
+      timestring: event.target.value,
+    });
+  }
   renderDatepicker({ subroute }) {
+    const { timestring } = this.state;
     switch (subroute.time) {
       case 'month':
         return (
           <div className={styles.monthpicker}>
             <Form inline>
               <FormGroup>
-                <Input type="text" placeholder="YYYY" />
+                <Input
+                  type="text"
+                  placeholder="YYYY"
+                  onChange={this._handleChange}
+                  value={timestring}
+                />
               </FormGroup>
-              <Button>Search Yearwise</Button>
+              <Button color="secondary" onClick={this._handleUpdate}>
+                Search Yearwise
+              </Button>
             </Form>
           </div>
         );
@@ -53,9 +82,16 @@ class IAChart extends Component {
           <div className={styles.weekpicker}>
             <Form inline>
               <FormGroup>
-                <Input type="text" placeholder="YYYY-WW" />
+                <Input
+                  type="text"
+                  placeholder="YYYYWW"
+                  onChange={this._handleChange}
+                  value={timestring}
+                />
               </FormGroup>
-              <Button>Search Weekwise</Button>
+              <Button color="secondary" onClick={this._handleUpdate}>
+                Search Weekwise
+              </Button>
             </Form>
           </div>
         );
@@ -64,9 +100,16 @@ class IAChart extends Component {
           <div className={styles.daypicker}>
             <Form inline>
               <FormGroup>
-                <Input type="text" placeholder="YYY-MM-DD" />
+                <Input
+                  type="text"
+                  placeholder="YYYYMMDD"
+                  onChange={this._handleChange}
+                  value={timestring}
+                />
               </FormGroup>
-              <Button>Search Daywise</Button>
+              <Button color="secondary" onClick={this._handleUpdate}>
+                Search Daywise
+              </Button>
             </Form>
           </div>
         );

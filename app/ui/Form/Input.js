@@ -5,14 +5,17 @@ import styles from './Form.css';
 
 class Input extends Component {
   render() {
-    let {
-      type,
-      innerRef,
-      placeholder,
-    } = this.props;
+    let { onChange, type, innerRef, placeholder, value } = this.props;
 
     return (
-      <input type={type} ref={innerRef} className={styles.input} placeholder={placeholder} />
+      <input
+        type={type}
+        ref={innerRef}
+        className={styles.input}
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+      />
     );
   }
 }
