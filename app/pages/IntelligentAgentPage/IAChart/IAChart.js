@@ -135,6 +135,10 @@ class IAChart extends Component {
         <div className={styles.row}>
           <div className={styles.oneFull}>
             {this.renderDatepicker(getCurrentRoute(navigation))}
+          </div>
+        </div>
+        <div className={styles.row}>
+          <div className={styles.oneFull}>
             {data.available.length > 0
               ? <Chord
                   matrix={data.value}
@@ -199,8 +203,13 @@ function mapStateToProps(state) {
   };
 }
 
+IAChart.defaultProps = {
+  data: {},
+}
+
 IAChart.propTypes = {
   id: PropTypes.string,
+  data: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(IAChart);
