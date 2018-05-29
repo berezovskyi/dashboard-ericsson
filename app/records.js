@@ -21,6 +21,7 @@ const Stakeholder = new Record({
   type: '',
   highlighted: false,
   role: '',
+  url: '',
 });
 
 const Truck = new Record({

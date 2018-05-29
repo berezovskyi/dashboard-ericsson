@@ -40,7 +40,7 @@ class StakeholderProfileItem extends Component {
     const profile = className(styles.profile, styles.oneThird);
     return (
       <div className={profile}>
-        <img src="http://placehold.it/120x120" alt={stakeholder.name} />
+        <img src={stakeholder.url} alt={stakeholder.name} />
         <h4 className={styles.title}>
           <span id={`Tooltip-${stakeholder.id}`} className={styles.name}>
             {stakeholder.name}
