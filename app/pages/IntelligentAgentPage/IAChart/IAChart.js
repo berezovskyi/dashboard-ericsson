@@ -131,6 +131,7 @@ class IAChart extends Component {
         title="Interoperatability curve between all available robots."
         id={id}
         date={receivedAt}
+        helpText="The Interoperability Curve signifies how many times two entities inside the warehouse level interacted with each while performing a certain task. "
       >
         <div className={styles.row}>
           <div className={styles.oneFull}>
@@ -205,7 +206,7 @@ function mapStateToProps(state) {
 
 IAChart.defaultProps = {
   data: {},
-}
+};
 
 IAChart.propTypes = {
   id: PropTypes.string,
