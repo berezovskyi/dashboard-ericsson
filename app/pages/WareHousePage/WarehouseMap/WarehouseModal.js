@@ -45,7 +45,7 @@ class WarehouseModal extends Component {
     if (diff) {
       return (
         <div>
-          <h1>
+          <h1 className={styles.modalboxtitle}>
             {`${diff.value}`}
           </h1>
         </div>
@@ -70,7 +70,7 @@ class WarehouseModal extends Component {
               <div className={styles.row}>
                 <div className={styles.oneFourth}>
                   <div className={styles.grade}>
-                    <h4>Privacy Grade</h4>
+                    <h4>Privacy Level</h4>
                     <h1>B</h1>
                   </div>
                 </div>
@@ -112,7 +112,11 @@ class WarehouseModal extends Component {
                   </p>
                   <div className={styles.modalbox}>
                     <SafetyIcon width={96} height={96} />
-                    {this.diffContainer(robot.battery)}
+                    <div>
+                      <h1 className={styles.modalboxtitle}>
+                        3.2m
+                      </h1>
+                    </div>
                   </div>
                 </div>
               </div>

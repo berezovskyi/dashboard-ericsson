@@ -56,7 +56,6 @@ class RPChart extends Component {
     }
   }
 
-
   _handleUpdate(event) {
     const { dispatch, navigation } = this.props;
     const { timestring } = this.state;
@@ -141,7 +140,12 @@ class RPChart extends Component {
     const search = getCurrentRoute(navigation);
     const legend = this._handlelegend(search.subroute.time);
     return (
-      <Card title="Profitability - Risk vs Time Curve" id={id} date={receivedAt}>
+      <Card
+        title="Profitability - Risk vs Time Curve"
+        id={id}
+        date={receivedAt}
+        helpText="Profitability Vs Risk Curve is a graph representing the profit and risk chances due to availability or unavailability of goods in a warehouse."
+      >
         <div className={styles.row}>
           <div className={styles.oneFull}>
             {this.renderDatepicker(getCurrentRoute(navigation))}
@@ -157,7 +161,7 @@ class RPChart extends Component {
                   }}
                   lineWidth={2}
                   minY="auto"
-                  curve="basis"
+                  curve="linear"
                   axisBottom={{
                     orient: 'bottom',
                     tickSize: 5,

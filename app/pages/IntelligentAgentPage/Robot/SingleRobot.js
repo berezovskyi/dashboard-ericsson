@@ -131,7 +131,7 @@ class SingleRobot extends React.Component {
                   <div className={styles.row}>
                     <div className={styles.oneFourth}>
                       <div className={styles.grade}>
-                        <h4>Privacy Grade</h4>
+                        <h4>Privacy Level</h4>
                         <h1>{privacyGrade}</h1>
                       </div>
                     </div>
