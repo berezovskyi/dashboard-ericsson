@@ -38,6 +38,7 @@ function receiveStakeholders(json) {
               type: item.type,
               highlighted: item.highlighted,
               role: item.role,
+              url: item.url,
             }),
           ];
         }),

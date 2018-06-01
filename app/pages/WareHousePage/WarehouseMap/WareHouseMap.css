@@ -74,3 +74,30 @@
 .diffdetail {
   font-size: 12px;
 }
+
+
+.oneFourth {
+  lost-column: 1/4;
+}
+
+.threeFourth {
+  lost-column: 3/4;
+}
+
+
+.grade {
+  text-align: center;
+  background: #F4F8F9;
+  border-radius: 2px;
+  padding: 20px 5px;
+  margin-bottom: 10px;
+}
+
+.grade h4 {
+  font-weight: 300;
+  margin: 0;
+}
+
+.grade h1 {
+  margin: 0;
+}

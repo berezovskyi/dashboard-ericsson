@@ -39,7 +39,9 @@ class StakeholderModalProfile extends Component {
               <div className={styles.oneFifth}>
                 <img
                   className={styles.stakeholderphoto}
-                  src="http://placehold.it/100x100"
+                  src={stakeholder.url}
+                  height={100}
+                  width={100}
                 />
               </div>
               <div className={styles.threeFifth}>

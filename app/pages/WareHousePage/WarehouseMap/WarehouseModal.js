@@ -45,7 +45,7 @@ class WarehouseModal extends Component {
     if (diff) {
       return (
         <div>
-          <h1>
+          <h1 className={styles.modalboxtitle}>
             {`${diff.value}`}
           </h1>
         </div>
@@ -67,18 +67,29 @@ class WarehouseModal extends Component {
               <h4 className={styles.progresstitle}>
                 Journey Status : Active
               </h4>
-              <Alert color="primary">
-                <p><strong>Name:</strong> {robot.name}</p>
-                <p><strong>Robot ID:</strong>{robot.id}</p>
-                <p>
-                  <strong>Going to: </strong>
-                  Line 1 - Y2
-                </p>
-                <p>
-                  <strong>Coming from: </strong>
-                  Line 3 - Y1
-                </p>
-              </Alert>
+              <div className={styles.row}>
+                <div className={styles.oneFourth}>
+                  <div className={styles.grade}>
+                    <h4>Privacy Level</h4>
+                    <h1>B</h1>
+                  </div>
+                </div>
+                <div className={styles.threeFourth}>
+                  <Alert color="primary">
+                    <p><strong>Name:</strong> {robot.name}</p>
+                    <p><strong>Robot ID:</strong>{robot.id}</p>
+                    <p>
+                      <strong>Going to: </strong>
+                      Line 1 - Y2
+                    </p>
+                    <p>
+                      <strong>Coming from: </strong>
+                      Line 3 - Y1
+                    </p>
+                  </Alert>
+                </div>
+              </div>
+
               <div className={styles.row}>
                 <div className={styles.oneHalf}>
                   <h4 className={styles.modaltitle}>Time to Completion</h4>
@@ -101,7 +112,11 @@ class WarehouseModal extends Component {
                   </p>
                   <div className={styles.modalbox}>
                     <SafetyIcon width={96} height={96} />
-                    {this.diffContainer(robot.battery)}
+                    <div>
+                      <h1 className={styles.modalboxtitle}>
+                        3.2m
+                      </h1>
+                    </div>
                   </div>
                 </div>
               </div>
