@@ -92,7 +92,7 @@
     "lint-staged": "^0.1.1",
     "minimist": "^1.2.0",
     "mocha": "^2.3.4",
-    "ngrok": "2.1.6",
+    "ngrok": "^2.1.6",
     "null-loader": "^0.1.1",
     "offline-plugin": "^2.0.4",
     "plop": "^1.5.0",
